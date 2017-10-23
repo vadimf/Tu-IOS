@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  Tuttnauer Wi-Fi Connect
+
+  Created by Erez Hod on 10/14/17.
+  Copyright © 2017 Tuttnauer Europe B.V. All rights reserved.
+*/
+
+// MARK: - Alert Dialog Buttons
+
+"alert_dialog_button_close" = "Close";
+"alert_dialog_button_done" = "Done";
+"alert_dialog_button_cancel" = "Cancel";
+"alert_dialog_button_yes" = "Yes";
+"alert_dialog_button_no" = "No";
+
+// MARK: - Scan For Machines Screen
+
+"scan_machines_screen_found_multiple_machines_title" = "Multiple machines found";
+"scan_machines_screen_found_one_machine_title" = "One machine found";
+"scan_machines_screen_found_multiple_machines_choose_title" = "Please choose one to connect";
+"scan_machines_screen_found_one_machine_choose_title" = "Please choose it to connect";
+"scan_machines_screen_found_none_machines_title" = "No machines found";
+
+"scan_machines_screen_tableview_cell_model_name_title" = "Model Name";
+"scan_machines_screen_tableview_cell_serial_title" = "Serial Number";
+"scan_machines_screen_tableview_cell_ip_title" = "IP";
+"scan_machines_screen_tableview_cell_bsversion_title" = "BS Version";
+
+
+// MARK: - Settings Screen
+
+"settings_screen_title" = "Settings";
+
+"settings_screen_group_title_preferences" = "Preferences";
+"settings_screen_group_title_notifications" = "Notifications";
+"settings_screen_group_title_about" = "About";
+
+"settings_screen_cell_temperature_title" = "Temperature";
+"settings_screen_cell_temperature_option_celcius" = "C";
+"settings_screen_cell_temperature_option_fahrenheit" = "F";
+
+"settings_screen_cell_pressure_title" = "Pressure";
+"settings_screen_cell_pressure_kpa" = "kPa";
+
+"settings_screen_cell_language_title" = "Language";
+"settings_screen_cell_language_option_english" = "English";
+
+"settings_screen_cell_choose_connection_title" = "Choose Connection";
+"settings_screen_cell_choose_connection_option_auto" = "Auto Connect on Start";
+
+"settings_screen_cell_notifications_title" = "Receive Live Notifications";
+"settings_screen_cell_notifications_subtitle" = "Check to enable notifications from the machine";
+
+"settings_screen_cell_created_by_title" = "Created By";
+"settings_screen_cell_created_by_subtitle" = "Tuttnauer Ltd.";
+
+"settings_screen_cell_copyright_title" = "Copyright";
+"settings_screen_cell_copyright_subtitle" = "Copyright";
+
+"settings_screen_cell_version_title" = "Version";
+"settings_screen_cell_version_subtitle" = "0.0.0.0";

@@ -1,0 +1,785 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFB91F9E144400D33278 /* MachineMonitor.swift */; };
+		1650AFBC1F9E177B00D33278 /* MachineNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */; };
+		1662FDE11F9E5F8A004A390C /* HA+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1662FDE01F9E5F8A004A390C /* HA+Array.swift */; };
+		1662FDE31F9E6D7F004A390C /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1662FDE21F9E6D7F004A390C /* Alerts.swift */; };
+		1663F4091F9CCBDC005C05FF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1663F4081F9CCBDC005C05FF /* Utilities.swift */; };
+		16707DDC1F6175AF00706B87 /* SwiftLibModbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16707DDB1F6175AF00706B87 /* SwiftLibModbus.swift */; };
+		16707DEF1F61775500706B87 /* AUTHORS in Resources */ = {isa = PBXBuildFile; fileRef = 16707DDE1F61775500706B87 /* AUTHORS */; };
+		16707DF01F61775500706B87 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 16707DE01F61775500706B87 /* COPYING */; };
+		16707DF11F61775500706B87 /* COPYING.LESSER in Resources */ = {isa = PBXBuildFile; fileRef = 16707DE11F61775500706B87 /* COPYING.LESSER */; };
+		16707DF21F61775500706B87 /* modbus-data.c in Sources */ = {isa = PBXBuildFile; fileRef = 16707DE21F61775500706B87 /* modbus-data.c */; };
+		16707DF31F61775500706B87 /* modbus-rtu.c in Sources */ = {isa = PBXBuildFile; fileRef = 16707DE51F61775500706B87 /* modbus-rtu.c */; };
+		16707DF41F61775500706B87 /* modbus-tcp.c in Sources */ = {isa = PBXBuildFile; fileRef = 16707DE81F61775500706B87 /* modbus-tcp.c */; };
+		16707DF51F61775500706B87 /* modbus.c in Sources */ = {isa = PBXBuildFile; fileRef = 16707DEB1F61775500706B87 /* modbus.c */; };
+		16707DF61F61775500706B87 /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 16707DED1F61775500706B87 /* NEWS */; };
+		16707DF71F61775500706B87 /* README.rst in Resources */ = {isa = PBXBuildFile; fileRef = 16707DEE1F61775500706B87 /* README.rst */; };
+		167C93651F9BB489004930C0 /* AutoClaveEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167C93641F9BB489004930C0 /* AutoClaveEnums.swift */; };
+		168909F51F98C2FE006ECEE4 /* ScanForMachinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168909F41F98C2FE006ECEE4 /* ScanForMachinesViewController.swift */; };
+		168909F81F98C36F006ECEE4 /* MachineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168909F71F98C36F006ECEE4 /* MachineTableViewCell.swift */; };
+		168909FA1F98C465006ECEE4 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168909F91F98C465006ECEE4 /* Machine.swift */; };
+		168ACDE61F922920000277DD /* HA+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDE51F922920000277DD /* HA+UIViewController.swift */; };
+		168ACDE81F922974000277DD /* HA+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDE71F922974000277DD /* HA+UITextField.swift */; };
+		168ACDEA1F922996000277DD /* HA+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDE91F922996000277DD /* HA+UIView.swift */; };
+		168ACDEC1F922A3B000277DD /* MainConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDEB1F922A3B000277DD /* MainConnectViewController.swift */; };
+		168ACDF01F922D86000277DD /* SingleMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDEF1F922D86000277DD /* SingleMachineViewController.swift */; };
+		168ACDF21F922EEF000277DD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDF11F922EEF000277DD /* Constants.swift */; };
+		168ACDF41F923179000277DD /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDF31F923179000277DD /* SettingsTableViewController.swift */; };
+		168ACDF61F923625000277DD /* SettingsOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDF51F923625000277DD /* SettingsOptionsTableViewController.swift */; };
+		168ACDFD1F925FEE000277DD /* Tuttnauer+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDFC1F925FEE000277DD /* Tuttnauer+UIColor.swift */; };
+		168ACE001F9260AD000277DD /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACDFF1F9260AD000277DD /* MainNavigationController.swift */; };
+		168ACE031F9260C4000277DD /* MainNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACE021F9260C4000277DD /* MainNavigationBar.swift */; };
+		168ACE051F9262B1000277DD /* LocalString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACE041F9262B1000277DD /* LocalString.swift */; };
+		168ACE081F926371000277DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 168ACE0A1F926371000277DD /* Localizable.strings */; };
+		168ACE0D1F92656B000277DD /* HA+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168ACE0C1F92656B000277DD /* HA+String.swift */; };
+		16A462C11F5D3FE0002C4ECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A462C01F5D3FE0002C4ECF /* AppDelegate.swift */; };
+		16A462C61F5D3FE0002C4ECF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C41F5D3FE0002C4ECF /* Main.storyboard */; };
+		16A462C81F5D3FE0002C4ECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C71F5D3FE0002C4ECF /* Assets.xcassets */; };
+		16A462CB1F5D3FE0002C4ECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C91F5D3FE0002C4ECF /* LaunchScreen.storyboard */; };
+		16A462EA1F5D8D90002C4ECF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A462E91F5D8D90002C4ECF /* MainViewController.swift */; };
+		16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */; };
+		DEFE033A3177EF0CFDE5252D /* Pods_Tuttnauer_Wi_Fi_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A658036055AEE555928011 /* Pods_Tuttnauer_Wi_Fi_Connect.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1650AFB91F9E144400D33278 /* MachineMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineMonitor.swift; sourceTree = "<group>"; };
+		1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineNetworking.swift; sourceTree = "<group>"; };
+		1662FDE01F9E5F8A004A390C /* HA+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+Array.swift"; sourceTree = "<group>"; };
+		1662FDE21F9E6D7F004A390C /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		1663F4081F9CCBDC005C05FF /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		16707DDB1F6175AF00706B87 /* SwiftLibModbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLibModbus.swift; sourceTree = "<group>"; };
+		16707DDE1F61775500706B87 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		16707DDF1F61775500706B87 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		16707DE01F61775500706B87 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		16707DE11F61775500706B87 /* COPYING.LESSER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LESSER; sourceTree = "<group>"; };
+		16707DE21F61775500706B87 /* modbus-data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-data.c"; sourceTree = "<group>"; };
+		16707DE31F61775500706B87 /* modbus-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-private.h"; sourceTree = "<group>"; };
+		16707DE41F61775500706B87 /* modbus-rtu-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-rtu-private.h"; sourceTree = "<group>"; };
+		16707DE51F61775500706B87 /* modbus-rtu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-rtu.c"; sourceTree = "<group>"; };
+		16707DE61F61775500706B87 /* modbus-rtu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-rtu.h"; sourceTree = "<group>"; };
+		16707DE71F61775500706B87 /* modbus-tcp-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-tcp-private.h"; sourceTree = "<group>"; };
+		16707DE81F61775500706B87 /* modbus-tcp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-tcp.c"; sourceTree = "<group>"; };
+		16707DE91F61775500706B87 /* modbus-tcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-tcp.h"; sourceTree = "<group>"; };
+		16707DEA1F61775500706B87 /* modbus-version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-version.h"; sourceTree = "<group>"; };
+		16707DEB1F61775500706B87 /* modbus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = modbus.c; sourceTree = "<group>"; };
+		16707DEC1F61775500706B87 /* modbus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modbus.h; sourceTree = "<group>"; };
+		16707DED1F61775500706B87 /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
+		16707DEE1F61775500706B87 /* README.rst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
+		167C93641F9BB489004930C0 /* AutoClaveEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoClaveEnums.swift; sourceTree = "<group>"; };
+		168909F41F98C2FE006ECEE4 /* ScanForMachinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanForMachinesViewController.swift; sourceTree = "<group>"; };
+		168909F71F98C36F006ECEE4 /* MachineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineTableViewCell.swift; sourceTree = "<group>"; };
+		168909F91F98C465006ECEE4 /* Machine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
+		168ACDE51F922920000277DD /* HA+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+UIViewController.swift"; sourceTree = "<group>"; };
+		168ACDE71F922974000277DD /* HA+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+UITextField.swift"; sourceTree = "<group>"; };
+		168ACDE91F922996000277DD /* HA+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+UIView.swift"; sourceTree = "<group>"; };
+		168ACDEB1F922A3B000277DD /* MainConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainConnectViewController.swift; sourceTree = "<group>"; };
+		168ACDEF1F922D86000277DD /* SingleMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMachineViewController.swift; sourceTree = "<group>"; };
+		168ACDF11F922EEF000277DD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		168ACDF31F923179000277DD /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		168ACDF51F923625000277DD /* SettingsOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsTableViewController.swift; sourceTree = "<group>"; };
+		168ACDFC1F925FEE000277DD /* Tuttnauer+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tuttnauer+UIColor.swift"; sourceTree = "<group>"; };
+		168ACDFF1F9260AD000277DD /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		168ACE021F9260C4000277DD /* MainNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationBar.swift; sourceTree = "<group>"; };
+		168ACE041F9262B1000277DD /* LocalString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalString.swift; sourceTree = "<group>"; };
+		168ACE091F926371000277DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		168ACE0B1F926378000277DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		168ACE0C1F92656B000277DD /* HA+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+String.swift"; sourceTree = "<group>"; };
+		16A462BD1F5D3FE0002C4ECF /* Tuttnauer Wi-Fi Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tuttnauer Wi-Fi Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		16A462C01F5D3FE0002C4ECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		16A462C51F5D3FE0002C4ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		16A462C71F5D3FE0002C4ECF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		16A462CA1F5D3FE0002C4ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		16A462CC1F5D3FE0002C4ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16A462E61F5D6A43002C4ECF /* Tuttnauer Wi-Fi Connect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tuttnauer Wi-Fi Connect-Bridging-Header.h"; sourceTree = "<group>"; };
+		16A462E91F5D8D90002C4ECF /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConstants.swift; sourceTree = "<group>"; };
+		2FBFEF04E9F5ED22D427708A /* Pods-Tuttnauer Wi-Fi Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuttnauer Wi-Fi Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect.release.xcconfig"; sourceTree = "<group>"; };
+		37A658036055AEE555928011 /* Pods_Tuttnauer_Wi_Fi_Connect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuttnauer_Wi_Fi_Connect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74DFEC704B23A81212A8E45F /* Pods-Tuttnauer Wi-Fi Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuttnauer Wi-Fi Connect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		16A462BA1F5D3FE0002C4ECF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEFE033A3177EF0CFDE5252D /* Pods_Tuttnauer_Wi_Fi_Connect.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1663F4051F9CBC1F005C05FF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		16707DDD1F61774B00706B87 /* libmodbus */ = {
+			isa = PBXGroup;
+			children = (
+				16707DDE1F61775500706B87 /* AUTHORS */,
+				16707DDF1F61775500706B87 /* config.h */,
+				16707DE01F61775500706B87 /* COPYING */,
+				16707DE11F61775500706B87 /* COPYING.LESSER */,
+				16707DE21F61775500706B87 /* modbus-data.c */,
+				16707DE31F61775500706B87 /* modbus-private.h */,
+				16707DE41F61775500706B87 /* modbus-rtu-private.h */,
+				16707DE51F61775500706B87 /* modbus-rtu.c */,
+				16707DE61F61775500706B87 /* modbus-rtu.h */,
+				16707DE71F61775500706B87 /* modbus-tcp-private.h */,
+				16707DE81F61775500706B87 /* modbus-tcp.c */,
+				16707DE91F61775500706B87 /* modbus-tcp.h */,
+				16707DEA1F61775500706B87 /* modbus-version.h */,
+				16707DEB1F61775500706B87 /* modbus.c */,
+				16707DEC1F61775500706B87 /* modbus.h */,
+				16707DED1F61775500706B87 /* NEWS */,
+				16707DEE1F61775500706B87 /* README.rst */,
+			);
+			name = libmodbus;
+			sourceTree = "<group>";
+		};
+		16707DF81F6178D600706B87 /* Modbus */ = {
+			isa = PBXGroup;
+			children = (
+				16707DDD1F61774B00706B87 /* libmodbus */,
+				16A462E41F5D6678002C4ECF /* SwiftLibModbus */,
+			);
+			name = Modbus;
+			sourceTree = "<group>";
+		};
+		167C93631F9BB3EF004930C0 /* AutoClave */ = {
+			isa = PBXGroup;
+			children = (
+				167C93641F9BB489004930C0 /* AutoClaveEnums.swift */,
+			);
+			name = AutoClave;
+			sourceTree = "<group>";
+		};
+		168909F61F98C356006ECEE4 /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				168909F71F98C36F006ECEE4 /* MachineTableViewCell.swift */,
+			);
+			name = "TableView Cells";
+			sourceTree = "<group>";
+		};
+		168ACDF71F92362C000277DD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				168ACDF31F923179000277DD /* SettingsTableViewController.swift */,
+				168ACDF51F923625000277DD /* SettingsOptionsTableViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		168ACDF81F923638000277DD /* Machine */ = {
+			isa = PBXGroup;
+			children = (
+				168ACDEF1F922D86000277DD /* SingleMachineViewController.swift */,
+			);
+			name = Machine;
+			sourceTree = "<group>";
+		};
+		168ACDF91F923645000277DD /* Connections */ = {
+			isa = PBXGroup;
+			children = (
+				168909F61F98C356006ECEE4 /* TableView Cells */,
+				16A462E91F5D8D90002C4ECF /* MainViewController.swift */,
+				168ACDEB1F922A3B000277DD /* MainConnectViewController.swift */,
+				168909F41F98C2FE006ECEE4 /* ScanForMachinesViewController.swift */,
+			);
+			name = Connections;
+			sourceTree = "<group>";
+		};
+		168ACDFE1F926092000277DD /* Navigation Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				168ACE011F9260AF000277DD /* Navigation Bars */,
+				168ACDFF1F9260AD000277DD /* MainNavigationController.swift */,
+			);
+			name = "Navigation Controllers";
+			sourceTree = "<group>";
+		};
+		168ACE011F9260AF000277DD /* Navigation Bars */ = {
+			isa = PBXGroup;
+			children = (
+				168ACE021F9260C4000277DD /* MainNavigationBar.swift */,
+			);
+			name = "Navigation Bars";
+			sourceTree = "<group>";
+		};
+		16A462B41F5D3FE0002C4ECF = {
+			isa = PBXGroup;
+			children = (
+				16A462BF1F5D3FE0002C4ECF /* Tuttnauer Wi-Fi Connect */,
+				16A462BE1F5D3FE0002C4ECF /* Products */,
+				AD7C8A32361D2DD6E737746C /* Pods */,
+				64CE229D8A9B976CDF5DC06D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		16A462BE1F5D3FE0002C4ECF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				16A462BD1F5D3FE0002C4ECF /* Tuttnauer Wi-Fi Connect.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		16A462BF1F5D3FE0002C4ECF /* Tuttnauer Wi-Fi Connect */ = {
+			isa = PBXGroup;
+			children = (
+				16A462C01F5D3FE0002C4ECF /* AppDelegate.swift */,
+				16A462D71F5D63DF002C4ECF /* Constants */,
+				16A462DA1F5D65EB002C4ECF /* Utilities */,
+				16A462D21F5D63B4002C4ECF /* Model */,
+				16A462D41F5D63C2002C4ECF /* Business */,
+				16A462D31F5D63BD002C4ECF /* Views */,
+				16A462D81F5D63EF002C4ECF /* View Controllers */,
+				16A462D61F5D63D2002C4ECF /* User Interface */,
+				16A462D91F5D65E5002C4ECF /* Extensions */,
+				16A462D51F5D63C8002C4ECF /* Supporting Files */,
+				16A462DB1F5D6632002C4ECF /* Libraries */,
+				16A462C71F5D3FE0002C4ECF /* Assets.xcassets */,
+			);
+			path = "Tuttnauer Wi-Fi Connect";
+			sourceTree = "<group>";
+		};
+		16A462D21F5D63B4002C4ECF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				168909F91F98C465006ECEE4 /* Machine.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		16A462D31F5D63BD002C4ECF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		16A462D41F5D63C2002C4ECF /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				1663F4051F9CBC1F005C05FF /* Networking */,
+				16D607BD1F9E3921001F8E08 /* Machine */,
+			);
+			name = Business;
+			sourceTree = "<group>";
+		};
+		16A462D51F5D63C8002C4ECF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				16A462E61F5D6A43002C4ECF /* Tuttnauer Wi-Fi Connect-Bridging-Header.h */,
+				16A462CC1F5D3FE0002C4ECF /* Info.plist */,
+				168ACE0A1F926371000277DD /* Localizable.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		16A462D61F5D63D2002C4ECF /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				16A462C41F5D3FE0002C4ECF /* Main.storyboard */,
+				16A462C91F5D3FE0002C4ECF /* LaunchScreen.storyboard */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		16A462D71F5D63DF002C4ECF /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				167C93631F9BB3EF004930C0 /* AutoClave */,
+				168ACDF11F922EEF000277DD /* Constants.swift */,
+				16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */,
+				168ACE041F9262B1000277DD /* LocalString.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		16A462D81F5D63EF002C4ECF /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				168ACDFE1F926092000277DD /* Navigation Controllers */,
+				168ACDF91F923645000277DD /* Connections */,
+				168ACDF81F923638000277DD /* Machine */,
+				168ACDF71F92362C000277DD /* Settings */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		16A462D91F5D65E5002C4ECF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				168ACDE51F922920000277DD /* HA+UIViewController.swift */,
+				168ACDE91F922996000277DD /* HA+UIView.swift */,
+				168ACDE71F922974000277DD /* HA+UITextField.swift */,
+				168ACE0C1F92656B000277DD /* HA+String.swift */,
+				168ACDFC1F925FEE000277DD /* Tuttnauer+UIColor.swift */,
+				1662FDE01F9E5F8A004A390C /* HA+Array.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		16A462DA1F5D65EB002C4ECF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1663F4081F9CCBDC005C05FF /* Utilities.swift */,
+				1662FDE21F9E6D7F004A390C /* Alerts.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		16A462DB1F5D6632002C4ECF /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				16707DF81F6178D600706B87 /* Modbus */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		16A462E41F5D6678002C4ECF /* SwiftLibModbus */ = {
+			isa = PBXGroup;
+			children = (
+				16707DDB1F6175AF00706B87 /* SwiftLibModbus.swift */,
+			);
+			name = SwiftLibModbus;
+			sourceTree = "<group>";
+		};
+		16D607BD1F9E3921001F8E08 /* Machine */ = {
+			isa = PBXGroup;
+			children = (
+				1650AFB91F9E144400D33278 /* MachineMonitor.swift */,
+				1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */,
+			);
+			name = Machine;
+			sourceTree = "<group>";
+		};
+		64CE229D8A9B976CDF5DC06D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37A658036055AEE555928011 /* Pods_Tuttnauer_Wi_Fi_Connect.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD7C8A32361D2DD6E737746C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74DFEC704B23A81212A8E45F /* Pods-Tuttnauer Wi-Fi Connect.debug.xcconfig */,
+				2FBFEF04E9F5ED22D427708A /* Pods-Tuttnauer Wi-Fi Connect.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		16A462BC1F5D3FE0002C4ECF /* Tuttnauer Wi-Fi Connect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16A462CF1F5D3FE0002C4ECF /* Build configuration list for PBXNativeTarget "Tuttnauer Wi-Fi Connect" */;
+			buildPhases = (
+				97FE50111014BB4E562A66DE /* [CP] Check Pods Manifest.lock */,
+				16A462B91F5D3FE0002C4ECF /* Sources */,
+				16A462BA1F5D3FE0002C4ECF /* Frameworks */,
+				16A462BB1F5D3FE0002C4ECF /* Resources */,
+				23FF638930512EF64C35724A /* [CP] Embed Pods Frameworks */,
+				2242B24BF94CDEE424873C2E /* [CP] Copy Pods Resources */,
+				16707DB11F616ACF00706B87 /* Crashlytics */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tuttnauer Wi-Fi Connect";
+			productName = "Tuttnauer Wi-Fi Connect";
+			productReference = 16A462BD1F5D3FE0002C4ECF /* Tuttnauer Wi-Fi Connect.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		16A462B51F5D3FE0002C4ECF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Tuttnauer Europe B.V.";
+				TargetAttributes = {
+					16A462BC1F5D3FE0002C4ECF = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = BK2GKQZQW9;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 16A462B81F5D3FE0002C4ECF /* Build configuration list for PBXProject "Tuttnauer Wi-Fi Connect" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 16A462B41F5D3FE0002C4ECF;
+			productRefGroup = 16A462BE1F5D3FE0002C4ECF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				16A462BC1F5D3FE0002C4ECF /* Tuttnauer Wi-Fi Connect */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		16A462BB1F5D3FE0002C4ECF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16A462CB1F5D3FE0002C4ECF /* LaunchScreen.storyboard in Resources */,
+				16707DF11F61775500706B87 /* COPYING.LESSER in Resources */,
+				16707DEF1F61775500706B87 /* AUTHORS in Resources */,
+				16707DF61F61775500706B87 /* NEWS in Resources */,
+				168ACE081F926371000277DD /* Localizable.strings in Resources */,
+				16A462C81F5D3FE0002C4ECF /* Assets.xcassets in Resources */,
+				16707DF01F61775500706B87 /* COPYING in Resources */,
+				16A462C61F5D3FE0002C4ECF /* Main.storyboard in Resources */,
+				16707DF71F61775500706B87 /* README.rst in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		16707DB11F616ACF00706B87 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2a2f1a11c3b59a0bc6aca1ffc12345a256cc2878 057394d507776f11e37226f9b6f97946d0f6c012b50a6d985de47034d5930135";
+		};
+		2242B24BF94CDEE424873C2E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		23FF638930512EF64C35724A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MMLanScan/MMLanScan.framework",
+				"${BUILT_PRODUCTS_DIR}/NetUtils/NetUtils.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMLanScan.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetUtils.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97FE50111014BB4E562A66DE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tuttnauer Wi-Fi Connect-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		16A462B91F5D3FE0002C4ECF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */,
+				16A462EA1F5D8D90002C4ECF /* MainViewController.swift in Sources */,
+				168ACDEA1F922996000277DD /* HA+UIView.swift in Sources */,
+				16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */,
+				16707DF31F61775500706B87 /* modbus-rtu.c in Sources */,
+				168ACDE81F922974000277DD /* HA+UITextField.swift in Sources */,
+				168ACDEC1F922A3B000277DD /* MainConnectViewController.swift in Sources */,
+				16707DDC1F6175AF00706B87 /* SwiftLibModbus.swift in Sources */,
+				1662FDE11F9E5F8A004A390C /* HA+Array.swift in Sources */,
+				168ACDFD1F925FEE000277DD /* Tuttnauer+UIColor.swift in Sources */,
+				16707DF51F61775500706B87 /* modbus.c in Sources */,
+				168909FA1F98C465006ECEE4 /* Machine.swift in Sources */,
+				168ACE001F9260AD000277DD /* MainNavigationController.swift in Sources */,
+				168909F51F98C2FE006ECEE4 /* ScanForMachinesViewController.swift in Sources */,
+				167C93651F9BB489004930C0 /* AutoClaveEnums.swift in Sources */,
+				168ACE0D1F92656B000277DD /* HA+String.swift in Sources */,
+				1662FDE31F9E6D7F004A390C /* Alerts.swift in Sources */,
+				16A462C11F5D3FE0002C4ECF /* AppDelegate.swift in Sources */,
+				1663F4091F9CCBDC005C05FF /* Utilities.swift in Sources */,
+				168ACDF61F923625000277DD /* SettingsOptionsTableViewController.swift in Sources */,
+				168909F81F98C36F006ECEE4 /* MachineTableViewCell.swift in Sources */,
+				168ACDE61F922920000277DD /* HA+UIViewController.swift in Sources */,
+				168ACE051F9262B1000277DD /* LocalString.swift in Sources */,
+				168ACDF01F922D86000277DD /* SingleMachineViewController.swift in Sources */,
+				16707DF21F61775500706B87 /* modbus-data.c in Sources */,
+				168ACE031F9260C4000277DD /* MainNavigationBar.swift in Sources */,
+				168ACDF41F923179000277DD /* SettingsTableViewController.swift in Sources */,
+				168ACDF21F922EEF000277DD /* Constants.swift in Sources */,
+				16707DF41F61775500706B87 /* modbus-tcp.c in Sources */,
+				1650AFBC1F9E177B00D33278 /* MachineNetworking.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		168ACE0A1F926371000277DD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				168ACE091F926371000277DD /* en */,
+				168ACE0B1F926378000277DD /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		16A462C41F5D3FE0002C4ECF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				16A462C51F5D3FE0002C4ECF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		16A462C91F5D3FE0002C4ECF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				16A462CA1F5D3FE0002C4ECF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		16A462CD1F5D3FE0002C4ECF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		16A462CE1F5D3FE0002C4ECF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		16A462D01F5D3FE0002C4ECF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74DFEC704B23A81212A8E45F /* Pods-Tuttnauer Wi-Fi Connect.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = BK2GKQZQW9;
+				INFOPLIST_FILE = "Tuttnauer Wi-Fi Connect/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tuttnauer.Tuttnauer-WiFi-Connect";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tuttnauer Wi-Fi Connect/Tuttnauer Wi-Fi Connect-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		16A462D11F5D3FE0002C4ECF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FBFEF04E9F5ED22D427708A /* Pods-Tuttnauer Wi-Fi Connect.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = BK2GKQZQW9;
+				INFOPLIST_FILE = "Tuttnauer Wi-Fi Connect/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tuttnauer.Tuttnauer-WiFi-Connect";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tuttnauer Wi-Fi Connect/Tuttnauer Wi-Fi Connect-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16A462B81F5D3FE0002C4ECF /* Build configuration list for PBXProject "Tuttnauer Wi-Fi Connect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16A462CD1F5D3FE0002C4ECF /* Debug */,
+				16A462CE1F5D3FE0002C4ECF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16A462CF1F5D3FE0002C4ECF /* Build configuration list for PBXNativeTarget "Tuttnauer Wi-Fi Connect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16A462D01F5D3FE0002C4ECF /* Debug */,
+				16A462D11F5D3FE0002C4ECF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 16A462B51F5D3FE0002C4ECF /* Project object */;
+}
