@@ -65,8 +65,6 @@ class MachineMonitor: NSObject {
     func startMonitoring() {
         timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(getMachineRealTimeData), userInfo: nil, repeats: true)
         timer?.fire()
-        
-        print(AutoClaveEnums.systemCurrentStatus.cycleDone.hashValue)
     }
     
     func stopMonitoring() {
@@ -88,6 +86,7 @@ class MachineMonitor: NSObject {
     @objc private func getMachineRealTimeData() {
         guard let networkManager = self.networkManager else { return }
         networkManager.getMachineRealTimeStateData()
+        networkManager.getMachineCurrentCycleProperties()
     }
     
     // TODO - Handle lost connections / errors

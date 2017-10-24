@@ -104,6 +104,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         
         currentCycleNameLabel.text = machineRealTime.cycleName?.getName
         doorStateLabel.text = machineRealTime.doorState?.getName
+        temperatureLabel.text = "\(machineRealTime.analogInput1IOMapping)"
     }
     
     func initialMachineDataReceived() {

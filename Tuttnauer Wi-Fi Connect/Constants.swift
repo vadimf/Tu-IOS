@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct AppConstants {
+    static let version = "1.0"
+}
+
 struct SegueIdentifiers {
     static let mainConnectToSingleMachine = "Main Connect to Single Machine Segue"
     static let singleMachineToSettings = "Single Machine to Settings Segue"

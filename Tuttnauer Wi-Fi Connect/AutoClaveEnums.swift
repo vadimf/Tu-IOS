@@ -9,14 +9,31 @@
 import Foundation
 
 class AutoClaveEnums {
-    
-    enum systemCurrentStatus: Int {
+        
+    enum SystemCurrentStatus: Int {
         case none = 0
-        case noError = 1
+        case noError
         case standByError
         case cycleRunning
         case cycleDone
         case cycleFail
+        
+        var getName: String {
+            switch self {
+            case .none:
+                return "-"
+            case .noError:
+                return "No Error"
+            case .standByError:
+                return "Standby Error"
+            case .cycleRunning:
+                return "Cycle Running"
+            case .cycleDone:
+                return "Cycle Done"
+            case .cycleFail:
+                return "Cycle Failed"
+            }
+        }
     }
     
     enum DoorState: Int {
@@ -214,6 +231,34 @@ class AutoClaveEnums {
             }
         }
     }
+    
+    enum CycleStage: Int {
+        case none = 0
+        case errorVacuuming
+        case errorOpening
+        case errorClosing
+        case errorLocking
+        case errorUnlocking
+        
+        var getName: String {
+            switch self {
+            case .none:
+                return "-"
+            case .errorVacuuming:
+                return "Error Vacuuming"
+            case .errorOpening:
+                return "Error Opening"
+            case .errorClosing:
+                return "Error Closing"
+            case .errorLocking:
+                return "Error Locking"
+            case .errorUnlocking:
+                return "Error Unlocking"
+            }
+        }
+    }
+    
+    // MARK: - WTF?
     
     enum currentWaitingCondition {
         case none
@@ -417,62 +462,3 @@ class AutoClaveEnums {
     }
     
 }
-
-/*enum CycleNames: String {
- case instruments = "Instruments"
- case wrappedInstruments = "Wrapped Instruments"
- case pouches = "Pouches"
- case wrappedPouches = "Wrapped Pouches"
- case delicate = "Delicate"
- case wrappedDelicate = "Wrapped Delicate"
- case liquids1 = "Liquids 1"
- case liquids2 = "Liquids 2"
- case bigPackages = "Big Packages"
- case bioHazard1 = "Bio Hazard 1"
- case bioHazard2 = "Bio Hazard 2"
- case vacuumTest = "Vacuum Test"
- case bdTest = "BD Test"
- case pasteurization = "Pasteurization"
- case vhp = "Vhp"
- case warmUp = "Warm Up"
- case isothermal = "Isothermal"
- case glass = "Glass"
- case plastic = "Plastic"
- case liquidRegular = "Liquid Regular"
- case liquid2Waste = "Liquid 2 Waste"
- case liquid1Cooling = "Liquid 1 Cooling"
- case liquid2WasteCooling = "Liquid 2 Waste Cooling"
- case waste = "Waste"
- case hollowLoad = "Hollow Load"
- case bioHazardLiquids = "BioHazard Liquids"
- case unwrapped134 = "Unwrapped 134"
- case wrapped134 = "Wrapped134"
- case unwrapped121 = "Unwrapped121"
- case wrapped121 = "Wrapped 121"
- case prion134 = "Prion134"
- case extraDry = "Extra Dry"
- case airSteamMixture = "Air Steam Mixture"
- case glassTest = "Glass Test"
- case custom1 = "Custom 1"
- case custom2 = "Custom 2"
- case custom3 = "Custom 3"
- case custom4 = "Custom 4"
- case custom5 = "Custom 5"
- case custom6 = "Custom 6"
- case custom7 = "Custom 7"
- case custom8 = "Custom 8"
- case custom9 = "Custom 9"
- case custom10 = "Custom 10"
- case custom11 = "Custom 11"
- case custom12 = "Custom 12"
- case custom13 = "Custom 13"
- case custom14 = "Custom 14"
- case custom15 = "Custom 15"
- case custom16 = "Custom 16"
- case custom17 = "Custom 17"
- case custom18 = "Custom 18"
- case custom19 = "Custom 19"
- case custom20 = "Custom 20"
- }*/
-
-

@@ -22,10 +22,14 @@ protocol MachineNetworkingDelegate {
 
 class MachineNetworking: NSObject {
     
+    static let shared = MachineNetworking()
+    
     var delegate: MachineNetworkingDelegate?
     
     private var modbus: SwiftLibModbus?
     
+    private var machine: Machine?
+    private var machineRealTime: MachineRealTime?
     
     // MARK: - Connecting & Disconnecting
     
@@ -37,6 +41,8 @@ class MachineNetworking: NSObject {
         // Connect
         modbus?.connect(success: {
             completion?(true, nil)
+            self.machine = Machine()
+            self.machineRealTime = MachineRealTime()
             print("Connected to:", ipAddress)
         }, failure: { error in
             completion?(false, error)
@@ -52,8 +58,6 @@ class MachineNetworking: NSObject {
     // MARK: - Machine Setup Methods
 
     func getMachineSetupData() {
-
-        let machine = Machine()
         
         let versionMajorAddress = MachineConstants.Versions.versionMajor
         let versionMinorAddress = MachineConstants.Versions.versionMinor
@@ -71,7 +75,8 @@ class MachineNetworking: NSObject {
             
             print("Received version number")
             
-            guard let data = data as? [Int] else { return }
+            guard let data = data as? [Int],
+                let machine = self.machine else { return }
             
             let version: String = "\(data[0]).\(data[1]).\(data[3]).\(data[2])"
             machine.bsVersion = version
@@ -88,7 +93,8 @@ class MachineNetworking: NSObject {
 
             print("Received model name")
             
-            guard let data = data as? [Int] else { return }
+            guard let data = data as? [Int],
+                let machine = self.machine else { return }
             
             let modelName = Array(data[..<Int(modelNameAddress.count)]).generateStringFromIntArray()
             
@@ -112,7 +118,7 @@ class MachineNetworking: NSObject {
         
     }
     
-    // MARK: - Machine Observer Methods
+    // MARK: - Machine Real Time Observer Methods
     
     func getMachineRealTimeStateData() {
         
@@ -122,9 +128,9 @@ class MachineNetworking: NSObject {
             
             print("Received Real Time Data")
             
-            guard let data = data as? [Int] else { return }
+            guard let data = data as? [Int],
+                let machineRealTime = self.machineRealTime else { return }
             
-            let machineRealTime = MachineRealTime()
             machineRealTime.systemStatus = self.getMachineRealTimeCurrentStatus(startAddress: totalAddresses.start, data: data)
             machineRealTime.cycleName = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
             machineRealTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
@@ -153,4 +159,44 @@ class MachineNetworking: NSObject {
         return data[Int(doorStateAddress.start - startAddress)]
     }
     
+    // MARK: - Current Cycle Observer Methods
+    
+    func getMachineCurrentCycleProperties() {
+        
+        let totalAddresses = MachineConstants.CurrentCycleProperties.total
+        
+        modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+            
+            print("Received Current Cycle Data")
+            
+            guard let data = data as? [Int],
+                let machineRealTime = self.machineRealTime else { return }
+            
+            let analogIOs = self.getMachineCurrentCyclePropertiesAnalogIO(startAddress: totalAddresses.start, data: data)
+            machineRealTime.analogInput1IOMapping = analogIOs.0
+            machineRealTime.analogInput2IOMapping = analogIOs.1
+            machineRealTime.analogInput3IOMapping = analogIOs.2
+            
+            self.delegate?.receivedMachineRealTimeStateData(with: machineRealTime)
+            
+        }, failure: { (error) in
+            self.getMachineCurrentCycleProperties()
+            print(error.localizedDescription)
+        })
+        
+    }
+    
+    private func getMachineCurrentCyclePropertiesAnalogIO(startAddress: Int32, data: [Int]) -> (Int, Int, Int) {
+        
+        let analog1 = MachineConstants.CurrentCycleProperties.analogInput1IOMapping
+        let analog2 = MachineConstants.CurrentCycleProperties.analogInput2IOMapping
+        let analog3 = MachineConstants.CurrentCycleProperties.analogInput3IOMapping
+        
+        let analog1Data = data[Int(analog1.start - startAddress)]
+        let analog2Data = data[Int(analog2.start - startAddress)]
+        let analog3Data = data[Int(analog3.start - startAddress)]
+        
+        return (analog1Data, analog2Data, analog3Data)
+    }
+
 }

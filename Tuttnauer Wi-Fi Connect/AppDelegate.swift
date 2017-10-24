@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 import Fabric
 import Crashlytics
 
@@ -20,7 +21,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         Fabric.with([Crashlytics.self])
-
+        
+        let settingsManager = UserSettingsManager.shared
+        
+        // Check if this is the App's first run
+        if Defaults[.isFirstRun] == nil {
+            // This is the first run, log the user out if exists from a previous installation
+            Defaults[.isFirstRun] = false
+            settingsManager.firstTimeUserSettingsSetup()
+        } else {
+            settingsManager.getUserSettingsFromDefaults()
+        }
+        
+        // Check the app version and sync everything if needed
+        if let appVersion = Defaults[.appVersion] {
+            // If the Defaults AppVersion is different, than we should sync and update
+            if appVersion != AppConstants.version {
+                // TODO: Do necessary stuff if app version is different
+            }
+        } else {
+            // If no appVersion in Defaults, than let's set one up and sync the data
+            Defaults[.appVersion] = AppConstants.version
+        }
+        
         return true
     }
 
