@@ -62,6 +62,7 @@ class SettingsOptionsTableViewController: UITableViewController {
     }
     
     private func populateTemperatureOptions() {
+        title = "Temperature"
         for item in Enums.TemperatureUnit.allValues {
             let selected = UserSettingsManager.shared.userSettings!.temperatureUnit == item
             let option = SettingsOption(name: item.getFullName, value: item.rawValue, isSelected: selected)
@@ -70,6 +71,7 @@ class SettingsOptionsTableViewController: UITableViewController {
     }
     
     private func populatePressureOptions() {
+        title = "Pressure"
         for item in Enums.PressureUnit.allValues {
             let selected = UserSettingsManager.shared.userSettings!.pressureUnit == item
             let option = SettingsOption(name: item.getName, value: item.rawValue, isSelected: selected)
@@ -78,6 +80,7 @@ class SettingsOptionsTableViewController: UITableViewController {
     }
     
     private func populateLanguageOptions() {
+        title = "Language"
         for item in Enums.Language.allValues {
             let selected = UserSettingsManager.shared.userSettings!.language == item
             let option = SettingsOption(name: item.getName, value: item.rawValue, isSelected: selected)
@@ -86,6 +89,7 @@ class SettingsOptionsTableViewController: UITableViewController {
     }
     
     private func populateChooseConnectionOptions() {
+        title = "Choose Connection"
         for item in Enums.ConnectionType.allValues {
             let selected = UserSettingsManager.shared.userSettings!.connectionType == item
             let option = SettingsOption(name: item.getName, value: item.rawValue, isSelected: selected)
