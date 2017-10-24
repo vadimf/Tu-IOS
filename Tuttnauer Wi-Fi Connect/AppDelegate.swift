@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Check if this is the App's first run
         if Defaults[.isFirstRun] == nil {
-            // This is the first run, log the user out if exists from a previous installation
+            // This is the first run
             Defaults[.isFirstRun] = false
             settingsManager.firstTimeUserSettingsSetup()
         } else {
