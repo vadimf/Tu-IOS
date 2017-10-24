@@ -806,13 +806,17 @@
                                                     <constraint firstAttribute="width" constant="1" id="nmA-3P-L9D"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liquid B Waste Cooling" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdF-3n-h44">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liquid B Waste Cooling" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdF-3n-h44">
                                                 <rect key="frame" x="0.0" y="34" width="148.5" height="33.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" name="TuttnauerRed"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Cycle Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjJ-Iz-FA8">
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="s9N-CB-MyE">
+                                                <rect key="frame" x="69" y="107" width="20" height="20"/>
+                                                <color key="color" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </activityIndicatorView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Current Cycle Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjJ-Iz-FA8">
                                                 <rect key="frame" x="0.0" y="10" width="148.5" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -824,12 +828,14 @@
                                             <constraint firstItem="xdF-3n-h44" firstAttribute="top" secondItem="YjJ-Iz-FA8" secondAttribute="bottom" constant="7" id="081-47-mNF"/>
                                             <constraint firstAttribute="bottom" secondItem="2HT-YX-6fZ" secondAttribute="bottom" id="6li-u9-etL"/>
                                             <constraint firstItem="YjJ-Iz-FA8" firstAttribute="top" secondItem="zk8-oT-L91" secondAttribute="top" constant="10" id="IED-Bm-JHI"/>
+                                            <constraint firstItem="s9N-CB-MyE" firstAttribute="centerX" secondItem="zk8-oT-L91" secondAttribute="centerX" id="JfF-iQ-DZH"/>
                                             <constraint firstItem="2HT-YX-6fZ" firstAttribute="top" secondItem="zk8-oT-L91" secondAttribute="top" id="VTc-17-aRM"/>
                                             <constraint firstAttribute="trailing" secondItem="2HT-YX-6fZ" secondAttribute="trailing" id="XWe-WR-hL8"/>
                                             <constraint firstItem="2HT-YX-6fZ" firstAttribute="leading" secondItem="YjJ-Iz-FA8" secondAttribute="trailing" constant="10" id="aEa-jF-PHc"/>
                                             <constraint firstItem="xdF-3n-h44" firstAttribute="leading" secondItem="YjJ-Iz-FA8" secondAttribute="leading" id="ijR-of-TSF"/>
                                             <constraint firstItem="YjJ-Iz-FA8" firstAttribute="leading" secondItem="zk8-oT-L91" secondAttribute="leading" id="imi-qG-DeK"/>
                                             <constraint firstItem="xdF-3n-h44" firstAttribute="trailing" secondItem="YjJ-Iz-FA8" secondAttribute="trailing" id="kvg-2G-XFA"/>
+                                            <constraint firstItem="s9N-CB-MyE" firstAttribute="centerY" secondItem="zk8-oT-L91" secondAttribute="centerY" id="ufW-ND-Dr1"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="0lT-vi-t81">
@@ -960,10 +966,20 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="currentCycleIndicator" destination="s9N-CB-MyE" id="ZMD-QM-0as"/>
                         <outlet property="currentCycleNameLabel" destination="xdF-3n-h44" id="Mbf-BJ-JRI"/>
+                        <outlet property="cycleErrorLabel" destination="lf4-gH-Wuh" id="zBc-lN-KdI"/>
+                        <outlet property="cycleParameterDryTimeLabel" destination="LCv-0e-WZu" id="URr-0O-RRI"/>
+                        <outlet property="cycleParameterSterTempLabel" destination="NoW-d2-JcD" id="vAW-xO-ojn"/>
+                        <outlet property="cycleParameterSterTimeLabel" destination="67r-jg-Bio" id="2aA-FF-Ngh"/>
+                        <outlet property="doorStateLabel" destination="GRC-Y2-mbt" id="5Z0-5B-9sJ"/>
                         <outlet property="ipAddressLabel" destination="B0U-vB-9Gg" id="JWW-fo-5Bi"/>
                         <outlet property="modelNameLabel" destination="Jt3-CF-0FV" id="DxG-DP-fBR"/>
+                        <outlet property="pressureLabel" destination="Swp-IA-rdo" id="88J-Mh-hFo"/>
                         <outlet property="serialNumberLabel" destination="Uzq-z0-3z9" id="hRR-Hm-MeU"/>
+                        <outlet property="systemStatusLabel" destination="mAT-ar-2Ub" id="Hqr-Mt-wpX"/>
+                        <outlet property="temp1Label" destination="SpB-Kt-nrV" id="TMa-EL-zXg"/>
+                        <outlet property="temperatureLabel" destination="TTQ-Hx-c6Q" id="0Xn-KE-sVy"/>
                         <outlet property="versionLabel" destination="8aV-Ap-Vby" id="d9h-HY-URo"/>
                         <segue destination="HY0-mi-NFI" kind="presentation" identifier="Single Machine to Settings Segue" id="Ql1-Rb-boG"/>
                     </connections>

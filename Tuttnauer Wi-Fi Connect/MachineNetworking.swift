@@ -126,8 +126,8 @@ class MachineNetworking: NSObject {
             
             let machineRealTime = MachineRealTime()
             machineRealTime.systemStatus = self.getMachineRealTimeCurrentStatus(startAddress: totalAddresses.start, data: data)
-            machineRealTime.cycleName = AutoClaveEnums.CycleIDs(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleIDs(rawValue: 0)
-            machineRealTime.doorState = self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)
+            machineRealTime.cycleName = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
+            machineRealTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
             
             self.delegate?.receivedMachineRealTimeStateData(with: machineRealTime)
             

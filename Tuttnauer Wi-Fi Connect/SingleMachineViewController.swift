@@ -12,7 +12,6 @@ class SingleMachineViewController: UIViewController {
 
     var machineMonitor: MachineMonitor?
     
-    
     // MARK: - IBOutlets
     
     @IBOutlet weak var modelNameLabel: UILabel!
@@ -21,13 +20,26 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var versionLabel: UILabel!
     
     @IBOutlet weak var currentCycleNameLabel: UILabel!
+    @IBOutlet weak var currentCycleIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var temp1Label: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    
+    @IBOutlet weak var systemStatusLabel: UILabel!
+    @IBOutlet weak var doorStateLabel: UILabel!
+    @IBOutlet weak var cycleErrorLabel: UILabel!
+    
+    @IBOutlet weak var cycleParameterSterTempLabel: UILabel!
+    @IBOutlet weak var cycleParameterSterTimeLabel: UILabel!
+    @IBOutlet weak var cycleParameterDryTimeLabel: UILabel!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLocalization()
+        resetLabelsValues()
         machineMonitor = MachineMonitor.shared // Singleton Class
         machineMonitor?.delegate = self
         machineMonitor?.getMachineSetupData() // Request the initial machine object with data
@@ -41,12 +53,28 @@ class SingleMachineViewController: UIViewController {
     // MARK: - Setup Methods
     
     private func setupLocalization() {
+        
+    }
+    
+    private func resetLabelsValues() {
         modelNameLabel.text = ""
         serialNumberLabel.text = ""
         ipAddressLabel.text = ""
         versionLabel.text = ""
         
         currentCycleNameLabel.text = ""
+        
+        temperatureLabel.text = "-"
+        temp1Label.text = "-"
+        pressureLabel.text = "-"
+        
+        systemStatusLabel.text = "-"
+        doorStateLabel.text = "-"
+        cycleErrorLabel.text = "-"
+        
+        cycleParameterSterTempLabel.text = "-"
+        cycleParameterSterTimeLabel.text = "-"
+        cycleParameterDryTimeLabel.text = "-"
     }
     
     // MARK: - IBActions
@@ -75,8 +103,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             let machineRealTime = machineMonitor.machineRealTime else { return }
         
         currentCycleNameLabel.text = machineRealTime.cycleName?.getName
-        
-        print("Door State:", machineRealTime.doorState)
+        doorStateLabel.text = machineRealTime.doorState?.getName
     }
     
     func initialMachineDataReceived() {

@@ -12,8 +12,8 @@ class MachineRealTime: NSObject {
 
     // Real Time State
     var systemStatus: Int = 0
-    var cycleName: AutoClaveEnums.CycleIDs?
+    var cycleName: AutoClaveEnums.CycleID?
     var screenSaverOn: Int = 0
-    var doorState: Int = 0
+    var doorState: AutoClaveEnums.DoorState?
     
 }

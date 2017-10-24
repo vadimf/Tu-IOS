@@ -19,7 +19,33 @@ class AutoClaveEnums {
         case cycleFail
     }
     
-    enum CycleIDs: Int {
+    enum DoorState: Int {
+        case door1Opened = 0
+        case door1Closed
+        case door1ClosedDoor2Closed
+        case door1OpenDoor2Open
+        case door1ClosedDoor2Opened
+        case door1OpenDoor2Closed
+        
+        var getName: String {
+            switch self {
+            case .door1Opened:
+                return "Door Opened"
+            case .door1Closed:
+                return "Door Closed"
+            case .door1ClosedDoor2Closed:
+                return "Door 1 Closed. Door 2 Closed"
+            case .door1OpenDoor2Open:
+                return "Door 1 Open. Door 2 Open"
+            case .door1ClosedDoor2Opened:
+                return "Door 1 Closed. Door 2 Opened"
+            case .door1OpenDoor2Closed:
+                return "Door 1 Open. Door 2 Closed"
+            }
+        }
+    }
+    
+    enum CycleID: Int {
         case instruments = 0
         case wrappedInstruments
         case pouches
