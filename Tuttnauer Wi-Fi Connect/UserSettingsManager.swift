@@ -28,14 +28,14 @@ class UserSettingsManager: NSObject {
     func firstTimeUserSettingsSetup() {
         
         // UserDefaults
-        Defaults[.userTemperatureUnit] = Enums.TemperatureUnit.celcius.rawValue
+        Defaults[.userTemperatureUnit] = Enums.TemperatureUnit.celsius.rawValue
         Defaults[.userPressureUnit] = Enums.PressureUnit.kpa.rawValue
         Defaults[.userLanguage] = Enums.Language.english.rawValue
         Defaults[.userReceiveLiveNotifications] = false
         Defaults[.userConnectionType] = Enums.ConnectionType.autoConnectOnStart.rawValue
         
         // Also, let's populate the UserSettings object
-        userSettings.temperatureUnit = .celcius
+        userSettings.temperatureUnit = .celsius
         userSettings.pressureUnit = .kpa
         userSettings.language = .english
         userSettings.receiveLiveNotifications = false

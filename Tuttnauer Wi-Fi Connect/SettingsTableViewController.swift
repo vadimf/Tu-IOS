@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    var selectedOptions: Enums.SettingsOptions!
+    
     // MARK: - IBOutlets
     
     // MARK: Cell Titles
@@ -66,13 +68,14 @@ class SettingsTableViewController: UITableViewController {
         versionTitleLabel.text = LocalString.settingsScreenCellVersionTitle
     }
     
-    private func resetCellTitlesValues() {
-        temperatureSignLabel.text = ""
-        pressureSignLabel.text = ""
-        languageLabel.text = ""
-        connectionTypeLabel.text = ""
+    internal func resetCellTitlesValues() {
+        let settings = UserSettingsManager.shared.userSettings!
+        temperatureSignLabel.text = settings.temperatureUnit?.getName
+        pressureSignLabel.text = settings.pressureUnit?.getName
+        languageLabel.text = settings.language?.getName
+        connectionTypeLabel.text = settings.connectionType?.getName
         versionSubtitleLabel.text = ""
-        liveNotificationsSwitch.isOn = false
+        liveNotificationsSwitch.isOn = UserSettingsManager.shared.userSettings.receiveLiveNotifications!
     }
     
     // MARK: - IBActions
@@ -81,6 +84,9 @@ class SettingsTableViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func liveNotificationsSwitchTapped(_ sender: UISwitch) {
+        UserSettingsManager.shared.setUserReceiveLiveNotifications(to: sender.isOn)
+    }
 }
 
 // MARK: - Navigation
@@ -88,6 +94,12 @@ class SettingsTableViewController: UITableViewController {
 extension SettingsTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == SegueIdentifiers.settingsToSettingsOptions {
+            guard let vc = segue.destination as? SettingsOptionsTableViewController else { return }
+            vc.delegate = self
+            vc.optionsType = selectedOptions
+        }
         
     }
     
@@ -99,10 +111,50 @@ extension SettingsTableViewController {
     
     // MARK: Data Source
     
+    
     // MARK: Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: What to do when a cell is selected?
+        
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                selectedOptions = Enums.SettingsOptions.temperatureUnit
+            case 1:
+                selectedOptions = Enums.SettingsOptions.pressureUnit
+            case 2:
+                selectedOptions = Enums.SettingsOptions.language
+            case 3:
+                selectedOptions = Enums.SettingsOptions.connectionType
+            default:
+                return
+            }
+            
+            performSegue(withIdentifier: SegueIdentifiers.settingsToSettingsOptions, sender: self)
+        }
+        
+    }
+    
+}
+
+extension SettingsTableViewController: SettingsOptionsTableViewControllerDelegate {
+    
+    func didSelect(option: SettingsOption) {
+        switch selectedOptions! {
+            case .temperatureUnit:
+                let unit = Enums.TemperatureUnit(rawValue: option.value)
+                UserSettingsManager.shared.setUserTemperatureUnit(to: unit!)
+            case .pressureUnit:
+                let unit = Enums.PressureUnit(rawValue: option.value)
+                UserSettingsManager.shared.setUserPressureUnit(to: unit!)
+            case .language:
+                let language = Enums.Language(rawValue: option.value)
+                UserSettingsManager.shared.setUserLanguage(to: language!)
+            case .connectionType:
+                let type = Enums.ConnectionType(rawValue: option.value)
+                UserSettingsManager.shared.setUserConnectionType(to: type!)
+        }
+        resetCellTitlesValues()
     }
     
 }

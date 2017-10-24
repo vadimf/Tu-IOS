@@ -10,9 +10,36 @@ import Foundation
 
 class Enums: NSObject {
 
+    enum SettingsOptions {
+        case temperatureUnit
+        case pressureUnit
+        case language
+        case connectionType
+    }
+    
     enum TemperatureUnit: Int {
-        case celcius = 0
+        case celsius = 0
         case fahrenheit
+        
+        static let allValues = [celsius, fahrenheit]
+        
+        var getName: String {
+            switch self {
+            case .celsius:
+                return "°C"
+            case .fahrenheit:
+                return "°F"
+            }
+        }
+        
+        var getFullName: String {
+            switch self {
+            case .celsius:
+                return "Celsius °C"
+            case .fahrenheit:
+                return "Fahrenheit °F"
+            }
+        }
     }
     
     enum PressureUnit: Int {
@@ -24,16 +51,58 @@ class Enums: NSObject {
         case inhg
         case mBar
         
+        static let allValues = [kpa, psia, psig, barA, barG, inhg, mBar]
+        
+        var getName: String {
+            switch self {
+            case .kpa:
+                return "kPa"
+            case .psia:
+                return "Psia"
+            case .psig:
+                return "Psig"
+            case .barA:
+                return "BarA"
+            case .barG:
+                return "BarG"
+            case .inhg:
+                return "Inhg"
+            case .mBar:
+                return "Mbar"
+            }
+        }
     }
     
     enum Language: Int {
         case english = 0
+        
+        static let allValues = [english]
+        
+        var getName: String {
+            switch self {
+            case .english:
+                return "English"
+            }
+        }
     }
     
     enum ConnectionType: Int {
         case autoConnectOnStart = 0
         case manualConnect
         case connectToLastMachine
+        
+        static let allValues = [autoConnectOnStart, manualConnect, connectToLastMachine]
+        
+        var getName: String {
+            switch self {
+            case .autoConnectOnStart:
+                return "Auto connect on start"
+            case .manualConnect:
+                return "Manual connect"
+            case .connectToLastMachine:
+                return "Connect to last machine"
+            }
+        }
     }
     
 }
