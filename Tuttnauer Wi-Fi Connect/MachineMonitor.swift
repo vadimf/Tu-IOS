@@ -10,6 +10,7 @@ import UIKit
 
 protocol MachineMonitorDelegate {
     func machineSetupDataUpdated()
+    func machineRealTimeDataUpdated()
     func initialMachineDataReceived()
     func machineDataUpdated(modelName: String, serialNumber: String)
     func lostConnection()
@@ -22,6 +23,7 @@ class MachineMonitor: NSObject {
     var delegate: MachineMonitorDelegate?
     
     var machine: Machine?
+    var machineRealTime: MachineRealTime?
     var networkManager: MachineNetworking?
     
     var isConnected: Bool = false
@@ -33,6 +35,7 @@ class MachineMonitor: NSObject {
     override init() {
         super.init()
         machine = Machine()
+        machineRealTime = MachineRealTime()
         networkManager = MachineNetworking()
         networkManager?.delegate = self
         startMonitoring()
@@ -60,8 +63,10 @@ class MachineMonitor: NSObject {
     // MARK: - Manipulation Methods
     
     func startMonitoring() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(getMachineObservableData), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(getMachineRealTimeData), userInfo: nil, repeats: true)
         timer?.fire()
+        
+        print(AutoClaveEnums.systemCurrentStatus.cycleDone.hashValue)
     }
     
     func stopMonitoring() {
@@ -80,8 +85,9 @@ class MachineMonitor: NSObject {
         networkManager.getMachineSetupData()
     }
     
-    @objc private func getMachineObservableData() {
-        // TODO: Observables
+    @objc private func getMachineRealTimeData() {
+        guard let networkManager = self.networkManager else { return }
+        networkManager.getMachineRealTimeStateData()
     }
     
     // TODO - Handle lost connections / errors
@@ -97,12 +103,18 @@ extension MachineMonitor: MachineNetworkingDelegate {
        delegate?.machineSetupDataUpdated()
     }
     
+    func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime) {
+        self.machineRealTime = machineRealTimeState
+        delegate?.machineRealTimeDataUpdated()
+    }
+    
     func machineNewData(modelName: String, serialNumber: String) {
         delegate?.machineDataUpdated(modelName: modelName, serialNumber: serialNumber)
     }
     
     func disconnect() {
-        
+        guard let networkManager = self.networkManager else { return }
+        networkManager.disconnect()
     }
     
     func connectionLost() {

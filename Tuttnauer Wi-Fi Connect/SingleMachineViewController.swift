@@ -20,6 +20,9 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var ipAddressLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     
+    @IBOutlet weak var currentCycleNameLabel: UILabel!
+    
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -42,6 +45,8 @@ class SingleMachineViewController: UIViewController {
         serialNumberLabel.text = ""
         ipAddressLabel.text = ""
         versionLabel.text = ""
+        
+        currentCycleNameLabel.text = ""
     }
     
     // MARK: - IBActions
@@ -52,7 +57,10 @@ class SingleMachineViewController: UIViewController {
     
 }
 
+// MARK: - Machine Monitor Delegate
+
 extension SingleMachineViewController: MachineMonitorDelegate {
+    
     func machineSetupDataUpdated() {
         guard let machineMonitor = self.machineMonitor,
             let machine = machineMonitor.machine else { return }
@@ -62,6 +70,14 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         versionLabel.text = machine.bsVersion
     }
     
+    func machineRealTimeDataUpdated() {
+        guard let machineMonitor = self.machineMonitor,
+            let machineRealTime = machineMonitor.machineRealTime else { return }
+        
+        currentCycleNameLabel.text = machineRealTime.cycleName?.getName
+        
+        print("Door State:", machineRealTime.doorState)
+    }
     
     func initialMachineDataReceived() {
         

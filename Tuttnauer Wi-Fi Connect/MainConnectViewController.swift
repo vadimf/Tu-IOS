@@ -22,8 +22,8 @@ class MainConnectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
-        ipAddressTextField.text = "192.168.1.147" // For dev purpose only
-        ipAddressTextField.text = "10.0.0.44" // For dev purpose only
+        ipAddressTextField.text = "192.168.1.147" // Work IP - For dev purpose only
+        //ipAddressTextField.text = "10.0.0.44" // Home IP - For dev purpose only
     }
 
     override func didReceiveMemoryWarning() {

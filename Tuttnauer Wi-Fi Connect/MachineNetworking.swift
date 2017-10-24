@@ -13,6 +13,8 @@ typealias MachineRegistersCompletionHandler = (_ data: [AnyObject]?, _ error: NS
 
 protocol MachineNetworkingDelegate {
     func receivedMachineSetupData(with machine: Machine)
+    func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime)
+    
     func machineNewData(modelName: String, serialNumber: String)
     func disconnect()
     func connectionLost()
@@ -50,22 +52,24 @@ class MachineNetworking: NSObject {
     // MARK: - Machine Setup Methods
 
     func getMachineSetupData() {
-        
+
         let machine = Machine()
         
-        let versionMajorAddress = MachineConstants.versions.versionMajor
-        let versionMinorAddress = MachineConstants.versions.versionMinor
-        let versionRevisionAddress = MachineConstants.versions.versionRevision
-        let versionBuildAddress = MachineConstants.versions.versionBuild
+        let versionMajorAddress = MachineConstants.Versions.versionMajor
+        let versionMinorAddress = MachineConstants.Versions.versionMinor
+        let versionRevisionAddress = MachineConstants.Versions.versionRevision
+        let versionBuildAddress = MachineConstants.Versions.versionBuild
         
-        let modelNameAddress = MachineConstants.setup.modelName
-        let serialNumberAddress = MachineConstants.setup.serialNumber
+        let modelNameAddress = MachineConstants.Setup.modelName
+        let serialNumberAddress = MachineConstants.Setup.serialNumber
         
         let versionTotalAddresses = (versionMajorAddress.count + versionMinorAddress.count + versionRevisionAddress.count + versionBuildAddress.count)
         let modelTotalAddresses = (modelNameAddress.count + serialNumberAddress.count)
         
         // Get Version Number
         modbus?.readRegistersFrom(startAddress: (versionMajorAddress.start - 1), count: versionTotalAddresses, success: { (data) in
+            
+            print("Received version number")
             
             guard let data = data as? [Int] else { return }
             
@@ -81,6 +85,8 @@ class MachineNetworking: NSObject {
         
         // Get Model Name & Serial Number
         modbus?.readRegistersFrom(startAddress: (modelNameAddress.start - 1), count: modelTotalAddresses, success: { (data) in
+
+            print("Received model name")
             
             guard let data = data as? [Int] else { return }
             
@@ -100,11 +106,51 @@ class MachineNetworking: NSObject {
             self.delegate?.receivedMachineSetupData(with: machine)
             
         }, failure: { (error) in
-            // TODO: Retry after X seconds instead of forcing immediately
             self.getMachineSetupData()
             print(error.localizedDescription)
         })
         
+    }
+    
+    // MARK: - Machine Observer Methods
+    
+    func getMachineRealTimeStateData() {
+        
+        let totalAddresses = MachineConstants.RealTime.total
+        
+        modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+            
+            print("Received Real Time Data")
+            
+            guard let data = data as? [Int] else { return }
+            
+            let machineRealTime = MachineRealTime()
+            machineRealTime.systemStatus = self.getMachineRealTimeCurrentStatus(startAddress: totalAddresses.start, data: data)
+            machineRealTime.cycleName = AutoClaveEnums.CycleIDs(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleIDs(rawValue: 0)
+            machineRealTime.doorState = self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)
+            
+            self.delegate?.receivedMachineRealTimeStateData(with: machineRealTime)
+            
+        }, failure: { (error) in
+            self.getMachineRealTimeStateData()
+            print(error.localizedDescription)
+        })
+        
+    }
+    
+    private func getMachineRealTimeCurrentCycleID(startAddress: Int32, data: [Int]) -> Int {
+        let currentCycleIDAddresss = MachineConstants.RealTime.cycleID
+        return data[Int(currentCycleIDAddresss.start - startAddress)]
+    }
+    
+    private func getMachineRealTimeCurrentStatus(startAddress: Int32, data: [Int]) -> Int {
+        let currentStatusAddress = MachineConstants.RealTime.systemStatus
+        return data[Int(currentStatusAddress.start - startAddress)] // TODO: it's 4 addresses, translate that to a String
+    }
+    
+    private func getMachineRealTimeDoorState(startAddress: Int32, data: [Int]) -> Int {
+        let doorStateAddress = MachineConstants.RealTime.doorState
+        return data[Int(doorStateAddress.start - startAddress)]
     }
     
 }

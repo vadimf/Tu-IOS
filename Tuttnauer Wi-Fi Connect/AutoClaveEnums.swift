@@ -9,8 +9,8 @@
 import Foundation
 
 class AutoClaveEnums {
- 
-    enum SystemCurrentStatus: Int {
+    
+    enum systemCurrentStatus: Int {
         case none = 0
         case noError = 1
         case standByError
@@ -19,7 +19,177 @@ class AutoClaveEnums {
         case cycleFail
     }
     
-    enum CurrentWaitingCondition {
+    enum CycleIDs: Int {
+        case instruments = 0
+        case wrappedInstruments
+        case pouches
+        case wrappedPouches
+        case delicate
+        case wrappedDelicate
+        case liquids1
+        case liquids2
+        case bigPackages
+        case bioHazard1
+        case bioHazard2
+        case vacuumTest
+        case bdTest
+        case pasteurization = 33
+        case vhp
+        case warmUp
+        case isothermal
+        case glass
+        case plastic
+        case liquidRegular
+        case liquid2Waste
+        case liquid1Cooling
+        case liquid2WasteCooling
+        case waste
+        case hollowLoad
+        case bioHazardLiquids
+        case unwrapped134
+        case wrapped134
+        case unwrapped121
+        case wrapped121
+        case prion134
+        case extraDry
+        case airSteamMixture
+        case glassTest
+        case custom1 = 100
+        case custom2
+        case custom3
+        case custom4
+        case custom5
+        case custom6
+        case custom7
+        case custom8
+        case custom9
+        case custom10
+        case custom11
+        case custom12
+        case custom13
+        case custom14
+        case custom15
+        case custom16
+        case custom17
+        case custom18
+        case custom19
+        case custom20
+        
+        var getName: String {
+            switch self {
+            case .instruments:
+                return "Instruments"
+            case .wrappedInstruments:
+                return "Wrapped Instruments"
+            case .pouches:
+                return "Pouches"
+            case .wrappedPouches:
+                return "Wrapped Pouches"
+            case .delicate:
+                return "Delicate"
+            case .wrappedDelicate:
+                return "Wrapped Delicate"
+            case .liquids1:
+                return "Liquids A"
+            case .liquids2:
+                return "Liquids B"
+            case .bigPackages:
+                return "Big Packages"
+            case .bioHazard1:
+                return "Bio Hazard A"
+            case .bioHazard2:
+                return "Bio Hazard B"
+            case .vacuumTest:
+                return "Vacuum Test"
+            case .bdTest:
+                return "BD Test"
+            case .pasteurization:
+                return "Pasteurization"
+            case .vhp:
+                return "Vhp"
+            case .warmUp:
+                return "Warm Up"
+            case .isothermal:
+                return "Isothermal"
+            case .glass:
+                return "Glass"
+            case .plastic:
+                return "Plastic"
+            case .liquidRegular:
+                return "Liquid A"
+            case .liquid2Waste:
+                return "Liquid B Waste"
+            case .liquid1Cooling:
+                return "Liquid A Cooling"
+            case .liquid2WasteCooling:
+                return "Liquid B Waste Cooling"
+            case .waste:
+                return "Waste"
+            case .hollowLoad:
+                return "Hollow Load"
+            case .bioHazardLiquids:
+                return "BioHazard Liquids"
+            case .unwrapped134:
+                return "Unwrapped 134"
+            case .wrapped134:
+                return "Wrapped 134"
+            case .unwrapped121:
+                return "Unwrapped 121"
+            case .wrapped121:
+                return "Wrapped 121"
+            case .prion134:
+                return "Prion 134"
+            case .extraDry:
+                return "Extra Dry"
+            case .airSteamMixture:
+                return "Air Steam Mixture"
+            case .glassTest:
+                return "Glass Test"
+            case .custom1:
+                return "Custom 1"
+            case .custom2:
+                return "Custom 2"
+            case .custom3:
+                return "Custom 3"
+            case .custom4:
+                return "Custom 4"
+            case .custom5:
+                return "Custom 5"
+            case .custom6:
+                return "Custom 6"
+            case .custom7:
+                return "Custom 7"
+            case .custom8:
+                return "Custom 8"
+            case .custom9:
+                return "Custom 9"
+            case .custom10:
+                return "Custom 10"
+            case .custom11:
+                return "Custom 11"
+            case .custom12:
+                return "Custom 12"
+            case .custom13:
+                return "Custom 13"
+            case .custom14:
+                return "Custom 14"
+            case .custom15:
+                return "Custom 15"
+            case .custom16:
+                return "Custom 16"
+            case .custom17:
+                return "Custom 17"
+            case .custom18:
+                return "Custom 18"
+            case .custom19:
+                return "Custom 19"
+            case .custom20:
+                return "Custom 20"
+            }
+        }
+    }
+    
+    enum currentWaitingCondition {
         case none
         case waitingForNormalTemperature
         case waitingForCoolingPressure
@@ -29,7 +199,7 @@ class AutoClaveEnums {
         case waitingForCleaningFilter
     }
     
-    enum CoolingFanMode: Int {
+    enum coolingFanMode: Int {
         case none = 0
         case removeAir = 1
         case stabilize = 2
@@ -221,3 +391,62 @@ class AutoClaveEnums {
     }
     
 }
+
+/*enum CycleNames: String {
+ case instruments = "Instruments"
+ case wrappedInstruments = "Wrapped Instruments"
+ case pouches = "Pouches"
+ case wrappedPouches = "Wrapped Pouches"
+ case delicate = "Delicate"
+ case wrappedDelicate = "Wrapped Delicate"
+ case liquids1 = "Liquids 1"
+ case liquids2 = "Liquids 2"
+ case bigPackages = "Big Packages"
+ case bioHazard1 = "Bio Hazard 1"
+ case bioHazard2 = "Bio Hazard 2"
+ case vacuumTest = "Vacuum Test"
+ case bdTest = "BD Test"
+ case pasteurization = "Pasteurization"
+ case vhp = "Vhp"
+ case warmUp = "Warm Up"
+ case isothermal = "Isothermal"
+ case glass = "Glass"
+ case plastic = "Plastic"
+ case liquidRegular = "Liquid Regular"
+ case liquid2Waste = "Liquid 2 Waste"
+ case liquid1Cooling = "Liquid 1 Cooling"
+ case liquid2WasteCooling = "Liquid 2 Waste Cooling"
+ case waste = "Waste"
+ case hollowLoad = "Hollow Load"
+ case bioHazardLiquids = "BioHazard Liquids"
+ case unwrapped134 = "Unwrapped 134"
+ case wrapped134 = "Wrapped134"
+ case unwrapped121 = "Unwrapped121"
+ case wrapped121 = "Wrapped 121"
+ case prion134 = "Prion134"
+ case extraDry = "Extra Dry"
+ case airSteamMixture = "Air Steam Mixture"
+ case glassTest = "Glass Test"
+ case custom1 = "Custom 1"
+ case custom2 = "Custom 2"
+ case custom3 = "Custom 3"
+ case custom4 = "Custom 4"
+ case custom5 = "Custom 5"
+ case custom6 = "Custom 6"
+ case custom7 = "Custom 7"
+ case custom8 = "Custom 8"
+ case custom9 = "Custom 9"
+ case custom10 = "Custom 10"
+ case custom11 = "Custom 11"
+ case custom12 = "Custom 12"
+ case custom13 = "Custom 13"
+ case custom14 = "Custom 14"
+ case custom15 = "Custom 15"
+ case custom16 = "Custom 16"
+ case custom17 = "Custom 17"
+ case custom18 = "Custom 18"
+ case custom19 = "Custom 19"
+ case custom20 = "Custom 20"
+ }*/
+
+

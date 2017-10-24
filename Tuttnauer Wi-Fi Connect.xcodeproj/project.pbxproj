@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */; };
 		1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFB91F9E144400D33278 /* MachineMonitor.swift */; };
 		1650AFBC1F9E177B00D33278 /* MachineNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */; };
 		1662FDE11F9E5F8A004A390C /* HA+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1662FDE01F9E5F8A004A390C /* HA+Array.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineRealTime.swift; sourceTree = "<group>"; };
 		1650AFB91F9E144400D33278 /* MachineMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineMonitor.swift; sourceTree = "<group>"; };
 		1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineNetworking.swift; sourceTree = "<group>"; };
 		1662FDE01F9E5F8A004A390C /* HA+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+Array.swift"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				168909F91F98C465006ECEE4 /* Machine.swift */,
+				163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				16707DF31F61775500706B87 /* modbus-rtu.c in Sources */,
 				168ACDE81F922974000277DD /* HA+UITextField.swift in Sources */,
 				168ACDEC1F922A3B000277DD /* MainConnectViewController.swift in Sources */,
+				163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */,
 				16707DDC1F6175AF00706B87 /* SwiftLibModbus.swift in Sources */,
 				1662FDE11F9E5F8A004A390C /* HA+Array.swift in Sources */,
 				168ACDFD1F925FEE000277DD /* Tuttnauer+UIColor.swift in Sources */,
