@@ -21,6 +21,7 @@ class SingleMachineViewController: UIViewController {
     
     @IBOutlet weak var currentCycleNameLabel: UILabel!
     @IBOutlet weak var currentCycleIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var currentCycleIconImageView: UIImageView!
     @IBOutlet weak var currentCycleStageNameLabel: UILabel!
     @IBOutlet weak var currentCycleSubStageNameLabel: UILabel!
     
@@ -65,6 +66,7 @@ class SingleMachineViewController: UIViewController {
         versionLabel.text = ""
         
         currentCycleNameLabel.text = ""
+        currentCycleIconImageView.isHidden = true
         currentCycleStageNameLabel.text = ""
         currentCycleSubStageNameLabel.text = ""
         
@@ -108,12 +110,19 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         
         systemStatusLabel.text = machineRealTime.systemStatus?.getName
         currentCycleNameLabel.text = machineRealTime.cycleName?.getName
+        currentCycleIconImageView.image = machineRealTime.cycleName?.getIcon
         currentCycleStageNameLabel.text = machineRealTime.cycleStage?.getName
         currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
         cycleErrorLabel.text = machineRealTime.cycleError?.getName
         
         doorStateLabel.text = machineRealTime.doorState?.getName
         temperatureLabel.text = "\(machineRealTime.analogInput1IOMapping)"
+        
+        if machineRealTime.cycleName! == .none {
+            currentCycleIconImageView.isHidden = true
+        } else {
+            currentCycleIconImageView.isHidden = false
+        }
         
         if machineRealTime.systemStatus! != .none {
             currentCycleIndicator.startAnimating()

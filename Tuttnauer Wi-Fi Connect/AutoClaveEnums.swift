@@ -6,7 +6,7 @@
 //  Copyright © 2017 Tuttnauer Europe B.V. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class AutoClaveEnums {
         
@@ -228,6 +228,51 @@ class AutoClaveEnums {
                 return "Custom 19"
             case .custom20:
                 return "Custom 20"
+            }
+        }
+        
+        var getIcon: UIImage {
+            switch self {
+            case .instruments:
+                return #imageLiteral(resourceName: "icon_cycle_instruments")
+            case .wrappedInstruments:
+                return #imageLiteral(resourceName: "icon_cycle_wrappedinstruments")
+            case .pouches:
+                return #imageLiteral(resourceName: "icon_cycle_pouches")
+            case .wrappedPouches:
+                return #imageLiteral(resourceName: "icon_cycle_wrappedpouches")
+            case .delicate:
+                return #imageLiteral(resourceName: "icon_cycle_delicate")
+            case .wrappedDelicate:
+                return #imageLiteral(resourceName: "icon_cycle_wrappeddelicate")
+            case .liquids1:
+                return #imageLiteral(resourceName: "icon_cycle_liquids")
+            case .liquids2:
+                return #imageLiteral(resourceName: "icon_cycle_liquids")
+            case .pasteurization:
+                return #imageLiteral(resourceName: "icon_cycle_pasteurization")
+            case .warmUp:
+                return #imageLiteral(resourceName: "icon_cycle_warmup")
+            case .isothermal:
+                return #imageLiteral(resourceName: "icon_cycle_isothermal")
+            case .glass:
+                return #imageLiteral(resourceName: "icon_cycle_glasses")
+            case .plastic:
+                return #imageLiteral(resourceName: "icon_cycle_delicate")
+            case .liquidRegular:
+                return #imageLiteral(resourceName: "icon_cycle_liquids")
+            case .liquid2Waste:
+                return #imageLiteral(resourceName: "icon_cycle_liquids")
+            case .liquid1Cooling:
+                return #imageLiteral(resourceName: "icon_cycle_liquids")
+            case .liquid2WasteCooling:
+                return #imageLiteral(resourceName: "icon_cycle_liquids")
+            case .waste:
+                return #imageLiteral(resourceName: "icon_cycle_waste")
+            case .glassTest:
+                return #imageLiteral(resourceName: "icon_cycle_glasses")
+            default:
+                return #imageLiteral(resourceName: "icon_cycle_default")
             }
         }
     }
