@@ -126,13 +126,13 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         doorStateLabel.text = machineRealTime.doorState?.getName
         temperatureLabel.text = "\(machineRealTime.analogInput1IOMapping)"
         
-        if machineRealTime.cycleName! == .none {
+        if let cycleName = machineRealTime.cycleName, cycleName == .none {
             currentCycleIconImageView.isHidden = true
         } else {
             currentCycleIconImageView.isHidden = false
         }
         
-        if machineRealTime.systemStatus! != .none {
+        if let systemStatus = machineRealTime.systemStatus, systemStatus != .none {
             currentCycleIndicator.startAnimating()
         } else {
             currentCycleIndicator.stopAnimating()
@@ -151,8 +151,26 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         print("Model Name =", modelName, "Serial Number =", serialNumber)
     }
     
-    func lostConnection() {
-        
+    func connectionLost() {
+        Alerts.alertMessageWithActions(for: self, title: "Connection Lost", message: "The machine is not responding. What do you want to do?", doneButtonTitle: "Reconnect", cancelButtonTitle: "Disconnect", doneHandler: {
+            self.reconnect()
+        }) {
+            self.machineMonitor?.disconnect()
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    private func reconnect() {
+        self.machineMonitor?.reconnect(completion: { (success, error) in
+            
+            guard error == nil, success else {
+                self.connectionLost()
+                return
+            }
+            
+            self.machineMonitor?.getMachineSetupData()
+            self.machineMonitor?.startMonitoring()
+        })
     }
     
 }

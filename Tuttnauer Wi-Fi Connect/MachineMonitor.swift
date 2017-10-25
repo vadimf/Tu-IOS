@@ -14,7 +14,7 @@ protocol MachineMonitorDelegate {
     func machineRealTimeDataUpdated()
     func initialMachineDataReceived()
     func machineDataUpdated(modelName: String, serialNumber: String)
-    func lostConnection()
+    func connectionLost()
 }
 
 class MachineMonitor: NSObject {
@@ -39,7 +39,6 @@ class MachineMonitor: NSObject {
         machineRealTime = MachineRealTime()
         networkManager = MachineNetworking()
         networkManager?.delegate = self
-        startMonitoring()
     }
     
     // MARK: - Connect & Disconnect
@@ -51,14 +50,36 @@ class MachineMonitor: NSObject {
         networkManager.connect(ipAddress: ipAddress) { (success, error) in
             
             guard error == nil, success else {
+                self.isConnected = false
                 completion?(false, error!)
                 return
             }
             
+            self.isConnected = true
             self.machine?.ipAddress = ipAddress
+            
+            self.startMonitoring()
             
             completion?(success, nil)
         }
+    }
+    
+    func reconnect(completion: MachineConnectCompletionHandler?) {
+        
+        guard let networkManager = self.networkManager else { return }
+        
+        networkManager.reconnect { (success, error) in
+            
+            guard error == nil, success else {
+                self.isConnected = false
+                completion?(false, error!)
+                return
+            }
+            
+            self.isConnected = true
+            completion?(success, nil)
+        }
+        
     }
     
     // MARK: - Manipulation Methods
@@ -118,7 +139,9 @@ extension MachineMonitor: MachineNetworkingDelegate {
     }
     
     func connectionLost() {
-        
+        isConnected = false
+        stopMonitoring()
+        delegate?.connectionLost()
     }
     
 }

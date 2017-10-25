@@ -50,9 +50,30 @@ class MachineNetworking: NSObject {
         })
     }
     
+    func reconnect(completion: MachineConnectCompletionHandler?) {
+        guard let machine = self.machine else { return }
+        print("Reconnecting to:", machine.ipAddress)
+        connect(ipAddress: machine.ipAddress) { (success, error) in
+            if success {
+                completion?(true, nil)
+            } else {
+                completion?(false, error)
+            }
+        }
+    }
+    
+    func checkConnection(error: NSError) {
+        if error.code == 54 {
+            delegate?.connectionLost()
+        }
+        print(error.localizedDescription)
+    }
+    
     func disconnect() {
         modbus?.disconnect()
         modbus = nil
+        machine = nil
+        machineRealTime = nil
     }
     
     // MARK: - Machine Setup Methods
@@ -112,8 +133,8 @@ class MachineNetworking: NSObject {
             self.delegate?.receivedMachineSetupData(with: machine)
             
         }, failure: { (error) in
+            self.checkConnection(error: error)
             self.getMachineSetupData()
-            print(error.localizedDescription)
         })
         
     }
@@ -141,8 +162,8 @@ class MachineNetworking: NSObject {
             self.delegate?.receivedMachineRealTimeStateData(with: machineRealTime)
             
         }, failure: { (error) in
+            self.checkConnection(error: error)
             self.getMachineRealTimeStateData()
-            print(error.localizedDescription)
         })
         
     }
@@ -198,8 +219,8 @@ class MachineNetworking: NSObject {
             self.delegate?.receivedMachineRealTimeStateData(with: machineRealTime)
             
         }, failure: { (error) in
+            self.checkConnection(error: error)
             self.getMachineCurrentCycleProperties()
-            print(error.localizedDescription)
         })
         
     }
