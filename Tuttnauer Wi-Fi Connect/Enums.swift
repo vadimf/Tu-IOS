@@ -105,4 +105,23 @@ class Enums: NSObject {
         }
     }
     
+    enum SideMenuItems {
+        case privacyNotice
+        case help
+        case about
+        
+        static let allValues = [privacyNotice, help, about]
+        
+        var getName: String {
+            switch self {
+            case .privacyNotice:
+                return "Privacy Notice"
+            case .help:
+                return "Help"
+            case .about:
+                return "About Tuttnauer"
+            }
+        }
+    }
+    
 }

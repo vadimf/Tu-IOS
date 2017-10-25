@@ -189,10 +189,10 @@
             </objects>
             <point key="canvasLocation" x="1748" y="-725"/>
         </scene>
-        <!--View Controller-->
+        <!--Side Menu View Controller-->
         <scene sceneID="sVJ-bk-Rne">
             <objects>
-                <viewController id="oIq-EN-chF" sceneMemberID="viewController">
+                <viewController id="oIq-EN-chF" customClass="SideMenuViewController" customModule="Tuttnauer_Wi_Fi_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cFs-W0-jE3"/>
                         <viewControllerLayoutGuide type="bottom" id="Y4J-6t-jLl"/>
@@ -201,24 +201,127 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QP-8g-uI6">
-                                <rect key="frame" x="119.5" y="273.5" width="81" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGH-L7-zo4" userLabel="Logo Container">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="side_menu_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Vp3-yW-KwO">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_sidemenu_logo" translatesAutoresizingMaskIntoConstraints="NO" id="pr6-il-cl4">
+                                        <rect key="frame" x="13" y="60" width="70" height="70"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tuttnauer Wi-Fi Connect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wm9-1Y-ZHu">
+                                        <rect key="frame" x="13" y="150" width="168.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.54461092821894508" blue="0.51301319317453653" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Vp3-yW-KwO" firstAttribute="leading" secondItem="dGH-L7-zo4" secondAttribute="leading" id="3yw-Iz-7gU"/>
+                                    <constraint firstItem="wm9-1Y-ZHu" firstAttribute="top" secondItem="pr6-il-cl4" secondAttribute="bottom" constant="20" id="AIN-Gt-nvj"/>
+                                    <constraint firstItem="Vp3-yW-KwO" firstAttribute="top" secondItem="dGH-L7-zo4" secondAttribute="top" id="Bis-AW-HNA"/>
+                                    <constraint firstItem="wm9-1Y-ZHu" firstAttribute="leading" secondItem="pr6-il-cl4" secondAttribute="leading" id="EL6-PA-HCT"/>
+                                    <constraint firstItem="pr6-il-cl4" firstAttribute="centerY" secondItem="dGH-L7-zo4" secondAttribute="centerY" constant="-15" id="Kb2-rL-9Ik"/>
+                                    <constraint firstItem="pr6-il-cl4" firstAttribute="leading" secondItem="dGH-L7-zo4" secondAttribute="leadingMargin" constant="5" id="Z2p-AU-ezm"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vp3-yW-KwO" secondAttribute="trailing" id="d0L-nl-A7t"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vp3-yW-KwO" secondAttribute="bottom" id="sIn-qo-CnS"/>
+                                    <constraint firstAttribute="height" constant="220" id="xhG-Ub-MwX"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eyu-lr-unn">
+                                <rect key="frame" x="0.0" y="220" width="320" height="348"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Side Menu Icon Cell" id="UKM-d0-HXD" userLabel="Icon Cell" customClass="SideMenuIconTableViewCell" customModule="Tuttnauer_Wi_Fi_Connect" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UKM-d0-HXD" id="Nvh-31-oJN">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_sidemenu_machine" translatesAutoresizingMaskIntoConstraints="NO" id="wqd-Ok-BYS">
+                                                    <rect key="frame" x="13" y="16.5" width="25" height="32"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5z-J6-Dra">
+                                                    <rect key="frame" x="58" y="22" width="83" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMI-qV-pTE" userLabel="Separator">
+                                                    <rect key="frame" x="0.0" y="64" width="320" height="1"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="p5s-tC-eYb"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mMI-qV-pTE" firstAttribute="leading" secondItem="Nvh-31-oJN" secondAttribute="leading" id="2sm-AX-iEZ"/>
+                                                <constraint firstItem="wqd-Ok-BYS" firstAttribute="leading" secondItem="Nvh-31-oJN" secondAttribute="leadingMargin" constant="5" id="DAW-Zh-Bfk"/>
+                                                <constraint firstAttribute="bottom" secondItem="mMI-qV-pTE" secondAttribute="bottom" id="M5j-GC-fBS"/>
+                                                <constraint firstItem="wqd-Ok-BYS" firstAttribute="centerY" secondItem="Nvh-31-oJN" secondAttribute="centerY" id="Mue-oJ-pMP"/>
+                                                <constraint firstAttribute="trailing" secondItem="mMI-qV-pTE" secondAttribute="trailing" id="a0M-by-yfB"/>
+                                                <constraint firstItem="M5z-J6-Dra" firstAttribute="centerY" secondItem="Nvh-31-oJN" secondAttribute="centerY" id="eei-04-lrt"/>
+                                                <constraint firstItem="M5z-J6-Dra" firstAttribute="leading" secondItem="wqd-Ok-BYS" secondAttribute="trailing" constant="20" id="kMR-O4-gM7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="iconImageView" destination="wqd-Ok-BYS" id="9zL-xr-M0G"/>
+                                            <outlet property="titleLabel" destination="M5z-J6-Dra" id="hno-nU-7Nz"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Side Menu Cell" id="J01-3u-mwd" userLabel="No Icon Cell" customClass="SideMenuTableViewCell" customModule="Tuttnauer_Wi_Fi_Connect" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="93" width="320" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J01-3u-mwd" id="MrJ-dX-Cjx">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CgP-wt-Pbg">
+                                                    <rect key="frame" x="13" y="22" width="83" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="CgP-wt-Pbg" firstAttribute="centerY" secondItem="MrJ-dX-Cjx" secondAttribute="centerY" id="PPk-q7-DOt"/>
+                                                <constraint firstItem="CgP-wt-Pbg" firstAttribute="leading" secondItem="MrJ-dX-Cjx" secondAttribute="leadingMargin" constant="5" id="WwO-tP-k34"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="CgP-wt-Pbg" id="Ziv-4B-6Kc"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="oIq-EN-chF" id="wg9-7O-6it"/>
+                                    <outlet property="delegate" destination="oIq-EN-chF" id="4uY-jY-Kpa"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5QP-8g-uI6" firstAttribute="centerX" secondItem="xZ3-X9-RSC" secondAttribute="centerX" id="Iem-kE-p3I"/>
-                            <constraint firstItem="5QP-8g-uI6" firstAttribute="centerY" secondItem="xZ3-X9-RSC" secondAttribute="centerY" id="kjl-g4-DMI"/>
+                            <constraint firstAttribute="trailing" secondItem="eyu-lr-unn" secondAttribute="trailing" id="Jka-LW-yOT"/>
+                            <constraint firstAttribute="trailing" secondItem="dGH-L7-zo4" secondAttribute="trailing" id="JpV-yE-snE"/>
+                            <constraint firstItem="eyu-lr-unn" firstAttribute="leading" secondItem="xZ3-X9-RSC" secondAttribute="leading" id="QL7-cX-Zp3"/>
+                            <constraint firstItem="eyu-lr-unn" firstAttribute="top" secondItem="dGH-L7-zo4" secondAttribute="bottom" id="Ryg-SO-mR1"/>
+                            <constraint firstItem="dGH-L7-zo4" firstAttribute="leading" secondItem="xZ3-X9-RSC" secondAttribute="leading" id="XRS-ln-mwH"/>
+                            <constraint firstItem="dGH-L7-zo4" firstAttribute="top" secondItem="xZ3-X9-RSC" secondAttribute="top" id="u12-zS-Kqn"/>
+                            <constraint firstItem="Y4J-6t-jLl" firstAttribute="top" secondItem="eyu-lr-unn" secondAttribute="bottom" id="vbB-X4-HdS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hHl-IF-Lqw"/>
+                    <connections>
+                        <outlet property="itemsTableView" destination="eyu-lr-unn" id="EiE-Qd-238"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xh-T5-Z43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2550" y="-725"/>
+            <point key="canvasLocation" x="2550" y="-725.70422535211264"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="lSO-35-pNK">
@@ -1223,7 +1326,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="zei-AR-dO7">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="DEA-bP-Ko4"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="DEA-bP-Ko4"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="JFr-qu-kJu">
                             <connections>
                                 <action selector="doneButtonTapped:" destination="Fd9-CS-IDQ" id="O1F-w3-Biw"/>
@@ -1334,7 +1437,10 @@
         <image name="icon_navigationbar_menu" width="25" height="17"/>
         <image name="icon_navigationbar_reload" width="23" height="25"/>
         <image name="icon_navigationbar_settings" width="25" height="25"/>
+        <image name="icon_sidemenu_logo" width="70" height="70"/>
+        <image name="icon_sidemenu_machine" width="25" height="32"/>
         <image name="launchscreen_logo" width="304" height="116"/>
+        <image name="side_menu_bg" width="360" height="240"/>
         <namedColor name="TuttnauerGreen">
             <color red="0.55299997329999995" green="0.78799998760000001" blue="0.25099998709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

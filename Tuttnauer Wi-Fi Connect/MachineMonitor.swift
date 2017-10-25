@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 
 protocol MachineMonitorDelegate {
     func machineSetupDataUpdated()

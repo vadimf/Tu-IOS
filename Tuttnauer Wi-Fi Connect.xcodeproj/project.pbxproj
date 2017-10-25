@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */; };
+		162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */; };
 		163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */; };
 		1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFB91F9E144400D33278 /* MachineMonitor.swift */; };
 		1650AFBC1F9E177B00D33278 /* MachineNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */; };
+		165BB9431FA0098D0077862D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BB9421FA0098D0077862D /* SideMenuViewController.swift */; };
 		1660E9871F9FCB16008DC47E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E9861F9FCB16008DC47E /* UserSettings.swift */; };
 		1660E9891F9FCDB5008DC47E /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E9881F9FCDB5008DC47E /* Enums.swift */; };
 		1660E98C1F9FD133008DC47E /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E98B1F9FD133008DC47E /* UserSettingsManager.swift */; };
@@ -55,9 +58,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuIconTableViewCell.swift; sourceTree = "<group>"; };
 		163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineRealTime.swift; sourceTree = "<group>"; };
 		1650AFB91F9E144400D33278 /* MachineMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineMonitor.swift; sourceTree = "<group>"; };
 		1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineNetworking.swift; sourceTree = "<group>"; };
+		165BB9421FA0098D0077862D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		1660E9861F9FCB16008DC47E /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		1660E9881F9FCDB5008DC47E /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		1660E98B1F9FD133008DC47E /* UserSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
@@ -128,6 +134,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		162FEE921FA01117005A1055 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */,
+				162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		165BB9411FA009750077862D /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				162FEE921FA01117005A1055 /* Table View Cells */,
+				165BB9421FA0098D0077862D /* SideMenuViewController.swift */,
+			);
+			name = "Side Menu";
+			sourceTree = "<group>";
+		};
 		1660E98A1F9FD123008DC47E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				168ACDFE1F926092000277DD /* Navigation Controllers */,
+				165BB9411FA009750077862D /* Side Menu */,
 				168ACDF91F923645000277DD /* Connections */,
 				168ACDF81F923638000277DD /* Machine */,
 				168ACDF71F92362C000277DD /* Settings */,
@@ -569,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */,
 				1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */,
 				16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */,
 				16A462EA1F5D8D90002C4ECF /* MainViewController.swift in Sources */,
@@ -585,7 +611,9 @@
 				16707DF51F61775500706B87 /* modbus.c in Sources */,
 				168909FA1F98C465006ECEE4 /* Machine.swift in Sources */,
 				168ACE001F9260AD000277DD /* MainNavigationController.swift in Sources */,
+				165BB9431FA0098D0077862D /* SideMenuViewController.swift in Sources */,
 				168909F51F98C2FE006ECEE4 /* ScanForMachinesViewController.swift in Sources */,
+				162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */,
 				167C93651F9BB489004930C0 /* AutoClaveEnums.swift in Sources */,
 				168ACE0D1F92656B000277DD /* HA+String.swift in Sources */,
 				1662FDE31F9E6D7F004A390C /* Alerts.swift in Sources */,
