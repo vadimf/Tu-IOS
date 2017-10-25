@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class SingleMachineViewController: UIViewController {
 
@@ -41,6 +42,7 @@ class SingleMachineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSideMenu()
         setupLocalization()
         resetLabelsValues()
         machineMonitor = MachineMonitor.shared // Singleton Class
@@ -81,6 +83,12 @@ class SingleMachineViewController: UIViewController {
         cycleParameterSterTempLabel.text = "-"
         cycleParameterSterTimeLabel.text = "-"
         cycleParameterDryTimeLabel.text = "-"
+    }
+    
+    private func setupSideMenu() {
+        let menuManager = SideMenuManager.default
+        menuManager.menuPresentMode = .menuSlideIn
+        menuManager.menuFadeStatusBar = false
     }
     
     // MARK: - IBActions

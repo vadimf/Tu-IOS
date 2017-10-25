@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 struct MenuItem {
     let name: String
@@ -32,6 +33,7 @@ class SideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         machines = [
             [
                 "name": MachineMonitor.shared.machine!.modelName,
