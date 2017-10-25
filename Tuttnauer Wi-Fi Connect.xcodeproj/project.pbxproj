@@ -277,7 +277,6 @@
 				16A462DA1F5D65EB002C4ECF /* Utilities */,
 				16A462D21F5D63B4002C4ECF /* Model */,
 				16A462D41F5D63C2002C4ECF /* Business */,
-				16A462D31F5D63BD002C4ECF /* Views */,
 				16A462D81F5D63EF002C4ECF /* View Controllers */,
 				16A462D61F5D63D2002C4ECF /* User Interface */,
 				16A462D91F5D65E5002C4ECF /* Extensions */,
@@ -296,13 +295,6 @@
 				1660E9861F9FCB16008DC47E /* UserSettings.swift */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		16A462D31F5D63BD002C4ECF /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 		16A462D41F5D63C2002C4ECF /* Business */ = {
@@ -769,7 +761,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BK2GKQZQW9;
 				INFOPLIST_FILE = "Tuttnauer Wi-Fi Connect/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

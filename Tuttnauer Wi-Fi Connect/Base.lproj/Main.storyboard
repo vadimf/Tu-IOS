@@ -8,7 +8,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -162,9 +161,8 @@
                                     <constraint firstItem="Vp3-yW-KwO" firstAttribute="leading" secondItem="dGH-L7-zo4" secondAttribute="leading" id="3yw-Iz-7gU"/>
                                     <constraint firstItem="wm9-1Y-ZHu" firstAttribute="top" secondItem="pr6-il-cl4" secondAttribute="bottom" constant="20" id="AIN-Gt-nvj"/>
                                     <constraint firstItem="Vp3-yW-KwO" firstAttribute="top" secondItem="dGH-L7-zo4" secondAttribute="top" id="Bis-AW-HNA"/>
-                                    <constraint firstItem="wm9-1Y-ZHu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pr6-il-cl4" secondAttribute="leading" id="EL6-PA-HCT"/>
+                                    <constraint firstItem="wm9-1Y-ZHu" firstAttribute="leading" secondItem="pr6-il-cl4" secondAttribute="leading" id="EL6-PA-HCT"/>
                                     <constraint firstItem="pr6-il-cl4" firstAttribute="centerY" secondItem="dGH-L7-zo4" secondAttribute="centerY" constant="-15" id="Kb2-rL-9Ik"/>
-                                    <constraint firstAttribute="trailing" secondItem="wm9-1Y-ZHu" secondAttribute="trailing" constant="138.5" id="W2E-gg-dFG"/>
                                     <constraint firstItem="pr6-il-cl4" firstAttribute="leading" secondItem="dGH-L7-zo4" secondAttribute="leadingMargin" constant="5" id="Z2p-AU-ezm"/>
                                     <constraint firstAttribute="trailing" secondItem="Vp3-yW-KwO" secondAttribute="trailing" id="d0L-nl-A7t"/>
                                     <constraint firstAttribute="bottom" secondItem="Vp3-yW-KwO" secondAttribute="bottom" id="sIn-qo-CnS"/>
@@ -186,7 +184,7 @@
                                                     <rect key="frame" x="13" y="14" width="25" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5z-J6-Dra">
-                                                    <rect key="frame" x="58" y="21.5" width="70" height="17"/>
+                                                    <rect key="frame" x="48" y="21.5" width="70" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -204,10 +202,9 @@
                                                 <constraint firstItem="wqd-Ok-BYS" firstAttribute="leading" secondItem="Nvh-31-oJN" secondAttribute="leadingMargin" constant="5" id="DAW-Zh-Bfk"/>
                                                 <constraint firstAttribute="bottom" secondItem="mMI-qV-pTE" secondAttribute="bottom" id="M5j-GC-fBS"/>
                                                 <constraint firstItem="wqd-Ok-BYS" firstAttribute="centerY" secondItem="Nvh-31-oJN" secondAttribute="centerY" id="Mue-oJ-pMP"/>
-                                                <constraint firstAttribute="trailing" secondItem="M5z-J6-Dra" secondAttribute="trailing" constant="192" id="R8f-nD-EJN"/>
                                                 <constraint firstAttribute="trailing" secondItem="mMI-qV-pTE" secondAttribute="trailing" id="a0M-by-yfB"/>
                                                 <constraint firstItem="M5z-J6-Dra" firstAttribute="centerY" secondItem="Nvh-31-oJN" secondAttribute="centerY" id="eei-04-lrt"/>
-                                                <constraint firstItem="M5z-J6-Dra" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wqd-Ok-BYS" secondAttribute="trailing" symbolic="YES" id="kMR-O4-gM7"/>
+                                                <constraint firstItem="M5z-J6-Dra" firstAttribute="leading" secondItem="wqd-Ok-BYS" secondAttribute="trailing" constant="10" id="kMR-O4-gM7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -231,8 +228,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CgP-wt-Pbg" firstAttribute="centerY" secondItem="MrJ-dX-Cjx" secondAttribute="centerY" id="PPk-q7-DOt"/>
-                                                <constraint firstItem="CgP-wt-Pbg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MrJ-dX-Cjx" secondAttribute="leadingMargin" id="WwO-tP-k34"/>
-                                                <constraint firstAttribute="trailing" secondItem="CgP-wt-Pbg" secondAttribute="trailingMargin" constant="245" id="qPW-T4-ANu"/>
+                                                <constraint firstItem="CgP-wt-Pbg" firstAttribute="leading" secondItem="MrJ-dX-Cjx" secondAttribute="leadingMargin" constant="5" id="WwO-tP-k34"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -575,18 +571,15 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="v5Y-iZ-phz" firstAttribute="top" secondItem="nXu-pz-3PA" secondAttribute="bottom" constant="8" id="0x2-7R-qup"/>
-                                                    <constraint firstItem="Uzq-z0-3z9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nXu-pz-3PA" secondAttribute="trailing" constant="8" symbolic="YES" id="4Vw-Qh-qJT"/>
+                                                    <constraint firstItem="Uzq-z0-3z9" firstAttribute="leading" secondItem="nXu-pz-3PA" secondAttribute="trailing" constant="8" symbolic="YES" id="4Vw-Qh-qJT"/>
                                                     <constraint firstItem="nXu-pz-3PA" firstAttribute="top" secondItem="wgw-zU-2hu" secondAttribute="top" id="BSu-hL-GtS"/>
                                                     <constraint firstItem="8aV-Ap-Vby" firstAttribute="centerY" secondItem="c0g-IP-dfP" secondAttribute="centerY" id="Bhu-xj-6X4"/>
-                                                    <constraint firstItem="8aV-Ap-Vby" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c0g-IP-dfP" secondAttribute="trailing" constant="8" symbolic="YES" id="EVf-00-B15"/>
-                                                    <constraint firstAttribute="trailing" secondItem="8aV-Ap-Vby" secondAttribute="trailing" constant="46" id="LAs-s3-nJe"/>
+                                                    <constraint firstItem="8aV-Ap-Vby" firstAttribute="leading" secondItem="c0g-IP-dfP" secondAttribute="trailing" constant="8" symbolic="YES" id="EVf-00-B15"/>
                                                     <constraint firstItem="c0g-IP-dfP" firstAttribute="leading" secondItem="wgw-zU-2hu" secondAttribute="leading" id="M9I-GD-HtK"/>
                                                     <constraint firstItem="Uzq-z0-3z9" firstAttribute="centerY" secondItem="nXu-pz-3PA" secondAttribute="centerY" id="Mnw-An-WU8"/>
                                                     <constraint firstItem="c0g-IP-dfP" firstAttribute="top" secondItem="v5Y-iZ-phz" secondAttribute="bottom" constant="8" id="TdQ-Mo-6PL"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Uzq-z0-3z9" secondAttribute="trailing" constant="15" id="ZLD-6z-mqa"/>
-                                                    <constraint firstAttribute="trailing" secondItem="B0U-vB-9Gg" secondAttribute="trailing" constant="41" id="fXC-gc-bDY"/>
                                                     <constraint firstItem="v5Y-iZ-phz" firstAttribute="leading" secondItem="wgw-zU-2hu" secondAttribute="leading" id="gTC-VQ-GTK"/>
-                                                    <constraint firstItem="B0U-vB-9Gg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v5Y-iZ-phz" secondAttribute="trailing" constant="8" symbolic="YES" id="gsV-Uq-0o0"/>
+                                                    <constraint firstItem="B0U-vB-9Gg" firstAttribute="leading" secondItem="v5Y-iZ-phz" secondAttribute="trailing" constant="8" symbolic="YES" id="gsV-Uq-0o0"/>
                                                     <constraint firstItem="B0U-vB-9Gg" firstAttribute="centerY" secondItem="v5Y-iZ-phz" secondAttribute="centerY" id="ouC-Yf-rwU"/>
                                                     <constraint firstItem="nXu-pz-3PA" firstAttribute="leading" secondItem="wgw-zU-2hu" secondAttribute="leading" id="rED-gO-RE4"/>
                                                 </constraints>
@@ -638,7 +631,7 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="25" text="14 °C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTQ-Hx-c6Q">
                                                                 <rect key="frame" x="0.0" y="16.5" width="92.5" height="45.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                                <color key="textColor" name="TuttnauerGreen"/>
+                                                                <color key="textColor" red="0.55294117649999996" green="0.78823529410000004" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -664,7 +657,7 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="25" text="44 °C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SpB-Kt-nrV">
                                                                 <rect key="frame" x="-0.5" y="17" width="93.5" height="45"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                                <color key="textColor" name="TuttnauerGreen"/>
+                                                                <color key="textColor" red="0.55294117649999996" green="0.78823529410000004" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -690,7 +683,7 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="25" text="100 kPa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Swp-IA-rdo">
                                                                 <rect key="frame" x="-0.5" y="17" width="93.5" height="45"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                                                <color key="textColor" name="TuttnauerGreen"/>
+                                                                <color key="textColor" red="0.55294117649999996" green="0.78823529410000004" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -868,7 +861,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Liquid B Waste Cooling" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdF-3n-h44">
                                                 <rect key="frame" x="43" y="40" width="110.5" height="33.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" name="TuttnauerRed"/>
+                                                <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grH-Bc-pX7" userLabel="Separator">
@@ -971,7 +964,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Open" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRC-Y2-mbt">
                                                         <rect key="frame" x="0.0" y="22" width="123.5" height="50.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" name="TuttnauerRed"/>
+                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -1434,11 +1427,5 @@
         <image name="icon_sidemenu_machine" width="25" height="32"/>
         <image name="launchscreen_logo" width="304" height="116"/>
         <image name="side_menu_bg" width="360" height="240"/>
-        <namedColor name="TuttnauerGreen">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="TuttnauerRed">
-            <color red="1" green="0.14900000393390656" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>
