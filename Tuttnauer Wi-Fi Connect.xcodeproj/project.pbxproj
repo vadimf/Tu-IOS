@@ -51,7 +51,6 @@
 		16A462C61F5D3FE0002C4ECF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C41F5D3FE0002C4ECF /* Main.storyboard */; };
 		16A462C81F5D3FE0002C4ECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C71F5D3FE0002C4ECF /* Assets.xcassets */; };
 		16A462CB1F5D3FE0002C4ECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C91F5D3FE0002C4ECF /* LaunchScreen.storyboard */; };
-		16A462EA1F5D8D90002C4ECF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A462E91F5D8D90002C4ECF /* MainViewController.swift */; };
 		16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */; };
 		16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E075091F9FC976008474B5 /* DefaultsKeys.swift */; };
 		DEFE033A3177EF0CFDE5252D /* Pods_Tuttnauer_Wi_Fi_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A658036055AEE555928011 /* Pods_Tuttnauer_Wi_Fi_Connect.framework */; };
@@ -114,7 +113,6 @@
 		16A462CA1F5D3FE0002C4ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16A462CC1F5D3FE0002C4ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16A462E61F5D6A43002C4ECF /* Tuttnauer Wi-Fi Connect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tuttnauer Wi-Fi Connect-Bridging-Header.h"; sourceTree = "<group>"; };
-		16A462E91F5D8D90002C4ECF /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConstants.swift; sourceTree = "<group>"; };
 		16E075091F9FC976008474B5 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		2FBFEF04E9F5ED22D427708A /* Pods-Tuttnauer Wi-Fi Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuttnauer Wi-Fi Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect.release.xcconfig"; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				168909F61F98C356006ECEE4 /* TableView Cells */,
-				16A462E91F5D8D90002C4ECF /* MainViewController.swift */,
 				168ACDEB1F922A3B000277DD /* MainConnectViewController.swift */,
 				168909F41F98C2FE006ECEE4 /* ScanForMachinesViewController.swift */,
 			);
@@ -546,22 +543,18 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMLanScan/MMLanScan.framework",
-				"${BUILT_PRODUCTS_DIR}/NetUtils/NetUtils.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMLanScan.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetUtils.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,7 +590,6 @@
 				162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */,
 				1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */,
 				16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */,
-				16A462EA1F5D8D90002C4ECF /* MainViewController.swift in Sources */,
 				168ACDEA1F922996000277DD /* HA+UIView.swift in Sources */,
 				16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */,
 				16707DF31F61775500706B87 /* modbus-rtu.c in Sources */,
@@ -777,6 +769,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BK2GKQZQW9;
 				INFOPLIST_FILE = "Tuttnauer Wi-Fi Connect/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

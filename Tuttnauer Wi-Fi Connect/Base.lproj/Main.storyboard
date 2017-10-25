@@ -12,66 +12,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
-        <scene sceneID="sJh-jr-w4i">
-            <objects>
-                <viewController id="vtV-JM-jFT" customClass="MainViewController" customModule="Tuttnauer_Wi_Fi_Connect" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yir-xe-i8i"/>
-                        <viewControllerLayoutGuide type="bottom" id="fbO-Dx-VQB"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="j6P-fr-etG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jox-Ra-ran">
-                                <rect key="frame" x="92" y="269" width="136" height="30"/>
-                                <state key="normal" title="Connect to Modbus"/>
-                                <connections>
-                                    <action selector="discoverButtonTapped:" destination="vtV-JM-jFT" eventType="touchUpInside" id="gVr-5d-6jR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uva-5t-z7Z">
-                                <rect key="frame" x="96.5" y="306.5" width="127" height="30"/>
-                                <state key="normal" title="Make Modbus Call"/>
-                                <connections>
-                                    <action selector="discoverButtonTapped:" destination="vtV-JM-jFT" eventType="touchUpInside" id="eSd-Ao-rjL"/>
-                                    <action selector="makeModbusCallTapped:" destination="vtV-JM-jFT" eventType="touchUpInside" id="xQg-pE-euB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlB-FX-esv">
-                                <rect key="frame" x="69.5" y="344.5" width="181" height="30"/>
-                                <state key="normal" title="Close Modbus Connection"/>
-                                <connections>
-                                    <action selector="closeModbusConnectionTapped:" destination="vtV-JM-jFT" eventType="touchUpInside" id="bJt-Px-qYp"/>
-                                    <action selector="discoverButtonTapped:" destination="vtV-JM-jFT" eventType="touchUpInside" id="ywq-dG-kLd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hM-37-MQk">
-                                <rect key="frame" x="70" y="394.5" width="180" height="30"/>
-                                <state key="normal" title="Discover Network Devices"/>
-                                <connections>
-                                    <action selector="discoverNetworkDevicesTapped:" destination="vtV-JM-jFT" eventType="touchUpInside" id="1mJ-Qe-rR1"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="6hM-37-MQk" firstAttribute="top" secondItem="NlB-FX-esv" secondAttribute="bottom" constant="20" id="CXS-y7-NhN"/>
-                            <constraint firstItem="6hM-37-MQk" firstAttribute="centerX" secondItem="NlB-FX-esv" secondAttribute="centerX" id="Hx9-aZ-o0w"/>
-                            <constraint firstItem="Uva-5t-z7Z" firstAttribute="centerX" secondItem="Jox-Ra-ran" secondAttribute="centerX" id="KDM-54-now"/>
-                            <constraint firstItem="NlB-FX-esv" firstAttribute="top" secondItem="Uva-5t-z7Z" secondAttribute="bottom" constant="8" id="PfA-Gp-6iq"/>
-                            <constraint firstItem="Jox-Ra-ran" firstAttribute="centerY" secondItem="j6P-fr-etG" secondAttribute="centerY" id="tCe-9a-BPN"/>
-                            <constraint firstItem="NlB-FX-esv" firstAttribute="centerX" secondItem="Uva-5t-z7Z" secondAttribute="centerX" id="ti7-Ex-S4G"/>
-                            <constraint firstItem="Uva-5t-z7Z" firstAttribute="top" secondItem="Jox-Ra-ran" secondAttribute="bottom" constant="7.5" id="ufs-XM-DLd"/>
-                            <constraint firstItem="Jox-Ra-ran" firstAttribute="centerX" secondItem="j6P-fr-etG" secondAttribute="centerX" id="yBH-fX-cAe"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5o8-Q5-YuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="122" y="-724"/>
-        </scene>
         <!--Modbus Monitor-->
         <scene sceneID="uFj-f3-aV8">
             <objects>
@@ -103,7 +43,7 @@
                                 <rect key="frame" x="0.0" y="244" width="320" height="324"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter IP Address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c1d-Qh-aCf">
-                                        <rect key="frame" x="25" y="89.5" width="270" height="43"/>
+                                        <rect key="frame" x="25" y="69" width="270" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="JFl-hX-6ii"/>
                                         </constraints>
@@ -112,7 +52,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfa-fn-1vr">
-                                        <rect key="frame" x="90.5" y="152.5" width="140" height="43"/>
+                                        <rect key="frame" x="90.5" y="132" width="140" height="43"/>
                                         <color key="backgroundColor" red="0.55294117649999996" green="0.78823529410000004" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="PZx-Nm-9E3"/>
@@ -127,7 +67,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl6-4t-Nsr">
-                                        <rect key="frame" x="96.5" y="215.5" width="127" height="30"/>
+                                        <rect key="frame" x="96.5" y="195" width="127" height="30"/>
                                         <state key="normal" title="Scan for Machines">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -139,7 +79,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="c1d-Qh-aCf" secondAttribute="trailing" constant="25" id="98M-D7-SUk"/>
                                     <constraint firstItem="Nfa-fn-1vr" firstAttribute="top" secondItem="c1d-Qh-aCf" secondAttribute="bottom" constant="20" id="QD3-oD-HfI"/>
-                                    <constraint firstItem="c1d-Qh-aCf" firstAttribute="bottom" secondItem="S7J-db-PHZ" secondAttribute="centerY" constant="-30" id="RWT-pP-pK0"/>
+                                    <constraint firstItem="c1d-Qh-aCf" firstAttribute="bottom" secondItem="S7J-db-PHZ" secondAttribute="centerY" constant="-50" id="RWT-pP-pK0"/>
                                     <constraint firstItem="c1d-Qh-aCf" firstAttribute="leading" secondItem="S7J-db-PHZ" secondAttribute="leading" constant="25" id="b04-dY-Vwd"/>
                                     <constraint firstItem="xl6-4t-Nsr" firstAttribute="top" secondItem="Nfa-fn-1vr" secondAttribute="bottom" constant="20" id="bBa-Ge-XmW"/>
                                     <constraint firstItem="xl6-4t-Nsr" firstAttribute="centerX" secondItem="S7J-db-PHZ" secondAttribute="centerX" id="drj-Pt-i8p"/>
@@ -159,7 +99,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Modbus Monitor" id="gK7-wc-QBs">
-                        <barButtonItem key="backBarButtonItem" title=" " id="hex-DL-tQS"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="tLn-vy-UPZ"/>
                     </navigationItem>
                     <connections>
                         <outlet property="connectButton" destination="Nfa-fn-1vr" id="w7k-4S-YMo"/>
@@ -187,7 +127,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydV-KE-fcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1748" y="-725"/>
+            <point key="canvasLocation" x="2145" y="-725.70422535211264"/>
         </scene>
         <!--Side Menu View Controller-->
         <scene sceneID="sVJ-bk-Rne">
@@ -222,8 +162,9 @@
                                     <constraint firstItem="Vp3-yW-KwO" firstAttribute="leading" secondItem="dGH-L7-zo4" secondAttribute="leading" id="3yw-Iz-7gU"/>
                                     <constraint firstItem="wm9-1Y-ZHu" firstAttribute="top" secondItem="pr6-il-cl4" secondAttribute="bottom" constant="20" id="AIN-Gt-nvj"/>
                                     <constraint firstItem="Vp3-yW-KwO" firstAttribute="top" secondItem="dGH-L7-zo4" secondAttribute="top" id="Bis-AW-HNA"/>
-                                    <constraint firstItem="wm9-1Y-ZHu" firstAttribute="leading" secondItem="pr6-il-cl4" secondAttribute="leading" id="EL6-PA-HCT"/>
+                                    <constraint firstItem="wm9-1Y-ZHu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pr6-il-cl4" secondAttribute="leading" id="EL6-PA-HCT"/>
                                     <constraint firstItem="pr6-il-cl4" firstAttribute="centerY" secondItem="dGH-L7-zo4" secondAttribute="centerY" constant="-15" id="Kb2-rL-9Ik"/>
+                                    <constraint firstAttribute="trailing" secondItem="wm9-1Y-ZHu" secondAttribute="trailing" constant="138.5" id="W2E-gg-dFG"/>
                                     <constraint firstItem="pr6-il-cl4" firstAttribute="leading" secondItem="dGH-L7-zo4" secondAttribute="leadingMargin" constant="5" id="Z2p-AU-ezm"/>
                                     <constraint firstAttribute="trailing" secondItem="Vp3-yW-KwO" secondAttribute="trailing" id="d0L-nl-A7t"/>
                                     <constraint firstAttribute="bottom" secondItem="Vp3-yW-KwO" secondAttribute="bottom" id="sIn-qo-CnS"/>
@@ -263,9 +204,10 @@
                                                 <constraint firstItem="wqd-Ok-BYS" firstAttribute="leading" secondItem="Nvh-31-oJN" secondAttribute="leadingMargin" constant="5" id="DAW-Zh-Bfk"/>
                                                 <constraint firstAttribute="bottom" secondItem="mMI-qV-pTE" secondAttribute="bottom" id="M5j-GC-fBS"/>
                                                 <constraint firstItem="wqd-Ok-BYS" firstAttribute="centerY" secondItem="Nvh-31-oJN" secondAttribute="centerY" id="Mue-oJ-pMP"/>
+                                                <constraint firstAttribute="trailing" secondItem="M5z-J6-Dra" secondAttribute="trailing" constant="192" id="R8f-nD-EJN"/>
                                                 <constraint firstAttribute="trailing" secondItem="mMI-qV-pTE" secondAttribute="trailing" id="a0M-by-yfB"/>
                                                 <constraint firstItem="M5z-J6-Dra" firstAttribute="centerY" secondItem="Nvh-31-oJN" secondAttribute="centerY" id="eei-04-lrt"/>
-                                                <constraint firstItem="M5z-J6-Dra" firstAttribute="leading" secondItem="wqd-Ok-BYS" secondAttribute="trailing" constant="20" id="kMR-O4-gM7"/>
+                                                <constraint firstItem="M5z-J6-Dra" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wqd-Ok-BYS" secondAttribute="trailing" symbolic="YES" id="kMR-O4-gM7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -289,7 +231,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CgP-wt-Pbg" firstAttribute="centerY" secondItem="MrJ-dX-Cjx" secondAttribute="centerY" id="PPk-q7-DOt"/>
-                                                <constraint firstItem="CgP-wt-Pbg" firstAttribute="leading" secondItem="MrJ-dX-Cjx" secondAttribute="leadingMargin" constant="5" id="WwO-tP-k34"/>
+                                                <constraint firstItem="CgP-wt-Pbg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MrJ-dX-Cjx" secondAttribute="leadingMargin" id="WwO-tP-k34"/>
+                                                <constraint firstAttribute="trailing" secondItem="CgP-wt-Pbg" secondAttribute="trailingMargin" constant="245" id="qPW-T4-ANu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -321,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xh-T5-Z43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2550" y="-725.70422535211264"/>
+            <point key="canvasLocation" x="2947.5" y="-725.70422535211264"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="lSO-35-pNK">
@@ -339,7 +282,7 @@
             </objects>
             <point key="canvasLocation" x="-1618" y="90"/>
         </scene>
-        <!--Modbus Monitor-->
+        <!--Scan for Machines-->
         <scene sceneID="x3A-B3-rML">
             <objects>
                 <viewController id="8eD-Mo-oxZ" customClass="ScanForMachinesViewController" customModule="Tuttnauer_Wi_Fi_Connect" customModuleProvider="target" sceneMemberID="viewController">
@@ -450,9 +393,10 @@
                                                                 <constraint firstItem="XZu-h2-7cd" firstAttribute="top" secondItem="82r-DF-jMa" secondAttribute="bottom" constant="-1" id="8lw-Ca-aXt"/>
                                                                 <constraint firstAttribute="trailing" secondItem="HzH-cU-rud" secondAttribute="trailing" id="D2V-Gc-f34"/>
                                                                 <constraint firstItem="HzH-cU-rud" firstAttribute="bottom" secondItem="ELA-cA-yrZ" secondAttribute="centerY" id="H7w-Tj-0fZ"/>
-                                                                <constraint firstItem="HLD-Jg-KmV" firstAttribute="leading" secondItem="ELA-cA-yrZ" secondAttribute="leading" id="HcN-iL-3tg"/>
+                                                                <constraint firstItem="HLD-Jg-KmV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ELA-cA-yrZ" secondAttribute="leading" id="HcN-iL-3tg"/>
                                                                 <constraint firstItem="HzH-cU-rud" firstAttribute="top" secondItem="Fso-Cd-64N" secondAttribute="bottom" constant="5" id="J6c-Xm-4jf"/>
                                                                 <constraint firstItem="Fso-Cd-64N" firstAttribute="top" secondItem="HLD-Jg-KmV" secondAttribute="bottom" id="Nda-I3-pmM"/>
+                                                                <constraint firstAttribute="trailing" secondItem="HLD-Jg-KmV" secondAttribute="trailing" constant="49.5" id="PhR-bz-05s"/>
                                                                 <constraint firstItem="82r-DF-jMa" firstAttribute="leading" secondItem="ELA-cA-yrZ" secondAttribute="leading" id="S9M-Ww-PE6"/>
                                                                 <constraint firstItem="XZu-h2-7cd" firstAttribute="leading" secondItem="ELA-cA-yrZ" secondAttribute="leading" id="V8v-r7-dKW"/>
                                                                 <constraint firstItem="5Rz-pm-5cS" firstAttribute="leading" secondItem="ELA-cA-yrZ" secondAttribute="leading" id="b6b-sm-SSg"/>
@@ -526,7 +470,7 @@
                             <constraint firstItem="UwW-kG-N7a" firstAttribute="centerX" secondItem="a6B-da-05e" secondAttribute="centerX" id="yvl-oD-NR7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Modbus Monitor" id="Dsw-qt-giA">
+                    <navigationItem key="navigationItem" title="Scan for Machines" id="Dsw-qt-giA">
                         <barButtonItem key="backBarButtonItem" title=" " id="87E-3h-m8f"/>
                         <barButtonItem key="rightBarButtonItem" image="icon_navigationbar_reload" id="25Z-Lm-shh">
                             <connections>
@@ -631,15 +575,18 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="v5Y-iZ-phz" firstAttribute="top" secondItem="nXu-pz-3PA" secondAttribute="bottom" constant="8" id="0x2-7R-qup"/>
-                                                    <constraint firstItem="Uzq-z0-3z9" firstAttribute="leading" secondItem="nXu-pz-3PA" secondAttribute="trailing" constant="8" id="4Vw-Qh-qJT"/>
+                                                    <constraint firstItem="Uzq-z0-3z9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nXu-pz-3PA" secondAttribute="trailing" symbolic="YES" id="4Vw-Qh-qJT"/>
                                                     <constraint firstItem="nXu-pz-3PA" firstAttribute="top" secondItem="wgw-zU-2hu" secondAttribute="top" id="BSu-hL-GtS"/>
                                                     <constraint firstItem="8aV-Ap-Vby" firstAttribute="centerY" secondItem="c0g-IP-dfP" secondAttribute="centerY" id="Bhu-xj-6X4"/>
-                                                    <constraint firstItem="8aV-Ap-Vby" firstAttribute="leading" secondItem="c0g-IP-dfP" secondAttribute="trailing" constant="8" id="EVf-00-B15"/>
+                                                    <constraint firstItem="8aV-Ap-Vby" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c0g-IP-dfP" secondAttribute="trailing" constant="8" symbolic="YES" id="EVf-00-B15"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8aV-Ap-Vby" secondAttribute="trailing" constant="46" id="LAs-s3-nJe"/>
                                                     <constraint firstItem="c0g-IP-dfP" firstAttribute="leading" secondItem="wgw-zU-2hu" secondAttribute="leading" id="M9I-GD-HtK"/>
                                                     <constraint firstItem="Uzq-z0-3z9" firstAttribute="centerY" secondItem="nXu-pz-3PA" secondAttribute="centerY" id="Mnw-An-WU8"/>
                                                     <constraint firstItem="c0g-IP-dfP" firstAttribute="top" secondItem="v5Y-iZ-phz" secondAttribute="bottom" constant="8" id="TdQ-Mo-6PL"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Uzq-z0-3z9" secondAttribute="trailing" constant="15" id="ZLD-6z-mqa"/>
+                                                    <constraint firstAttribute="trailing" secondItem="B0U-vB-9Gg" secondAttribute="trailing" constant="41" id="fXC-gc-bDY"/>
                                                     <constraint firstItem="v5Y-iZ-phz" firstAttribute="leading" secondItem="wgw-zU-2hu" secondAttribute="leading" id="gTC-VQ-GTK"/>
-                                                    <constraint firstItem="B0U-vB-9Gg" firstAttribute="leading" secondItem="v5Y-iZ-phz" secondAttribute="trailing" constant="8" id="gsV-Uq-0o0"/>
+                                                    <constraint firstItem="B0U-vB-9Gg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v5Y-iZ-phz" secondAttribute="trailing" symbolic="YES" id="gsV-Uq-0o0"/>
                                                     <constraint firstItem="B0U-vB-9Gg" firstAttribute="centerY" secondItem="v5Y-iZ-phz" secondAttribute="centerY" id="ouC-Yf-rwU"/>
                                                     <constraint firstItem="nXu-pz-3PA" firstAttribute="leading" secondItem="wgw-zU-2hu" secondAttribute="leading" id="rED-gO-RE4"/>
                                                 </constraints>
@@ -1104,7 +1051,7 @@
                                 <segue destination="Msn-Wh-Vgi" kind="presentation" identifier="Show Side Menu" id="11v-0X-BZT"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="icon_navigationbar_settings" id="s4c-bR-pdW">
+                        <barButtonItem key="rightBarButtonItem" image="icon_navigationbar_settings" id="s4c-bR-pdW">
                             <connections>
                                 <action selector="settingsButtonTapped:" destination="oCj-zq-mhH" id="wuF-fW-8rU"/>
                             </connections>

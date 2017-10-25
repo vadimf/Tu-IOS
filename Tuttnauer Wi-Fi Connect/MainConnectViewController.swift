@@ -13,7 +13,6 @@ class MainConnectViewController: UIViewController {
 
     // MARK: - IBOutlets
     
-    @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var ipAddressTextField: UITextField!
     @IBOutlet weak var connectButton: UIButton!
     
@@ -34,11 +33,16 @@ class MainConnectViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func connectButtonTapped(_ sender: UIButton) {
-        guard let ipAddress = ipAddressTextField.text, !ipAddress.isEmpty else { return }
+        guard let ipAddress = ipAddressTextField.text, !ipAddress.isEmpty else {
+            ipAddressTextField.shakeView()
+            return
+        }
         connect(to: ipAddress)
     }
     
 }
+
+// MARK: - Navigation
 
 extension MainConnectViewController {
     

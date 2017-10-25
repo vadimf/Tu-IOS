@@ -13,10 +13,11 @@ target 'Tuttnauer Wi-Fi Connect' do
   pod 'MBProgressHUD'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'IQKeyboardManagerSwift'
 
-  pod 'CocoaAsyncSocket'
-  pod 'SwiftSocket'
-  pod 'NetUtils' 
-  pod 'SwiftSocket'
+  #pod 'CocoaAsyncSocket'
+  #pod 'SwiftSocket'
+  #pod 'NetUtils' 
+  #pod 'SwiftSocket'
  
 end
