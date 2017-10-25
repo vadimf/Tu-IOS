@@ -131,9 +131,12 @@ class MachineNetworking: NSObject {
             guard let data = data as? [Int],
                 let machineRealTime = self.machineRealTime else { return }
             
-            machineRealTime.systemStatus = self.getMachineRealTimeCurrentStatus(startAddress: totalAddresses.start, data: data)
-            machineRealTime.cycleName = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
+            //machineRealTime.systemStatus = self.getMachineRealTimeCurrentStatus(startAddress: totalAddresses.start, data: data)
             machineRealTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
+            machineRealTime.cycleName = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
+            machineRealTime.cycleStage = AutoClaveEnums.CycleStage(rawValue: self.getMachineRealTimeCycleStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleStage(rawValue: 0)
+            machineRealTime.cycleSubStage = AutoClaveEnums.CycleSubStage(rawValue: self.getMachineRealTimeCycleSubStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleSubStage(rawValue: 0)
+            machineRealTime.cycleError = AutoClaveEnums.CycleError(rawValue: self.getMachineRealTimeCycleError(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleError(rawValue: 0)
             
             self.delegate?.receivedMachineRealTimeStateData(with: machineRealTime)
             
@@ -145,18 +148,33 @@ class MachineNetworking: NSObject {
     }
     
     private func getMachineRealTimeCurrentCycleID(startAddress: Int32, data: [Int]) -> Int {
-        let currentCycleIDAddresss = MachineConstants.RealTime.cycleID
-        return data[Int(currentCycleIDAddresss.start - startAddress)]
+        let address = MachineConstants.RealTime.cycleID
+        return data[Int(address.start - startAddress)]
     }
     
     private func getMachineRealTimeCurrentStatus(startAddress: Int32, data: [Int]) -> Int {
-        let currentStatusAddress = MachineConstants.RealTime.systemStatus
-        return data[Int(currentStatusAddress.start - startAddress)] // TODO: it's 4 addresses, translate that to a String
+        let address = MachineConstants.RealTime.systemStatus
+        return data[Int(address.start - startAddress)] // TODO: it's 4 addresses, translate that to a String
     }
     
     private func getMachineRealTimeDoorState(startAddress: Int32, data: [Int]) -> Int {
-        let doorStateAddress = MachineConstants.RealTime.doorState
-        return data[Int(doorStateAddress.start - startAddress)]
+        let address = MachineConstants.RealTime.doorState
+        return data[Int(address.start - startAddress)]
+    }
+    
+    private func getMachineRealTimeCycleStage(startAddress: Int32, data: [Int]) -> Int {
+        let address = MachineConstants.RealTime.cycleStage
+        return data[Int(address.start - startAddress)]
+    }
+    
+    private func getMachineRealTimeCycleSubStage(startAddress: Int32, data: [Int]) -> Int {
+        let address = MachineConstants.RealTime.cycleSubStage
+        return data[Int(address.start - startAddress)]
+    }
+    
+    private func getMachineRealTimeCycleError(startAddress: Int32, data: [Int]) -> Int {
+        let address = MachineConstants.RealTime.cycleError
+        return data[Int(address.start - startAddress)]
     }
     
     // MARK: - Current Cycle Observer Methods

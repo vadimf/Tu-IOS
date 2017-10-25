@@ -21,6 +21,8 @@ class SingleMachineViewController: UIViewController {
     
     @IBOutlet weak var currentCycleNameLabel: UILabel!
     @IBOutlet weak var currentCycleIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var currentCycleStageNameLabel: UILabel!
+    @IBOutlet weak var currentCycleSubStageNameLabel: UILabel!
     
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var temp1Label: UILabel!
@@ -63,6 +65,8 @@ class SingleMachineViewController: UIViewController {
         versionLabel.text = ""
         
         currentCycleNameLabel.text = ""
+        currentCycleStageNameLabel.text = ""
+        currentCycleSubStageNameLabel.text = ""
         
         temperatureLabel.text = "-"
         temp1Label.text = "-"
@@ -102,9 +106,20 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         guard let machineMonitor = self.machineMonitor,
             let machineRealTime = machineMonitor.machineRealTime else { return }
         
+        systemStatusLabel.text = machineRealTime.systemStatus?.getName
         currentCycleNameLabel.text = machineRealTime.cycleName?.getName
+        currentCycleStageNameLabel.text = machineRealTime.cycleStage?.getName
+        currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
+        cycleErrorLabel.text = machineRealTime.cycleError?.getName
+        
         doorStateLabel.text = machineRealTime.doorState?.getName
         temperatureLabel.text = "\(machineRealTime.analogInput1IOMapping)"
+        
+        if machineRealTime.systemStatus! != .none {
+            currentCycleIndicator.startAnimating()
+        } else {
+            currentCycleIndicator.stopAnimating()
+        }
     }
     
     func initialMachineDataReceived() {

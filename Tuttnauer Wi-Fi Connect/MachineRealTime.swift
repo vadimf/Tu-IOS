@@ -12,10 +12,18 @@ class MachineRealTime: NSObject {
 
     // MARK: - Real Time Data
     
-    var systemStatus: Int = 0
-    var cycleName: AutoClaveEnums.CycleID?
+    var systemStatus: AutoClaveEnums.SystemCurrentStatus?
     var screenSaverOn: Int = 0
     var doorState: AutoClaveEnums.DoorState?
+    
+    var cycleName: AutoClaveEnums.CycleID?
+    var cycleStage: AutoClaveEnums.CycleStage? {
+        didSet {
+            updateSystemStatus() // Did this because there is no way to determine RealTimeStateSystemStatus (according to Avi)
+        }
+    }
+    var cycleSubStage: AutoClaveEnums.CycleSubStage?
+    var cycleError: AutoClaveEnums.CycleError?
     
     // MARK: - Current Cycle Properties
     
@@ -27,5 +35,16 @@ class MachineRealTime: NSObject {
     var cycleTemperatureSensor3: Int = 0
     var cycleTemperatureSensor4: Int = 0
     var currentCycleIconID: Int = 0
+    
+    private func updateSystemStatus() {
+        switch cycleStage! {
+        case .none:
+            systemStatus = AutoClaveEnums.SystemCurrentStatus.none
+        case .done:
+            systemStatus = AutoClaveEnums.SystemCurrentStatus.cycleDone
+        default:
+            systemStatus = AutoClaveEnums.SystemCurrentStatus.cycleRunning
+        }
+    }
     
 }
