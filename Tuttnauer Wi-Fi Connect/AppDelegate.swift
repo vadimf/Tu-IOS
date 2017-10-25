@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         let settingsManager = UserSettingsManager.shared
         
         // Check if this is the App's first run

@@ -13,6 +13,7 @@ class MainNavigationBar: UINavigationBar {
     override func awakeFromNib() {
         super.awakeFromNib()
         isTranslucent = false
+        barStyle = .black
         backgroundColor = UIColor.tuttnauerOrange()
         barTintColor = UIColor.tuttnauerOrange()
         tintColor = UIColor.white
