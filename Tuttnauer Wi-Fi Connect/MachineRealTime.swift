@@ -22,19 +22,17 @@ class MachineRealTime: NSObject {
             updateSystemStatus() // Did this because there is no way to determine RealTimeStateSystemStatus (according to Avi)
         }
     }
+    
     var cycleSubStage: AutoClaveEnums.CycleSubStage?
     var cycleError: AutoClaveEnums.CycleError?
     
-    // MARK: - Current Cycle Properties
+    // MARK: - Sensors
     
-    var analogInput1IOMapping: Int = 0
-    var analogInput2IOMapping: Int = 0
-    var analogInput3IOMapping: Int = 0
-    var cycleTemperatureSensor1: Int = 0
-    var cycleTemperatureSensor2: Int = 0
-    var cycleTemperatureSensor3: Int = 0
-    var cycleTemperatureSensor4: Int = 0
-    var currentCycleIconID: Int = 0
+    var sensor1: BaseSensor?
+    var sensor2: BaseSensor?
+    var sensor3: BaseSensor?
+    
+    // MARK: Update Methods
     
     private func updateSystemStatus() {
         switch cycleStage! {

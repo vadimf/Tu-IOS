@@ -12,8 +12,6 @@ import SwiftyUserDefaults
 protocol MachineMonitorDelegate {
     func machineSetupDataUpdated()
     func machineRealTimeDataUpdated()
-    func initialMachineDataReceived()
-    func machineDataUpdated(modelName: String, serialNumber: String)
     func connectionLost()
 }
 
@@ -37,7 +35,7 @@ class MachineMonitor: NSObject {
         super.init()
         machine = Machine()
         machineRealTime = MachineRealTime()
-        networkManager = MachineNetworking()
+        networkManager = MachineNetworking.shared
         networkManager?.delegate = self
     }
     
@@ -108,7 +106,7 @@ class MachineMonitor: NSObject {
     @objc private func getMachineRealTimeData() {
         guard let networkManager = self.networkManager else { return }
         networkManager.getMachineRealTimeStateData()
-        networkManager.getMachineCurrentCycleProperties()
+        networkManager.getMachineSensorsData()
     }
     
     // TODO - Handle lost connections / errors
@@ -127,10 +125,6 @@ extension MachineMonitor: MachineNetworkingDelegate {
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime) {
         self.machineRealTime = machineRealTimeState
         delegate?.machineRealTimeDataUpdated()
-    }
-    
-    func machineNewData(modelName: String, serialNumber: String) {
-        delegate?.machineDataUpdated(modelName: modelName, serialNumber: serialNumber)
     }
     
     func disconnect() {

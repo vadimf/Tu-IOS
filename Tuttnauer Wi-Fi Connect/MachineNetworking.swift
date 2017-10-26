@@ -14,8 +14,6 @@ typealias MachineRegistersCompletionHandler = (_ data: [AnyObject]?, _ error: NS
 protocol MachineNetworkingDelegate {
     func receivedMachineSetupData(with machine: Machine)
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime)
-    
-    func machineNewData(modelName: String, serialNumber: String)
     func disconnect()
     func connectionLost()
 }
@@ -152,7 +150,6 @@ class MachineNetworking: NSObject {
             guard let data = data as? [Int],
                 let machineRealTime = self.machineRealTime else { return }
             
-            //machineRealTime.systemStatus = self.getMachineRealTimeCurrentStatus(startAddress: totalAddresses.start, data: data)
             machineRealTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
             machineRealTime.cycleName = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
             machineRealTime.cycleStage = AutoClaveEnums.CycleStage(rawValue: self.getMachineRealTimeCycleStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleStage(rawValue: 0)
@@ -200,42 +197,73 @@ class MachineNetworking: NSObject {
     
     // MARK: - Current Cycle Observer Methods
     
-    func getMachineCurrentCycleProperties() {
+    func getMachineSensorsData() {
         
-        let totalAddresses = MachineConstants.CurrentCycleProperties.total
+        let totalAddresses = MachineConstants.Sensors.total
         
         modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
-            print("Received Current Cycle Data")
+            print("Received Sensors Data")
             
             guard let data = data as? [Int],
                 let machineRealTime = self.machineRealTime else { return }
             
-            let analogIOs = self.getMachineCurrentCyclePropertiesAnalogIO(startAddress: totalAddresses.start, data: data)
-            machineRealTime.analogInput1IOMapping = analogIOs.0
-            machineRealTime.analogInput2IOMapping = analogIOs.1
-            machineRealTime.analogInput3IOMapping = analogIOs.2
+            let sensorNames = self.getMachineSensorsNames(startAddress: totalAddresses.start, data: data)
+            let sensorValues = self.getMachineSensorsValues(startAddress: totalAddresses.start, data: data)
+            let sensorsUnits = self.getMachineSensorsUnits(startAddress: totalAddresses.start, data: data)
+            
+            let sensor1 = BaseSensor(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
+            let sensor2 = BaseSensor(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
+            let sensor3 = BaseSensor(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
+            
+            machineRealTime.sensor1 = sensor1
+            machineRealTime.sensor2 = sensor2
+            machineRealTime.sensor3 = sensor3
             
             self.delegate?.receivedMachineRealTimeStateData(with: machineRealTime)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
-            self.getMachineCurrentCycleProperties()
+            self.getMachineSensorsData()
         })
         
     }
     
-    private func getMachineCurrentCyclePropertiesAnalogIO(startAddress: Int32, data: [Int]) -> (Int, Int, Int) {
+    private func getMachineSensorsNames(startAddress: Int32, data: [Int]) -> (String, String, String) {
         
-        let analog1 = MachineConstants.CurrentCycleProperties.analogInput1IOMapping
-        let analog2 = MachineConstants.CurrentCycleProperties.analogInput2IOMapping
-        let analog3 = MachineConstants.CurrentCycleProperties.analogInput3IOMapping
+        let sensor1Address = MachineConstants.Sensors.analogInput1ShortName
+        let sensor2Address = MachineConstants.Sensors.analogInput2ShortName
+        let sensor3Address = MachineConstants.Sensors.analogInput3ShortName
         
-        let analog1Data = data[Int(analog1.start - startAddress)]
-        let analog2Data = data[Int(analog2.start - startAddress)]
-        let analog3Data = data[Int(analog3.start - startAddress)]
+        let sensor1Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor1Address.start - startAddress)])?.getName ?? ""
+        let sensor2Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor2Address.start - startAddress)])?.getName ?? ""
+        let sensor3Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor3Address.start - startAddress)])?.getName ?? ""
         
-        return (analog1Data, analog2Data, analog3Data)
+        return (sensor1Name, sensor2Name, sensor3Name)
+    }
+    
+    private func getMachineSensorsValues(startAddress: Int32, data: [Int]) -> (Float, Float, Float) {
+        
+        let sensor1Address = MachineConstants.Sensors.analogInput1Value
+        let sensor2Address = MachineConstants.Sensors.analogInput2Value
+        let sensor3Address = MachineConstants.Sensors.analogInput3Value
+        
+        // TODO: Awaiting Avi's response on WhatsApp on how to parse those
+        
+        return (0, 0, 0)
+    }
+    
+    private func getMachineSensorsUnits(startAddress: Int32, data: [Int]) -> (AutoClaveEnums.AnalogUnits, AutoClaveEnums.AnalogUnits, AutoClaveEnums.AnalogUnits) {
+        
+        let sensor1Address = MachineConstants.Sensors.analog1Units
+        let sensor2Address = MachineConstants.Sensors.analog2Units
+        let sensor3Address = MachineConstants.Sensors.analog3Units
+        
+        let sensor1Units = AutoClaveEnums.AnalogUnits(rawValue: data[Int(sensor1Address.start - startAddress)]) ?? AutoClaveEnums.AnalogUnits.celsius
+        let sensor2Units = AutoClaveEnums.AnalogUnits(rawValue: data[Int(sensor2Address.start - startAddress)]) ?? AutoClaveEnums.AnalogUnits.celsius
+        let sensor3Units = AutoClaveEnums.AnalogUnits(rawValue: data[Int(sensor3Address.start - startAddress)]) ?? AutoClaveEnums.AnalogUnits.celsius
+        
+        return (sensor1Units, sensor2Units, sensor3Units)
     }
 
 }

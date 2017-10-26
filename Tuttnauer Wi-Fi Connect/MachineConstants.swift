@@ -133,6 +133,29 @@ class MachineConstants: NSObject {
         static let cycleIcon = ModbusAddress(start: 117, end: 117, count: Size.int16Size)
     }
     
+    // MARK: - Support for External Device - Quick Reading Current State (Temperature / Pressure Sensors & Units)
+    
+    struct Sensors {
+        static let total = ModbusAddress(start: 2140, end: 2197, count: 58)
+        static let analogInput1ShortName = ModbusAddress(start: 2140, end: 2140, count: Size.int16Size)
+        static let analogInput2ShortName = ModbusAddress(start: 2141, end: 2141, count: Size.int16Size)
+        static let analogInput3ShortName = ModbusAddress(start: 2142, end: 2142, count: Size.int16Size)
+        static let analogInput1Value = ModbusAddress(start: 2143, end: 2146, count: Size.int64Size)
+        static let analogInput2Value = ModbusAddress(start: 2147, end: 2150, count: Size.int64Size)
+        static let analogInput3Value = ModbusAddress(start: 2151, end: 2154, count: Size.int64Size)
+        static let currentCycleOrderNum = ModbusAddress(start: 2155, end: 2155, count: Size.int16Size)
+        static let currentCycleName = ModbusAddress(start: 2156, end: 2179, count: 24)
+        static let mainParameter1ID = ModbusAddress(start: 2180, end: 2180, count: Size.int16Size)
+        static let mainParameter2ID = ModbusAddress(start: 2181, end: 2181, count: Size.int16Size)
+        static let mainParameter3ID = ModbusAddress(start: 2182, end: 2182, count: Size.int16Size)
+        static let mainParameter1Value = ModbusAddress(start: 2183, end: 2186, count: Size.int64Size)
+        static let mainParameter2Value = ModbusAddress(start: 2187, end: 2190, count: Size.int64Size)
+        static let mainParameter3Value = ModbusAddress(start: 2191, end: 2194, count: Size.int64Size)
+        static let analog1Units = ModbusAddress(start: 2195, end: 2195, count: Size.int16Size)
+        static let analog2Units = ModbusAddress(start: 2196, end: 2196, count: Size.int16Size)
+        static let analog3Units = ModbusAddress(start: 2197, end: 2197, count: Size.int16Size)
+    }
+    
 }
 
 

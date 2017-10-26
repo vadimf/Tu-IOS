@@ -124,7 +124,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         cycleErrorLabel.text = machineRealTime.cycleError?.getName
         
         doorStateLabel.text = machineRealTime.doorState?.getName
-        temperatureLabel.text = "\(machineRealTime.analogInput1IOMapping)"
+        temperatureLabel.text = "\(0)"
         
         if let cycleName = machineRealTime.cycleName, cycleName == .none {
             currentCycleIconImageView.isHidden = true
@@ -137,14 +137,6 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         } else {
             currentCycleIndicator.stopAnimating()
         }
-    }
-    
-    func initialMachineDataReceived() {
-        
-    }
-
-    func receivedMachineSetupData(with machine: Machine) {
-
     }
     
     func machineDataUpdated(modelName: String, serialNumber: String) {
