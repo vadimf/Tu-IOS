@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import SwiftyUserDefaults
 import MBProgressHUD
 
 class MainConnectViewController: UIViewController {
 
+    var previouslyConnected: Bool = false
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var ipAddressTextField: UITextField!
@@ -21,8 +24,13 @@ class MainConnectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
-        //ipAddressTextField.text = "192.168.1.147" // Work IP - For dev purpose only
-        ipAddressTextField.text = "10.0.0.44" // Home IP - For dev purpose only
+        ipAddressTextField.text = "192.168.1.147" // Work IP - For dev purpose only
+        //ipAddressTextField.text = "10.0.0.44" // Home IP - For dev purpose only
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        autoConnectIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,21 +69,52 @@ extension MainConnectViewController {
 
 extension MainConnectViewController {
     
-    func connect(to ipAddress: String) {
+    func connect(to ipAddress: String, loaderMessage: String = "Connecting...") {
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        progressHUD.label.text = loaderMessage
         
-        MachineMonitor.shared.connect(to: ipAddress) { (success, error) in
-            
-            MBProgressHUD.hide(for: self.view, animated: false)
-            
-            guard error == nil, success else {
-                Alerts.alertMessage(for: self, title: "Connection Failed", message: "Could not connect to \(ipAddress)", closeHandler: nil)
-                return
+        // It's connecting to the machine too fast XD
+        // We'll dispatch this call after 2 seconds just so the user can experience the awesome MBProgressHUD
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            MachineMonitor.shared.connect(to: ipAddress) { (success, error) in
+                
+                MBProgressHUD.hide(for: self.view, animated: false)
+                
+                guard error == nil else {
+                    Alerts.alertMessage(for: self, title: "Connection Failed", message: "Could not connect to \(ipAddress)", closeHandler: nil)
+                    return
+                }
+                
+                self.previouslyConnected = true
+                UserSettingsManager.shared.setUserLastMachineIPAddress(to: ipAddress)
+                
+                self.performSegue(withIdentifier: SegueIdentifiers.mainConnectToSingleMachine, sender: self)
+                
             }
-            
-            self.performSegue(withIdentifier: SegueIdentifiers.mainConnectToSingleMachine, sender: self)
-            
+        }
+    }
+    
+    func autoConnectIfNeeded() {
+        
+        guard !previouslyConnected else { return }
+        guard let autoConnectSettings = Defaults[.userConnectionType] else { return }
+        
+        let types = Enums.ConnectionType.self
+        
+        switch autoConnectSettings {
+        case types.autoConnectOnStart.rawValue:
+            // Just temporary until I fix the machine discovery feature
+            guard let lastMachineIP = UserSettingsManager.shared.userSettings.lastMachineIPAddress, !lastMachineIP.isEmpty else { return }
+            connect(to: lastMachineIP, loaderMessage: "Connecting: \(lastMachineIP)")
+            return
+        case types.connectToLastMachine.rawValue:
+            guard let lastMachineIP = UserSettingsManager.shared.userSettings.lastMachineIPAddress, !lastMachineIP.isEmpty else { return }
+            connect(to: lastMachineIP, loaderMessage: "Connecting: \(lastMachineIP)")
+        case types.manualConnect.rawValue:
+            return
+        default:
+            return
         }
     }
     

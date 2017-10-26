@@ -23,5 +23,6 @@ extension DefaultsKeys {
     static let userLanguage = DefaultsKey<Int?>("userPressureUnit")
     static let userConnectionType = DefaultsKey<Int?>("userConnectionType")
     static let userReceiveLiveNotifications = DefaultsKey<Bool?>("userReceiveLiveNotifications")
+    static let userLastMachineIPAddress = DefaultsKey<String?>("userLastMachineIPAddress")
     
 }

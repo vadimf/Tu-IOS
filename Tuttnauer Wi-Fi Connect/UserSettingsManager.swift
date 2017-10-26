@@ -33,6 +33,7 @@ class UserSettingsManager: NSObject {
         Defaults[.userLanguage] = Enums.Language.english.rawValue
         Defaults[.userReceiveLiveNotifications] = false
         Defaults[.userConnectionType] = Enums.ConnectionType.autoConnectOnStart.rawValue
+        Defaults[.userLastMachineIPAddress] = ""
         
         // Also, let's populate the UserSettings object
         userSettings.temperatureUnit = .celsius
@@ -40,6 +41,7 @@ class UserSettingsManager: NSObject {
         userSettings.language = .english
         userSettings.receiveLiveNotifications = false
         userSettings.connectionType = .autoConnectOnStart
+        userSettings.lastMachineIPAddress = ""
     }
     
     func getUserSettingsFromDefaults() {
@@ -48,13 +50,15 @@ class UserSettingsManager: NSObject {
             let pressureUnit = Defaults[.userPressureUnit],
             let language = Defaults[.userLanguage],
             let liveNotifications = Defaults[.userReceiveLiveNotifications],
-            let connectionType = Defaults[.userConnectionType] else { return }
+            let connectionType = Defaults[.userConnectionType],
+            let lastMachineIP = Defaults[.userLastMachineIPAddress] else { return }
         
         userSettings.temperatureUnit = Enums.TemperatureUnit(rawValue: temperatureUnit)
         userSettings.pressureUnit = Enums.PressureUnit(rawValue: pressureUnit)
         userSettings.language = Enums.Language(rawValue: language)
         userSettings.receiveLiveNotifications = liveNotifications
         userSettings.connectionType = Enums.ConnectionType(rawValue: connectionType)
+        userSettings.lastMachineIPAddress = lastMachineIP
     }
 
     // MARK: - Modification Methods
@@ -82,6 +86,12 @@ class UserSettingsManager: NSObject {
     func setUserConnectionType(to connectionType: Enums.ConnectionType) {
         Defaults[.userConnectionType] = connectionType.rawValue
         userSettings.connectionType = connectionType
+    }
+    
+    func setUserLastMachineIPAddress(to ipAddress: String) {
+        if userSettings.lastMachineIPAddress == ipAddress { return }
+        Defaults[.userLastMachineIPAddress] = ipAddress
+        userSettings.lastMachineIPAddress = ipAddress
     }
     
 }
