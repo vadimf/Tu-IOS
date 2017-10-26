@@ -54,6 +54,13 @@ class SideMenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - IBActions
+    
+    @IBAction func disconnectButtonTapped(_ sender: UIButton) {
+        MachineMonitor.shared.disconnect()
+        NotificationCenter.default.post(name: NotificationsIdentifiers.machineDidDisconnectUserInitiated, object: nil)
+    }
 
 }
 
@@ -78,7 +85,7 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
         let item = dataSource[indexPath.row]
         
         if item.type == typeMachine {
-            
+        
             let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellsIdentifiers.sideMenuIconCell) as! SideMenuIconTableViewCell
             
             cell.titleLabel.text = item.name

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Tuttnauer Europe B.V. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class UserSettings: NSObject {
 
@@ -15,5 +15,6 @@ class UserSettings: NSObject {
     var language: Enums.Language?
     var connectionType: Enums.ConnectionType?
     var receiveLiveNotifications: Bool?
+    var lastMachineIPAddress: String?
     
 }

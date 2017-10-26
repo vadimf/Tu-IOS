@@ -12,6 +12,7 @@ import SwiftyUserDefaults
 protocol MachineMonitorDelegate {
     func machineSetupDataUpdated()
     func machineRealTimeDataUpdated()
+    func didDisconnectFromMachine()
     func connectionLost()
 }
 
@@ -80,6 +81,12 @@ class MachineMonitor: NSObject {
         
     }
     
+    func disconnect() {
+        guard let networkManager = self.networkManager else { return }
+        stopMonitoring()
+        networkManager.disconnect()
+    }
+    
     // MARK: - Manipulation Methods
     
     func startMonitoring() {
@@ -127,9 +134,9 @@ extension MachineMonitor: MachineNetworkingDelegate {
         delegate?.machineRealTimeDataUpdated()
     }
     
-    func disconnect() {
-        guard let networkManager = self.networkManager else { return }
-        networkManager.disconnect()
+    func didDisconnectFromMachine() {
+        isConnected = false
+        delegate?.didDisconnectFromMachine()
     }
     
     func connectionLost() {

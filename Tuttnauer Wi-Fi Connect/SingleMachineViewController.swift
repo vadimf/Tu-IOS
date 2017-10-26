@@ -42,17 +42,24 @@ class SingleMachineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        registerNotifications()
         setupSideMenu()
         setupLocalization()
         resetLabelsValues()
+        
         machineMonitor = MachineMonitor.shared // Singleton Class
         machineMonitor?.delegate = self
         machineMonitor?.getMachineSetupData() // Request the initial machine object with data
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        deRegisterNotifications()
     }
     
     // MARK: - Setup Methods
@@ -99,10 +106,36 @@ class SingleMachineViewController: UIViewController {
     
 }
 
+// MARK: - Notifications
+
+extension SingleMachineViewController {
+    
+    func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleMachineDidDisconnectUserInitiated), name: NotificationsIdentifiers.machineDidDisconnectUserInitiated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleMachineDidDisconnect), name: NotificationsIdentifiers.machineDidDisconnect, object: nil)
+    }
+    
+    func deRegisterNotifications() {
+        NotificationCenter.default.removeObserver(self, name: NotificationsIdentifiers.machineDidDisconnectUserInitiated, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NotificationsIdentifiers.machineDidDisconnect, object: nil)
+    }
+    
+    @objc func handleMachineDidDisconnectUserInitiated(notification: Notification) {
+        // User disconnected from the machine on purpose
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleMachineDidDisconnect(notification: Notification) {
+        // Disconnected from the machine for unknown reasons
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
 // MARK: - Machine Monitor Delegate
 
 extension SingleMachineViewController: MachineMonitorDelegate {
-    
+
     func machineSetupDataUpdated() {
         guard let machineMonitor = self.machineMonitor,
             let machine = machineMonitor.machine else { return }
@@ -139,8 +172,8 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         }
     }
     
-    func machineDataUpdated(modelName: String, serialNumber: String) {
-        print("Model Name =", modelName, "Serial Number =", serialNumber)
+    func didDisconnectFromMachine() {
+        dismiss(animated: true, completion: nil)
     }
     
     func connectionLost() {

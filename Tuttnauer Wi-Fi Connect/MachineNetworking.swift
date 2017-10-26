@@ -14,7 +14,7 @@ typealias MachineRegistersCompletionHandler = (_ data: [AnyObject]?, _ error: NS
 protocol MachineNetworkingDelegate {
     func receivedMachineSetupData(with machine: Machine)
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime)
-    func disconnect()
+    func didDisconnectFromMachine()
     func connectionLost()
 }
 
@@ -72,6 +72,7 @@ class MachineNetworking: NSObject {
         modbus = nil
         machine = nil
         machineRealTime = nil
+        delegate?.didDisconnectFromMachine()
     }
     
     // MARK: - Machine Setup Methods
