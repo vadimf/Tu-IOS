@@ -12,6 +12,7 @@ import SwiftyUserDefaults
 protocol MachineMonitorDelegate {
     func machineSetupDataUpdated()
     func machineRealTimeDataUpdated()
+    func machineSensorsDataUpdated()
     func didDisconnectFromMachine()
     func connectionLost()
 }
@@ -123,6 +124,7 @@ class MachineMonitor: NSObject {
 // MARK: - Machine Networking Delegate
 
 extension MachineMonitor: MachineNetworkingDelegate {
+
     
     func receivedMachineSetupData(with machine: Machine) {
        self.machine = machine
@@ -132,6 +134,11 @@ extension MachineMonitor: MachineNetworkingDelegate {
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime) {
         self.machineRealTime = machineRealTimeState
         delegate?.machineRealTimeDataUpdated()
+    }
+    
+    func receivedMachineSensorsData(with machineRealTimeState: MachineRealTime) {
+        self.machineRealTime = machineRealTimeState
+        delegate?.machineSensorsDataUpdated()
     }
     
     func didDisconnectFromMachine() {

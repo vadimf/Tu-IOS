@@ -33,4 +33,36 @@ class Utilities {
         return UIApplication.shared.userInterfaceLayoutDirection
     }
     
+    // MARK: - Bytes & Arrays
+    
+    class func toByteArray<T>(_ value: T) -> [UInt8] {
+        var value = value
+        return withUnsafeBytes(of: &value) { Array($0) }
+    }
+    
+    class func fromByteArray<T>(_ value: [UInt8], _: T.Type) -> T {
+        return value.withUnsafeBytes {
+            $0.baseAddress!.load(as: T.self)
+        }
+    }
+    
+    class func decimalsToDouble(decimals: [Int]) -> Double {
+        
+        var byteArray = [UInt8]()
+        
+        for decimal in decimals {
+            
+            let array = decimal.toUInt8BytesArray()
+            
+            for byte in array {
+                if byte == 0 { continue }
+                byteArray.append(byte)
+            }
+        }
+        
+        let finalValue = Utilities.fromByteArray(byteArray, Double.self)
+        
+        return finalValue
+    }
+    
 }

@@ -14,6 +14,7 @@ typealias MachineRegistersCompletionHandler = (_ data: [AnyObject]?, _ error: NS
 protocol MachineNetworkingDelegate {
     func receivedMachineSetupData(with machine: Machine)
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime)
+    func receivedMachineSensorsData(with machineRealTimeState: MachineRealTime)
     func didDisconnectFromMachine()
     func connectionLost()
 }
@@ -221,7 +222,7 @@ class MachineNetworking: NSObject {
             machineRealTime.sensor2 = sensor2
             machineRealTime.sensor3 = sensor3
             
-            self.delegate?.receivedMachineRealTimeStateData(with: machineRealTime)
+            self.delegate?.receivedMachineSensorsData(with: machineRealTime)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
@@ -243,15 +244,21 @@ class MachineNetworking: NSObject {
         return (sensor1Name, sensor2Name, sensor3Name)
     }
     
-    private func getMachineSensorsValues(startAddress: Int32, data: [Int]) -> (Float, Float, Float) {
+    private func getMachineSensorsValues(startAddress: Int32, data: [Int]) -> (Double, Double, Double) {
         
         let sensor1Address = MachineConstants.Sensors.analogInput1Value
         let sensor2Address = MachineConstants.Sensors.analogInput2Value
         let sensor3Address = MachineConstants.Sensors.analogInput3Value
         
-        // TODO: Awaiting Avi's response on WhatsApp on how to parse those
+        let sensor1 = Array(data[Int(sensor1Address.start - startAddress)..<Int(sensor1Address.end - startAddress + 1)])
+        let sensor2 = Array(data[Int(sensor2Address.start - startAddress)..<Int(sensor2Address.end - startAddress + 1)])
+        let sensor3 = Array(data[Int(sensor3Address.start - startAddress)..<Int(sensor3Address.end - startAddress + 1)])
         
-        return (0, 0, 0)
+        let sensor1Value = Utilities.decimalsToDouble(decimals: sensor1)
+        let sensor2Value = Utilities.decimalsToDouble(decimals: sensor2)
+        let sensor3Value = Utilities.decimalsToDouble(decimals: sensor3)
+        
+        return (sensor1Value, sensor2Value, sensor3Value)
     }
     
     private func getMachineSensorsUnits(startAddress: Int32, data: [Int]) -> (AutoClaveEnums.AnalogUnits, AutoClaveEnums.AnalogUnits, AutoClaveEnums.AnalogUnits) {

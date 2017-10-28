@@ -172,6 +172,17 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         }
     }
     
+    func machineSensorsDataUpdated() {
+        guard let machineMonitor = self.machineMonitor,
+            let machineRealTime = machineMonitor.machineRealTime else { return }
+        
+        let sensor1 = machineRealTime.sensor1!
+        let sensor2 = machineRealTime.sensor2!
+        let sensor3 = machineRealTime.sensor3!
+        
+        temperatureLabel.text = sensor1.getFormattedTemperatureUnit()
+    }
+    
     func didDisconnectFromMachine() {
         dismiss(animated: true, completion: nil)
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1601CCD01FA504E2004AC86F /* HA+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1601CCCF1FA504E2004AC86F /* HA+Int.swift */; };
 		160DD2361FA1E4060017D221 /* BaseSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160DD2351FA1E4060017D221 /* BaseSensor.swift */; };
 		162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */; };
 		162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1601CCCF1FA504E2004AC86F /* HA+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+Int.swift"; sourceTree = "<group>"; };
 		160DD2351FA1E4060017D221 /* BaseSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSensor.swift; sourceTree = "<group>"; };
 		162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuIconTableViewCell.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				168ACE0C1F92656B000277DD /* HA+String.swift */,
 				168ACDFC1F925FEE000277DD /* Tuttnauer+UIColor.swift */,
 				1662FDE01F9E5F8A004A390C /* HA+Array.swift */,
+				1601CCCF1FA504E2004AC86F /* HA+Int.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				168ACDF61F923625000277DD /* SettingsOptionsTableViewController.swift in Sources */,
 				168909F81F98C36F006ECEE4 /* MachineTableViewCell.swift in Sources */,
 				168ACDE61F922920000277DD /* HA+UIViewController.swift in Sources */,
+				1601CCD01FA504E2004AC86F /* HA+Int.swift in Sources */,
 				168ACE051F9262B1000277DD /* LocalString.swift in Sources */,
 				168ACDF01F922D86000277DD /* SingleMachineViewController.swift in Sources */,
 				16707DF21F61775500706B87 /* modbus-data.c in Sources */,

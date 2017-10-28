@@ -11,12 +11,12 @@ import Foundation
 class BaseSensor: NSObject {
 
     var name: String = ""
-    var value: Float = 0
+    var value: Double = 0
     var units: AutoClaveEnums.AnalogUnits = AutoClaveEnums.AnalogUnits.celsius
     
     // MARK: - Initialization
     
-    init(name: String, value: Float, units: AutoClaveEnums.AnalogUnits) {
+    init(name: String, value: Double, units: AutoClaveEnums.AnalogUnits) {
         super.init()
         self.name = name
         self.value = value
@@ -25,7 +25,7 @@ class BaseSensor: NSObject {
     
     // MARK: - Temperature Unit Methods
     
-    func getTemperatureUnit() -> Float {
+    func getTemperatureUnit() -> Double {
         switch self.units {
         case .celsius:
             return self.value
@@ -49,7 +49,7 @@ class BaseSensor: NSObject {
     
     // MARK: - Pressure Unit Methods
     
-    func getPressureUnit() -> Float {
+    func getPressureUnit() -> Double {
         switch self.units {
         case .kpa:
             return self.value
