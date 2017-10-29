@@ -15,6 +15,7 @@ protocol MachineNetworkingDelegate {
     func receivedMachineSetupData(with machine: Machine)
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime)
     func receivedMachineSensorsData(with machineRealTimeState: MachineRealTime)
+    func receivedMachineParametersData(with machineRealTimeState: MachineRealTime)
     func didDisconnectFromMachine()
     func connectionLost()
 }
@@ -197,7 +198,7 @@ class MachineNetworking: NSObject {
         return data[Int(address.start - startAddress)]
     }
     
-    // MARK: - Current Cycle Observer Methods
+    // MARK: - Current Cycle Sensors Observer Methods
     
     func getMachineSensorsData() {
         
@@ -222,14 +223,20 @@ class MachineNetworking: NSObject {
             
             if sensor1.value > 3 {
                 machineRealTime.sensor1 = sensor1
+            } else {
+                machineRealTime.sensor1 = nil
             }
             
             if sensor2.value > 3 {
                 machineRealTime.sensor2 = sensor2
+            } else {
+                machineRealTime.sensor2 = nil
             }
             
             if sensor3.value > 3 {
                 machineRealTime.sensor3 = sensor3
+            } else {
+                machineRealTime.sensor3 = nil
             }
             
             self.delegate?.receivedMachineSensorsData(with: machineRealTime)
@@ -282,6 +289,87 @@ class MachineNetworking: NSObject {
         let sensor3Units = AutoClaveEnums.AnalogUnits(rawValue: data[Int(sensor3Address.start - startAddress)]) ?? AutoClaveEnums.AnalogUnits.celsius
         
         return (sensor1Units, sensor2Units, sensor3Units)
+    }
+    
+    // MARK: - Current Cycle Parameters Observer Methods
+    
+    func getMachineCycleParametersData() {
+        
+        let totalAddresses = MachineConstants.CycleParameters.total
+        
+        modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+            
+            print("Received Cycle Prameters Data")
+            
+            guard let data = data as? [Int],
+                let machineRealTime = self.machineRealTime else { return }
+            
+            let parametersNames = self.getMachinePrametersIDs(startAddress: totalAddresses.start, data: data)
+            let parametersValues = self.getMachineParametersValues(startAddress: totalAddresses.start, data: data)
+            
+            let parameter1 = BaseParameter(name: parametersNames.0, value: parametersValues.0, units: .temperature)
+            let parameter2 = BaseParameter(name: parametersNames.1, value: parametersValues.1, units: .time)
+            let parameter3 = BaseParameter(name: parametersNames.2, value: parametersValues.2, units: .time)
+            
+            if !parameter1.name.isEmpty {
+                machineRealTime.parameter1 = parameter1
+            } else {
+                machineRealTime.parameter1 = nil
+            }
+            
+            if !parameter2.name.isEmpty {
+                machineRealTime.parameter2 = parameter2
+            } else {
+                machineRealTime.parameter2 = nil
+            }
+            
+            if !parameter3.name.isEmpty {
+                machineRealTime.parameter3 = parameter3
+            } else {
+                machineRealTime.parameter3 = nil
+            }
+            
+            self.delegate?.receivedMachineParametersData(with: machineRealTime)
+            
+        }, failure: { (error) in
+            self.checkConnection(error: error)
+            self.getMachineCycleParametersData()
+        })
+        
+    }
+    
+    private func getMachinePrametersIDs(startAddress: Int32, data: [Int]) -> (String, String, String) {
+        
+        let parameter1Address = MachineConstants.CycleParameters.parameter1ID
+        let parameter2Address = MachineConstants.CycleParameters.parameter2ID
+        let parameter3Address = MachineConstants.CycleParameters.parameter3ID
+        
+        let parameter1 = data[Int(parameter1Address.start - startAddress)]
+        let parameter2 = data[Int(parameter2Address.start - startAddress)]
+        let parameter3 = data[Int(parameter3Address.start - startAddress)]
+        
+        let paramter1Name = AutoClaveEnums.MainParametersNames(rawValue: parameter1)!.getName
+        let paramter2Name = AutoClaveEnums.MainParametersNames(rawValue: parameter2)!.getName
+        let paramter3Name = AutoClaveEnums.MainParametersNames(rawValue: parameter3)!.getName
+        
+        return (paramter1Name, paramter2Name, paramter3Name)
+    }
+    
+    private func getMachineParametersValues(startAddress: Int32, data: [Int]) -> (Double, Double, Double) {
+        
+        let parameter1Address = MachineConstants.CycleParameters.parameter1Value
+        let parameter2Address = MachineConstants.CycleParameters.parameter2Value
+        let parameter3Address = MachineConstants.CycleParameters.parameter3Value
+        
+        let parameter1 = Array(data[Int(parameter1Address.start - startAddress)..<Int(parameter1Address.end - startAddress + 1)])
+        let parameter2 = Array(data[Int(parameter2Address.start - startAddress)..<Int(parameter2Address.end - startAddress + 1)])
+        let parameter3 = Array(data[Int(parameter3Address.start - startAddress)..<Int(parameter3Address.end - startAddress + 1)])
+        
+        let parameter1Value = Utilities.decimalsToDouble(decimals: parameter1)
+        let parameter2Value = Utilities.decimalsToDouble(decimals: parameter2)
+        let parameter3Value = Utilities.decimalsToDouble(decimals: parameter3)
+        
+        return (parameter1Value, parameter2Value, parameter3Value)
     }
     
 }

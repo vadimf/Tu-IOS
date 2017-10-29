@@ -32,6 +32,12 @@ class MachineRealTime: NSObject {
     var sensor2: BaseSensor?
     var sensor3: BaseSensor?
     
+    // MARK: - Main Parameters
+    
+    var parameter1: BaseParameter?
+    var parameter2: BaseParameter?
+    var parameter3: BaseParameter?
+    
     // MARK: Update Methods
     
     private func updateSystemStatus() {

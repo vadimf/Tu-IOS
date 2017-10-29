@@ -47,7 +47,7 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .door1Opened:
-                return "Door Opened"
+                return "Door Open"
             case .door1Closed:
                 return "Door Closed"
             case .door1ClosedDoor2Closed:
@@ -855,6 +855,32 @@ class AutoClaveEnums {
                 return "Filter Temperature"
             }
         }
+    }
+    
+    enum MainParametersNames: Int {
+        case none = -1
+        case sterTemperature = 0
+        case sterTime
+        case dryTime
+        
+        var getName: String {
+            switch self {
+            case .none:
+                return ""
+            case .sterTemperature:
+                return "Ster. Temp."
+            case .sterTime:
+                return "Ster. Time"
+            case .dryTime:
+                return "Dry Time"
+            }
+        }
+    }
+    
+    enum MainParametersUnits: Int {
+        case none = -1
+        case temperature = 0
+        case time
     }
     
     enum AnalogUnits: Int {

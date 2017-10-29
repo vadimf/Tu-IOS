@@ -156,6 +156,16 @@ class MachineConstants: NSObject {
         static let analog3Units = ModbusAddress(start: 2197, end: 2197, count: Size.int16Size)
     }
     
+    struct CycleParameters {
+        static let total = ModbusAddress(start: 2180, end: 2194, count: 15)
+        static let parameter1ID = ModbusAddress(start: 2180, end: 2180, count: Size.int16Size)
+        static let parameter2ID = ModbusAddress(start: 2181, end: 2181, count: Size.int16Size)
+        static let parameter3ID = ModbusAddress(start: 2182, end: 2182, count: Size.int16Size)
+        static let parameter1Value = ModbusAddress(start: 2183, end: 2186, count: Size.int64Size)
+        static let parameter2Value = ModbusAddress(start: 2187, end: 2190, count: Size.int64Size)
+        static let parameter3Value = ModbusAddress(start: 2191, end: 2194, count: Size.int64Size)
+    }
+    
 }
 
 

@@ -54,7 +54,8 @@ class SingleMachineViewController: UIViewController {
         registerNotifications()
         setupSideMenu()
         setupLocalization()
-        resetLabelsValues()
+        resetOneTimeLabelValues()
+        resetOccurrentLabelValues()
         
         machineMonitor = MachineMonitor.shared // Singleton Class
         machineMonitor?.delegate = self
@@ -76,7 +77,8 @@ class SingleMachineViewController: UIViewController {
         
     }
     
-    private func resetLabelsValues() {
+    private func resetOneTimeLabelValues() {
+        
         modelNameLabel.text = ""
         serialNumberLabel.text = ""
         ipAddressLabel.text = ""
@@ -87,17 +89,20 @@ class SingleMachineViewController: UIViewController {
         currentCycleStageNameLabel.text = ""
         currentCycleSubStageNameLabel.text = ""
         
+        systemStatusLabel.text = "-"
+        doorStateLabel.text = "-"
+        cycleErrorLabel.text = "-"
+    }
+    
+    fileprivate func resetOccurrentLabelValues() {
+        
         sensor1TitleLabel.text = ""
         sensor2TitleLabel.text = ""
         sensor3TitleLabel.text = ""
         
-        sensor1ValueLabel.text = "-"
-        sensor2ValueLabel.text = "-"
-        sensor3ValueLabel.text = "-"
-        
-        systemStatusLabel.text = "-"
-        doorStateLabel.text = "-"
-        cycleErrorLabel.text = "-"
+        sensor1ValueLabel.text = ""
+        sensor2ValueLabel.text = ""
+        sensor3ValueLabel.text = ""
         
         parameter1TitleLabel.text = ""
         parameter2TitleLabel.text = ""
@@ -194,16 +199,56 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         if let sensor1 = machineRealTime.sensor1 {
             sensor1TitleLabel.text = sensor1.name
             sensor1ValueLabel.text = sensor1.getFormattedUnit()
+        } else {
+            sensor1TitleLabel.text = ""
+            sensor1ValueLabel.text = ""
         }
         
         if let sensor2 = machineRealTime.sensor2 {
             sensor2TitleLabel.text = sensor2.name
             sensor2ValueLabel.text = sensor2.getFormattedUnit()
+        } else {
+            sensor2TitleLabel.text = ""
+            sensor2ValueLabel.text = ""
         }
         
         if let sensor3 = machineRealTime.sensor3 {
             sensor3TitleLabel.text = sensor3.name
             sensor3ValueLabel.text = sensor3.getFormattedUnit()
+        } else {
+            sensor2TitleLabel.text = ""
+            sensor2ValueLabel.text = ""
+        }
+    }
+    
+    func machineParametersDataUpdated() {
+        guard let machineMonitor = self.machineMonitor,
+            let machineRealTime = machineMonitor.machineRealTime else { return }
+        
+        // TODO: Update the parameters UI components
+        
+        if let parameter1 = machineRealTime.parameter1 {
+            parameter1TitleLabel.text = parameter1.name
+            parameter1ValueLabel.text = "\(parameter1.value)"
+        } else {
+            parameter1TitleLabel.text = ""
+            parameter1ValueLabel.text = ""
+        }
+        
+        if let parameter2 = machineRealTime.parameter2 {
+            parameter2TitleLabel.text = parameter2.name
+            parameter2ValueLabel.text = "\(parameter2.value)"
+        } else {
+            parameter2TitleLabel.text = ""
+            parameter2ValueLabel.text = ""
+        }
+        
+        if let parameter3 = machineRealTime.parameter3 {
+            parameter3TitleLabel.text = parameter3.name
+            parameter3ValueLabel.text = "\(parameter3.value)"
+        } else {
+            parameter3TitleLabel.text = ""
+            parameter3ValueLabel.text = ""
         }
     }
     
@@ -219,6 +264,8 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    // MARK: - Non-Delegate Methods
     
     private func reconnect() {
         self.machineMonitor?.reconnect(completion: { (success, error) in
