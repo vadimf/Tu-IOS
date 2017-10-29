@@ -778,6 +778,7 @@ class AutoClaveEnums {
     }
     
     enum AnalogInputShorNames: Int {
+        case none = -1
         case door1 = 0
         case door2
         case chamberTemperature
@@ -805,6 +806,8 @@ class AutoClaveEnums {
         
         var getName: String {
             switch self {
+            case .none:
+                return ""
             case .door1:
                 return "Door 1"
             case .door2:

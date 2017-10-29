@@ -299,8 +299,8 @@
 				168909F91F98C465006ECEE4 /* Machine.swift */,
 				163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */,
 				160DD2351FA1E4060017D221 /* BaseSensor.swift */,
-				1660E9861F9FCB16008DC47E /* UserSettings.swift */,
 				166BA9721FA6125C00157706 /* BaseParameter.swift */,
+				1660E9861F9FCB16008DC47E /* UserSettings.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";

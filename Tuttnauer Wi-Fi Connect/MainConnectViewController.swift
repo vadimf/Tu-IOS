@@ -26,6 +26,9 @@ class MainConnectViewController: UIViewController {
         hideKeyboardWhenTappedAround()
         //ipAddressTextField.text = "192.168.1.147" // Work IP - For dev purpose only
         //ipAddressTextField.text = "10.0.0.44" // Home IP - For dev purpose only
+        
+        let dec = Utilities.fromByteArray([0, 0, 0, 0, 0, 64, 94, 64], Double.self)
+        print(dec)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -221,20 +221,26 @@ class MachineNetworking: NSObject {
             
             // Check if larger than 3. Solves a certain bug where the machine sometimes sends a faulty double 2.234352...
             
-            if sensor1.value > 3 {
-                machineRealTime.sensor1 = sensor1
+            if !sensor1.name.isEmpty {
+                if sensor1.value > 3 {
+                    machineRealTime.sensor1 = sensor1
+                }
             } else {
                 machineRealTime.sensor1 = nil
             }
             
-            if sensor2.value > 3 {
-                machineRealTime.sensor2 = sensor2
+            if !sensor2.name.isEmpty {
+                if sensor2.value > 3 {
+                    machineRealTime.sensor2 = sensor2
+                }
             } else {
                 machineRealTime.sensor2 = nil
             }
             
-            if sensor3.value > 3 {
-                machineRealTime.sensor3 = sensor3
+            if !sensor3.name.isEmpty, sensor3.value > 3 {
+                if sensor3.value > 3 {
+                    machineRealTime.sensor3 = sensor3
+                }
             } else {
                 machineRealTime.sensor3 = nil
             }
@@ -254,9 +260,9 @@ class MachineNetworking: NSObject {
         let sensor2Address = MachineConstants.Sensors.analogInput2ShortName
         let sensor3Address = MachineConstants.Sensors.analogInput3ShortName
         
-        let sensor1Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor1Address.start - startAddress)])?.getName ?? ""
-        let sensor2Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor2Address.start - startAddress)])?.getName ?? ""
-        let sensor3Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor3Address.start - startAddress)])?.getName ?? ""
+        let sensor1Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor1Address.start - startAddress)])?.getName ?? AutoClaveEnums.AnalogInputShorNames.none.getName
+        let sensor2Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor2Address.start - startAddress)])?.getName ?? AutoClaveEnums.AnalogInputShorNames.none.getName
+        let sensor3Name = AutoClaveEnums.AnalogInputShorNames(rawValue: data[Int(sensor3Address.start - startAddress)])?.getName ?? AutoClaveEnums.AnalogInputShorNames.none.getName
         
         return (sensor1Name, sensor2Name, sensor3Name)
     }
@@ -307,9 +313,9 @@ class MachineNetworking: NSObject {
             let parametersNames = self.getMachinePrametersIDs(startAddress: totalAddresses.start, data: data)
             let parametersValues = self.getMachineParametersValues(startAddress: totalAddresses.start, data: data)
             
-            let parameter1 = BaseParameter(name: parametersNames.0, value: parametersValues.0, units: .temperature)
-            let parameter2 = BaseParameter(name: parametersNames.1, value: parametersValues.1, units: .time)
-            let parameter3 = BaseParameter(name: parametersNames.2, value: parametersValues.2, units: .time)
+            let parameter1 = BaseParameter(id: parametersNames.0, name: parametersNames.1, value: parametersValues.0)
+            let parameter2 = BaseParameter(id: parametersNames.2, name: parametersNames.3, value: parametersValues.1)
+            let parameter3 = BaseParameter(id: parametersNames.4, name: parametersNames.5, value: parametersValues.2)
             
             if !parameter1.name.isEmpty {
                 machineRealTime.parameter1 = parameter1
@@ -338,21 +344,21 @@ class MachineNetworking: NSObject {
         
     }
     
-    private func getMachinePrametersIDs(startAddress: Int32, data: [Int]) -> (String, String, String) {
+    private func getMachinePrametersIDs(startAddress: Int32, data: [Int]) -> (Int, String, Int, String, Int, String) {
         
         let parameter1Address = MachineConstants.CycleParameters.parameter1ID
         let parameter2Address = MachineConstants.CycleParameters.parameter2ID
         let parameter3Address = MachineConstants.CycleParameters.parameter3ID
         
-        let parameter1 = data[Int(parameter1Address.start - startAddress)]
-        let parameter2 = data[Int(parameter2Address.start - startAddress)]
-        let parameter3 = data[Int(parameter3Address.start - startAddress)]
+        let parameter1ID = data[Int(parameter1Address.start - startAddress)]
+        let parameter2ID = data[Int(parameter2Address.start - startAddress)]
+        let parameter3ID = data[Int(parameter3Address.start - startAddress)]
         
-        let paramter1Name = AutoClaveEnums.MainParametersNames(rawValue: parameter1)!.getName
-        let paramter2Name = AutoClaveEnums.MainParametersNames(rawValue: parameter2)!.getName
-        let paramter3Name = AutoClaveEnums.MainParametersNames(rawValue: parameter3)!.getName
+        let paramter1Name = AutoClaveEnums.MainParametersNames(rawValue: parameter1ID)?.getName ?? AutoClaveEnums.MainParametersNames.none.getName
+        let paramter2Name = AutoClaveEnums.MainParametersNames(rawValue: parameter2ID)?.getName ?? AutoClaveEnums.MainParametersNames.none.getName
+        let paramter3Name = AutoClaveEnums.MainParametersNames(rawValue: parameter3ID)?.getName ?? AutoClaveEnums.MainParametersNames.none.getName
         
-        return (paramter1Name, paramter2Name, paramter3Name)
+        return (parameter1ID, paramter1Name, parameter2ID, paramter2Name, parameter3ID, paramter3Name)
     }
     
     private func getMachineParametersValues(startAddress: Int32, data: [Int]) -> (Double, Double, Double) {

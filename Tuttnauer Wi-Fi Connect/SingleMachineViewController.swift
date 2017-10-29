@@ -229,7 +229,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         
         if let parameter1 = machineRealTime.parameter1 {
             parameter1TitleLabel.text = parameter1.name
-            parameter1ValueLabel.text = "\(parameter1.value)"
+            parameter1ValueLabel.text = parameter1.getFormattedUnit()
         } else {
             parameter1TitleLabel.text = ""
             parameter1ValueLabel.text = ""
@@ -237,7 +237,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         
         if let parameter2 = machineRealTime.parameter2 {
             parameter2TitleLabel.text = parameter2.name
-            parameter2ValueLabel.text = "\(parameter2.value)"
+            parameter2ValueLabel.text = parameter2.getFormattedUnit()
         } else {
             parameter2TitleLabel.text = ""
             parameter2ValueLabel.text = ""
@@ -245,7 +245,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         
         if let parameter3 = machineRealTime.parameter3 {
             parameter3TitleLabel.text = parameter3.name
-            parameter3ValueLabel.text = "\(parameter3.value)"
+            parameter3ValueLabel.text = parameter3.getFormattedUnit()
         } else {
             parameter3TitleLabel.text = ""
             parameter3ValueLabel.text = ""

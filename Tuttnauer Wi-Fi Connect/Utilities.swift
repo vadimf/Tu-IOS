@@ -60,6 +60,15 @@ class Utilities {
             }
         }
         
+        var blanksArray = [UInt8]()
+        
+        if byteArray.count < 8 {
+            for _ in 0..<(8 - byteArray.count) {
+                blanksArray.append(0)
+            }
+            byteArray = blanksArray + byteArray
+        }
+        
         let finalValue = Utilities.fromByteArray(byteArray, Double.self)
         
         return finalValue
