@@ -866,6 +866,7 @@ class AutoClaveEnums {
         case barA
         case barG
         case inhg
+        case mbar
     }
     
 }

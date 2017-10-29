@@ -1000,7 +1000,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Cancelled by user" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lf4-gH-Wuh">
-                                                        <rect key="frame" x="-0.5" y="21.5" width="123.5" height="52"/>
+                                                        <rect key="frame" x="5" y="21.5" width="113.5" height="52"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1009,11 +1009,11 @@
                                                 <color key="backgroundColor" red="0.96957012425557887" green="0.96805449820427925" blue="0.99452871012590671" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="VJ5-Cr-FR9" firstAttribute="top" secondItem="rt8-1A-XeU" secondAttribute="top" constant="5" id="IjX-Rb-xel"/>
-                                                    <constraint firstItem="lf4-gH-Wuh" firstAttribute="leading" secondItem="rt8-1A-XeU" secondAttribute="leading" id="Om9-vb-Gyj"/>
+                                                    <constraint firstItem="lf4-gH-Wuh" firstAttribute="leading" secondItem="rt8-1A-XeU" secondAttribute="leading" constant="5" id="Om9-vb-Gyj"/>
                                                     <constraint firstItem="VJ5-Cr-FR9" firstAttribute="leading" secondItem="rt8-1A-XeU" secondAttribute="leading" id="QGh-ic-XWq"/>
                                                     <constraint firstAttribute="trailing" secondItem="VJ5-Cr-FR9" secondAttribute="trailing" id="haR-SZ-40D"/>
                                                     <constraint firstItem="lf4-gH-Wuh" firstAttribute="top" secondItem="VJ5-Cr-FR9" secondAttribute="bottom" id="tGQ-q2-egu"/>
-                                                    <constraint firstAttribute="trailing" secondItem="lf4-gH-Wuh" secondAttribute="trailing" id="yQX-tw-xxQ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="lf4-gH-Wuh" secondAttribute="trailing" constant="5" id="yQX-tw-xxQ"/>
                                                     <constraint firstAttribute="bottom" secondItem="lf4-gH-Wuh" secondAttribute="bottom" id="zMl-at-l2M"/>
                                                 </constraints>
                                             </view>
@@ -1068,17 +1068,23 @@
                         <outlet property="currentCycleStageNameLabel" destination="CMI-p9-4BG" id="RXw-ax-Ot0"/>
                         <outlet property="currentCycleSubStageNameLabel" destination="BTf-lu-qTq" id="7a2-Bz-DGq"/>
                         <outlet property="cycleErrorLabel" destination="lf4-gH-Wuh" id="zBc-lN-KdI"/>
-                        <outlet property="cycleParameterDryTimeLabel" destination="LCv-0e-WZu" id="URr-0O-RRI"/>
-                        <outlet property="cycleParameterSterTempLabel" destination="NoW-d2-JcD" id="vAW-xO-ojn"/>
-                        <outlet property="cycleParameterSterTimeLabel" destination="67r-jg-Bio" id="2aA-FF-Ngh"/>
                         <outlet property="doorStateLabel" destination="GRC-Y2-mbt" id="5Z0-5B-9sJ"/>
                         <outlet property="ipAddressLabel" destination="B0U-vB-9Gg" id="JWW-fo-5Bi"/>
                         <outlet property="modelNameLabel" destination="Jt3-CF-0FV" id="DxG-DP-fBR"/>
-                        <outlet property="pressureLabel" destination="Swp-IA-rdo" id="88J-Mh-hFo"/>
+                        <outlet property="parameter1TitleLabel" destination="7vF-46-sdh" id="Hf1-Si-yJl"/>
+                        <outlet property="parameter1ValueLabel" destination="NoW-d2-JcD" id="fKd-h1-bgv"/>
+                        <outlet property="parameter2TitleLabel" destination="NeB-3s-dZv" id="jKu-Ev-PA3"/>
+                        <outlet property="parameter2ValueLabel" destination="67r-jg-Bio" id="tj2-6c-61P"/>
+                        <outlet property="parameter3TitleLabel" destination="au0-5x-8PJ" id="j7d-Oz-AEc"/>
+                        <outlet property="parameter3ValueLabel" destination="LCv-0e-WZu" id="qqC-TB-w0I"/>
+                        <outlet property="sensor1TitleLabel" destination="y6Y-8g-9sh" id="vwB-dt-yJY"/>
+                        <outlet property="sensor1ValueLabel" destination="TTQ-Hx-c6Q" id="zfa-H8-WYm"/>
+                        <outlet property="sensor2TitleLabel" destination="mlV-HJ-y2N" id="W0o-GA-8j6"/>
+                        <outlet property="sensor2ValueLabel" destination="SpB-Kt-nrV" id="yCw-45-P2N"/>
+                        <outlet property="sensor3TitleLabel" destination="6QI-SX-ggK" id="aeb-UO-qCJ"/>
+                        <outlet property="sensor3ValueLabel" destination="Swp-IA-rdo" id="bTS-fT-fi7"/>
                         <outlet property="serialNumberLabel" destination="Uzq-z0-3z9" id="hRR-Hm-MeU"/>
                         <outlet property="systemStatusLabel" destination="mAT-ar-2Ub" id="Hqr-Mt-wpX"/>
-                        <outlet property="temp1Label" destination="SpB-Kt-nrV" id="TMa-EL-zXg"/>
-                        <outlet property="temperatureLabel" destination="TTQ-Hx-c6Q" id="0Xn-KE-sVy"/>
                         <outlet property="versionLabel" destination="8aV-Ap-Vby" id="d9h-HY-URo"/>
                         <segue destination="HY0-mi-NFI" kind="presentation" identifier="Single Machine to Settings Segue" id="Ql1-Rb-boG"/>
                     </connections>

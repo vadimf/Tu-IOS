@@ -7,12 +7,27 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
 class BaseSensor: NSObject {
 
     var name: String = ""
     var value: Double = 0
     var units: AutoClaveEnums.AnalogUnits = AutoClaveEnums.AnalogUnits.celsius
+    
+    // Pressure Factors
+    let psiaFactor: Double = 689.51251465214093635799489760739
+    let kpaToInhgFactor: Double = 0.2953
+    private var kpaToPsiaFactor: Double {
+        get {
+            return (100.0 / self.psiaFactor)  // 0.14503
+        }
+    }
+    private var kpaToPsigFactor: Double {
+        get {
+            return self.kpaToPsiaFactor
+        }
+    }
     
     // MARK: - Initialization
     
@@ -21,69 +36,64 @@ class BaseSensor: NSObject {
         self.name = name
         self.value = value
         self.units = units
+        
+        if let userTemperatureUnit = Defaults[.userTemperatureUnit],
+            units == .celsius || units == .fahrenheit {
+            self.units = AutoClaveEnums.AnalogUnits(rawValue: userTemperatureUnit)!
+        }
+        
+        if let userPressureUnit = Defaults[.userPressureUnit],
+            units == .kpa || units == .psia || units == .psig || units == .barA || units == .barG || units == .inhg || units == .mbar {
+            self.units = AutoClaveEnums.AnalogUnits(rawValue: userPressureUnit)!
+        }
     }
     
     // MARK: - Temperature Unit Methods
     
-    func getTemperatureUnit() -> Double {
+    func getUnit() -> Double {
         switch self.units {
         case .celsius:
             return self.value
         case .fahrenheit:
-            return (self.value * 1.8) + 32
-        default:
+            return ((self.value * 1.8) + 32)
+        case .kpa:
             return self.value
+        case .psia:
+            return (self.value * kpaToPsiaFactor)
+        case .psig:
+            return (self.value * kpaToPsigFactor)
+        case .barA:
+            return (self.value / 100)
+        case .barG:
+            return ((self.value - 100) / 100)
+        case .inhg:
+            return (self.value * kpaToInhgFactor)
+        case .mbar:
+            return abs((self.value / 10) * 100)
         }
     }
     
-    func getFormattedTemperatureUnit() -> String {
+    func getFormattedUnit() -> String {
+        let unitValue = getUnit().roundToPlaces(places: 1)
         switch self.units {
         case .celsius:
-            return "\(self.value) °C"
+            return "\(unitValue) °C"
         case .fahrenheit:
-            return "\((self.value * 1.8) + 32) °F"
-        default:
-            return "\(self.value)"
-        }
-    }
-    
-    // MARK: - Pressure Unit Methods
-    
-    func getPressureUnit() -> Double {
-        switch self.units {
+            return "\(unitValue) °F"
         case .kpa:
-            return self.value
+            return "\(unitValue) kPa"
         case .psia:
-            return self.value
+            return "\(unitValue) Psia"
         case .psig:
-            return self.value
+            return "\(unitValue) Psig"
         case .barA:
-            return self.value
+            return "\(unitValue) BarA"
         case .barG:
-            return self.value
+            return "\(unitValue) BarG"
         case .inhg:
-            return self.value
-        default:
-            return self.value
-        }
-    }
-    
-    func getFormattedPressureUnit() -> String {
-        switch self.units {
-        case .kpa:
-            return "\(self.value) kPa"
-        case .psia:
-            return "\(self.value) Psia"
-        case .psig:
-            return "\(self.value) Psig"
-        case .barA:
-            return "\(self.value) BarA"
-        case .barG:
-            return "\(self.value) BarG"
-        case .inhg:
-            return "\(self.value) Inhg"
-        default:
-            return "\(self.value)"
+            return "\(unitValue) Inhg"
+        case .mbar:
+            return "\(unitValue) Mbar"
         }
     }
     

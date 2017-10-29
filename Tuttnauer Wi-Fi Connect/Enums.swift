@@ -43,7 +43,7 @@ class Enums: NSObject {
     }
     
     enum PressureUnit: Int {
-        case kpa = 0
+        case kpa = 2
         case psia
         case psig
         case barA

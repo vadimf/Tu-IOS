@@ -77,7 +77,7 @@ class MachineNetworking: NSObject {
     }
     
     // MARK: - Machine Setup Methods
-
+    
     func getMachineSetupData() {
         
         let versionMajorAddress = MachineConstants.Versions.versionMajor
@@ -111,7 +111,7 @@ class MachineNetworking: NSObject {
         
         // Get Model Name & Serial Number
         modbus?.readRegistersFrom(startAddress: (modelNameAddress.start - 1), count: modelTotalAddresses, success: { (data) in
-
+            
             print("Received model name")
             
             guard let data = data as? [Int],
@@ -218,9 +218,19 @@ class MachineNetworking: NSObject {
             let sensor2 = BaseSensor(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
             let sensor3 = BaseSensor(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
             
-            machineRealTime.sensor1 = sensor1
-            machineRealTime.sensor2 = sensor2
-            machineRealTime.sensor3 = sensor3
+            // Check if larger than 3. Solves a certain bug where the machine sometimes sends a faulty double 2.234352...
+            
+            if sensor1.value > 3 {
+                machineRealTime.sensor1 = sensor1
+            }
+            
+            if sensor2.value > 3 {
+                machineRealTime.sensor2 = sensor2
+            }
+            
+            if sensor3.value > 3 {
+                machineRealTime.sensor3 = sensor3
+            }
             
             self.delegate?.receivedMachineSensorsData(with: machineRealTime)
             
@@ -273,5 +283,5 @@ class MachineNetworking: NSObject {
         
         return (sensor1Units, sensor2Units, sensor3Units)
     }
-
+    
 }

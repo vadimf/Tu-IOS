@@ -26,17 +26,25 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var currentCycleStageNameLabel: UILabel!
     @IBOutlet weak var currentCycleSubStageNameLabel: UILabel!
     
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var temp1Label: UILabel!
-    @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var sensor1TitleLabel: UILabel!
+    @IBOutlet weak var sensor2TitleLabel: UILabel!
+    @IBOutlet weak var sensor3TitleLabel: UILabel!
+    
+    @IBOutlet weak var sensor1ValueLabel: UILabel!
+    @IBOutlet weak var sensor2ValueLabel: UILabel!
+    @IBOutlet weak var sensor3ValueLabel: UILabel!
     
     @IBOutlet weak var systemStatusLabel: UILabel!
     @IBOutlet weak var doorStateLabel: UILabel!
     @IBOutlet weak var cycleErrorLabel: UILabel!
     
-    @IBOutlet weak var cycleParameterSterTempLabel: UILabel!
-    @IBOutlet weak var cycleParameterSterTimeLabel: UILabel!
-    @IBOutlet weak var cycleParameterDryTimeLabel: UILabel!
+    @IBOutlet weak var parameter1TitleLabel: UILabel!
+    @IBOutlet weak var parameter2TitleLabel: UILabel!
+    @IBOutlet weak var parameter3TitleLabel: UILabel!
+    
+    @IBOutlet weak var parameter1ValueLabel: UILabel!
+    @IBOutlet weak var parameter2ValueLabel: UILabel!
+    @IBOutlet weak var parameter3ValueLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -79,17 +87,25 @@ class SingleMachineViewController: UIViewController {
         currentCycleStageNameLabel.text = ""
         currentCycleSubStageNameLabel.text = ""
         
-        temperatureLabel.text = "-"
-        temp1Label.text = "-"
-        pressureLabel.text = "-"
+        sensor1TitleLabel.text = ""
+        sensor2TitleLabel.text = ""
+        sensor3TitleLabel.text = ""
+        
+        sensor1ValueLabel.text = "-"
+        sensor2ValueLabel.text = "-"
+        sensor3ValueLabel.text = "-"
         
         systemStatusLabel.text = "-"
         doorStateLabel.text = "-"
         cycleErrorLabel.text = "-"
         
-        cycleParameterSterTempLabel.text = "-"
-        cycleParameterSterTimeLabel.text = "-"
-        cycleParameterDryTimeLabel.text = "-"
+        parameter1TitleLabel.text = ""
+        parameter2TitleLabel.text = ""
+        parameter3TitleLabel.text = ""
+        
+        parameter1ValueLabel.text = "-"
+        parameter2ValueLabel.text = "-"
+        parameter3ValueLabel.text = "-"
     }
     
     private func setupSideMenu() {
@@ -157,7 +173,6 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         cycleErrorLabel.text = machineRealTime.cycleError?.getName
         
         doorStateLabel.text = machineRealTime.doorState?.getName
-        temperatureLabel.text = "\(0)"
         
         if let cycleName = machineRealTime.cycleName, cycleName == .none {
             currentCycleIconImageView.isHidden = true
@@ -176,11 +191,20 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         guard let machineMonitor = self.machineMonitor,
             let machineRealTime = machineMonitor.machineRealTime else { return }
         
-        let sensor1 = machineRealTime.sensor1!
-        let sensor2 = machineRealTime.sensor2!
-        let sensor3 = machineRealTime.sensor3!
+        if let sensor1 = machineRealTime.sensor1 {
+            sensor1TitleLabel.text = sensor1.name
+            sensor1ValueLabel.text = sensor1.getFormattedUnit()
+        }
         
-        temperatureLabel.text = sensor1.getFormattedTemperatureUnit()
+        if let sensor2 = machineRealTime.sensor2 {
+            sensor2TitleLabel.text = sensor2.name
+            sensor2ValueLabel.text = sensor2.getFormattedUnit()
+        }
+        
+        if let sensor3 = machineRealTime.sensor3 {
+            sensor3TitleLabel.text = sensor3.name
+            sensor3ValueLabel.text = sensor3.getFormattedUnit()
+        }
     }
     
     func didDisconnectFromMachine() {
