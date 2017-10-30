@@ -95,7 +95,7 @@ class MachineNetworking: NSObject {
         // Get Version Number
         modbus?.readRegistersFrom(startAddress: (versionMajorAddress.start - 1), count: versionTotalAddresses, success: { (data) in
             
-            print("Received version number")
+            // print("Received version number")
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
@@ -113,7 +113,7 @@ class MachineNetworking: NSObject {
         // Get Model Name & Serial Number
         modbus?.readRegistersFrom(startAddress: (modelNameAddress.start - 1), count: modelTotalAddresses, success: { (data) in
             
-            print("Received model name")
+            // print("Received model name")
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
@@ -148,7 +148,7 @@ class MachineNetworking: NSObject {
         
         modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
-            print("Received Real Time Data")
+            // print("Received Real Time Data")
             
             guard let data = data as? [Int],
                 let machineRealTime = self.machineRealTime else { return }
@@ -206,7 +206,7 @@ class MachineNetworking: NSObject {
         
         modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
-            print("Received Sensors Data")
+            // print("Received Sensors Data")
             
             guard let data = data as? [Int],
                 let machineRealTime = self.machineRealTime else { return }
@@ -305,7 +305,7 @@ class MachineNetworking: NSObject {
         
         modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
-            print("Received Cycle Prameters Data")
+            // print("Received Cycle Prameters Data")
             
             guard let data = data as? [Int],
                 let machineRealTime = self.machineRealTime else { return }

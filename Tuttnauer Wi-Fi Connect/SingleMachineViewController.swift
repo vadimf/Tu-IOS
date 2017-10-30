@@ -57,6 +57,8 @@ class SingleMachineViewController: UIViewController {
         resetOneTimeLabelValues()
         resetOccurrentLabelValues()
         
+        NotificationsManager.shared.registerForNotifications()
+        
         machineMonitor = MachineMonitor.shared // Singleton Class
         machineMonitor?.delegate = self
         machineMonitor?.getMachineSetupData() // Request the initial machine object with data

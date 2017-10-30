@@ -54,6 +54,7 @@
 		16A462C61F5D3FE0002C4ECF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C41F5D3FE0002C4ECF /* Main.storyboard */; };
 		16A462C81F5D3FE0002C4ECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C71F5D3FE0002C4ECF /* Assets.xcassets */; };
 		16A462CB1F5D3FE0002C4ECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C91F5D3FE0002C4ECF /* LaunchScreen.storyboard */; };
+		16CE3F451FA763610000AB75 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE3F441FA763610000AB75 /* NotificationsManager.swift */; };
 		16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */; };
 		16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E075091F9FC976008474B5 /* DefaultsKeys.swift */; };
 		DEFE033A3177EF0CFDE5252D /* Pods_Tuttnauer_Wi_Fi_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A658036055AEE555928011 /* Pods_Tuttnauer_Wi_Fi_Connect.framework */; };
@@ -119,6 +120,7 @@
 		16A462CA1F5D3FE0002C4ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16A462CC1F5D3FE0002C4ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16A462E61F5D6A43002C4ECF /* Tuttnauer Wi-Fi Connect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tuttnauer Wi-Fi Connect-Bridging-Header.h"; sourceTree = "<group>"; };
+		16CE3F441FA763610000AB75 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConstants.swift; sourceTree = "<group>"; };
 		16E075091F9FC976008474B5 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		2FBFEF04E9F5ED22D427708A /* Pods-Tuttnauer Wi-Fi Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuttnauer Wi-Fi Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,12 +158,13 @@
 			name = "Side Menu";
 			sourceTree = "<group>";
 		};
-		1660E98A1F9FD123008DC47E /* Settings */ = {
+		1660E98A1F9FD123008DC47E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				1660E98B1F9FD133008DC47E /* UserSettingsManager.swift */,
+				16CE3F441FA763610000AB75 /* NotificationsManager.swift */,
 			);
-			name = Settings;
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		16707DDD1F61774B00706B87 /* libmodbus */ = {
@@ -308,7 +311,7 @@
 		16A462D41F5D63C2002C4ECF /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				1660E98A1F9FD123008DC47E /* Settings */,
+				1660E98A1F9FD123008DC47E /* Managers */,
 				16D607BD1F9E3921001F8E08 /* Machine */,
 			);
 			name = Business;
@@ -602,6 +605,7 @@
 				1660E9871F9FCB16008DC47E /* UserSettings.swift in Sources */,
 				1662FDE11F9E5F8A004A390C /* HA+Array.swift in Sources */,
 				168ACDFD1F925FEE000277DD /* Tuttnauer+UIColor.swift in Sources */,
+				16CE3F451FA763610000AB75 /* NotificationsManager.swift in Sources */,
 				16707DF51F61775500706B87 /* modbus.c in Sources */,
 				168909FA1F98C465006ECEE4 /* Machine.swift in Sources */,
 				168ACE001F9260AD000277DD /* MainNavigationController.swift in Sources */,

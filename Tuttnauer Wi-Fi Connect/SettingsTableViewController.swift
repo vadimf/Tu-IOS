@@ -85,7 +85,20 @@ class SettingsTableViewController: UITableViewController {
     }
 
     @IBAction func liveNotificationsSwitchTapped(_ sender: UISwitch) {
-        UserSettingsManager.shared.setUserReceiveLiveNotifications(to: sender.isOn)
+        
+        NotificationsManager.shared.checkNotificationsAuthorizationStatus { (authorized) in
+            DispatchQueue.main.sync {
+                guard authorized else {
+                    if sender.isOn {
+                        Alerts.alertMessage(for: self, title: "Could not activate live notifications", message: "Please activate notifications for Tuttnauer Wi-Fi Connect on your iPhone's settings app", closeHandler: {
+                            sender.setOn(false, animated: true)
+                        })
+                    }
+                    return
+                }
+                UserSettingsManager.shared.setUserReceiveLiveNotifications(to: sender.isOn)
+            }
+        }
     }
 }
 

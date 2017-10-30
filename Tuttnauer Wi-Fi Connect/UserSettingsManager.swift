@@ -31,7 +31,7 @@ class UserSettingsManager: NSObject {
         Defaults[.userTemperatureUnit] = Enums.TemperatureUnit.celsius.rawValue
         Defaults[.userPressureUnit] = Enums.PressureUnit.kpa.rawValue
         Defaults[.userLanguage] = Enums.Language.english.rawValue
-        Defaults[.userReceiveLiveNotifications] = false
+        Defaults[.userReceiveLiveNotifications] = true
         Defaults[.userConnectionType] = Enums.ConnectionType.autoConnectOnStart.rawValue
         Defaults[.userLastMachineIPAddress] = ""
         
@@ -39,7 +39,7 @@ class UserSettingsManager: NSObject {
         userSettings.temperatureUnit = .celsius
         userSettings.pressureUnit = .kpa
         userSettings.language = .english
-        userSettings.receiveLiveNotifications = false
+        userSettings.receiveLiveNotifications = true
         userSettings.connectionType = .autoConnectOnStart
         userSettings.lastMachineIPAddress = ""
     }

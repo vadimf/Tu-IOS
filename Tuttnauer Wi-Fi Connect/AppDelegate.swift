@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         
         let settingsManager = UserSettingsManager.shared
+        let _ = NotificationsManager.shared
         
         // Check if this is the App's first run
         if Defaults[.isFirstRun] == nil {
@@ -66,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        NotificationsManager.shared.checkNotificationsAuthorizationStatus(completion: nil)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

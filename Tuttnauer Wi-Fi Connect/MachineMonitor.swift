@@ -62,6 +62,8 @@ class MachineMonitor: NSObject {
             self.startMonitoring()
             
             completion?(success, nil)
+            
+            NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Connected to: \(ipAddress)")
         }
     }
     
