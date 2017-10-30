@@ -30,6 +30,8 @@ class MachineMonitor: NSObject {
     
     var isConnected: Bool = false
     
+    var cycleErrorNotified: Bool = false
+    
     var timer: Timer?
     
     // MARK: - Lifecycle
@@ -136,6 +138,16 @@ extension MachineMonitor: MachineNetworkingDelegate {
     
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime) {
         self.machineRealTime = machineRealTimeState
+        
+        if let cycleError = machineRealTimeState.cycleError, cycleError != .None {
+            if !cycleErrorNotified {
+                cycleErrorNotified = true
+                NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Cycle error: \(cycleError.getName)")
+            }
+        } else {
+            cycleErrorNotified = false
+        }
+        
         delegate?.machineRealTimeDataUpdated()
     }
     
@@ -152,12 +164,14 @@ extension MachineMonitor: MachineNetworkingDelegate {
     func didDisconnectFromMachine() {
         isConnected = false
         delegate?.didDisconnectFromMachine()
+        NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Disconnected from: \(self.machine!.ipAddress)")
     }
     
     func connectionLost() {
         isConnected = false
         stopMonitoring()
         delegate?.connectionLost()
+        NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Lost conncetion to: \(self.machine!.ipAddress)")
     }
     
 }
