@@ -57,6 +57,8 @@
 		16CE3F451FA763610000AB75 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE3F441FA763610000AB75 /* NotificationsManager.swift */; };
 		16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */; };
 		16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E075091F9FC976008474B5 /* DefaultsKeys.swift */; };
+		16E2DBC11FA7B3AA006E131D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E2DBC01FA7B3AA006E131D /* NetworkManager.swift */; };
+		16E2DBC41FA7B8E2006E131D /* UDPBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E2DBC31FA7B8E2006E131D /* UDPBroadcast.swift */; };
 		DEFE033A3177EF0CFDE5252D /* Pods_Tuttnauer_Wi_Fi_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A658036055AEE555928011 /* Pods_Tuttnauer_Wi_Fi_Connect.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +125,8 @@
 		16CE3F441FA763610000AB75 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConstants.swift; sourceTree = "<group>"; };
 		16E075091F9FC976008474B5 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
+		16E2DBC01FA7B3AA006E131D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		16E2DBC31FA7B8E2006E131D /* UDPBroadcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDPBroadcast.swift; sourceTree = "<group>"; };
 		2FBFEF04E9F5ED22D427708A /* Pods-Tuttnauer Wi-Fi Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuttnauer Wi-Fi Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect.release.xcconfig"; sourceTree = "<group>"; };
 		37A658036055AEE555928011 /* Pods_Tuttnauer_Wi_Fi_Connect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tuttnauer_Wi_Fi_Connect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DFEC704B23A81212A8E45F /* Pods-Tuttnauer Wi-Fi Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tuttnauer Wi-Fi Connect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 			children = (
 				1660E98B1F9FD133008DC47E /* UserSettingsManager.swift */,
 				16CE3F441FA763610000AB75 /* NotificationsManager.swift */,
+				16E2DBC01FA7B3AA006E131D /* NetworkManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 		16A462DB1F5D6632002C4ECF /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				16E2DBC21FA7B8CE006E131D /* UDPBroadcast */,
 				16707DF81F6178D600706B87 /* Modbus */,
 			);
 			name = Libraries;
@@ -407,6 +413,14 @@
 				1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */,
 			);
 			name = Machine;
+			sourceTree = "<group>";
+		};
+		16E2DBC21FA7B8CE006E131D /* UDPBroadcast */ = {
+			isa = PBXGroup;
+			children = (
+				16E2DBC31FA7B8E2006E131D /* UDPBroadcast.swift */,
+			);
+			name = UDPBroadcast;
 			sourceTree = "<group>";
 		};
 		64CE229D8A9B976CDF5DC06D /* Frameworks */ = {
@@ -547,17 +561,21 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Tuttnauer Wi-Fi Connect/Pods-Tuttnauer Wi-Fi Connect-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MMLanScan/MMLanScan.framework",
+				"${BUILT_PRODUCTS_DIR}/NetUtils/NetUtils.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMLanScan.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetUtils.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
 			);
@@ -598,6 +616,7 @@
 				168ACDEA1F922996000277DD /* HA+UIView.swift in Sources */,
 				16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */,
 				16707DF31F61775500706B87 /* modbus-rtu.c in Sources */,
+				16E2DBC41FA7B8E2006E131D /* UDPBroadcast.swift in Sources */,
 				168ACDE81F922974000277DD /* HA+UITextField.swift in Sources */,
 				168ACDEC1F922A3B000277DD /* MainConnectViewController.swift in Sources */,
 				163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */,
@@ -615,6 +634,7 @@
 				167C93651F9BB489004930C0 /* AutoClaveEnums.swift in Sources */,
 				168ACE0D1F92656B000277DD /* HA+String.swift in Sources */,
 				1662FDE31F9E6D7F004A390C /* Alerts.swift in Sources */,
+				16E2DBC11FA7B3AA006E131D /* NetworkManager.swift in Sources */,
 				16A462C11F5D3FE0002C4ECF /* AppDelegate.swift in Sources */,
 				1663F4091F9CCBDC005C05FF /* Utilities.swift in Sources */,
 				160DD2361FA1E4060017D221 /* BaseSensor.swift in Sources */,
