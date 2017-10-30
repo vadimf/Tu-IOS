@@ -122,6 +122,28 @@ class Enums: NSObject {
                 return "About Tuttnauer"
             }
         }
+        
+        var getValue: String {
+            switch self {
+            case .privacyNotice:
+                return ""
+            case .help:
+                return ""
+            case .about:
+                return "https://tuttnauer.com"
+            }
+        }
+        
+        var isEnabled: Bool {
+            switch self {
+            case .privacyNotice:
+                return false
+            case .help:
+                return false
+            case .about:
+                return true
+            }
+        }
     }
     
 }

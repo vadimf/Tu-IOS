@@ -13,13 +13,20 @@ struct MenuItem {
     let name: String
     let value: String
     let type: Int
+    let enabled: Bool
+}
+
+struct MenuItemMachine {
+    let name: String
+    let ipAddress: String
+    let enabled: Bool
 }
 
 class SideMenuViewController: UIViewController {
 
     var dataSource = [MenuItem]()
     
-    var machines: [[String: String]]?
+    var machines: [MenuItemMachine]?
     let sideMenuItems = Enums.SideMenuItems.allValues
     
     let typeMachine = 0
@@ -35,18 +42,16 @@ class SideMenuViewController: UIViewController {
         super.viewDidLoad()
         
         machines = [
-            [
-                "name": MachineMonitor.shared.machine!.modelName,
-                "ipAddress": MachineMonitor.shared.machine!.ipAddress
-            ]
+            MenuItemMachine(name: MachineMonitor.shared.machine!.modelName, ipAddress: MachineMonitor.shared.machine!.ipAddress, enabled: true),
+            MenuItemMachine(name: MachineMonitor.shared.machine!.modelName, ipAddress: MachineMonitor.shared.machine!.ipAddress, enabled: true)
         ]
         
         for machine in machines! {
-            dataSource.append(MenuItem(name: machine["name"]!, value: machine["ipAddress"]!, type: typeMachine))
+            dataSource.append(MenuItem(name: machine.name, value: machine.ipAddress, type: typeMachine, enabled: machine.enabled))
         }
         
         for item in sideMenuItems {
-            dataSource.append(MenuItem(name: item.getName, value: "", type: typeMenuitem))
+            dataSource.append(MenuItem(name: item.getName, value: item.getValue, type: typeMenuitem, enabled: item.isEnabled))
         }
     }
 
@@ -90,12 +95,22 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.titleLabel.text = item.name
             
+            if !item.enabled {
+                cell.titleLabel.textColor = UIColor.lightGray
+                cell.selectionStyle = .none
+            }
+            
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellsIdentifiers.sideMenuCell) as! SideMenuTableViewCell
         
         cell.titleLabel.text = item.name
+        
+        if !item.enabled {
+            cell.titleLabel.textColor = UIColor.lightGray
+            cell.selectionStyle = .none
+        }
         
         return cell
     }
@@ -104,5 +119,31 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let item = dataSource[indexPath.row]
+        
+        guard item.enabled else { return }
+        
+        if item.type == typeMachine {
+            let currentIPAddress = MachineMonitor.shared.machine!.ipAddress
+            if item.value == currentIPAddress {
+                dismiss(animated: true, completion: nil)
+            } else {
+                // TODO: Connect to the new machine
+                dismiss(animated: true, completion: nil)
+            }
+        }
+        
+        UIApplication.shared.open(URL(string: item.value)!, options: [:], completionHandler: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let item = dataSource[indexPath.row]
+        
+        if item.type == typeMachine {
+            return 60
+        }
+        
+        return 44
     }
 }
