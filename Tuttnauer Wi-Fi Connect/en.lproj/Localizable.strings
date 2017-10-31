@@ -23,9 +23,9 @@
 "scan_machines_screen_found_none_machines_title" = "No machines found";
 
 "scan_machines_screen_tableview_cell_model_name_title" = "Model Name";
-"scan_machines_screen_tableview_cell_serial_title" = "Serial Number";
-"scan_machines_screen_tableview_cell_ip_title" = "IP";
-"scan_machines_screen_tableview_cell_bsversion_title" = "BS Version";
+"scan_machines_screen_tableview_cell_serial_title" = "Serial:";
+"scan_machines_screen_tableview_cell_ip_title" = "IP:";
+"scan_machines_screen_tableview_cell_bsversion_title" = "Version:";
 
 
 // MARK: - Settings Screen

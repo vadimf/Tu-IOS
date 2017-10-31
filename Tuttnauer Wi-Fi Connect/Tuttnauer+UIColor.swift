@@ -26,5 +26,9 @@ extension UIColor {
         return UIColor(red: 0.92, green: 0.92, blue: 0.93, alpha: 1.00)
     }
     
+    class func tuttnauerLightGreyBorder() -> UIColor {
+        return UIColor(red: 0.91, green: 0.93, blue: 0.93, alpha: 1.00)
+    }
+    
 }
 
