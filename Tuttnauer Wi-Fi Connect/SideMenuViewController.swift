@@ -45,6 +45,11 @@ class SideMenuViewController: UIViewController {
         super.viewDidLoad()
         networkManager = NetworkManager.shared
         networkManager?.delegate = self
+        
+        if networkManager!.machines.isEmpty {
+            networkManager?.scanForMachinesOnNetwork()
+        }
+        
         updateDataSource()
     }
 
@@ -68,6 +73,7 @@ extension SideMenuViewController: NetworkManagerDelegate {
     
     func didUpdateMachineList(list: [Machine]) {
         self.machines = list
+        updateDataSource()
     }
     
 }

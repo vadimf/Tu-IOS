@@ -42,7 +42,7 @@ class ScanForMachinesViewController: UIViewController {
         
         if let selectedCellIndexPath = self.selectedCellIndexPath,
             let selectedCell = machinesTableView.cellForRow(at: selectedCellIndexPath) as? MachineTableViewCell {
-            selectedCell.unHighlihtCell()
+            selectedCell.unHighlightCell()
         }
         
         if initialDataReload {
@@ -125,7 +125,7 @@ extension ScanForMachinesViewController: UITableViewDataSource, UITableViewDeleg
         
         if let selectedCellIndexPath = self.selectedCellIndexPath,
             let selectedCell = tableView.cellForRow(at: selectedCellIndexPath) as? MachineTableViewCell {
-            selectedCell.unHighlihtCell()
+            selectedCell.unHighlightCell()
         }
         
         guard let cell = tableView.cellForRow(at: indexPath) as? MachineTableViewCell else { return }

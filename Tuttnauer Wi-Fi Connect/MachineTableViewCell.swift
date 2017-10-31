@@ -71,7 +71,7 @@ class MachineTableViewCell: UITableViewCell {
         cellContainerView.borderColor = UIColor.tuttnauerGreen()
     }
     
-    func unHighlihtCell() {
+    func unHighlightCell() {
         cellContainerView.borderColor = UIColor.darkGray
     }
 

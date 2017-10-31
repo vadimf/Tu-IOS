@@ -8,18 +8,23 @@
 
 import Foundation
 import CocoaAsyncSocket
+import Reachability
 
 protocol NetworkManagerDelegate {
     func didUpdateMachineList(list: [Machine])
 }
 
-class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
+class NetworkManager: NSObject {
     
     // This manager class is used to find & manage machines on the network
     
     static let shared = NetworkManager()
     
     var delegate: NetworkManagerDelegate?
+    
+    var reachability: Reachability?
+    
+    var isConnceted: Bool = false
     
     var udpListenerSocket: GCDAsyncUdpSocket?
     var udpListenerQueue: DispatchQueue?
@@ -31,7 +36,7 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
     var udpPLCListeningPort: UInt16 = 9051
     var udpSocketTimeOut: TimeInterval = 5
     
-    var myIPAddress: String = "192.168.1.102"
+    var myIPAddress: String = ""
     var netMaskAddress: String = "255.255.255.255"
     
     var foundIPAddresses = [String]()
@@ -42,19 +47,31 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
     
     override init() {
         super.init()
-//        DispatchQueue(label: "com.cocoaAsyncSocket.listener", qos: .utility)
-//        DispatchQueue(label: "com.cocoaAsyncSocket.broadcaster", qos: .utility)
+        setupReachability()
+        updateMyDeviceIP()
+        setupSockets()
+    }
+    
+    // MARK: - Methods
+    
+    fileprivate func setupSockets() {
+        // Setup sockets
         udpListenerQueue = DispatchQueue.main
         udpListenerSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: udpListenerQueue)
         udpBroadcasterQueue = DispatchQueue.main
         udpBroadcasterSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: udpBroadcasterQueue)
         
-        // Setup Listeners
+        // Setup listeners
         setupListenerSocket()
         setupBroadcasterSocket()
+        
+        isConnceted = true
     }
     
-    // MARK: - Methods
+    fileprivate func updateMyDeviceIP() {
+        let ifAddress = Utilities.getIFAddresses()
+        myIPAddress = ifAddress[0]
+    }
     
     func scanForMachinesOnNetwork() {
         
@@ -76,6 +93,9 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
             try udpListenerSocket?.bind(toPort: udpPLCListeningPort)
             try udpListenerSocket?.beginReceiving()
         } catch let error {
+            udpListenerSocket?.close()
+            udpBroadcasterSocket?.close()
+            disconnect()
             print("Cannot accept on socket:", error.localizedDescription)
         }
     }
@@ -86,8 +106,10 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
         do {
             try udpBroadcasterSocket?.bind(toPort: udpClientListeningPort)
             try udpBroadcasterSocket?.enableBroadcast(true)
-            try udpBroadcasterSocket?.beginReceiving()
         } catch let error {
+            udpListenerSocket?.close()
+            udpBroadcasterSocket?.close()
+            disconnect()
             print("Cannot setup UDP socket:", error.localizedDescription)
         }
     }
@@ -113,13 +135,94 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
     
 }
 
-// MARK: - GCDAsyncUdpSocketDelegate Methods
+// MARK: - Public Network Cycle Methods
 
 extension NetworkManager {
+    
+    func connect() {
+        setupSockets()
+        isConnceted = true
+    }
+    
+    func disconnect() {
+        udpBroadcasterSocket?.close()
+        udpListenerSocket?.close()
+        udpBroadcasterSocket = nil
+        udpListenerSocket = nil
+        isConnceted = false
+    }
+    
+}
+
+// MARK: - GCDAsyncUdpSocketDelegate Methods
+
+extension NetworkManager: GCDAsyncUdpSocketDelegate {
     
     func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
         guard let machineData = String(data: data, encoding: .utf8) else { return }
         parseMachineData(data: machineData)
     }
     
+    func udpSocket(_ sock: GCDAsyncUdpSocket, didNotConnect error: Error?) {
+        print("didNotConnect")
+    }
+    
+    func udpSocket(_ sock: GCDAsyncUdpSocket, didSendDataWithTag tag: Int) {
+        print("didSendDataWithTag")
+    }
+    
+    func udpSocketDidClose(_ sock: GCDAsyncUdpSocket, withError error: Error?) {
+        print("udpSocketDidClose")
+    }
+    
+    func udpSocket(_ sock: GCDAsyncUdpSocket, didConnectToAddress address: Data) {
+        print("didConnectToAddress")
+    }
+    
+    func udpSocket(_ sock: GCDAsyncUdpSocket, didNotSendDataWithTag tag: Int, dueToError error: Error?) {
+        print("didNotSendDataWithTag")
+    }
+    
 }
+
+// MARK: - Reachablity
+
+extension NetworkManager {
+    
+    fileprivate func setupReachability() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged), name: NotificationsIdentifiers.reachabilityChanged, object: nil)
+        reachability = Reachability()
+        do {
+            try reachability?.startNotifier()
+        } catch let error {
+            reachability?.stopNotifier()
+            print("Could not start reachability notifier:", error.localizedDescription)
+        }
+    }
+    
+    @objc fileprivate func reachabilityChanged(notification: Notification) {
+        
+        var topViewController = UIViewController()
+        
+        if let topVC = UIApplication.shared.delegate?.window??.rootViewController {
+            topViewController = topVC
+        }
+        
+        let reachability = notification.object as! Reachability
+        if reachability.isReachable {
+            if reachability.isReachableViaWiFi {
+                updateMyDeviceIP()
+                if !isConnceted {
+                    setupSockets()
+                }
+            } else {
+                Alerts.alertMessage(for: topViewController, title: "Network Error", message: "You are not connected to a Wi-Fi network", closeHandler: nil)
+            }
+        } else {
+            Alerts.alertMessage(for: topViewController, title: "Network Error", message: "Network not available", closeHandler: nil)
+            print("Network not reachable")
+        }
+    }
+    
+}
+

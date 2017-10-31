@@ -3,3 +3,6 @@
 //
 
 #import "modbus.h"
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <ifaddrs.h>
