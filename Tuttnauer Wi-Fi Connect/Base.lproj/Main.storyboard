@@ -489,6 +489,7 @@
                         <outlet property="chooseMachinesTitleLabel" destination="wNn-li-gX2" id="5EL-0N-V0Y"/>
                         <outlet property="machinesFoundTitleLabel" destination="UwW-kG-N7a" id="BdB-Rt-ylq"/>
                         <outlet property="machinesTableView" destination="uS2-Bf-uMp" id="8s0-XN-nct"/>
+                        <segue destination="bCn-u1-QcQ" kind="presentation" identifier="Scan Machines to Single Machine Segue" id="Ea2-KU-6HQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VaQ-h7-wrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1456,4 +1457,7 @@
         <image name="launchscreen_logo" width="304" height="116"/>
         <image name="side_menu_bg" width="360" height="240"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ea2-KU-6HQ"/>
+    </inferredMetricsTieBreakers>
 </document>

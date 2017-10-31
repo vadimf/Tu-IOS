@@ -18,6 +18,7 @@ class ScanForMachinesViewController: UIViewController {
     }
     
     var initialDataReload: Bool = true
+    var selectedCellIndexPath: IndexPath?
     
     var networkManager: NetworkManager?
     
@@ -38,10 +39,17 @@ class ScanForMachinesViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if let selectedCellIndexPath = self.selectedCellIndexPath,
+            let selectedCell = machinesTableView.cellForRow(at: selectedCellIndexPath) as? MachineTableViewCell {
+            selectedCell.unHighlihtCell()
+        }
+        
         if initialDataReload {
             MBProgressHUD.showAdded(to: self.view, animated: true)
             initialDataReload = false
         }
+        
         networkManager?.scanForMachinesOnNetwork()
     }
     
@@ -68,6 +76,7 @@ class ScanForMachinesViewController: UIViewController {
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
         resetResults()
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         networkManager?.scanForMachinesOnNetwork()
     }
     
@@ -111,8 +120,19 @@ extension ScanForMachinesViewController: UITableViewDataSource, UITableViewDeleg
     // MARK: - Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let selectedCellIndexPath = self.selectedCellIndexPath,
+            let selectedCell = tableView.cellForRow(at: selectedCellIndexPath) as? MachineTableViewCell {
+            selectedCell.unHighlihtCell()
+        }
+        
         guard let cell = tableView.cellForRow(at: indexPath) as? MachineTableViewCell else { return }
         cell.highlightCell()
+        selectedCellIndexPath = indexPath
+        
+        let machine = machines[indexPath.row]
+        
+        connect(to: machine.ipAddress)
     }
     
 }
@@ -136,6 +156,37 @@ extension ScanForMachinesViewController: NetworkManagerDelegate {
         }
         
         self.machines = list
+    }
+    
+}
+
+// MARK: - Connections
+
+extension ScanForMachinesViewController {
+    
+    fileprivate func connect(to ipAddress: String, loaderMessage: String = "Connecting...") {
+        
+        let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        progressHUD.label.text = loaderMessage
+        
+        // It's connecting to the machine too fast XD
+        // We'll dispatch this call after 2 seconds just so the user can experience the awesome MBProgressHUD
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            MachineMonitor.shared.connect(to: ipAddress) { (success, error) in
+                
+                MBProgressHUD.hide(for: self.view, animated: false)
+                
+                guard error == nil else {
+                    Alerts.alertMessage(for: self, title: "Connection Failed", message: "Could not connect to \(ipAddress)", closeHandler: nil)
+                    return
+                }
+                
+                UserSettingsManager.shared.setUserLastMachineIPAddress(to: ipAddress)
+                
+                self.performSegue(withIdentifier: SegueIdentifiers.scanMachinesToSinleMachine, sender: self)
+                
+            }
+        }
     }
     
 }

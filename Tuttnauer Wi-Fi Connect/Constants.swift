@@ -14,6 +14,7 @@ struct AppConstants {
 
 struct SegueIdentifiers {
     static let mainConnectToSingleMachine = "Main Connect to Single Machine Segue"
+    static let scanMachinesToSinleMachine = "Scan Machines to Single Machine Segue"
     static let singleMachineToSettings = "Single Machine to Settings Segue"
     static let settingsToSettingsOptions = "Settings To Settings Options Segue"
 }
