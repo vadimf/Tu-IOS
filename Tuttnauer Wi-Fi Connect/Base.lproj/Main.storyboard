@@ -184,7 +184,7 @@
                                                     <rect key="frame" x="13" y="14" width="25" height="32"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5z-J6-Dra">
-                                                    <rect key="frame" x="48" y="21.5" width="70" height="17"/>
+                                                    <rect key="frame" x="48" y="11" width="70" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -196,6 +196,12 @@
                                                         <constraint firstAttribute="height" constant="1" id="p5s-tC-eYb"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.0.0.100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjA-8p-9Ng">
+                                                    <rect key="frame" x="48" y="32" width="57" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="mMI-qV-pTE" firstAttribute="leading" secondItem="Nvh-31-oJN" secondAttribute="leading" id="2sm-AX-iEZ"/>
@@ -203,12 +209,15 @@
                                                 <constraint firstAttribute="bottom" secondItem="mMI-qV-pTE" secondAttribute="bottom" id="M5j-GC-fBS"/>
                                                 <constraint firstItem="wqd-Ok-BYS" firstAttribute="centerY" secondItem="Nvh-31-oJN" secondAttribute="centerY" id="Mue-oJ-pMP"/>
                                                 <constraint firstAttribute="trailing" secondItem="mMI-qV-pTE" secondAttribute="trailing" id="a0M-by-yfB"/>
-                                                <constraint firstItem="M5z-J6-Dra" firstAttribute="centerY" secondItem="Nvh-31-oJN" secondAttribute="centerY" id="eei-04-lrt"/>
+                                                <constraint firstItem="gjA-8p-9Ng" firstAttribute="top" secondItem="Nvh-31-oJN" secondAttribute="centerY" constant="2" id="bJ1-s2-ubp"/>
+                                                <constraint firstItem="M5z-J6-Dra" firstAttribute="bottom" secondItem="Nvh-31-oJN" secondAttribute="centerY" constant="-2" id="eei-04-lrt"/>
                                                 <constraint firstItem="M5z-J6-Dra" firstAttribute="leading" secondItem="wqd-Ok-BYS" secondAttribute="trailing" constant="10" id="kMR-O4-gM7"/>
+                                                <constraint firstItem="gjA-8p-9Ng" firstAttribute="leading" secondItem="M5z-J6-Dra" secondAttribute="leading" id="sXU-dT-P2c"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="iconImageView" destination="wqd-Ok-BYS" id="9zL-xr-M0G"/>
+                                            <outlet property="subtitleLabel" destination="gjA-8p-9Ng" id="ka3-9f-HKy"/>
                                             <outlet property="titleLabel" destination="M5z-J6-Dra" id="hno-nU-7Nz"/>
                                         </connections>
                                     </tableViewCell>

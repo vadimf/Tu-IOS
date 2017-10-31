@@ -12,7 +12,7 @@ import SideMenu
 struct MenuItem {
     let name: String
     let value: String
-    let type: Int
+    let type: MenuItemType
     let enabled: Bool
 }
 
@@ -22,17 +22,18 @@ struct MenuItemMachine {
     let enabled: Bool
 }
 
+enum MenuItemType {
+    case machine
+    case button
+}
+
 class SideMenuViewController: UIViewController {
 
-    var dataSource = [MenuItem]()
-    
-    var machines: [MenuItemMachine]?
-    let sideMenuItems = Enums.SideMenuItems.allValues
-    
-    let typeMachine = 0
-    let typeMenuitem = 1
-    
     var networkManager: NetworkManager?
+    
+    var dataSource = [MenuItem]()
+    var machines = [Machine]()
+    let sideMenuItems = Enums.SideMenuItems.allValues
     
     // MARK: - IBOutlets
     
@@ -42,22 +43,9 @@ class SideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         networkManager = NetworkManager.shared
         networkManager?.delegate = self
-        
-        machines = [
-            MenuItemMachine(name: MachineMonitor.shared.machine!.modelName, ipAddress: MachineMonitor.shared.machine!.ipAddress, enabled: true),
-            MenuItemMachine(name: MachineMonitor.shared.machine!.modelName, ipAddress: MachineMonitor.shared.machine!.ipAddress, enabled: true)
-        ]
-        
-        for machine in machines! {
-            dataSource.append(MenuItem(name: machine.name, value: machine.ipAddress, type: typeMachine, enabled: machine.enabled))
-        }
-        
-        for item in sideMenuItems {
-            dataSource.append(MenuItem(name: item.getName, value: item.getValue, type: typeMenuitem, enabled: item.isEnabled))
-        }
+        updateDataSource()
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,7 +67,41 @@ class SideMenuViewController: UIViewController {
 extension SideMenuViewController: NetworkManagerDelegate {
     
     func didUpdateMachineList(list: [Machine]) {
-        // TODO: Modify machines to be populated usin this list
+        self.machines = list
+    }
+    
+}
+
+// MARK: - Setup & Update Methods
+
+extension SideMenuViewController {
+    
+    fileprivate func updateMachineList() {
+        for machine in machines {
+            dataSource.append(MenuItem(name: machine.modelName, value: machine.ipAddress, type: .machine, enabled: true))
+        }
+    }
+    
+    fileprivate func updateMenuItemsList() {
+        for item in sideMenuItems {
+            dataSource.append(MenuItem(name: item.getName, value: item.getValue, type: .button, enabled: item.isEnabled))
+        }
+    }
+    
+    fileprivate func updateDataSource() {
+
+        if !dataSource.isEmpty {
+            dataSource.removeAll()
+        }
+        
+        if let networkManager = self.networkManager {
+            machines = networkManager.machines
+        }
+        
+        updateMachineList()
+        updateMenuItemsList()
+        
+        itemsTableView.reloadData()
     }
     
 }
@@ -104,11 +126,12 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
         
         let item = dataSource[indexPath.row]
         
-        if item.type == typeMachine {
+        if item.type == .machine {
         
             let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellsIdentifiers.sideMenuIconCell) as! SideMenuIconTableViewCell
             
             cell.titleLabel.text = item.name
+            cell.subtitleLabel.text = item.value
             
             if !item.enabled {
                 cell.titleLabel.textColor = UIColor.lightGray
@@ -138,9 +161,9 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
         
         guard item.enabled else { return }
         
-        if item.type == typeMachine {
-            let currentIPAddress = MachineMonitor.shared.machine!.ipAddress
-            if item.value == currentIPAddress {
+        if item.type == .machine {
+            let currentMachineIPAddress = MachineMonitor.shared.machine!.ipAddress
+            if item.value == currentMachineIPAddress {
                 dismiss(animated: true, completion: nil)
             } else {
                 // TODO: Connect to the new machine
@@ -155,10 +178,11 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
         
         let item = dataSource[indexPath.row]
         
-        if item.type == typeMachine {
+        if item.type == .machine {
             return 60
         }
         
         return 44
     }
+    
 }

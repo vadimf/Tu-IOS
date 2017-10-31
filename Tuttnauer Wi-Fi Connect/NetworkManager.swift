@@ -31,7 +31,7 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
     var udpPLCListeningPort: UInt16 = 9051
     var udpSocketTimeOut: TimeInterval = 5
     
-    var myIPAddress: String = "10.0.0.36"
+    var myIPAddress: String = "192.168.1.102"
     var netMaskAddress: String = "255.255.255.255"
     
     var foundIPAddresses = [String]()
@@ -59,7 +59,7 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
     func scanForMachinesOnNetwork() {
         
         // Clear previous results first
-        machines = [Machine]()
+        machines.removeAll()
 
         // Send a broadcaster call
         if let data = myIPAddress.data(using: .utf8) {

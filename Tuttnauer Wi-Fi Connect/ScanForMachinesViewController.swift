@@ -46,7 +46,8 @@ class ScanForMachinesViewController: UIViewController {
         }
         
         if initialDataReload {
-            MBProgressHUD.showAdded(to: self.view, animated: true)
+            let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+            progressHUD.label.text = "Searching..."
             initialDataReload = false
         }
         
@@ -76,7 +77,8 @@ class ScanForMachinesViewController: UIViewController {
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
         resetResults()
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        progressHUD.label.text = "Searching..."
         networkManager?.scanForMachinesOnNetwork()
     }
     
