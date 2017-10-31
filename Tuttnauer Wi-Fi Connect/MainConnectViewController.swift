@@ -31,7 +31,6 @@ class MainConnectViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        autoConnectIfNeeded()
-        let _ = NetworkManager.shared.scanForMachinesOnNetwork()
     }
 
     override func didReceiveMemoryWarning() {

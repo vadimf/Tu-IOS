@@ -8,14 +8,18 @@
 
 import UIKit
 import MBProgressHUD
-import MMLanScan
 
 class ScanForMachinesViewController: UIViewController {
-
-    var machines = [Machine]()
-    var initialDataReload: Bool = false
     
-    var lanScanner: MMLANScanner!
+    var machines = [Machine]() {
+        didSet {
+            machinesTableView.reloadData()
+        }
+    }
+    
+    var initialDataReload: Bool = true
+    
+    var networkManager: NetworkManager?
     
     // MARK: - IBOutlets
     
@@ -28,16 +32,19 @@ class ScanForMachinesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLocalization()
-        lanScanner = MMLANScanner(delegate: self)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleDidFinishFetchingSingleMachineDataNotificaiton), name: NotificationsIdentifiers.didFinishFetchingSingleMachineDataNotification, object: nil)
+        networkManager = NetworkManager.shared
+        networkManager?.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        scanForMachines()
+        if initialDataReload {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            initialDataReload = false
+        }
+        networkManager?.scanForMachinesOnNetwork()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,13 +61,14 @@ class ScanForMachinesViewController: UIViewController {
         machinesFoundTitleLabel.text = ""
         chooseMachinesTitleLabel.text = ""
         machines = [Machine]()
+        initialDataReload = true
     }
     
     // MARK: - IBOutlets
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
         resetResults()
-        scanForMachines()
+        networkManager?.scanForMachinesOnNetwork()
     }
     
 }
@@ -71,16 +79,6 @@ extension ScanForMachinesViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-    }
-    
-}
-
-// MARK: - Notifications Handling
-
-extension ScanForMachinesViewController {
-    
-    func handleDidFinishFetchingSingleMachineDataNotificaiton(notification: Notification) {
-        machinesTableView.reloadData()
     }
     
 }
@@ -119,22 +117,17 @@ extension ScanForMachinesViewController: UITableViewDataSource, UITableViewDeleg
     
 }
 
-// MARK: - Scanning for machines (MMLanScan)
+// MARK: - NetworkManager Delegate
 
-extension ScanForMachinesViewController: MMLANScannerDelegate {
+extension ScanForMachinesViewController: NetworkManagerDelegate {
     
-    func lanScanDidFindNewDevice(_ device: MMDevice) {
-        guard device.ipAddress == "192.168.1.147" else { return }
-        // TODO: Add device to array
-    }
-    
-    func lanScanDidFinishScanning(with status: MMLanScannerStatus) {
-
-        MBProgressHUD.hide(for : self.view, animated: true)
+    func didUpdateMachineList(list: [Machine]) {
         
-        if machines.count == 0 {
+        MBProgressHUD.hide(for: self.view, animated: true)
+        
+        if list.count == 0 {
             machinesFoundTitleLabel.text = LocalString.scanMachinesScreenFoundNoneMachinesTitle
-        } else if machines.count == 1 {
+        } else if list.count == 1 {
             machinesFoundTitleLabel.text = LocalString.scanMachinesScreenFoundOneMachineTitle
             chooseMachinesTitleLabel.text = LocalString.scanMachinesScreenFoundOneMachineChooseTitle
         } else {
@@ -142,21 +135,7 @@ extension ScanForMachinesViewController: MMLANScannerDelegate {
             chooseMachinesTitleLabel.text = LocalString.scanMachinesScreenFoundMultipleMachinesChooseTitle
         }
         
-        machinesTableView.reloadData()
-    }
-    
-    func lanScanProgressPinged(_ pingedHosts: Float, from overallHosts: Int) {
-        
-    }
-    
-    func lanScanDidFailedToScan() {
-        print("lanScanDidFailedToScan")
-    }
-    
-    func scanForMachines() {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        initialDataReload = true
-        lanScanner.start()
+        self.machines = list
     }
     
 }

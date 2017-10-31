@@ -32,6 +32,8 @@ class SideMenuViewController: UIViewController {
     let typeMachine = 0
     let typeMenuitem = 1
     
+    var networkManager: NetworkManager?
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var itemsTableView: UITableView!
@@ -40,6 +42,9 @@ class SideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        networkManager = NetworkManager.shared
+        networkManager?.delegate = self
         
         machines = [
             MenuItemMachine(name: MachineMonitor.shared.machine!.modelName, ipAddress: MachineMonitor.shared.machine!.ipAddress, enabled: true),
@@ -67,6 +72,16 @@ class SideMenuViewController: UIViewController {
         NotificationCenter.default.post(name: NotificationsIdentifiers.machineDidDisconnectUserInitiated, object: nil)
     }
 
+}
+
+// MARK: - NetworkManager Delegate
+
+extension SideMenuViewController: NetworkManagerDelegate {
+    
+    func didUpdateMachineList(list: [Machine]) {
+        // TODO: Modify machines to be populated usin this list
+    }
+    
 }
 
 // MARK: - Table View Data Source & Delegate

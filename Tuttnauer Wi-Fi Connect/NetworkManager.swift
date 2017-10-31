@@ -10,7 +10,7 @@ import Foundation
 import CocoaAsyncSocket
 
 protocol NetworkManagerDelegate {
-    func didUpdateMachineList()
+    func didUpdateMachineList(list: [Machine])
 }
 
 class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
@@ -42,10 +42,16 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
     
     override init() {
         super.init()
-        udpListenerQueue = DispatchQueue(label: "com.cocoaAsyncSocket.listener", qos: .userInteractive)
+//        DispatchQueue(label: "com.cocoaAsyncSocket.listener", qos: .utility)
+//        DispatchQueue(label: "com.cocoaAsyncSocket.broadcaster", qos: .utility)
+        udpListenerQueue = DispatchQueue.main
         udpListenerSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: udpListenerQueue)
-        udpBroadcasterQueue = DispatchQueue(label: "com.cocoaAsyncSocket.broadcaster", qos: .userInteractive)
+        udpBroadcasterQueue = DispatchQueue.main
         udpBroadcasterSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: udpBroadcasterQueue)
+        
+        // Setup Listeners
+        setupListenerSocket()
+        setupBroadcasterSocket()
     }
     
     // MARK: - Methods
@@ -54,16 +60,11 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
         
         // Clear previous results first
         machines = [Machine]()
-        
-        // Setup Listeners
-        setupListenerSocket()
-        setupBroadcasterSocket()
-        
+
         // Send a broadcaster call
         if let data = myIPAddress.data(using: .utf8) {
             udpBroadcasterSocket?.send(data, toHost: netMaskAddress, port: udpClientListeningPort, withTimeout: udpSocketTimeOut, tag: 0)
         }
-        
     }
     
     // MARK: - Setup Methods
@@ -107,7 +108,7 @@ class NetworkManager: NSObject, GCDAsyncUdpSocketDelegate {
         
         machines.append(machine)
         
-        delegate?.didUpdateMachineList()
+        delegate?.didUpdateMachineList(list: machines)
     }
     
 }
