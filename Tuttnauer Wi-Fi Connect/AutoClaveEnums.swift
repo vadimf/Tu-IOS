@@ -268,9 +268,23 @@ class AutoClaveEnums {
             case .liquid2WasteCooling:
                 return #imageLiteral(resourceName: "icon_cycle_liquids")
             case .waste:
-                return #imageLiteral(resourceName: "icon_cycle_waste")
+                return #imageLiteral(resourceName: "icon_cycle_wastes")
             case .glassTest:
                 return #imageLiteral(resourceName: "icon_cycle_glasses")
+            case .prion134:
+                return #imageLiteral(resourceName: "icon_cycle_finger")
+            case .wrapped121:
+                return #imageLiteral(resourceName: "icon_cycle_delicate")
+            case .wrapped134:
+                return #imageLiteral(resourceName: "icon_cycle_delicate")
+            case .unwrapped121:
+                return #imageLiteral(resourceName: "icon_cycle_delicate")
+            case .unwrapped134:
+                return #imageLiteral(resourceName: "icon_cycle_delicate")
+            case .bioHazard1:
+                return #imageLiteral(resourceName: "icon_cycle_wastes")
+            case .bioHazard2:
+                return #imageLiteral(resourceName: "icon_cycle_wastes")
             default:
                 return #imageLiteral(resourceName: "icon_cycle_default")
             }

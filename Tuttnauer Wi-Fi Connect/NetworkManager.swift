@@ -64,8 +64,6 @@ class NetworkManager: NSObject {
         // Setup listeners
         setupListenerSocket()
         setupBroadcasterSocket()
-        
-        isConnceted = true
     }
     
     fileprivate func updateMyDeviceIP() {
@@ -92,6 +90,7 @@ class NetworkManager: NSObject {
         do {
             try udpListenerSocket?.bind(toPort: udpPLCListeningPort)
             try udpListenerSocket?.beginReceiving()
+            isConnceted = true
         } catch let error {
             udpListenerSocket?.close()
             udpBroadcasterSocket?.close()
@@ -106,6 +105,7 @@ class NetworkManager: NSObject {
         do {
             try udpBroadcasterSocket?.bind(toPort: udpClientListeningPort)
             try udpBroadcasterSocket?.enableBroadcast(true)
+            isConnceted = true
         } catch let error {
             udpListenerSocket?.close()
             udpBroadcasterSocket?.close()

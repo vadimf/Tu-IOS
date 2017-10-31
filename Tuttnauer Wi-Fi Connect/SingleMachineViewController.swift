@@ -218,8 +218,8 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             sensor3TitleLabel.text = sensor3.name
             sensor3ValueLabel.text = sensor3.getFormattedUnit()
         } else {
-            sensor2TitleLabel.text = ""
-            sensor2ValueLabel.text = ""
+            sensor3TitleLabel.text = ""
+            sensor3ValueLabel.text = ""
         }
     }
     
