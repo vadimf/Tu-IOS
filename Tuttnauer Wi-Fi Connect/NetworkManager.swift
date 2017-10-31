@@ -67,8 +67,8 @@ class NetworkManager: NSObject {
     }
     
     fileprivate func updateMyDeviceIP() {
-        let ifAddress = Utilities.getIFAddresses()
-        myIPAddress = ifAddress[0]
+        guard let ipAddress = Utilities.getWiFiAddress() else { return }
+        myIPAddress = ipAddress
     }
     
     func scanForMachinesOnNetwork() {

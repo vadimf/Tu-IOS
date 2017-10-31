@@ -47,6 +47,8 @@ class NotificationsManager: NSObject {
                 return
             }
             
+            self.checkNotificationsAuthorizationStatus(completion: nil)
+            
         }
         
     }
