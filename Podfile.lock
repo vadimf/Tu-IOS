@@ -1,14 +1,14 @@
 PODS:
   - CocoaAsyncSocket (7.6.1)
-  - Crashlytics (3.9.0):
-    - Fabric (~> 1.7.0)
-  - Fabric (1.7.0)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - Fabric (1.7.2)
   - IQKeyboardManagerSwift (5.0.4)
   - MBProgressHUD (1.0.0)
   - MMLanScan (3.0.0)
   - NetUtils (4.0.2)
   - ReachabilitySwift (4.1.0)
-  - SideMenu (3.1.1)
+  - SideMenu (3.1.4)
   - SwiftyUserDefaults (3.0.0)
 
 DEPENDENCIES:
@@ -25,14 +25,14 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: 7eadd3f59e1a6c84e2aefc93e9ff7b55156fe174
-  Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
-  Fabric: e6be012366472553807dada21243c5ab8d904151
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   IQKeyboardManagerSwift: a0592bb636b10a9a1cf75d2b2c61144226226c84
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMLanScan: 86a0f77edbf163be30c1f58321469c7c8ce4c50e
   NetUtils: 3ae4058586b9574f8cbfa5b5d415a287f8179620
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  SideMenu: 1bf32e90afaa2dc0e0ab68e938a0ff85014c4217
+  SideMenu: 99021e70b3f2eee65b5dd88e4274d09031b1221e
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
 PODFILE CHECKSUM: 9275457ae0e86d1053bff33def61c188b46078f2
