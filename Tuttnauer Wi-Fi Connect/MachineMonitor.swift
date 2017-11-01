@@ -105,8 +105,14 @@ class MachineMonitor: NSObject {
         timer = nil
     }
     
-    func clearData() {
-        // TODO: Do we need to clear data when screen closes or in any other scenario?
+    func clearCurrentConnectionAndDisconnect() {
+        guard let networkManager = self.networkManager else { return }
+        stopMonitoring()
+        networkManager.disconnect()
+        machine = nil
+        machineRealTime = nil
+        isConnected = false
+        cycleErrorNotified = false
     }
     
     // MARK: - Requesting Data from Machine Networking

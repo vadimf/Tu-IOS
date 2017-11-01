@@ -222,25 +222,19 @@ class MachineNetworking: NSObject {
             // Check if larger than 3. Solves a certain bug where the machine sometimes sends a faulty double 2.234352...
             
             if !sensor1.name.isEmpty {
-                if sensor1.value > 3 {
-                    machineRealTime.sensor1 = sensor1
-                }
+                 machineRealTime.sensor1 = sensor1
             } else {
                 machineRealTime.sensor1 = nil
             }
             
             if !sensor2.name.isEmpty {
-                if sensor2.value > 3 {
-                    machineRealTime.sensor2 = sensor2
-                }
+                machineRealTime.sensor2 = sensor2
             } else {
                 machineRealTime.sensor2 = nil
             }
             
-            if !sensor3.name.isEmpty, sensor3.value > 3 {
-                if sensor3.value > 3 {
-                    machineRealTime.sensor3 = sensor3
-                }
+            if !sensor3.name.isEmpty {
+                machineRealTime.sensor3 = sensor3
             } else {
                 machineRealTime.sensor3 = nil
             }

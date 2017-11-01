@@ -54,10 +54,13 @@ class Utilities {
             
             let array = decimal.toUInt8BytesArray()
             
-            for byte in array {
+            byteArray.append(array[6])
+            byteArray.append(array[7])
+            
+            /*for byte in array {
                 if byte == 0 { continue }
                 byteArray.append(byte)
-            }
+            }*/
         }
         
         var blanksArray = [UInt8]()

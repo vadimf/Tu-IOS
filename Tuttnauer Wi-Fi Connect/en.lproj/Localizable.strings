@@ -27,7 +27,6 @@
 "scan_machines_screen_tableview_cell_ip_title" = "IP:";
 "scan_machines_screen_tableview_cell_bsversion_title" = "Version:";
 
-
 // MARK: - Settings Screen
 
 "settings_screen_title" = "Settings";

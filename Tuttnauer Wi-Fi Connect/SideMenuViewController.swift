@@ -27,9 +27,15 @@ enum MenuItemType {
     case button
 }
 
+protocol SideMenuDelegate {
+    func didChooseDifferentMachine(ipAddress: String)
+}
+
 class SideMenuViewController: UIViewController {
 
     var networkManager: NetworkManager?
+    
+    var delegate: SideMenuDelegate?
     
     var dataSource = [MenuItem]()
     var machines = [Machine]()
@@ -172,7 +178,7 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
             if item.value == currentMachineIPAddress {
                 dismiss(animated: true, completion: nil)
             } else {
-                // TODO: Connect to the new machine
+                delegate?.didChooseDifferentMachine(ipAddress: item.value)
                 dismiss(animated: true, completion: nil)
             }
         }

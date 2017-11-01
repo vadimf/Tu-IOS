@@ -8,6 +8,7 @@
 
 import UIKit
 import SideMenu
+import MBProgressHUD
 
 class SingleMachineViewController: UIViewController {
 
@@ -75,11 +76,11 @@ class SingleMachineViewController: UIViewController {
     
     // MARK: - Setup Methods
     
-    private func setupLocalization() {
+    fileprivate func setupLocalization() {
         
     }
     
-    private func resetOneTimeLabelValues() {
+    fileprivate func resetOneTimeLabelValues() {
         
         modelNameLabel.text = ""
         serialNumberLabel.text = ""
@@ -115,10 +116,14 @@ class SingleMachineViewController: UIViewController {
         parameter3ValueLabel.text = "-"
     }
     
-    private func setupSideMenu() {
+    fileprivate func setupSideMenu() {
         let menuManager = SideMenuManager.default
         menuManager.menuPresentMode = .menuSlideIn
         menuManager.menuFadeStatusBar = false
+        
+        if let menuVC = menuManager.menuLeftNavigationController?.viewControllers.first as? SideMenuViewController {
+            menuVC.delegate = self
+        }
     }
     
     // MARK: - IBActions
@@ -151,6 +156,40 @@ extension SingleMachineViewController {
     @objc func handleMachineDidDisconnect(notification: Notification) {
         // Disconnected from the machine for unknown reasons
         dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - Side Menu Delegate
+
+extension SingleMachineViewController: SideMenuDelegate {
+    
+    func didChooseDifferentMachine(ipAddress: String) {
+        guard let machineMonitor = self.machineMonitor else { return }
+        machineMonitor.clearCurrentConnectionAndDisconnect()
+        
+        let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        progressHUD.label.text = "Connecting: \(ipAddress)"
+        
+        machineMonitor.connect(to: ipAddress) { (success, error) in
+            
+            guard error == nil else {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                print("Could not connect:", error!.localizedDescription)
+                return
+            }
+            
+            UserSettingsManager.shared.setUserLastMachineIPAddress(to: ipAddress)
+            
+            DispatchQueue.main.sync {
+                self.setupLocalization()
+                self.resetOneTimeLabelValues()
+                self.resetOccurrentLabelValues()
+                self.machineMonitor?.getMachineSetupData()
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
+            
+        }
     }
     
 }
