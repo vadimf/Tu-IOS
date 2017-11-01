@@ -13,6 +13,24 @@
 "alert_dialog_button_cancel" = "Cancel";
 "alert_dialog_button_yes" = "Yes";
 "alert_dialog_button_no" = "No";
+"alert_dialog_button_connect" = "Connect";
+"alert_dialog_button_reconnect" = "Reconnect";
+"alert_dialog_button_disconnect" = "Disconnect";
+
+// MARK: - Alert Dialog Messages
+
+"alert_dialog_connection_failed_title" = "Connection Failed"
+"alert_dialog_connection_failed_message" = "Could not connect to %@"
+"alert_dialog_connection_lost_title" = "Connection Lost"
+"alert_dialog_connection_lost_message" = "The machine is not responding. What do you want to do?"
+"alert_dialog_could_not_activate_notifications_title" = "Could not activate live notifications";
+"alert_dialog_could_not_activate_notifications_message" = "Please activate notifications for Tuttnauer Wi-Fi Connect on your iPhone's settings app";
+
+// MARK: - Progress HUD titles
+
+"progress_hud_connecting" = "Connecting...";
+"progress_hud_connecting_to" = "Connecting %@";
+"progress_hud_searching" = "Searching...";
 
 // MARK: - Scan For Machines Screen
 
@@ -59,3 +77,53 @@
 
 "settings_screen_cell_version_title" = "Version";
 "settings_screen_cell_version_subtitle" = "0.0.0.0";
+
+// MARK: - Enums Values
+
+"enum_system_current_status_none" = "Ready";
+"enum_system_current_status_no_error" = "No Error";
+"enum_system_current_status_standby_error" = "Standby Error";
+"enum_system_current_status_cycle_running" = "Cycle Running";
+"enum_system_current_status_cycle_done" = "Cycle Done";
+"enum_system_current_status_cycle_failed" = "Cycle Failed";
+
+"enum_door_state_door_open" = "Door Open";
+"enum_door_state_door_closed" = "Dooe Closed";
+"enum_door_state_door1closed_door2closed" = "Door 1 Closed. Door 2 Closed";
+"enum_door_state_door1open_door2open" = "Door 1 Open. Door 2 Open";
+"enum_door_state_door1closed_door2open" = "Door 1 Closed. Door 2 Opened";
+"enum_door_state_door1open_door2closed" = "Door 1 Open. Door 2 Closed";
+
+"enum_door_error_none" = "-";
+"enum_door_error_vacuuming" = "Error Vacuuming";
+"enum_door_error_opening" = "Error Opening";
+"enum_door_error_closing" = "Error Closing";
+"enum_door_error_locking" = "Error Locking";
+"enum_door_error_unlocking" = "Error Unlocking";
+
+"enum_cycle_stage_none" = "";
+"enum_cycle_stage_global" = "Global";
+"enum_cycle_stage_start" = "Starting";
+"enum_cycle_stage_remove_air" = "Removing Air";
+"enum_cycle_stage_stabilize" = "Stabilizing";
+"enum_cycle_stage_heat" = "Heating";
+"enum_cycle_stage_sterilization" = "Sterilizing";
+"enum_cycle_stage_cool" = "Cooling";
+"enum_cycle_stage_exhaust" = "Exhaust";
+"enum_cycle_stage_dry" = "Drying";
+"enum_cycle_stage_ending" = "Ending";
+"enum_cycle_stage_done" = "Done";
+
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+"enum_" = "";
+
+
