@@ -19,10 +19,10 @@
 
 // MARK: - Alert Dialog Messages
 
-"alert_dialog_connection_failed_title" = "Connection Failed"
-"alert_dialog_connection_failed_message" = "Could not connect to %@"
-"alert_dialog_connection_lost_title" = "Connection Lost"
-"alert_dialog_connection_lost_message" = "The machine is not responding. What do you want to do?"
+"alert_dialog_connection_failed_title" = "Connection Failed";
+"alert_dialog_connection_failed_message" = "Could not connect to %@";
+"alert_dialog_connection_lost_title" = "Connection Lost";
+"alert_dialog_connection_lost_message" = "The machine is not responding. What do you want to do?";
 "alert_dialog_could_not_activate_notifications_title" = "Could not activate live notifications";
 "alert_dialog_could_not_activate_notifications_message" = "Please activate notifications for Tuttnauer Wi-Fi Connect on your iPhone's settings app";
 
@@ -113,17 +113,3 @@
 "enum_cycle_stage_dry" = "Drying";
 "enum_cycle_stage_ending" = "Ending";
 "enum_cycle_stage_done" = "Done";
-
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-"enum_" = "";
-
-

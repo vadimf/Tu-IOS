@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         
         UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.isIdleTimerDisabled = true // Prevent device from locking / turning off display when running
         
         let settingsManager = UserSettingsManager.shared
         let _ = NotificationsManager.shared
