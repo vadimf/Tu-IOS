@@ -16,7 +16,8 @@ class MachineRealTime: NSObject {
     var screenSaverOn: Int = 0
     var doorState: AutoClaveEnums.DoorState?
     
-    var cycleName: AutoClaveEnums.CycleID?
+    var cycleID: AutoClaveEnums.CycleID?
+    var cycleName: String?
     var cycleStage: AutoClaveEnums.CycleStage? {
         didSet {
             updateSystemStatus() // Did this because there is no way to determine RealTimeStateSystemStatus (according to Avi)

@@ -46,31 +46,40 @@ class Utilities {
         }
     }
     
+    class func decimalsToString(decimals: [Int]) -> String {
+        
+        var byteArray = [UInt8]()
+        
+        for decimal in decimals {
+            byteArray.append(UInt8(bitPattern: Int8(decimal)))
+        }
+
+        if let finalValue = String(bytes: byteArray, encoding: .utf8) {
+            return finalValue
+        }
+        
+        return ""
+        
+    }
+    
     class func decimalsToDouble(decimals: [Int]) -> Double {
         
         var byteArray = [UInt8]()
         
         for decimal in decimals {
-            
             let array = decimal.toUInt8BytesArray()
-            
             byteArray.append(array[6])
             byteArray.append(array[7])
-            
-            /*for byte in array {
-                if byte == 0 { continue }
-                byteArray.append(byte)
-            }*/
         }
         
-        var blanksArray = [UInt8]()
+        /*var blanksArray = [UInt8]()
         
         if byteArray.count < 8 {
             for _ in 0..<(8 - byteArray.count) {
                 blanksArray.append(0)
             }
             byteArray = blanksArray + byteArray
-        }
+        }*/
         
         let finalValue = Utilities.fromByteArray(byteArray, Double.self)
         

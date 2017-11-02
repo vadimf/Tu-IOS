@@ -13,6 +13,7 @@ protocol MachineMonitorDelegate {
     func machineSetupDataUpdated()
     func machineRealTimeDataUpdated()
     func machineSensorsDataUpdated()
+    func machineCycleInfoDataUpdated()
     func machineParametersDataUpdated()
     func didDisconnectFromMachine()
     func connectionLost()
@@ -126,6 +127,7 @@ class MachineMonitor: NSObject {
         guard let networkManager = self.networkManager else { return }
         networkManager.getMachineRealTimeStateData()
         networkManager.getMachineSensorsData()
+        networkManager.getMachineCycleInfoData()
         networkManager.getMachineCycleParametersData()
     }
     
@@ -160,6 +162,11 @@ extension MachineMonitor: MachineNetworkingDelegate {
     func receivedMachineSensorsData(with machineRealTimeState: MachineRealTime) {
         self.machineRealTime = machineRealTimeState
         delegate?.machineSensorsDataUpdated()
+    }
+    
+    func receivedMachineCycleInfoData(with machineRealTimeState: MachineRealTime) {
+        self.machineRealTime = machineRealTimeState
+        delegate?.machineCycleInfoDataUpdated()
     }
     
     func receivedMachineParametersData(with machineRealTimeState: MachineRealTime) {

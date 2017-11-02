@@ -208,7 +208,7 @@ extension SingleMachineViewController: SideMenuDelegate {
 // MARK: - Machine Monitor Delegate
 
 extension SingleMachineViewController: MachineMonitorDelegate {
-
+    
     func machineSetupDataUpdated() {
         guard let machineMonitor = self.machineMonitor,
             let machine = machineMonitor.machine else { return }
@@ -226,8 +226,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         let cycleError = machineRealTime.cycleError?.getName
         
         systemStatusLabel.text = machineRealTime.systemStatus?.getName
-        currentCycleNameLabel.text = machineRealTime.cycleName?.getName
-        currentCycleIconImageView.image = machineRealTime.cycleName?.getIcon
+        currentCycleIconImageView.image = machineRealTime.cycleID?.getIcon
         
         currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
         
@@ -249,7 +248,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         
         doorStateLabel.text = machineRealTime.doorState?.getName
         
-        if let cycleName = machineRealTime.cycleName, cycleName == .none {
+        if let cycleName = machineRealTime.cycleID, cycleName == .none {
             currentCycleIconImageView.isHidden = true
         } else {
             currentCycleIconImageView.isHidden = false
@@ -288,6 +287,17 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         } else {
             sensor3TitleLabel.text = ""
             sensor3ValueLabel.text = ""
+        }
+    }
+    
+    func machineCycleInfoDataUpdated() {
+        guard let machineMonitor = self.machineMonitor,
+            let machineRealTime = machineMonitor.machineRealTime else { return }
+        
+        if let cycleName = machineRealTime.cycleName {
+            currentCycleNameLabel.text = cycleName
+        } else {
+            currentCycleNameLabel.text = ""
         }
     }
     

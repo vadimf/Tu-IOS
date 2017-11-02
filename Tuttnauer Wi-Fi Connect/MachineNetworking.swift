@@ -16,6 +16,7 @@ protocol MachineNetworkingDelegate {
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime)
     func receivedMachineSensorsData(with machineRealTimeState: MachineRealTime)
     func receivedMachineParametersData(with machineRealTimeState: MachineRealTime)
+    func receivedMachineCycleInfoData(with machineRealTimeState: MachineRealTime)
     func didDisconnectFromMachine()
     func connectionLost()
 }
@@ -148,7 +149,7 @@ class MachineNetworking: NSObject {
                 let machineRealTime = self.machineRealTime else { return }
             
             machineRealTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
-            machineRealTime.cycleName = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
+            machineRealTime.cycleID = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
             machineRealTime.cycleStage = AutoClaveEnums.CycleStage(rawValue: self.getMachineRealTimeCycleStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleStage(rawValue: 0)
             machineRealTime.cycleSubStage = AutoClaveEnums.CycleSubStage(rawValue: self.getMachineRealTimeCycleSubStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleSubStage(rawValue: 0)
             machineRealTime.cycleError = AutoClaveEnums.CycleError(rawValue: self.getMachineRealTimeCycleError(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleError(rawValue: 0)
@@ -290,6 +291,39 @@ class MachineNetworking: NSObject {
         let sensor3Units = AutoClaveEnums.AnalogUnits(rawValue: data[Int(sensor3Address.start - startAddress)]) ?? AutoClaveEnums.AnalogUnits.celsius
         
         return (sensor1Units, sensor2Units, sensor3Units)
+    }
+    
+    // MARK: - Get Current Cycle Info
+    
+    func getMachineCycleInfoData() {
+        
+        let totalAddresses = MachineConstants.CycleInfo.total
+        
+        modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+            
+            guard let data = data as? [Int],
+                let machineRealTime = self.machineRealTime else { return }
+            
+            let cycleName = self.getMachineCycleName(startAddress: totalAddresses.start, data: data)
+            
+            if machineRealTime.cycleName != cycleName {
+                 machineRealTime.cycleName = cycleName
+            }
+            
+            self.delegate?.receivedMachineCycleInfoData(with: machineRealTime)
+            
+        }, failure: { (error) in
+            self.checkConnection(error: error)
+            self.getMachineCycleInfoData()
+        })
+        
+    }
+    
+    private func getMachineCycleName(startAddress: Int32, data: [Int]) -> String {
+        let cycleNameAddress = MachineConstants.CycleInfo.currentCycleName
+        let cycleName = Array(data[Int(cycleNameAddress.start - startAddress)..<Int(cycleNameAddress.end - startAddress + 1)])
+        let cycleNameValue = Utilities.decimalsToString(decimals: cycleName)
+        return cycleNameValue
     }
     
     // MARK: - Current Cycle Parameters Observer Methods
