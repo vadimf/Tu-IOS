@@ -879,6 +879,15 @@ class AutoClaveEnums {
         case sterTemperature = 0
         case sterTime
         case dryTime
+        case stable1Temperature = 12
+        case stable1Time
+        case stable2Temperature
+        case stable2Time
+        case requestPressure = 56
+        case vacuumTime1
+        case vacuumTime2
+        case filterTestTime = 131
+        case dryPulses = 136
         
         var getName: String {
             switch self {
@@ -890,6 +899,24 @@ class AutoClaveEnums {
                 return "Ster. Time"
             case .dryTime:
                 return "Dry Time"
+            case .stable1Temperature:
+                return "Temperature"
+            case .stable1Time:
+                return "Time"
+            case .stable2Temperature:
+                return "Temperature"
+            case .stable2Time:
+                return "Time"
+            case .requestPressure:
+                return "Vac. Pres."
+            case .vacuumTime1:
+                return "Vac. Time 1"
+            case .vacuumTime2:
+                return "Vac. Time 2"
+            case .filterTestTime:
+                return "Test Time"
+            case .dryPulses:
+                return "Dry Pulses"
             }
         }
     }
