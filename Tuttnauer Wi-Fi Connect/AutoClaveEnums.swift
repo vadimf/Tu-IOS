@@ -121,7 +121,7 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .instruments:
-                return "Instruments"
+                return "Unwrapped instruments"
             case .wrappedInstruments:
                 return "Wrapped Instruments"
             case .pouches:
@@ -129,9 +129,9 @@ class AutoClaveEnums {
             case .wrappedPouches:
                 return "Wrapped Pouches"
             case .delicate:
-                return "Delicate"
+                return "Unwrapped delicate inst."
             case .wrappedDelicate:
-                return "Wrapped Delicate"
+                return "Wrapped delicate inst."
             case .liquids1:
                 return "Liquids A"
             case .liquids2:
@@ -145,7 +145,7 @@ class AutoClaveEnums {
             case .vacuumTest:
                 return "Vacuum Test"
             case .bdTest:
-                return "BD Test"
+                return "Bowie and Dick"
             case .pasteurization:
                 return "Pasteurization"
             case .vhp:
@@ -183,7 +183,7 @@ class AutoClaveEnums {
             case .prion134:
                 return "Prion 134"
             case .extraDry:
-                return "Extra Dry"
+                return "Extra Drying Time"
             case .airSteamMixture:
                 return "Air Steam Mixture"
             case .glassTest:
@@ -620,7 +620,7 @@ class AutoClaveEnums {
             case .None:
                 return ""
             case .CanceledByUser:
-                return "Cancelled By User"
+                return "Cancelled by user"
             case .DoorIsOpen:
                 return "Door Is Open"
             case .AnalogInputError:

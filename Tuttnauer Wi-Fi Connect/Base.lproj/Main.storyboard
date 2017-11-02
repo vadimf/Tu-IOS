@@ -905,18 +905,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1M9-Tm-Ihx">
-                                                <rect key="frame" x="0.0" y="163" width="159" height="71"/>
-                                                <subviews>
-                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="s9N-CB-MyE">
-                                                        <rect key="frame" x="69" y="25.5" width="20" height="20"/>
-                                                        <color key="color" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </activityIndicatorView>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="s9N-CB-MyE" firstAttribute="centerY" secondItem="1M9-Tm-Ihx" secondAttribute="centerY" id="IjW-Te-Vvt"/>
-                                                    <constraint firstItem="s9N-CB-MyE" firstAttribute="centerX" secondItem="1M9-Tm-Ihx" secondAttribute="centerX" id="vjw-OY-XN0"/>
-                                                </constraints>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1M9-Tm-Ihx" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                                <rect key="frame" x="8" y="171" width="142.5" height="55"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -939,14 +929,14 @@
                                             <constraint firstItem="CMI-p9-4BG" firstAttribute="top" secondItem="7fO-Y9-dKy" secondAttribute="bottom" constant="7" id="b9q-Pt-w5H"/>
                                             <constraint firstItem="CMI-p9-4BG" firstAttribute="trailing" secondItem="xdF-3n-h44" secondAttribute="trailing" id="bBe-c4-eiH"/>
                                             <constraint firstItem="xdF-3n-h44" firstAttribute="leading" secondItem="Il1-9j-mmb" secondAttribute="trailing" constant="5" id="bYm-Xe-AnD"/>
-                                            <constraint firstAttribute="bottom" secondItem="1M9-Tm-Ihx" secondAttribute="bottom" id="ezK-On-7hK"/>
+                                            <constraint firstAttribute="bottom" secondItem="1M9-Tm-Ihx" secondAttribute="bottom" constant="8" id="ezK-On-7hK"/>
                                             <constraint firstItem="CMI-p9-4BG" firstAttribute="leading" secondItem="7fO-Y9-dKy" secondAttribute="leading" id="hrp-p1-LmG"/>
                                             <constraint firstItem="YjJ-Iz-FA8" firstAttribute="leading" secondItem="zk8-oT-L91" secondAttribute="leading" id="imi-qG-DeK"/>
                                             <constraint firstItem="xdF-3n-h44" firstAttribute="trailing" secondItem="YjJ-Iz-FA8" secondAttribute="trailing" id="kvg-2G-XFA"/>
-                                            <constraint firstItem="1M9-Tm-Ihx" firstAttribute="leading" secondItem="zk8-oT-L91" secondAttribute="leading" id="o7s-y4-2SA"/>
-                                            <constraint firstItem="1M9-Tm-Ihx" firstAttribute="top" secondItem="BTf-lu-qTq" secondAttribute="bottom" id="oIX-Cw-KZb"/>
+                                            <constraint firstItem="1M9-Tm-Ihx" firstAttribute="leading" secondItem="zk8-oT-L91" secondAttribute="leading" constant="8" id="o7s-y4-2SA"/>
+                                            <constraint firstItem="1M9-Tm-Ihx" firstAttribute="top" secondItem="BTf-lu-qTq" secondAttribute="bottom" constant="8" id="oIX-Cw-KZb"/>
                                             <constraint firstItem="7fO-Y9-dKy" firstAttribute="top" secondItem="grH-Bc-pX7" secondAttribute="bottom" constant="10" id="oVx-pH-M7g"/>
-                                            <constraint firstItem="2HT-YX-6fZ" firstAttribute="leading" secondItem="1M9-Tm-Ihx" secondAttribute="trailing" id="plJ-MM-eM9"/>
+                                            <constraint firstItem="2HT-YX-6fZ" firstAttribute="leading" secondItem="1M9-Tm-Ihx" secondAttribute="trailing" constant="8" id="plJ-MM-eM9"/>
                                             <constraint firstItem="BTf-lu-qTq" firstAttribute="top" secondItem="CMI-p9-4BG" secondAttribute="bottom" constant="5" id="yQ2-Gi-QSC"/>
                                         </constraints>
                                     </view>
@@ -1079,7 +1069,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="currentCycleIconImageView" destination="Il1-9j-mmb" id="mvS-Zq-4kQ"/>
-                        <outlet property="currentCycleIndicator" destination="s9N-CB-MyE" id="ZMD-QM-0as"/>
+                        <outlet property="currentCycleIndicator" destination="1M9-Tm-Ihx" id="4Ik-Py-cHn"/>
                         <outlet property="currentCycleNameLabel" destination="xdF-3n-h44" id="Mbf-BJ-JRI"/>
                         <outlet property="currentCycleNameTitleLabel" destination="YjJ-Iz-FA8" id="v0V-YR-fdo"/>
                         <outlet property="currentCycleStageNameLabel" destination="CMI-p9-4BG" id="RXw-ax-Ot0"/>

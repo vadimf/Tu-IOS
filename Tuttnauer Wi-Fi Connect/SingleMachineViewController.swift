@@ -9,6 +9,7 @@
 import UIKit
 import SideMenu
 import MBProgressHUD
+import NVActivityIndicatorView
 
 class SingleMachineViewController: UIViewController {
 
@@ -25,7 +26,7 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var currentStageTitleLabel: UILabel!
     
     @IBOutlet weak var currentCycleNameLabel: UILabel!
-    @IBOutlet weak var currentCycleIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var currentCycleIndicator: NVActivityIndicatorView!
     @IBOutlet weak var currentCycleIconImageView: UIImageView!
     @IBOutlet weak var currentCycleStageNameLabel: UILabel!
     @IBOutlet weak var currentCycleSubStageNameLabel: UILabel!
@@ -58,6 +59,9 @@ class SingleMachineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentCycleIndicator.type = .ballBeat
+        currentCycleIndicator.color = UIColor.tuttnauerRed()
         
         registerNotifications()
         setupSideMenu()
@@ -228,7 +232,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         systemStatusLabel.text = machineRealTime.systemStatus?.getName
         currentCycleIconImageView.image = machineRealTime.cycleID?.getIcon
         
-        currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
+        //currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
         
         if currentCycleStage!.isEmpty {
             currentStageTitleLabel.text = ""
