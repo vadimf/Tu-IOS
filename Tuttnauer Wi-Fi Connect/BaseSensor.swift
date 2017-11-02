@@ -36,7 +36,19 @@ class BaseSensor: NSObject {
         self.name = name
         self.value = value
         self.units = units
-        
+        setAccordingToUserSettings()
+    }
+    
+    // MARK: - Set / Update Methods
+    
+    func updateValues(name: String, value: Double, units: AutoClaveEnums.AnalogUnits) {
+        self.name = name
+        self.value = value
+        self.units = units
+        setAccordingToUserSettings()
+    }
+    
+    func setAccordingToUserSettings() {
         if let userTemperatureUnit = Defaults[.userTemperatureUnit],
             units == .celsius || units == .fahrenheit {
             self.units = AutoClaveEnums.AnalogUnits(rawValue: userTemperatureUnit)!

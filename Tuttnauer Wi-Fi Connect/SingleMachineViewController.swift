@@ -21,6 +21,9 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var ipAddressLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     
+    @IBOutlet weak var currentCycleNameTitleLabel: UILabel!
+    @IBOutlet weak var currentStageTitleLabel: UILabel!
+    
     @IBOutlet weak var currentCycleNameLabel: UILabel!
     @IBOutlet weak var currentCycleIndicator: UIActivityIndicatorView!
     @IBOutlet weak var currentCycleIconImageView: UIImageView!
@@ -34,6 +37,10 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var sensor1ValueLabel: UILabel!
     @IBOutlet weak var sensor2ValueLabel: UILabel!
     @IBOutlet weak var sensor3ValueLabel: UILabel!
+    
+    @IBOutlet weak var systemStatusTitleLabel: UILabel!
+    @IBOutlet weak var doorStateTitleLabel: UILabel!
+    @IBOutlet weak var cycleErrorTitleLabel: UILabel!
     
     @IBOutlet weak var systemStatusLabel: UILabel!
     @IBOutlet weak var doorStateLabel: UILabel!
@@ -87,10 +94,14 @@ class SingleMachineViewController: UIViewController {
         ipAddressLabel.text = ""
         versionLabel.text = ""
         
+        currentStageTitleLabel.text = ""
+        
         currentCycleNameLabel.text = ""
         currentCycleIconImageView.isHidden = true
         currentCycleStageNameLabel.text = ""
         currentCycleSubStageNameLabel.text = ""
+        
+        cycleErrorTitleLabel.text = ""
         
         systemStatusLabel.text = "-"
         doorStateLabel.text = "-"
@@ -211,12 +222,30 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         guard let machineMonitor = self.machineMonitor,
             let machineRealTime = machineMonitor.machineRealTime else { return }
         
+        let currentCycleStage = machineRealTime.cycleStage?.getName
+        let cycleError = machineRealTime.cycleError?.getName
+        
         systemStatusLabel.text = machineRealTime.systemStatus?.getName
         currentCycleNameLabel.text = machineRealTime.cycleName?.getName
         currentCycleIconImageView.image = machineRealTime.cycleName?.getIcon
-        currentCycleStageNameLabel.text = machineRealTime.cycleStage?.getName
+        
         currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
-        cycleErrorLabel.text = machineRealTime.cycleError?.getName
+        
+        if currentCycleStage!.isEmpty {
+            currentStageTitleLabel.text = ""
+            currentCycleStageNameLabel.text = ""
+        } else {
+            currentStageTitleLabel.text = "Current Stage"
+            currentCycleStageNameLabel.text = machineRealTime.cycleStage?.getName
+        }
+        
+        if cycleError!.isEmpty  {
+            cycleErrorTitleLabel.text = ""
+            cycleErrorLabel.text = ""
+        } else {
+            cycleErrorTitleLabel.text = "Cycle Error"
+            cycleErrorLabel.text = cycleError
+        }
         
         doorStateLabel.text = machineRealTime.doorState?.getName
         

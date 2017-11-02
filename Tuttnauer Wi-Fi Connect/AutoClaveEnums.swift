@@ -618,7 +618,7 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .None:
-                return "None"
+                return ""
             case .CanceledByUser:
                 return "Cancelled By User"
             case .DoorIsOpen:

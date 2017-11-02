@@ -215,26 +215,35 @@ class MachineNetworking: NSObject {
             let sensorValues = self.getMachineSensorsValues(startAddress: totalAddresses.start, data: data)
             let sensorsUnits = self.getMachineSensorsUnits(startAddress: totalAddresses.start, data: data)
             
-            let sensor1 = BaseSensor(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
-            let sensor2 = BaseSensor(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
-            let sensor3 = BaseSensor(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
-            
-            // Check if larger than 3. Solves a certain bug where the machine sometimes sends a faulty double 2.234352...
-            
-            if !sensor1.name.isEmpty {
-                 machineRealTime.sensor1 = sensor1
+            if !sensorNames.0.isEmpty {
+                if machineRealTime.sensor1 == nil {
+                    let sensor1 = BaseSensor(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
+                    machineRealTime.sensor1 = sensor1
+                } else {
+                    machineRealTime.sensor1?.updateValues(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
+                }
             } else {
                 machineRealTime.sensor1 = nil
             }
             
-            if !sensor2.name.isEmpty {
-                machineRealTime.sensor2 = sensor2
+            if !sensorNames.1.isEmpty {
+                if machineRealTime.sensor2 == nil {
+                    let sensor2 = BaseSensor(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
+                    machineRealTime.sensor2 = sensor2
+                } else {
+                    machineRealTime.sensor2?.updateValues(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
+                }
             } else {
                 machineRealTime.sensor2 = nil
             }
             
-            if !sensor3.name.isEmpty {
-                machineRealTime.sensor3 = sensor3
+            if !sensorNames.2.isEmpty {
+                if machineRealTime.sensor3 == nil {
+                    let sensor3 = BaseSensor(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
+                    machineRealTime.sensor3 = sensor3
+                } else {
+                    machineRealTime.sensor3?.updateValues(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
+                }
             } else {
                 machineRealTime.sensor3 = nil
             }
