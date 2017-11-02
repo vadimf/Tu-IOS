@@ -905,7 +905,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1M9-Tm-Ihx" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1M9-Tm-Ihx">
                                                 <rect key="frame" x="8" y="171" width="142.5" height="55"/>
                                             </view>
                                         </subviews>
@@ -1069,7 +1069,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="currentCycleIconImageView" destination="Il1-9j-mmb" id="mvS-Zq-4kQ"/>
-                        <outlet property="currentCycleIndicator" destination="1M9-Tm-Ihx" id="4Ik-Py-cHn"/>
+                        <outlet property="currentCycleIndicatorView" destination="1M9-Tm-Ihx" id="afa-cm-6aZ"/>
                         <outlet property="currentCycleNameLabel" destination="xdF-3n-h44" id="Mbf-BJ-JRI"/>
                         <outlet property="currentCycleNameTitleLabel" destination="YjJ-Iz-FA8" id="v0V-YR-fdo"/>
                         <outlet property="currentCycleStageNameLabel" destination="CMI-p9-4BG" id="RXw-ax-Ot0"/>

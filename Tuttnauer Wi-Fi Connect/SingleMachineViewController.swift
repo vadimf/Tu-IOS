@@ -12,8 +12,10 @@ import MBProgressHUD
 import NVActivityIndicatorView
 
 class SingleMachineViewController: UIViewController {
-
+    
     var machineMonitor: MachineMonitor?
+    
+    var cycleIndicator: NVActivityIndicatorView!
     
     // MARK: - IBOutlets
     
@@ -26,7 +28,7 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var currentStageTitleLabel: UILabel!
     
     @IBOutlet weak var currentCycleNameLabel: UILabel!
-    @IBOutlet weak var currentCycleIndicator: NVActivityIndicatorView!
+    @IBOutlet weak var currentCycleIndicatorView: UIView!
     @IBOutlet weak var currentCycleIconImageView: UIImageView!
     @IBOutlet weak var currentCycleStageNameLabel: UILabel!
     @IBOutlet weak var currentCycleSubStageNameLabel: UILabel!
@@ -60,8 +62,7 @@ class SingleMachineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentCycleIndicator.type = .ballBeat
-        currentCycleIndicator.color = UIColor.tuttnauerRed()
+        cycleIndicator = NVActivityIndicatorView(frame: currentCycleIndicatorView.frame, type: .ballBeat, color: UIColor.tuttnauerRed(), padding: 0)
         
         registerNotifications()
         setupSideMenu()
@@ -76,6 +77,11 @@ class SingleMachineViewController: UIViewController {
         machineMonitor?.getMachineSetupData() // Request the initial machine object with data
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupCycleIndicator()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -86,6 +92,17 @@ class SingleMachineViewController: UIViewController {
     }
     
     // MARK: - Setup Methods
+    
+    private func setupCycleIndicator() {
+        cycleIndicator.frame = currentCycleIndicatorView.frame
+        cycleIndicator.translatesAutoresizingMaskIntoConstraints = false
+        currentCycleIndicatorView.addSubview(cycleIndicator)
+        cycleIndicator.topAnchor.constraint(equalTo: currentCycleIndicatorView.topAnchor).isActive = true
+        cycleIndicator.rightAnchor.constraint(equalTo: currentCycleIndicatorView.rightAnchor).isActive = true
+        cycleIndicator.leftAnchor.constraint(equalTo: currentCycleIndicatorView.leftAnchor).isActive = true
+        cycleIndicator.bottomAnchor.constraint(equalTo: currentCycleIndicatorView.bottomAnchor).isActive = true
+        currentCycleIndicatorView.bringSubview(toFront: cycleIndicator)
+    }
     
     fileprivate func setupLocalization() {
         
@@ -259,9 +276,11 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         }
         
         if let systemStatus = machineRealTime.systemStatus, systemStatus != .none {
-            currentCycleIndicator.startAnimating()
+            if !cycleIndicator.isAnimating {
+                cycleIndicator.startAnimating()
+            }
         } else {
-            currentCycleIndicator.stopAnimating()
+            cycleIndicator.stopAnimating()
         }
     }
     
