@@ -276,11 +276,11 @@ class AutoClaveEnums {
             case .wrapped121:
                 return #imageLiteral(resourceName: "icon_cycle_delicate")
             case .wrapped134:
-                return #imageLiteral(resourceName: "icon_cycle_delicate")
+                return #imageLiteral(resourceName: "icon_cycle_instruments")
             case .unwrapped121:
                 return #imageLiteral(resourceName: "icon_cycle_delicate")
             case .unwrapped134:
-                return #imageLiteral(resourceName: "icon_cycle_delicate")
+                return #imageLiteral(resourceName: "icon_cycle_instruments")
             case .bioHazard1:
                 return #imageLiteral(resourceName: "icon_cycle_wastes")
             case .bioHazard2:
