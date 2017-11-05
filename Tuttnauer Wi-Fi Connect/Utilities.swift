@@ -48,6 +48,8 @@ class Utilities {
     
     class func decimalsToString(decimals: [Int]) -> String {
         
+        guard decimals.count == 4 else { return "" }
+        
         var byteArray = [UInt8]()
         
         for decimal in decimals {
@@ -64,6 +66,8 @@ class Utilities {
     
     class func decimalsToDouble(decimals: [Int]) -> Double {
         
+        guard decimals.count == 4 else { return 0 }
+        
         var byteArray = [UInt8]()
         
         for decimal in decimals {
@@ -72,18 +76,7 @@ class Utilities {
             byteArray.append(array[7])
         }
         
-        /*var blanksArray = [UInt8]()
-        
-        if byteArray.count < 8 {
-            for _ in 0..<(8 - byteArray.count) {
-                blanksArray.append(0)
-            }
-            byteArray = blanksArray + byteArray
-        }*/
-        
-        let finalValue = Utilities.fromByteArray(byteArray, Double.self)
-        
-        return finalValue
+        return Utilities.fromByteArray(byteArray, Double.self)
     }
     
     // MARK: - Networking
