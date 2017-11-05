@@ -25,6 +25,9 @@ class MachineMonitor: NSObject {
     
     var delegate: MachineMonitorDelegate?
     
+    var connections = [Connection]() // An array of machines we have connceted to
+    var currentConnectionIndex: Int? // Indicates which of the [Connections] we are currently monitoring
+    
     var machine: Machine?
     var machineRealTime: MachineRealTime?
     var networkManager: MachineNetworking?
@@ -46,6 +49,30 @@ class MachineMonitor: NSObject {
     }
     
     // MARK: - Connect & Disconnect
+    
+    func connect2(to ipAddress: String, completion: MachineConnectCompletionHandler?) {
+        
+        guard let networkManager = self.networkManager else { return }
+        
+        let modbus = SwiftLibModbus(ipAddress: ipAddress as NSString, port: 502, device: 0)
+        
+        networkManager.connect(ipAddress: ipAddress, modbus: modbus) { (success, error) in
+            
+            guard error == nil, success else {
+                completion?(false, error!)
+                return
+            }
+            
+            let connection = Connection(modbus: modbus)
+            connection.isConnected = true
+            
+            self.connections.append(connection)
+            
+            completion?(success, nil)
+            
+            NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Connected to: \(connection.machine?.ipAddress)")
+        }
+    }
     
     func connect(to ipAddress: String, completion: MachineConnectCompletionHandler?) {
         

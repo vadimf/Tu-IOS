@@ -22,4 +22,7 @@ class Machine: NSObject {
     var currentPressureUnits: Int = 0
     var currentTemperatureUnits: Int = 0
     
+    // Real Time Data
+    var realTime: MachineRealTime?
+    
 }

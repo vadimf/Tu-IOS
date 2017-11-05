@@ -65,24 +65,30 @@
                                             <action selector="connectButtonTapped:" destination="SPb-IZ-P4X" eventType="touchUpInside" id="egw-ez-8as"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xl6-4t-Nsr">
-                                        <rect key="frame" x="96.5" y="195" width="127" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoi-VU-0vw">
+                                        <rect key="frame" x="90" y="200" width="140" height="33"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="xiI-Qb-6BA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Scan for Machines">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="8eD-Mo-oxZ" kind="show" identifier="Main Connect to Scan for Machines Segue" id="QDo-9p-PyX"/>
+                                            <segue destination="8eD-Mo-oxZ" kind="show" identifier="" id="Tq8-6Z-p4U"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="hoi-VU-0vw" firstAttribute="top" secondItem="Nfa-fn-1vr" secondAttribute="bottom" constant="25" id="06z-r6-MES"/>
                                     <constraint firstAttribute="trailing" secondItem="c1d-Qh-aCf" secondAttribute="trailing" constant="25" id="98M-D7-SUk"/>
                                     <constraint firstItem="Nfa-fn-1vr" firstAttribute="top" secondItem="c1d-Qh-aCf" secondAttribute="bottom" constant="20" id="QD3-oD-HfI"/>
                                     <constraint firstItem="c1d-Qh-aCf" firstAttribute="bottom" secondItem="S7J-db-PHZ" secondAttribute="centerY" constant="-50" id="RWT-pP-pK0"/>
+                                    <constraint firstItem="hoi-VU-0vw" firstAttribute="centerX" secondItem="S7J-db-PHZ" secondAttribute="centerX" id="aFN-yc-35d"/>
                                     <constraint firstItem="c1d-Qh-aCf" firstAttribute="leading" secondItem="S7J-db-PHZ" secondAttribute="leading" constant="25" id="b04-dY-Vwd"/>
-                                    <constraint firstItem="xl6-4t-Nsr" firstAttribute="top" secondItem="Nfa-fn-1vr" secondAttribute="bottom" constant="20" id="bBa-Ge-XmW"/>
-                                    <constraint firstItem="xl6-4t-Nsr" firstAttribute="centerX" secondItem="S7J-db-PHZ" secondAttribute="centerX" id="drj-Pt-i8p"/>
                                     <constraint firstItem="Nfa-fn-1vr" firstAttribute="centerX" secondItem="S7J-db-PHZ" secondAttribute="centerX" id="riV-uc-YjL"/>
+                                    <constraint firstItem="hoi-VU-0vw" firstAttribute="width" secondItem="Nfa-fn-1vr" secondAttribute="width" id="rt1-Of-6Lb"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -101,7 +107,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="tLn-vy-UPZ"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="connectButton" destination="Nfa-fn-1vr" id="w7k-4S-YMo"/>
+                        <outlet property="connectButton" destination="Nfa-fn-1vr" id="T62-OS-BNm"/>
                         <outlet property="ipAddressTextField" destination="c1d-Qh-aCf" id="DDz-zc-4eP"/>
                         <segue destination="bCn-u1-QcQ" kind="presentation" identifier="Main Connect to Single Machine Segue" id="ShK-sK-DNl"/>
                     </connections>
@@ -1457,6 +1463,6 @@
         <image name="side_menu_bg" width="360" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ea2-KU-6HQ"/>
+        <segue reference="ShK-sK-DNl"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -118,7 +118,7 @@ class NetworkManager: NSObject {
     
     fileprivate func parseMachineData(data: String) {
         
-        let split = data.characters.split{$0 == ","}.map(String.init)
+        let split = data.split(separator: ",").map(String.init)
         
         guard split.count == 5 else { return } // Receiving 5 comma separated elements from the machine. If not 5, don't add it
         

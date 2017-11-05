@@ -34,6 +34,18 @@ class MachineNetworking: NSObject {
     
     // MARK: - Connecting & Disconnecting
     
+    func connect(ipAddress: String, modbus: SwiftLibModbus, completion: MachineConnectCompletionHandler?) {
+        modbus.connect(success: {
+            completion?(true, nil)
+            self.machine = Machine()
+            self.machineRealTime = MachineRealTime()
+            print("Connected to:", ipAddress)
+        }, failure: { error in
+            completion?(false, error)
+            print(error.localizedDescription)
+        })
+    }
+    
     func connect(ipAddress: String, completion: MachineConnectCompletionHandler?) {
         
         // Create a new Modbus instance
