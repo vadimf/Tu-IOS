@@ -25,12 +25,11 @@ class MachineMonitor: NSObject {
     
     var delegate: MachineMonitorDelegate?
     
-    var connections = [Connection]() // An array of machines we have connceted to
-    var currentConnectionIndex: Int? // Indicates which of the [Connections] we are currently monitoring
-    
     var machine: Machine?
-    var machineRealTime: MachineRealTime?
     var networkManager: MachineNetworking?
+    
+    var connections = [MachineConnection]() // Machine connections
+    var currentConnection: MachineConnection? // The current connection presented
     
     var isConnected: Bool = false
     
@@ -42,37 +41,12 @@ class MachineMonitor: NSObject {
     
     override init() {
         super.init()
-        machine = Machine()
-        machineRealTime = MachineRealTime()
         networkManager = MachineNetworking.shared
         networkManager?.delegate = self
+        machine = networkManager?.machine
     }
     
     // MARK: - Connect & Disconnect
-    
-    func connect2(to ipAddress: String, completion: MachineConnectCompletionHandler?) {
-        
-        guard let networkManager = self.networkManager else { return }
-        
-        let modbus = SwiftLibModbus(ipAddress: ipAddress as NSString, port: 502, device: 0)
-        
-        networkManager.connect(ipAddress: ipAddress, modbus: modbus) { (success, error) in
-            
-            guard error == nil, success else {
-                completion?(false, error!)
-                return
-            }
-            
-            let connection = Connection(modbus: modbus)
-            connection.isConnected = true
-            
-            self.connections.append(connection)
-            
-            completion?(success, nil)
-            
-            NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Connected to: \(connection.machine?.ipAddress)")
-        }
-    }
     
     func connect(to ipAddress: String, completion: MachineConnectCompletionHandler?) {
         
@@ -138,7 +112,6 @@ class MachineMonitor: NSObject {
         stopMonitoring()
         networkManager.disconnect()
         machine = nil
-        machineRealTime = nil
         isConnected = false
         cycleErrorNotified = false
     }
@@ -172,7 +145,8 @@ extension MachineMonitor: MachineNetworkingDelegate {
     }
     
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime) {
-        self.machineRealTime = machineRealTimeState
+
+        self.machine?.realTime = machineRealTimeState
         
         if let cycleError = machineRealTimeState.cycleError, cycleError != .None {
             if !cycleErrorNotified {
@@ -187,17 +161,17 @@ extension MachineMonitor: MachineNetworkingDelegate {
     }
     
     func receivedMachineSensorsData(with machineRealTimeState: MachineRealTime) {
-        self.machineRealTime = machineRealTimeState
+        self.machine?.realTime = machineRealTimeState
         delegate?.machineSensorsDataUpdated()
     }
     
     func receivedMachineCycleInfoData(with machineRealTimeState: MachineRealTime) {
-        self.machineRealTime = machineRealTimeState
+        self.machine?.realTime = machineRealTimeState
         delegate?.machineCycleInfoDataUpdated()
     }
     
     func receivedMachineParametersData(with machineRealTimeState: MachineRealTime) {
-        self.machineRealTime = machineRealTimeState
+        self.machine?.realTime = machineRealTimeState
         delegate?.machineParametersDataUpdated()
     }
     

@@ -15,6 +15,7 @@
 		1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFB91F9E144400D33278 /* MachineMonitor.swift */; };
 		1650AFBC1F9E177B00D33278 /* MachineNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */; };
 		165BB9431FA0098D0077862D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BB9421FA0098D0077862D /* SideMenuViewController.swift */; };
+		165BC92B1FB04FF90017EA9F /* MachineConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BC92A1FB04FF90017EA9F /* MachineConnection.swift */; };
 		1660E9871F9FCB16008DC47E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E9861F9FCB16008DC47E /* UserSettings.swift */; };
 		1660E9891F9FCDB5008DC47E /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E9881F9FCDB5008DC47E /* Enums.swift */; };
 		1660E98C1F9FD133008DC47E /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E98B1F9FD133008DC47E /* UserSettingsManager.swift */; };
@@ -54,7 +55,6 @@
 		16A462C61F5D3FE0002C4ECF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C41F5D3FE0002C4ECF /* Main.storyboard */; };
 		16A462C81F5D3FE0002C4ECF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C71F5D3FE0002C4ECF /* Assets.xcassets */; };
 		16A462CB1F5D3FE0002C4ECF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A462C91F5D3FE0002C4ECF /* LaunchScreen.storyboard */; };
-		16A8813B1FAF83A000CF021E /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A8813A1FAF83A000CF021E /* Connection.swift */; };
 		16CE3F451FA763610000AB75 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE3F441FA763610000AB75 /* NotificationsManager.swift */; };
 		16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */; };
 		16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E075091F9FC976008474B5 /* DefaultsKeys.swift */; };
@@ -72,6 +72,7 @@
 		1650AFB91F9E144400D33278 /* MachineMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineMonitor.swift; sourceTree = "<group>"; };
 		1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineNetworking.swift; sourceTree = "<group>"; };
 		165BB9421FA0098D0077862D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		165BC92A1FB04FF90017EA9F /* MachineConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConnection.swift; sourceTree = "<group>"; };
 		1660E9861F9FCB16008DC47E /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		1660E9881F9FCDB5008DC47E /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		1660E98B1F9FD133008DC47E /* UserSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
@@ -123,7 +124,6 @@
 		16A462CA1F5D3FE0002C4ECF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16A462CC1F5D3FE0002C4ECF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16A462E61F5D6A43002C4ECF /* Tuttnauer Wi-Fi Connect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tuttnauer Wi-Fi Connect-Bridging-Header.h"; sourceTree = "<group>"; };
-		16A8813A1FAF83A000CF021E /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		16CE3F441FA763610000AB75 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		16D607C01F9E4FB9001F8E08 /* MachineConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConstants.swift; sourceTree = "<group>"; };
 		16E075091F9FC976008474B5 /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
@@ -306,7 +306,6 @@
 		16A462D21F5D63B4002C4ECF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				16A8813A1FAF83A000CF021E /* Connection.swift */,
 				168909F91F98C465006ECEE4 /* Machine.swift */,
 				163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */,
 				160DD2351FA1E4060017D221 /* BaseSensor.swift */,
@@ -414,6 +413,7 @@
 			children = (
 				1650AFB91F9E144400D33278 /* MachineMonitor.swift */,
 				1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */,
+				165BC92A1FB04FF90017EA9F /* MachineConnection.swift */,
 			);
 			name = Machine;
 			sourceTree = "<group>";
@@ -639,7 +639,6 @@
 				168909F51F98C2FE006ECEE4 /* ScanForMachinesViewController.swift in Sources */,
 				162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */,
 				167C93651F9BB489004930C0 /* AutoClaveEnums.swift in Sources */,
-				16A8813B1FAF83A000CF021E /* Connection.swift in Sources */,
 				168ACE0D1F92656B000277DD /* HA+String.swift in Sources */,
 				1662FDE31F9E6D7F004A390C /* Alerts.swift in Sources */,
 				16E2DBC11FA7B3AA006E131D /* NetworkManager.swift in Sources */,
@@ -648,6 +647,7 @@
 				160DD2361FA1E4060017D221 /* BaseSensor.swift in Sources */,
 				1660E9891F9FCDB5008DC47E /* Enums.swift in Sources */,
 				1660E98C1F9FD133008DC47E /* UserSettingsManager.swift in Sources */,
+				165BC92B1FB04FF90017EA9F /* MachineConnection.swift in Sources */,
 				168ACDF61F923625000277DD /* SettingsOptionsTableViewController.swift in Sources */,
 				168909F81F98C36F006ECEE4 /* MachineTableViewCell.swift in Sources */,
 				168ACDE61F922920000277DD /* HA+UIViewController.swift in Sources */,

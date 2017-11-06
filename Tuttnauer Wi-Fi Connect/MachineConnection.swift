@@ -1,104 +1,112 @@
 //
-//  MachineNetworking.swift
+//  MachineConnection.swift
 //  Tuttnauer Wi-Fi Connect
 //
-//  Created by Erez Hod on 10/23/17.
+//  Created by Erez Hod on 11/6/17.
 //  Copyright © 2017 Tuttnauer Europe B.V. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-typealias MachineConnectCompletionHandler = (_ success: Bool,_ error: NSError?) -> Void
-typealias MachineRegistersCompletionHandler = (_ data: [AnyObject]?, _ error: NSError?) -> Void
-
-protocol MachineNetworkingDelegate {
-    func receivedMachineSetupData(with machine: Machine)
-    func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime)
-    func receivedMachineSensorsData(with machineRealTimeState: MachineRealTime)
-    func receivedMachineParametersData(with machineRealTimeState: MachineRealTime)
-    func receivedMachineCycleInfoData(with machineRealTimeState: MachineRealTime)
-    func didDisconnectFromMachine()
-    func connectionLost()
+protocol MachineConnectionDelegate {
+    func didConnect(success: Bool)
+    func didDisconnect()
+    func didLoseConnection()
+    func didUpdateSetupData(machine: Machine)
+    func didUpdateRealTimeData(machine: Machine)
 }
 
-class MachineNetworking: NSObject {
+class MachineConnection: NSObject {
+
+    var delegate: MachineConnectionDelegate?
     
-    static let shared = MachineNetworking()
-    
-    var delegate: MachineNetworkingDelegate?
+    fileprivate var modbus: SwiftLibModbus!
     
     var machine: Machine?
-    
-    private var modbus: SwiftLibModbus?
-    
     var isConnected: Bool = false
     
-    // MARK: - Initialization
+    var timer: Timer?
     
-    override init() {
-        super.init()
-    }
+    // MARK: Initialization
     
     init(ipAddress: String) {
         super.init()
-        self.connect(ipAddress: ipAddress) { (success, error) in
+        self.modbus = SwiftLibModbus(ipAddress: ipAddress as NSString, port: 502, device: 1)
+        self.connect() { (success, error) in
             guard error == nil else {
                 self.isConnected = false
+                self.delegate?.didConnect(success: false)
                 return
             }
             self.isConnected = true
+            self.machine = Machine()
+            self.delegate?.didConnect(success: true)
         }
     }
     
-    // MARK: - Connecting & Disconnecting
+    // MARK: Connecting & Disconnecting
     
-    func connect(ipAddress: String, completion: MachineConnectCompletionHandler?) {
-        
-        // Create a new Modbus instance
-        modbus = SwiftLibModbus(ipAddress: ipAddress as NSString, port: 502, device: 1)
-        
-        // Connect
-        modbus?.connect(success: {
+    func connect(completion: MachineConnectCompletionHandler?) {
+        modbus.connect(success: {
             completion?(true, nil)
-            self.machine = Machine()
-            self.machine?.realTime = MachineRealTime()
-            print("Connected to:", ipAddress)
+            print("Connected to:", String(describing: self.modbus.ipAddress))
         }, failure: { error in
             completion?(false, error)
             print(error.localizedDescription)
         })
     }
     
-    func reconnect(completion: MachineConnectCompletionHandler?) {
-        guard let machine = self.machine else { return }
-        print("Reconnecting to:", machine.ipAddress)
-        connect(ipAddress: machine.ipAddress) { (success, error) in
-            if success {
-                completion?(true, nil)
-            } else {
-                completion?(false, error)
-            }
-        }
+    func disconnect() {
+        modbus.disconnect()
+        isConnected = false
+        delegate?.didDisconnect()
     }
     
-    func checkConnection(error: NSError) {
+    fileprivate func checkConnection(error: NSError) {
         if error.code == 54 {
-            delegate?.connectionLost()
+            delegate?.didLoseConnection()
         }
         print(error.localizedDescription)
     }
     
-    func disconnect() {
-        modbus?.disconnect()
-        modbus = nil
-        machine = nil
-        //machineRealTime = nil
-        delegate?.didDisconnectFromMachine()
+    // MARK: - Fetch Start & Stop
+    
+    func start() {
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(fetchMachineRealTimeData), userInfo: nil, repeats: true)
+        timer?.fire()
     }
     
-    // MARK: - Machine Setup Methods
+    func stop() {
+        guard timer != nil else { return }
+        timer!.invalidate()
+        timer = nil
+    }
+
+}
+
+// MARK: - Fetch Data Methods
+
+extension MachineConnection {
     
-    func getMachineSetupData() {
+    fileprivate func fetchMachineSetupData() {
+        modbusMachineSetupData()
+    }
+    
+    @objc fileprivate func fetchMachineRealTimeData() {
+        modbusMachineStateData()
+        modbusMachineSensorsData()
+        modbusMachineCurrentCycleInfo()
+    }
+    
+}
+
+// MARK: - Fetch & Parse Modbus Data
+
+extension MachineConnection {
+    
+    // MARK: Fetch Setup Data
+    
+    fileprivate func modbusMachineSetupData() {
         
         let versionMajorAddress = MachineConstants.Versions.versionMajor
         let versionMinorAddress = MachineConstants.Versions.versionMinor
@@ -112,7 +120,7 @@ class MachineNetworking: NSObject {
         let modelTotalAddresses = (modelNameAddress.count + serialNumberAddress.count)
         
         // Get Version Number
-        modbus?.readRegistersFrom(startAddress: (versionMajorAddress.start - 1), count: versionTotalAddresses, success: { (data) in
+        modbus.readRegistersFrom(startAddress: (versionMajorAddress.start - 1), count: versionTotalAddresses, success: { (data) in
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
@@ -120,15 +128,16 @@ class MachineNetworking: NSObject {
             let version: String = "\(data[0]).\(data[1]).\(data[3]).\(data[2])"
             machine.bsVersion = version
             
-            self.delegate?.receivedMachineSetupData(with: machine)
+            self.delegate?.didUpdateSetupData(machine: machine)
             
         }, failure: { (error) in
-            self.getMachineSetupData()
+            self.checkConnection(error: error)
+            self.modbusMachineSetupData()
             print(error.localizedDescription)
         })
         
         // Get Model Name & Serial Number
-        modbus?.readRegistersFrom(startAddress: (modelNameAddress.start - 1), count: modelTotalAddresses, success: { (data) in
+        modbus.readRegistersFrom(startAddress: (modelNameAddress.start - 1), count: modelTotalAddresses, success: { (data) in
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
@@ -146,37 +155,37 @@ class MachineNetworking: NSObject {
             machine.serialNumber = serialNumber
             machine.ipAddress = String.init(describing: self.modbus!.ipAddress!)
             
-            self.delegate?.receivedMachineSetupData(with: machine)
+            self.delegate?.didUpdateSetupData(machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
-            self.getMachineSetupData()
+            self.modbusMachineSetupData()
         })
         
     }
     
-    // MARK: - Machine Real Time Observer Methods
+    // MARK: Fetch Real Time State Data
     
-    func getMachineRealTimeStateData() {
+    fileprivate func modbusMachineStateData() {
         
         let totalAddresses = MachineConstants.RealTime.total
         
-        modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+        modbus.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
             guard let data = data as? [Int],
-                let realTime = self.machine?.realTime else { return }
+                let machine = self.machine else { return }
             
-            realTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
-            realTime.cycleID = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
-            realTime.cycleStage = AutoClaveEnums.CycleStage(rawValue: self.getMachineRealTimeCycleStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleStage(rawValue: 0)
-            realTime.cycleSubStage = AutoClaveEnums.CycleSubStage(rawValue: self.getMachineRealTimeCycleSubStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleSubStage(rawValue: 0)
-            realTime.cycleError = AutoClaveEnums.CycleError(rawValue: self.getMachineRealTimeCycleError(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleError(rawValue: 0)
+            machine.realTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
+            machine.realTime.cycleID = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
+            machine.realTime.cycleStage = AutoClaveEnums.CycleStage(rawValue: self.getMachineRealTimeCycleStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleStage(rawValue: 0)
+            machine.realTime.cycleSubStage = AutoClaveEnums.CycleSubStage(rawValue: self.getMachineRealTimeCycleSubStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleSubStage(rawValue: 0)
+            machine.realTime.cycleError = AutoClaveEnums.CycleError(rawValue: self.getMachineRealTimeCycleError(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleError(rawValue: 0)
             
-            self.delegate?.receivedMachineRealTimeStateData(with: realTime)
+            self.delegate?.didUpdateRealTimeData(machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
-            self.getMachineRealTimeStateData()
+            self.modbusMachineStateData()
         })
         
     }
@@ -211,59 +220,59 @@ class MachineNetworking: NSObject {
         return data[Int(address.start - startAddress)]
     }
     
-    // MARK: - Current Cycle Sensors Observer Methods
+    // MARK: - Fetch Real Time Sensors Data
     
-    func getMachineSensorsData() {
+    fileprivate func modbusMachineSensorsData() {
         
         let totalAddresses = MachineConstants.Sensors.total
         
-        modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+        modbus.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
             guard let data = data as? [Int],
-                let realTime = self.machine?.realTime else { return }
+                let machine = self.machine else { return }
             
             let sensorNames = self.getMachineSensorsNames(startAddress: totalAddresses.start, data: data)
             let sensorValues = self.getMachineSensorsValues(startAddress: totalAddresses.start, data: data)
             let sensorsUnits = self.getMachineSensorsUnits(startAddress: totalAddresses.start, data: data)
             
             if !sensorNames.0.isEmpty {
-                if realTime.sensor1 == nil {
+                if machine.realTime.sensor1 == nil {
                     let sensor1 = BaseSensor(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
-                    realTime.sensor1 = sensor1
+                    machine.realTime.sensor1 = sensor1
                 } else {
-                    realTime.sensor1?.updateValues(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
+                    machine.realTime.sensor1?.updateValues(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
                 }
             } else {
-                realTime.sensor1 = nil
+                machine.realTime.sensor1 = nil
             }
             
             if !sensorNames.1.isEmpty {
-                if realTime.sensor2 == nil {
+                if machine.realTime.sensor2 == nil {
                     let sensor2 = BaseSensor(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
-                    realTime.sensor2 = sensor2
+                    machine.realTime.sensor2 = sensor2
                 } else {
-                    realTime.sensor2?.updateValues(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
+                    machine.realTime.sensor2?.updateValues(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
                 }
             } else {
-                realTime.sensor2 = nil
+                machine.realTime.sensor2 = nil
             }
             
             if !sensorNames.2.isEmpty {
-                if realTime.sensor3 == nil {
+                if machine.realTime.sensor3 == nil {
                     let sensor3 = BaseSensor(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
-                    realTime.sensor3 = sensor3
+                    machine.realTime.sensor3 = sensor3
                 } else {
-                    realTime.sensor3?.updateValues(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
+                    machine.realTime.sensor3?.updateValues(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
                 }
             } else {
-                realTime.sensor3 = nil
+                machine.realTime.sensor3 = nil
             }
             
-            self.delegate?.receivedMachineSensorsData(with: realTime)
+            self.delegate?.didUpdateRealTimeData(machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
-            self.getMachineSensorsData()
+            self.modbusMachineSensorsData()
         })
         
     }
@@ -311,28 +320,28 @@ class MachineNetworking: NSObject {
         return (sensor1Units, sensor2Units, sensor3Units)
     }
     
-    // MARK: - Get Current Cycle Info
+    // MARK: Fetch Current Cycle Information
     
-    func getMachineCycleInfoData() {
+    fileprivate func modbusMachineCurrentCycleInfo() {
         
         let totalAddresses = MachineConstants.CycleInfo.total
         
-        modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+        modbus.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
             guard let data = data as? [Int],
-                let realTime = self.machine?.realTime else { return }
+                let machine = self.machine else { return }
             
             let cycleName = self.getMachineCycleName(startAddress: totalAddresses.start, data: data)
             
-            if realTime.cycleName != cycleName {
-                 realTime.cycleName = cycleName
+            if machine.realTime.cycleName != cycleName {
+                machine.realTime.cycleName = cycleName
             }
             
-            self.delegate?.receivedMachineCycleInfoData(with: realTime)
+            self.delegate?.didUpdateRealTimeData(machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
-            self.getMachineCycleInfoData()
+            self.modbusMachineCurrentCycleInfo()
         })
         
     }
@@ -344,16 +353,16 @@ class MachineNetworking: NSObject {
         return cycleNameValue
     }
     
-    // MARK: - Current Cycle Parameters Observer Methods
+    // MARK: Current Cycle Parameters
     
-    func getMachineCycleParametersData() {
+    fileprivate func modbusCurrentCycleParameters() {
         
         let totalAddresses = MachineConstants.CycleParameters.total
         
-        modbus?.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+        modbus.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
             guard let data = data as? [Int],
-                let realTime = self.machine?.realTime else { return }
+                let machine = self.machine else { return }
             
             let parametersNames = self.getMachinePrametersIDs(startAddress: totalAddresses.start, data: data)
             let parametersValues = self.getMachineParametersValues(startAddress: totalAddresses.start, data: data)
@@ -361,30 +370,30 @@ class MachineNetworking: NSObject {
             let parameter1 = BaseParameter(id: parametersNames.0, name: parametersNames.1, value: parametersValues.0)
             let parameter2 = BaseParameter(id: parametersNames.2, name: parametersNames.3, value: parametersValues.1)
             let parameter3 = BaseParameter(id: parametersNames.4, name: parametersNames.5, value: parametersValues.2)
-
+            
             if !parameter1.name.isEmpty {
-                realTime.parameter1 = parameter1
+                machine.realTime.parameter1 = parameter1
             } else {
-                realTime.parameter1 = nil
+                machine.realTime.parameter1 = nil
             }
             
             if !parameter2.name.isEmpty {
-                realTime.parameter2 = parameter2
+                machine.realTime.parameter2 = parameter2
             } else {
-                realTime.parameter2 = nil
+                machine.realTime.parameter2 = nil
             }
             
             if !parameter3.name.isEmpty {
-                realTime.parameter3 = parameter3
+               machine.realTime.parameter3 = parameter3
             } else {
-                realTime.parameter3 = nil
+                machine.realTime.parameter3 = nil
             }
             
-            self.delegate?.receivedMachineParametersData(with: realTime)
+            self.delegate?.didUpdateRealTimeData(machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
-            self.getMachineCycleParametersData()
+            self.modbusCurrentCycleParameters()
         })
         
     }
@@ -424,3 +433,21 @@ class MachineNetworking: NSObject {
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

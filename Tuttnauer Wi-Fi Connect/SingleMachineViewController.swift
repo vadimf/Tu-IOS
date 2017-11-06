@@ -241,7 +241,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
     
     func machineRealTimeDataUpdated() {
         guard let machineMonitor = self.machineMonitor,
-            let machineRealTime = machineMonitor.machineRealTime else { return }
+            let machineRealTime = machineMonitor.machine?.realTime else { return }
         
         let currentCycleStage = machineRealTime.cycleStage?.getName
         let cycleError = machineRealTime.cycleError?.getName
@@ -286,7 +286,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
     
     func machineSensorsDataUpdated() {
         guard let machineMonitor = self.machineMonitor,
-            let machineRealTime = machineMonitor.machineRealTime else { return }
+            let machineRealTime = machineMonitor.machine?.realTime else { return }
         
         if let sensor1 = machineRealTime.sensor1 {
             sensor1TitleLabel.text = sensor1.name
@@ -315,7 +315,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
     
     func machineCycleInfoDataUpdated() {
         guard let machineMonitor = self.machineMonitor,
-            let machineRealTime = machineMonitor.machineRealTime else { return }
+            let machineRealTime = machineMonitor.machine?.realTime else { return }
         
         if let cycleName = machineRealTime.cycleName {
             currentCycleNameLabel.text = cycleName
@@ -326,7 +326,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
     
     func machineParametersDataUpdated() {
         guard let machineMonitor = self.machineMonitor,
-            let machineRealTime = machineMonitor.machineRealTime else { return }
+            let machineRealTime = machineMonitor.machine?.realTime else { return }
         
         // TODO: Update the parameters UI components
         

@@ -23,6 +23,11 @@ class Machine: NSObject {
     var currentTemperatureUnits: Int = 0
     
     // Real Time Data
-    var realTime: MachineRealTime?
+    var realTime: MachineRealTime!
+    
+    override init() {
+        super.init()
+        self.realTime = MachineRealTime()
+    }
     
 }
