@@ -51,6 +51,16 @@ class MachineMonitoring: NSObject {
         }
     }
     
+    func reconnect(to connection: MachineConnection) {
+        connection.connect { (success, error) in
+            if success {
+                self.delegate?.didConnect(to: connection, success: true)
+            } else {
+                self.delegate?.didLoseConnection(to: connection)
+            }
+        }
+    }
+    
     func disconnect(from connection: MachineConnection) {
         connection.disconnect()
         removeConnection(to: connection)
@@ -118,6 +128,9 @@ extension MachineMonitoring: MachineConnectionDelegate {
     
     func didLoseConnection(to connection: MachineConnection) {
         print("Lost connection to:", connection.ipAddress)
+        if connection == currentConnection {
+           delegate?.didLoseConnection(to: connection)
+        }
         NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Lost connection to: \(connection.machine!.ipAddress)")
     }
     

@@ -255,8 +255,8 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
     }
     
     func didLoseConnection(to connection: MachineConnection) {
-        Alerts.alertMessageWithActions(for: self, title: "Connection Lost", message: "The machine is not responding. What do you want to do?", doneButtonTitle: "Reconnect", cancelButtonTitle: "Disconnect", doneHandler: {
-            // TODO: Reconnect function
+        Alerts.alertMessageWithActions(for: self, title: "Connection Lost", message: "The machine \(connection.machine!.modelName) is not responding. What do you want to do?", doneButtonTitle: "Reconnect", cancelButtonTitle: "Disconnect", doneHandler: {
+            self.monitor?.reconnect(to: connection)
         }) {
             self.monitor?.disconnect(from: connection)
             self.dismiss(animated: true, completion: nil)
