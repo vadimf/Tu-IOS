@@ -35,19 +35,21 @@ class MachineConnection: NSObject {
         self.modbus = SwiftLibModbus(ipAddress: ipAddress as NSString, port: 502, device: 1)
         self.delegate = delegate
         self.ipAddress = ipAddress
-        self.connect()
+        self.connect(completion: nil)
     }
     
     // MARK: Connecting & Disconnecting
     
-    func connect() {
+    func connect(completion: MachineConnectCompletionHandler?) {
         modbus.connect(success: {
             self.isConnected = true
             self.machine = Machine()
             self.machine?.ipAddress = self.ipAddress
+            completion?(true, nil)
             self.delegate?.didConnect(to: self, success: true)
         }, failure: { error in
             self.isConnected = false
+            completion?(false, error)
             self.delegate?.didConnect(to: self, success: false)
             print(error.localizedDescription)
         })

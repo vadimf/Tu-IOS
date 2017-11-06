@@ -12,6 +12,7 @@ protocol MachineMonitoringDelegate {
     func didConnect(to connection: MachineConnection, success: Bool)
     func didDisconnect(from connection: MachineConnection)
     func didLoseConnection(to connection: MachineConnection)
+    func didChangeConnection(to connection: MachineConnection)
     func didUpdateSetupData(for machine: Machine)
     func didUpdateRealTimeData(for machine: Machine)
 }
@@ -30,13 +31,29 @@ class MachineMonitoring: NSObject {
     
     override init() {
         super.init()
-        
     }
     
-    // MARK: Connecting
+    // MARK: Create, Remove & Verify Connections
     
-    func createConnection(to ipAddress: String) {
-        let _ = MachineConnection(ipAddress: ipAddress, delegate: self) // Auto-connects on init
+    func createConnection(to ipAddress: String, completion: MachineConnectCompletionHandler?) {
+        let checkConnection = isConnected(to: ipAddress)
+        if checkConnection.connected {
+            currentConnection = checkConnection.connection
+            completion?(true, nil)
+        } else if !checkConnection.connected, let connection = checkConnection.connection {
+            connection.connect(completion: { (success, error) in
+                completion?(success, error)
+            })
+        } else {
+            let connection = MachineConnection(ipAddress: ipAddress, delegate: self) // Auto-connects on init
+            currentConnection = connection
+            completion?(true, nil)
+        }
+    }
+    
+    func disconnect(from connection: MachineConnection) {
+        connection.disconnect()
+        removeConnection(to: connection)
     }
     
     func removeConnection(to connection: MachineConnection) {
@@ -44,7 +61,36 @@ class MachineMonitoring: NSObject {
         connections.remove(at: index)
     }
     
+    /*func setCurrentConnection(with ipAddress: String) {
+        let changeTo = isConnected(to: ipAddress)
+        if changeTo.connected {
+            currentConnection = changeTo.connection
+        } else if !changeTo.connected, let connection = changeTo.connection {
+            connection.connect(completion: nil)
+        } else {
+            createConnection(to: ipAddress, completion: nil)
+        }
+    }*/
+    
+    // Returns if a machine with an ip address is already connected + already exists in our connections array
+    func isConnected(to ipAddress: String) -> (connected: Bool, connection: MachineConnection?) {
+        for connection in connections {
+            if connection.ipAddress == ipAddress {
+                return (connection.isConnected, connection)
+            }
+        }
+        return (false, nil)
+    }
+    
     // MARK: Start, Stop & Resume Monitoring
+    
+    func startMonitoring(connection: MachineConnection) {
+        connection.startFetching()
+    }
+    
+    func stopMonitoring(connection: MachineConnection) {
+        connection.stopFetching()
+    }
     
     func startMonitoringAll() {
         for connection in connections {

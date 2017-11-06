@@ -13,8 +13,7 @@ import NVActivityIndicatorView
 
 class SingleMachineViewController: UIViewController {
     
-    var machineMonitor: MachineMonitor?
-    
+    var monitor: MachineMonitoring?
     var cycleIndicator: NVActivityIndicatorView!
     
     // MARK: - IBOutlets
@@ -72,9 +71,9 @@ class SingleMachineViewController: UIViewController {
         
         NotificationsManager.shared.registerForNotifications()
         
-        machineMonitor = MachineMonitor.shared // Singleton Class
-        machineMonitor?.delegate = self
-        machineMonitor?.getMachineSetupData() // Request the initial machine object with data
+        monitor = MachineMonitoring.shared
+        monitor?.delegate = self
+        monitor?.startMonitoringAll()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -197,7 +196,7 @@ extension SingleMachineViewController {
 extension SingleMachineViewController: SideMenuDelegate {
     
     func didChooseDifferentMachine(ipAddress: String) {
-        guard let machineMonitor = self.machineMonitor else { return }
+        /*guard let machineMonitor = self.machineMonitor else { return }
         machineMonitor.clearCurrentConnectionAndDisconnect()
         
         let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -221,33 +220,63 @@ extension SingleMachineViewController: SideMenuDelegate {
                 MBProgressHUD.hide(for: self.view, animated: true)
             }
             
-        }
+        }*/
     }
     
 }
 
-// MARK: - Machine Monitor Delegate
+// MARK: - New Machine Monitoring Delegate
 
-extension SingleMachineViewController: MachineMonitorDelegate {
+extension SingleMachineViewController: MachineMonitoringDelegate {
     
-    func machineSetupDataUpdated() {
-        guard let machineMonitor = self.machineMonitor,
-            let machine = machineMonitor.machine else { return }
+    func didConnect(to connection: MachineConnection, success: Bool) {
+        
+    }
+    
+    func didDisconnect(from connection: MachineConnection) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didLoseConnection(to connection: MachineConnection) {
+        Alerts.alertMessageWithActions(for: self, title: "Connection Lost", message: "The machine is not responding. What do you want to do?", doneButtonTitle: "Reconnect", cancelButtonTitle: "Disconnect", doneHandler: {
+            // TODO: Reconnect function
+        }) {
+            self.monitor?.disconnect(from: connection)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func didChangeConnection(to connection: MachineConnection) {
+        
+    }
+    
+    func didUpdateSetupData(for machine: Machine) {
+        updateSetupData(with: machine)
+    }
+    
+    func didUpdateRealTimeData(for machine: Machine) {
+        updateRealTimeData(with: machine)
+        updateSensorsData(with: machine)
+        updateCycleInfoData(with: machine)
+        updateParametersData(with: machine)
+    }
+    
+    // MARK: UI Update Methods
+    
+    private func updateSetupData(with machine: Machine) {
         modelNameLabel.text = machine.modelName
         serialNumberLabel.text = machine.serialNumber
         ipAddressLabel.text = machine.ipAddress
         versionLabel.text = machine.bsVersion
     }
     
-    func machineRealTimeDataUpdated() {
-        guard let machineMonitor = self.machineMonitor,
-            let machineRealTime = machineMonitor.machine?.realTime else { return }
+    private func updateRealTimeData(with machine: Machine) {
         
-        let currentCycleStage = machineRealTime.cycleStage?.getName
-        let cycleError = machineRealTime.cycleError?.getName
+        let currentCycleStage = machine.realTime.cycleStage?.getName
+        let cycleError = machine.realTime.cycleError?.getName
         
-        systemStatusLabel.text = machineRealTime.systemStatus?.getName
-        currentCycleIconImageView.image = machineRealTime.cycleID?.getIcon
+        systemStatusLabel.text = machine.realTime.systemStatus?.getName
+        currentCycleIconImageView.image = machine.realTime.cycleID?.getIcon
         
         //currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
         
@@ -256,7 +285,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             currentCycleStageNameLabel.text = ""
         } else {
             currentStageTitleLabel.text = "Current Stage"
-            currentCycleStageNameLabel.text = machineRealTime.cycleStage?.getName
+            currentCycleStageNameLabel.text = machine.realTime.cycleStage?.getName
         }
         
         if cycleError!.isEmpty  {
@@ -267,15 +296,15 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             cycleErrorLabel.text = cycleError
         }
         
-        doorStateLabel.text = machineRealTime.doorState?.getName
+        doorStateLabel.text = machine.realTime.doorState?.getName
         
-        if let cycleName = machineRealTime.cycleID, cycleName == .none {
+        if let cycleName = machine.realTime.cycleID, cycleName == .none {
             currentCycleIconImageView.isHidden = true
         } else {
             currentCycleIconImageView.isHidden = false
         }
         
-        if let systemStatus = machineRealTime.systemStatus, systemStatus != .none {
+        if let systemStatus = machine.realTime.systemStatus, systemStatus != .none {
             if !cycleIndicator.isAnimating {
                 cycleIndicator.startAnimating()
             }
@@ -284,11 +313,9 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         }
     }
     
-    func machineSensorsDataUpdated() {
-        guard let machineMonitor = self.machineMonitor,
-            let machineRealTime = machineMonitor.machine?.realTime else { return }
+    private func updateSensorsData(with machine: Machine) {
         
-        if let sensor1 = machineRealTime.sensor1 {
+        if let sensor1 = machine.realTime.sensor1 {
             sensor1TitleLabel.text = sensor1.name
             sensor1ValueLabel.text = sensor1.getFormattedUnit()
         } else {
@@ -296,7 +323,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             sensor1ValueLabel.text = ""
         }
         
-        if let sensor2 = machineRealTime.sensor2 {
+        if let sensor2 = machine.realTime.sensor2 {
             sensor2TitleLabel.text = sensor2.name
             sensor2ValueLabel.text = sensor2.getFormattedUnit()
         } else {
@@ -304,7 +331,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             sensor2ValueLabel.text = ""
         }
         
-        if let sensor3 = machineRealTime.sensor3 {
+        if let sensor3 = machine.realTime.sensor3 {
             sensor3TitleLabel.text = sensor3.name
             sensor3ValueLabel.text = sensor3.getFormattedUnit()
         } else {
@@ -313,24 +340,16 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         }
     }
     
-    func machineCycleInfoDataUpdated() {
-        guard let machineMonitor = self.machineMonitor,
-            let machineRealTime = machineMonitor.machine?.realTime else { return }
-        
-        if let cycleName = machineRealTime.cycleName {
+    private func updateCycleInfoData(with machine: Machine) {
+        if let cycleName = machine.realTime.cycleName {
             currentCycleNameLabel.text = cycleName
         } else {
             currentCycleNameLabel.text = ""
         }
     }
     
-    func machineParametersDataUpdated() {
-        guard let machineMonitor = self.machineMonitor,
-            let machineRealTime = machineMonitor.machine?.realTime else { return }
-        
-        // TODO: Update the parameters UI components
-        
-        if let parameter1 = machineRealTime.parameter1 {
+    private func updateParametersData(with machine: Machine) {
+        if let parameter1 = machine.realTime.parameter1 {
             parameter1TitleLabel.text = parameter1.name
             parameter1ValueLabel.text = parameter1.getFormattedUnit()
         } else {
@@ -338,7 +357,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             parameter1ValueLabel.text = ""
         }
         
-        if let parameter2 = machineRealTime.parameter2 {
+        if let parameter2 = machine.realTime.parameter2 {
             parameter2TitleLabel.text = parameter2.name
             parameter2ValueLabel.text = parameter2.getFormattedUnit()
         } else {
@@ -346,7 +365,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             parameter2ValueLabel.text = ""
         }
         
-        if let parameter3 = machineRealTime.parameter3 {
+        if let parameter3 = machine.realTime.parameter3 {
             parameter3TitleLabel.text = parameter3.name
             parameter3ValueLabel.text = parameter3.getFormattedUnit()
         } else {
@@ -355,23 +374,17 @@ extension SingleMachineViewController: MachineMonitorDelegate {
         }
     }
     
-    func didDisconnectFromMachine() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func connectionLost() {
-        Alerts.alertMessageWithActions(for: self, title: "Connection Lost", message: "The machine is not responding. What do you want to do?", doneButtonTitle: "Reconnect", cancelButtonTitle: "Disconnect", doneHandler: {
-            self.reconnect()
-        }) {
-            self.machineMonitor?.disconnect()
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
+}
+
+
+// MARK: - Machine Monitor Delegate
+
+extension SingleMachineViewController {
     
     // MARK: - Non-Delegate Methods
     
     private func reconnect() {
-        self.machineMonitor?.reconnect(completion: { (success, error) in
+        /*self.machineMonitor?.reconnect(completion: { (success, error) in
             
             guard error == nil, success else {
                 self.connectionLost()
@@ -380,7 +393,7 @@ extension SingleMachineViewController: MachineMonitorDelegate {
             
             self.machineMonitor?.getMachineSetupData()
             self.machineMonitor?.startMonitoring()
-        })
+        })*/
     }
     
 }
