@@ -12,8 +12,6 @@
 		162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */; };
 		162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */; };
 		163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */; };
-		1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFB91F9E144400D33278 /* MachineMonitor.swift */; };
-		1650AFBC1F9E177B00D33278 /* MachineNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */; };
 		165BB9431FA0098D0077862D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BB9421FA0098D0077862D /* SideMenuViewController.swift */; };
 		165BC92B1FB04FF90017EA9F /* MachineConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BC92A1FB04FF90017EA9F /* MachineConnection.swift */; };
 		165BC92D1FB05A450017EA9F /* MachineMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BC92C1FB05A450017EA9F /* MachineMonitoring.swift */; };
@@ -70,8 +68,6 @@
 		162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuIconTableViewCell.swift; sourceTree = "<group>"; };
 		163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineRealTime.swift; sourceTree = "<group>"; };
-		1650AFB91F9E144400D33278 /* MachineMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineMonitor.swift; sourceTree = "<group>"; };
-		1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineNetworking.swift; sourceTree = "<group>"; };
 		165BB9421FA0098D0077862D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		165BC92A1FB04FF90017EA9F /* MachineConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConnection.swift; sourceTree = "<group>"; };
 		165BC92C1FB05A450017EA9F /* MachineMonitoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineMonitoring.swift; sourceTree = "<group>"; };
@@ -413,8 +409,6 @@
 		16D607BD1F9E3921001F8E08 /* Machine */ = {
 			isa = PBXGroup;
 			children = (
-				1650AFB91F9E144400D33278 /* MachineMonitor.swift */,
-				1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */,
 				165BC92A1FB04FF90017EA9F /* MachineConnection.swift */,
 				165BC92C1FB05A450017EA9F /* MachineMonitoring.swift */,
 			);
@@ -620,7 +614,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */,
-				1650AFBA1F9E144400D33278 /* MachineMonitor.swift in Sources */,
 				166BA9731FA6125C00157706 /* BaseParameter.swift in Sources */,
 				16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */,
 				168ACDEA1F922996000277DD /* HA+UIView.swift in Sources */,
@@ -663,7 +656,6 @@
 				168ACDF41F923179000277DD /* SettingsTableViewController.swift in Sources */,
 				168ACDF21F922EEF000277DD /* Constants.swift in Sources */,
 				16707DF41F61775500706B87 /* modbus-tcp.c in Sources */,
-				1650AFBC1F9E177B00D33278 /* MachineNetworking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

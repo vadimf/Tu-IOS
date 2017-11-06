@@ -61,17 +61,6 @@ class MachineMonitoring: NSObject {
         connections.remove(at: index)
     }
     
-    /*func setCurrentConnection(with ipAddress: String) {
-        let changeTo = isConnected(to: ipAddress)
-        if changeTo.connected {
-            currentConnection = changeTo.connection
-        } else if !changeTo.connected, let connection = changeTo.connection {
-            connection.connect(completion: nil)
-        } else {
-            createConnection(to: ipAddress, completion: nil)
-        }
-    }*/
-    
     // Returns if a machine with an ip address is already connected + already exists in our connections array
     func isConnected(to ipAddress: String) -> (connected: Bool, connection: MachineConnection?) {
         for connection in connections {

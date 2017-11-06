@@ -30,7 +30,7 @@ class MainConnectViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        autoConnectIfNeeded()
+        autoConnectIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,9 +104,14 @@ extension MainConnectViewController {
         
         switch autoConnectSettings {
         case types.autoConnectOnStart.rawValue:
-            // Just temporary until I fix the machine discovery feature
-            guard let lastMachineIP = UserSettingsManager.shared.userSettings.lastMachineIPAddress, !lastMachineIP.isEmpty else { return }
-            connect(to: lastMachineIP, loaderMessage: "Connecting: \(lastMachineIP)")
+            NetworkManager.shared.scanForMachinesOnNetwork()
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
+                MBProgressHUD.hide(for: self.view, animated: false)
+                if let machine = NetworkManager.shared.machines.first {
+                    self.connect(to: machine.ipAddress, loaderMessage: "Connecting: \(machine.ipAddress)")
+                }
+            })
             return
         case types.connectToLastMachine.rawValue:
             guard let lastMachineIP = UserSettingsManager.shared.userSettings.lastMachineIPAddress, !lastMachineIP.isEmpty else { return }
