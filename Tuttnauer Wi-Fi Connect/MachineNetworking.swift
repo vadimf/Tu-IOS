@@ -8,9 +8,6 @@
 
 import UIKit
 
-typealias MachineConnectCompletionHandler = (_ success: Bool,_ error: NSError?) -> Void
-typealias MachineRegistersCompletionHandler = (_ data: [AnyObject]?, _ error: NSError?) -> Void
-
 protocol MachineNetworkingDelegate {
     func receivedMachineSetupData(with machine: Machine)
     func receivedMachineRealTimeStateData(with machineRealTimeState: MachineRealTime)
@@ -23,7 +20,7 @@ protocol MachineNetworkingDelegate {
 
 class MachineNetworking: NSObject {
     
-    static let shared = MachineNetworking()
+    /*static let shared = MachineNetworking()
     
     var delegate: MachineNetworkingDelegate?
     
@@ -421,6 +418,6 @@ class MachineNetworking: NSObject {
         let parameter3Value = Utilities.decimalsToDouble(decimals: parameter3)
         
         return (parameter1Value, parameter2Value, parameter3Value)
-    }
+    }*/
     
 }

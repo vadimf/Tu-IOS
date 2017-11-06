@@ -24,11 +24,13 @@ class MachineTableViewCell: UITableViewCell {
     @IBOutlet weak var serialNumberTitleLabel: UILabel!
     @IBOutlet weak var ipTitleLabel: UILabel!
     @IBOutlet weak var bsVersionTitleLabel: UILabel!
+    @IBOutlet weak var connectedTitleLabel: UILabel!
     
     @IBOutlet weak var modelNameLabel: UILabel!
     @IBOutlet weak var serialNumberLabel: UILabel!
     @IBOutlet weak var ipLabel: UILabel!
     @IBOutlet weak var bsVersionLabel: UILabel!
+    @IBOutlet weak var connectedLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -58,6 +60,12 @@ class MachineTableViewCell: UITableViewCell {
         serialNumberLabel.text = machine.serialNumber
         ipLabel.text = machine.ipAddress
         bsVersionLabel.text = machine.bsVersion
+        
+        let connection = MachineMonitoring.shared.isConnected(to: machine.ipAddress)
+        if connection.connected {
+            connectedLabel.text = "Yes"
+            connectedLabel.isHighlighted = true
+        }
     }
     
     private func resetUI() {
@@ -65,6 +73,8 @@ class MachineTableViewCell: UITableViewCell {
         serialNumberLabel.text = ""
         ipLabel.text = ""
         bsVersionLabel.text = ""
+        connectedLabel.text = "No"
+        connectedLabel.isHighlighted = false
     }
     
     func highlightCell() {

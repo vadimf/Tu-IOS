@@ -68,7 +68,6 @@ class SideMenuViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func disconnectButtonTapped(_ sender: UIButton) {
-        MachineMonitor.shared.disconnect()
         NotificationCenter.default.post(name: NotificationsIdentifiers.machineDidDisconnectUserInitiated, object: nil)
     }
 

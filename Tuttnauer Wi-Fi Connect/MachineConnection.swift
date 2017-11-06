@@ -8,6 +8,9 @@
 
 import Foundation
 
+typealias MachineConnectCompletionHandler = (_ success: Bool,_ error: NSError?) -> Void
+typealias MachineRegistersCompletionHandler = (_ data: [AnyObject]?, _ error: NSError?) -> Void
+
 protocol MachineConnectionDelegate {
     func didConnect(to connection: MachineConnection, success: Bool)
     func didDisconnect(from connection: MachineConnection)

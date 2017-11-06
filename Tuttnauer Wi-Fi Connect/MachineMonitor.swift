@@ -21,7 +21,7 @@ protocol MachineMonitorDelegate {
 
 class MachineMonitor: NSObject {
     
-    static let shared = MachineMonitor()
+    /*static let shared = MachineMonitor()
     
     var delegate: MachineMonitorDelegate?
     
@@ -186,6 +186,6 @@ extension MachineMonitor: MachineNetworkingDelegate {
         stopMonitoring()
         delegate?.connectionLost()
         NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Lost conncetion to: \(self.machine!.ipAddress)")
-    }
+    }*/
     
 }

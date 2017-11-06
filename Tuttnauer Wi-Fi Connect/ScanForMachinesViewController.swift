@@ -174,7 +174,8 @@ extension ScanForMachinesViewController {
         // It's connecting to the machine too fast XD
         // We'll dispatch this call after 2 seconds just so the user can experience the awesome MBProgressHUD
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            MachineMonitor.shared.connect(to: ipAddress) { (success, error) in
+            
+            MachineMonitoring.shared.createConnection(to: ipAddress, completion: { (success, error) in
                 
                 MBProgressHUD.hide(for: self.view, animated: false)
                 
@@ -187,7 +188,7 @@ extension ScanForMachinesViewController {
                 
                 self.performSegue(withIdentifier: SegueIdentifiers.scanMachinesToSinleMachine, sender: self)
                 
-            }
+            })
         }
     }
     
