@@ -75,13 +75,16 @@ class Enums: NSObject {
     
     enum Language: Int {
         case english = 0
+        case spanish
         
-        static let allValues = [english]
+        static let allValues = [english, spanish]
         
         var getName: String {
             switch self {
             case .english:
                 return "English"
+            case .spanish:
+                return "Spanish"
             }
         }
     }

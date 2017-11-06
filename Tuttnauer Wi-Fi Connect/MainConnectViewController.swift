@@ -30,7 +30,7 @@ class MainConnectViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        autoConnectIfNeeded()
+//        autoConnectIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {

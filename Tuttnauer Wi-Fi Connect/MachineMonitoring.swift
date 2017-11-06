@@ -108,24 +108,28 @@ class MachineMonitoring: NSObject {
 
 // MARK: - Machine Connection Delegate
 
-extension MachineMonitoring: MachineConnectionDelegate {
+extension MachineMonitoring: MachineConnectionDelegate {    
     
     func didConnect(to connection: MachineConnection, success: Bool) {
         if success {
             self.connections.append(connection)
             connection.startFetching()
             print("Connected to:", connection.ipAddress)
+            NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Connected to: \(connection.machine!.ipAddress)")
         } else {
             print("Could not connect to:", connection.ipAddress)
+            NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Connection failed: \(connection.machine!.ipAddress)")
         }
     }
     
     func didDisconnect(from connection: MachineConnection) {
         print("Disconnected from:", connection.ipAddress)
+        NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Disconnected from: \(connection.machine!.ipAddress)")
     }
     
     func didLoseConnection(to connection: MachineConnection) {
         print("Lost connection to:", connection.ipAddress)
+        NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Lost connection to: \(connection.machine!.ipAddress)")
     }
     
     func didUpdateSetupData(for connection: MachineConnection, machine: Machine) {
@@ -135,6 +139,16 @@ extension MachineMonitoring: MachineConnectionDelegate {
     
     func didUpdateRealTimeData(for connection: MachineConnection, machine: Machine) {
         guard connection == currentConnection else { return }
+        
+        if let cycleError = machine.realTime.cycleError, cycleError != .None {
+            if !cycleErrorNotified {
+                cycleErrorNotified = true
+                NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "\(machine.modelName) cycle error: \(cycleError.getName)")
+            }
+        } else {
+            cycleErrorNotified = false
+        }
+        
         delegate?.didUpdateRealTimeData(for: machine)
     }
     
