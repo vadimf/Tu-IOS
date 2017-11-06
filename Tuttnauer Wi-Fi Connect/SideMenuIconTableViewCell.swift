@@ -17,6 +17,11 @@ class SideMenuIconTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         resetUI()
+        tintColor = UIColor.tuttnauerGreen()
+        let separatorView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: frame.size.height - 1), size: CGSize(width: frame.size.width, height: 1)))
+        separatorView.backgroundColor = UIColor.tuttnauerGrey()
+        addSubview(separatorView)
+        bringSubview(toFront: separatorView)
     }
     
     override func prepareForReuse() {

@@ -61,7 +61,7 @@ class SingleMachineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cycleIndicator = NVActivityIndicatorView(frame: currentCycleIndicatorView.frame, type: .ballBeat, color: UIColor.tuttnauerRed(), padding: 0)
+        cycleIndicator = NVActivityIndicatorView(frame: currentCycleIndicatorView.frame, type: .ballSpinFadeLoader, color: UIColor.tuttnauerRed(), padding: 0)
         
         registerNotifications()
         setupSideMenu()
@@ -93,6 +93,7 @@ class SingleMachineViewController: UIViewController {
     // MARK: - Setup Methods
     
     private func setupCycleIndicator() {
+        NVActivityIndicatorView.DEFAULT_BLOCKER_SIZE = CGSize(width: currentCycleIndicatorView.frame.size.height, height: currentCycleIndicatorView.frame.size.height)
         cycleIndicator.frame = currentCycleIndicatorView.frame
         cycleIndicator.translatesAutoresizingMaskIntoConstraints = false
         currentCycleIndicatorView.addSubview(cycleIndicator)

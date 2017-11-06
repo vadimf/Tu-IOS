@@ -20,6 +20,7 @@ struct MenuItemMachine {
     let name: String
     let ipAddress: String
     let enabled: Bool
+    let connected: Bool
 }
 
 enum MenuItemType {
@@ -90,7 +91,8 @@ extension SideMenuViewController {
     
     fileprivate func updateMachineList() {
         for machine in machines {
-            dataSource.append(MenuItem(name: machine.modelName, value: machine.ipAddress, type: .machine, enabled: true))
+            let connection = MachineMonitoring.shared.isConnected(to: machine.ipAddress)
+            dataSource.append(MenuItem(name: machine.modelName, value: machine.ipAddress, type: .machine, enabled: connection.connected))
         }
     }
     
@@ -145,9 +147,8 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
             cell.titleLabel.text = item.name
             cell.subtitleLabel.text = item.value
             
-            if !item.enabled {
-                cell.titleLabel.textColor = UIColor.lightGray
-                cell.selectionStyle = .none
+            if item.enabled { // To indicate if connected
+                cell.accessoryType = .checkmark
             }
             
             return cell
