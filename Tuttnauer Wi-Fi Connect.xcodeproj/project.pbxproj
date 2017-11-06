@@ -16,6 +16,7 @@
 		1650AFBC1F9E177B00D33278 /* MachineNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */; };
 		165BB9431FA0098D0077862D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BB9421FA0098D0077862D /* SideMenuViewController.swift */; };
 		165BC92B1FB04FF90017EA9F /* MachineConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BC92A1FB04FF90017EA9F /* MachineConnection.swift */; };
+		165BC92D1FB05A450017EA9F /* MachineMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BC92C1FB05A450017EA9F /* MachineMonitoring.swift */; };
 		1660E9871F9FCB16008DC47E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E9861F9FCB16008DC47E /* UserSettings.swift */; };
 		1660E9891F9FCDB5008DC47E /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E9881F9FCDB5008DC47E /* Enums.swift */; };
 		1660E98C1F9FD133008DC47E /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1660E98B1F9FD133008DC47E /* UserSettingsManager.swift */; };
@@ -73,6 +74,7 @@
 		1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineNetworking.swift; sourceTree = "<group>"; };
 		165BB9421FA0098D0077862D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		165BC92A1FB04FF90017EA9F /* MachineConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConnection.swift; sourceTree = "<group>"; };
+		165BC92C1FB05A450017EA9F /* MachineMonitoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineMonitoring.swift; sourceTree = "<group>"; };
 		1660E9861F9FCB16008DC47E /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		1660E9881F9FCDB5008DC47E /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		1660E98B1F9FD133008DC47E /* UserSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 				1650AFB91F9E144400D33278 /* MachineMonitor.swift */,
 				1650AFBB1F9E177B00D33278 /* MachineNetworking.swift */,
 				165BC92A1FB04FF90017EA9F /* MachineConnection.swift */,
+				165BC92C1FB05A450017EA9F /* MachineMonitoring.swift */,
 			);
 			name = Machine;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				160DD2361FA1E4060017D221 /* BaseSensor.swift in Sources */,
 				1660E9891F9FCDB5008DC47E /* Enums.swift in Sources */,
 				1660E98C1F9FD133008DC47E /* UserSettingsManager.swift in Sources */,
+				165BC92D1FB05A450017EA9F /* MachineMonitoring.swift in Sources */,
 				165BC92B1FB04FF90017EA9F /* MachineConnection.swift in Sources */,
 				168ACDF61F923625000277DD /* SettingsOptionsTableViewController.swift in Sources */,
 				168909F81F98C36F006ECEE4 /* MachineTableViewCell.swift in Sources */,

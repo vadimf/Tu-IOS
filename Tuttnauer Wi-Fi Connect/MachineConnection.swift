@@ -9,49 +9,46 @@
 import Foundation
 
 protocol MachineConnectionDelegate {
-    func didConnect(success: Bool)
-    func didDisconnect()
-    func didLoseConnection()
-    func didUpdateSetupData(machine: Machine)
-    func didUpdateRealTimeData(machine: Machine)
+    func didConnect(to connection: MachineConnection, success: Bool)
+    func didDisconnect(from connection: MachineConnection)
+    func didLoseConnection(to connection: MachineConnection)
+    func didUpdateSetupData(for connection: MachineConnection, machine: Machine)
+    func didUpdateRealTimeData(for connection: MachineConnection, machine: Machine)
 }
 
 class MachineConnection: NSObject {
 
-    var delegate: MachineConnectionDelegate?
+    fileprivate var delegate: MachineConnectionDelegate?
     
     fileprivate var modbus: SwiftLibModbus!
     
     var machine: Machine?
+    var ipAddress: String!
     var isConnected: Bool = false
     
     var timer: Timer?
     
     // MARK: Initialization
     
-    init(ipAddress: String) {
+    init(ipAddress: String, delegate: MachineConnectionDelegate?) {
         super.init()
         self.modbus = SwiftLibModbus(ipAddress: ipAddress as NSString, port: 502, device: 1)
-        self.connect() { (success, error) in
-            guard error == nil else {
-                self.isConnected = false
-                self.delegate?.didConnect(success: false)
-                return
-            }
-            self.isConnected = true
-            self.machine = Machine()
-            self.delegate?.didConnect(success: true)
-        }
+        self.delegate = delegate
+        self.ipAddress = ipAddress
+        self.connect()
     }
     
     // MARK: Connecting & Disconnecting
     
-    func connect(completion: MachineConnectCompletionHandler?) {
+    func connect() {
         modbus.connect(success: {
-            completion?(true, nil)
-            print("Connected to:", String(describing: self.modbus.ipAddress))
+            self.isConnected = true
+            self.machine = Machine()
+            self.machine?.ipAddress = self.ipAddress
+            self.delegate?.didConnect(to: self, success: true)
         }, failure: { error in
-            completion?(false, error)
+            self.isConnected = false
+            self.delegate?.didConnect(to: self, success: false)
             print(error.localizedDescription)
         })
     }
@@ -59,24 +56,24 @@ class MachineConnection: NSObject {
     func disconnect() {
         modbus.disconnect()
         isConnected = false
-        delegate?.didDisconnect()
+        delegate?.didDisconnect(from: self)
     }
     
     fileprivate func checkConnection(error: NSError) {
         if error.code == 54 {
-            delegate?.didLoseConnection()
+            delegate?.didLoseConnection(to: self)
         }
         print(error.localizedDescription)
     }
     
     // MARK: - Fetch Start & Stop
     
-    func start() {
+    func startFetching() {
         timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(fetchMachineRealTimeData), userInfo: nil, repeats: true)
         timer?.fire()
     }
     
-    func stop() {
+    func stopFetching() {
         guard timer != nil else { return }
         timer!.invalidate()
         timer = nil
@@ -128,7 +125,7 @@ extension MachineConnection {
             let version: String = "\(data[0]).\(data[1]).\(data[3]).\(data[2])"
             machine.bsVersion = version
             
-            self.delegate?.didUpdateSetupData(machine: machine)
+            self.delegate?.didUpdateSetupData(for: self, machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
@@ -155,7 +152,7 @@ extension MachineConnection {
             machine.serialNumber = serialNumber
             machine.ipAddress = String.init(describing: self.modbus!.ipAddress!)
             
-            self.delegate?.didUpdateSetupData(machine: machine)
+            self.delegate?.didUpdateSetupData(for: self, machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
@@ -181,7 +178,7 @@ extension MachineConnection {
             machine.realTime.cycleSubStage = AutoClaveEnums.CycleSubStage(rawValue: self.getMachineRealTimeCycleSubStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleSubStage(rawValue: 0)
             machine.realTime.cycleError = AutoClaveEnums.CycleError(rawValue: self.getMachineRealTimeCycleError(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleError(rawValue: 0)
             
-            self.delegate?.didUpdateRealTimeData(machine: machine)
+            self.delegate?.didUpdateRealTimeData(for: self, machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
@@ -268,7 +265,7 @@ extension MachineConnection {
                 machine.realTime.sensor3 = nil
             }
             
-            self.delegate?.didUpdateRealTimeData(machine: machine)
+            self.delegate?.didUpdateRealTimeData(for: self, machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
@@ -337,7 +334,7 @@ extension MachineConnection {
                 machine.realTime.cycleName = cycleName
             }
             
-            self.delegate?.didUpdateRealTimeData(machine: machine)
+            self.delegate?.didUpdateRealTimeData(for: self, machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
@@ -389,7 +386,7 @@ extension MachineConnection {
                 machine.realTime.parameter3 = nil
             }
             
-            self.delegate?.didUpdateRealTimeData(machine: machine)
+            self.delegate?.didUpdateRealTimeData(for: self, machine: machine)
             
         }, failure: { (error) in
             self.checkConnection(error: error)
@@ -433,21 +430,3 @@ extension MachineConnection {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
