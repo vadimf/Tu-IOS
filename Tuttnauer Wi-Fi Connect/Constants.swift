@@ -16,6 +16,7 @@ struct SegueIdentifiers {
     static let mainConnectToSingleMachine = "Main Connect to Single Machine Segue"
     static let scanMachinesToSinleMachine = "Scan Machines to Single Machine Segue"
     static let singleMachineToSettings = "Single Machine to Settings Segue"
+    static let singleMachineToSideMenu = "Single Machine To Side Menu Segue"
     static let settingsToSettingsOptions = "Settings To Settings Options Segue"
 }
 

@@ -93,24 +93,6 @@ extension MainConnectViewController {
                 
             }
         }
-
-        /*DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            MachineMonitor.shared.connect(to: ipAddress) { (success, error) in
-                
-                MBProgressHUD.hide(for: self.view, animated: false)
-                
-                guard error == nil else {
-                    Alerts.alertMessage(for: self, title: "Connection Failed", message: "Could not connect to \(ipAddress)", closeHandler: nil)
-                    return
-                }
-                
-                self.previouslyConnected = true
-                UserSettingsManager.shared.setUserLastMachineIPAddress(to: ipAddress)
-                
-                self.performSegue(withIdentifier: SegueIdentifiers.mainConnectToSingleMachine, sender: self)
-                
-            }
-        }*/
     }
     
     func autoConnectIfNeeded() {

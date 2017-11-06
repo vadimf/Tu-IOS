@@ -71,6 +71,7 @@ class MachineConnection: NSObject {
     // MARK: - Fetch Start & Stop
     
     func startFetching() {
+        fetchMachineSetupData()
         timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(fetchMachineRealTimeData), userInfo: nil, repeats: true)
         timer?.fire()
     }
@@ -95,6 +96,7 @@ extension MachineConnection {
         modbusMachineStateData()
         modbusMachineSensorsData()
         modbusMachineCurrentCycleInfo()
+        modbusCurrentCycleParameters()
     }
     
 }

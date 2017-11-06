@@ -48,7 +48,7 @@ class Utilities {
     
     class func decimalsToString(decimals: [Int]) -> String {
         
-        guard decimals.count == 4 else { return "" }
+        guard decimals.count >= 4 else { return "" }
         
         var byteArray = [UInt8]()
         

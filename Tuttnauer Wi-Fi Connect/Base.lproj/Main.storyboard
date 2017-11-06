@@ -1064,7 +1064,8 @@
                     <navigationItem key="navigationItem" title="Tuttnauer" id="Siy-T8-dj7">
                         <barButtonItem key="leftBarButtonItem" image="icon_navigationbar_menu" id="cIi-LG-lF1">
                             <connections>
-                                <segue destination="Msn-Wh-Vgi" kind="presentation" identifier="Show Side Menu" id="11v-0X-BZT"/>
+                                <action selector="menuButtonTapped:" destination="oCj-zq-mhH" id="xEf-aJ-GrU"/>
+                                <segue destination="Msn-Wh-Vgi" kind="presentation" identifier="Single Machine To Side Menu Segue" id="afB-q0-cxd"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="icon_navigationbar_settings" id="s4c-bR-pdW">

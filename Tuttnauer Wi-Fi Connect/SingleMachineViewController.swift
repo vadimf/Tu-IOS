@@ -151,7 +151,6 @@ class SingleMachineViewController: UIViewController {
         let menuManager = SideMenuManager.default
         menuManager.menuPresentMode = .menuSlideIn
         menuManager.menuFadeStatusBar = false
-        
         if let menuVC = menuManager.menuLeftNavigationController?.viewControllers.first as? SideMenuViewController {
             menuVC.delegate = self
         }
@@ -161,6 +160,9 @@ class SingleMachineViewController: UIViewController {
     
     @IBAction func settingsButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: SegueIdentifiers.singleMachineToSettings, sender: self)
+    }
+    
+    @IBAction func menuButtonTapped(_ sender: UIBarButtonItem) {
     }
     
 }
@@ -191,18 +193,34 @@ extension SingleMachineViewController {
     
 }
 
+// MARK: - Navigation
+
+extension SingleMachineViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == SegueIdentifiers.singleMachineToSideMenu {
+            guard let vc = segue.destination as? UISideMenuNavigationController else { return }
+            guard let sideMenuVC = vc.viewControllers.first as? SideMenuViewController else { return }
+            sideMenuVC.delegate = self
+        }
+        
+    }
+    
+}
+
 // MARK: - Side Menu Delegate
 
 extension SingleMachineViewController: SideMenuDelegate {
     
     func didChooseDifferentMachine(ipAddress: String) {
-        /*guard let machineMonitor = self.machineMonitor else { return }
-        machineMonitor.clearCurrentConnectionAndDisconnect()
+        
+        guard let monitor = self.monitor else { return }
         
         let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         progressHUD.label.text = "Connecting: \(ipAddress)"
         
-        machineMonitor.connect(to: ipAddress) { (success, error) in
+        monitor.createConnection(to: ipAddress) { (success, error) in
             
             guard error == nil else {
                 MBProgressHUD.hide(for: self.view, animated: true)
@@ -216,11 +234,9 @@ extension SingleMachineViewController: SideMenuDelegate {
                 self.setupLocalization()
                 self.resetOneTimeLabelValues()
                 self.resetOccurrentLabelValues()
-                self.machineMonitor?.getMachineSetupData()
                 MBProgressHUD.hide(for: self.view, animated: true)
             }
-            
-        }*/
+        }
     }
     
 }

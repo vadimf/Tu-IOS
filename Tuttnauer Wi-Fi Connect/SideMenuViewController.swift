@@ -174,7 +174,7 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
         guard item.enabled else { return }
         
         if item.type == .machine {
-            let currentMachineIPAddress = MachineMonitor.shared.machine!.ipAddress
+            let currentMachineIPAddress = MachineMonitoring.shared.currentConnection?.ipAddress
             if item.value == currentMachineIPAddress {
                 dismiss(animated: true, completion: nil)
             } else {
