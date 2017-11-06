@@ -831,7 +831,7 @@ class AutoClaveEnums {
             case .refChamberTemperature1:
                 return "Temp. 1"
             case .bioHazardTemperature:
-                return "BioHazard Temp."
+                return "Bio Temp."
             case .chamberPressure:
                 return "Pressure"
             case .water:

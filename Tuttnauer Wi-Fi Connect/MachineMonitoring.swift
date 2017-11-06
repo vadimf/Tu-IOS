@@ -130,8 +130,9 @@ extension MachineMonitoring: MachineConnectionDelegate {
         print("Lost connection to:", connection.ipAddress)
         if connection == currentConnection {
            delegate?.didLoseConnection(to: connection)
+        } else {
+            NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Lost connection to: \(connection.machine!.ipAddress)")
         }
-        NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Lost connection to: \(connection.machine!.ipAddress)")
     }
     
     func didUpdateSetupData(for connection: MachineConnection, machine: Machine) {

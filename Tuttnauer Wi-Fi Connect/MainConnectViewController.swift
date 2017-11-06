@@ -103,7 +103,8 @@ extension MainConnectViewController {
         switch autoConnectSettings {
         case types.autoConnectOnStart.rawValue:
             NetworkManager.shared.scanForMachinesOnNetwork()
-            MBProgressHUD.showAdded(to: self.view, animated: true)
+            let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+            progressHUD.label.text = "Searching..."
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
                 MBProgressHUD.hide(for: self.view, animated: false)
                 if let machine = NetworkManager.shared.machines.first {
