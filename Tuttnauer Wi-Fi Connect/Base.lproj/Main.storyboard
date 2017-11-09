@@ -929,8 +929,20 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1M9-Tm-Ihx">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1M9-Tm-Ihx">
                                                 <rect key="frame" x="8" y="171" width="142.5" height="55"/>
+                                                <subviews>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OE5-LG-TU3">
+                                                        <rect key="frame" x="31" y="9.5" width="80.5" height="36"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="OE5-LG-TU3" firstAttribute="centerY" secondItem="1M9-Tm-Ihx" secondAttribute="centerY" id="7E1-qY-OnK"/>
+                                                    <constraint firstItem="OE5-LG-TU3" firstAttribute="centerX" secondItem="1M9-Tm-Ihx" secondAttribute="centerX" id="tms-bP-4h3"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1098,6 +1110,7 @@
                         <outlet property="currentCycleNameLabel" destination="xdF-3n-h44" id="Mbf-BJ-JRI"/>
                         <outlet property="currentCycleNameTitleLabel" destination="YjJ-Iz-FA8" id="v0V-YR-fdo"/>
                         <outlet property="currentCycleStageNameLabel" destination="CMI-p9-4BG" id="RXw-ax-Ot0"/>
+                        <outlet property="currentCycleStageTimerLabel" destination="OE5-LG-TU3" id="9ad-Vj-ZGO"/>
                         <outlet property="currentCycleSubStageNameLabel" destination="BTf-lu-qTq" id="7a2-Bz-DGq"/>
                         <outlet property="currentStageTitleLabel" destination="7fO-Y9-dKy" id="Cwv-OI-Xki"/>
                         <outlet property="cycleErrorLabel" destination="lf4-gH-Wuh" id="zBc-lN-KdI"/>
@@ -1339,14 +1352,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H6c-VW-OJb">
-                                                    <rect key="frame" x="15" y="10" width="57" height="20.5"/>
+                                                    <rect key="frame" x="16" y="10" width="57" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="3.3.6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pcu-lA-uKX">
-                                                    <rect key="frame" x="15" y="33.5" width="28.5" height="14.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pcu-lA-uKX">
+                                                    <rect key="frame" x="16" y="33.5" width="16" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>

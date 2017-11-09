@@ -74,7 +74,7 @@ class SettingsTableViewController: UITableViewController {
         pressureSignLabel.text = settings.pressureUnit?.getName
         languageLabel.text = settings.language?.getName
         connectionTypeLabel.text = settings.connectionType?.getName
-        versionSubtitleLabel.text = ""
+        versionSubtitleLabel.text = "1.0"
         liveNotificationsSwitch.isOn = UserSettingsManager.shared.userSettings.receiveLiveNotifications!
     }
     

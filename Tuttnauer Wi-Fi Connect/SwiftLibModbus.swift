@@ -41,8 +41,7 @@ class SwiftLibModbus: NSObject {
     func connectWithError(_ error: NSError) -> Bool {
         let ret = modbus_connect(mb!)
         if ret == -1 {
-            var error = error
-            error = self.buildNSError(errno: errno)
+            var _ = self.buildNSError(errno: errno)
             return false
         }
         return true

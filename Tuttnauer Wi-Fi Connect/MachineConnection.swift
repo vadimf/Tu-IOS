@@ -75,7 +75,7 @@ class MachineConnection: NSObject {
     
     func startFetching() {
         fetchMachineSetupData()
-        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(fetchMachineRealTimeData), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fetchMachineRealTimeData), userInfo: nil, repeats: true)
         timer?.fire()
     }
     
@@ -179,11 +179,25 @@ extension MachineConnection {
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
             
+            machine.realTime.atmosphericPressure = self.getMachineRealTimeAtmosphericPressure(startAddress: totalAddresses.start, data: data)
+            
             machine.realTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
             machine.realTime.cycleID = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
             machine.realTime.cycleStage = AutoClaveEnums.CycleStage(rawValue: self.getMachineRealTimeCycleStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleStage(rawValue: 0)
             machine.realTime.cycleSubStage = AutoClaveEnums.CycleSubStage(rawValue: self.getMachineRealTimeCycleSubStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleSubStage(rawValue: 0)
             machine.realTime.cycleError = AutoClaveEnums.CycleError(rawValue: self.getMachineRealTimeCycleError(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleError(rawValue: 0)
+            machine.realTime.cycleStageTimerIsOn = self.getMachineStageTimeIsOn(startAddress: totalAddresses.start, data: data)
+            
+            if machine.realTime.cycleStageTimerIsOn {
+                if machine.realTime.cycleStageStartTime == nil && machine.realTime.cycleStageEndTime == nil {
+                    let times = self.getMachineStageStartEndTime(startAddress: totalAddresses.start, data: data)
+                    machine.realTime.cycleStageStartTime = times.start
+                    machine.realTime.cycleStageEndTime = times.end
+                }
+            } else {
+                machine.realTime.cycleStageStartTime = nil
+                machine.realTime.cycleStageEndTime = nil
+            }
             
             self.delegate?.didUpdateRealTimeData(for: self, machine: machine)
             
@@ -209,6 +223,13 @@ extension MachineConnection {
         return data[Int(address.start - startAddress)]
     }
     
+    private func getMachineRealTimeAtmosphericPressure(startAddress: Int32, data: [Int]) -> Double {
+        let address = MachineConstants.RealTime.atmospherePressure
+        let data = Array(data[Int(address.start - startAddress)..<Int(address.end - startAddress + 1)])
+        let pressure = Utilities.decimalsToDouble(decimals: data)
+        return pressure
+    }
+    
     private func getMachineRealTimeCycleStage(startAddress: Int32, data: [Int]) -> Int {
         let address = MachineConstants.RealTime.cycleStage
         return data[Int(address.start - startAddress)]
@@ -224,6 +245,26 @@ extension MachineConnection {
         return data[Int(address.start - startAddress)]
     }
     
+    private func getMachineStageTimeIsOn(startAddress: Int32, data: [Int]) -> Bool {
+        let address = MachineConstants.RealTime.isStageTimerOn
+        let isOn = data[Int(address.start - startAddress)]
+        if isOn == 1 { return true } else { return false }
+    }
+    
+    private func getMachineStageStartEndTime(startAddress: Int32, data: [Int]) -> (start: Date?, end: Date?) {
+        
+        let startTimeAddress = MachineConstants.RealTime.stageStartTime
+        let endTimeAddress = MachineConstants.RealTime.stageEndTime
+        
+        let startTimeData = Array(data[Int(startTimeAddress.start - startAddress)..<Int(startTimeAddress.end - startAddress + 1)])
+        let endTimeData = Array(data[Int(endTimeAddress.start - startAddress)..<Int(endTimeAddress.end - startAddress + 1)])
+
+        let startTime = Utilities.decimalsTicksToDate(decimals: startTimeData)
+        let endTime = Utilities.decimalsTicksToDate(decimals: endTimeData)
+        
+        return (startTime, endTime)
+    }
+    
     // MARK: - Fetch Real Time Sensors Data
     
     fileprivate func modbusMachineSensorsData() {
@@ -235,16 +276,17 @@ extension MachineConnection {
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
             
+            let pressure = machine.realTime.atmosphericPressure
             let sensorNames = self.getMachineSensorsNames(startAddress: totalAddresses.start, data: data)
             let sensorValues = self.getMachineSensorsValues(startAddress: totalAddresses.start, data: data)
             let sensorsUnits = self.getMachineSensorsUnits(startAddress: totalAddresses.start, data: data)
             
             if !sensorNames.0.isEmpty {
                 if machine.realTime.sensor1 == nil {
-                    let sensor1 = BaseSensor(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
+                    let sensor1 = BaseSensor(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0, pressure: pressure)
                     machine.realTime.sensor1 = sensor1
                 } else {
-                    machine.realTime.sensor1?.updateValues(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0)
+                    machine.realTime.sensor1?.updateValues(name: sensorNames.0, value: sensorValues.0, units: sensorsUnits.0, pressure: pressure)
                 }
             } else {
                 machine.realTime.sensor1 = nil
@@ -252,10 +294,10 @@ extension MachineConnection {
             
             if !sensorNames.1.isEmpty {
                 if machine.realTime.sensor2 == nil {
-                    let sensor2 = BaseSensor(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
+                    let sensor2 = BaseSensor(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1, pressure: pressure)
                     machine.realTime.sensor2 = sensor2
                 } else {
-                    machine.realTime.sensor2?.updateValues(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1)
+                    machine.realTime.sensor2?.updateValues(name: sensorNames.1, value: sensorValues.1, units: sensorsUnits.1, pressure: pressure)
                 }
             } else {
                 machine.realTime.sensor2 = nil
@@ -263,10 +305,10 @@ extension MachineConnection {
             
             if !sensorNames.2.isEmpty {
                 if machine.realTime.sensor3 == nil {
-                    let sensor3 = BaseSensor(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
+                    let sensor3 = BaseSensor(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2, pressure: pressure)
                     machine.realTime.sensor3 = sensor3
                 } else {
-                    machine.realTime.sensor3?.updateValues(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2)
+                    machine.realTime.sensor3?.updateValues(name: sensorNames.2, value: sensorValues.2, units: sensorsUnits.2, pressure: pressure)
                 }
             } else {
                 machine.realTime.sensor3 = nil

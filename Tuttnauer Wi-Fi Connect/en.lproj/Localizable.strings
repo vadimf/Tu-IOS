@@ -73,10 +73,10 @@
 "settings_screen_cell_created_by_subtitle" = "Tuttnauer Ltd.";
 
 "settings_screen_cell_copyright_title" = "Copyright";
-"settings_screen_cell_copyright_subtitle" = "Copyright";
+"settings_screen_cell_copyright_subtitle" = "® All Rights Reserved to Tuttnauer Ltd.";
 
 "settings_screen_cell_version_title" = "Version";
-"settings_screen_cell_version_subtitle" = "0.0.0.0";
+"settings_screen_cell_version_subtitle" = "1.0";
 
 // MARK: - Enums Values
 

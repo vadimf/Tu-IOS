@@ -338,7 +338,7 @@ class AutoClaveEnums {
             case .global:
                 return "Global"
             case .start:
-                return "Stating"
+                return "Starting"
             case .removeAir:
                 return "Removing Air"
             case .stabilize:

@@ -14,13 +14,14 @@ class BaseSensor: NSObject {
     var name: String = ""
     var value: Double = 0
     var units: AutoClaveEnums.AnalogUnits = AutoClaveEnums.AnalogUnits.celsius
+    var atmosphericPressure: Double = 100.0
     
     // Pressure Factors
     let psiaFactor: Double = 689.51251465214093635799489760739
     let kpaToInhgFactor: Double = 0.2953
     private var kpaToPsiaFactor: Double {
         get {
-            return (100.0 / self.psiaFactor)  // 0.14503
+            return (self.atmosphericPressure / self.psiaFactor)
         }
     }
     private var kpaToPsigFactor: Double {
@@ -31,20 +32,22 @@ class BaseSensor: NSObject {
     
     // MARK: - Initialization
     
-    init(name: String, value: Double, units: AutoClaveEnums.AnalogUnits) {
+    init(name: String, value: Double, units: AutoClaveEnums.AnalogUnits, pressure: Double) {
         super.init()
         self.name = name
         self.value = value
         self.units = units
+        self.atmosphericPressure = pressure
         setAccordingToUserSettings()
     }
     
     // MARK: - Set / Update Methods
     
-    func updateValues(name: String, value: Double, units: AutoClaveEnums.AnalogUnits) {
+    func updateValues(name: String, value: Double, units: AutoClaveEnums.AnalogUnits, pressure: Double) {
         self.name = name
         self.value = value
         self.units = units
+        self.atmosphericPressure = pressure
         setAccordingToUserSettings()
     }
     

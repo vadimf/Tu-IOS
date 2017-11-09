@@ -79,6 +79,40 @@ class Utilities {
         return Utilities.fromByteArray(byteArray, Double.self)
     }
     
+    class func decimalsTicksToDate(decimals: [Int]) -> Date {
+    
+        guard decimals.count == 4 else { return Date() }
+        
+        var byteArray = [UInt8]()
+        
+        for decimal in decimals {
+            let array = decimal.toUInt8BytesArray(reverse: false)
+            byteArray.append(array[1])
+            byteArray.append(array[0])
+        }
+        
+        byteArray = Array(byteArray.reversed())
+        
+        let ticks = Utilities.fromByteArray(byteArray, UInt64.self)
+        
+        return Date(ticks: ticks)
+    }
+    
+    class func decimalsToUInt64(decimals: [Int]) -> UInt64 {
+        
+        guard decimals.count == 4 else { return 0 }
+        
+        var byteArray = [UInt8]()
+        
+        for decimal in decimals {
+            let array = decimal.toUInt8BytesArray(reverse: false)
+            byteArray.append(array[1])
+            byteArray.append(array[0])
+        }
+        
+        return Utilities.fromByteArray(byteArray, UInt64.self)
+    }
+    
     // MARK: - Networking
     
     class func getWiFiAddress() -> String? {

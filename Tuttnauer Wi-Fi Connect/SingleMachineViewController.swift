@@ -31,6 +31,7 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var currentCycleIconImageView: UIImageView!
     @IBOutlet weak var currentCycleStageNameLabel: UILabel!
     @IBOutlet weak var currentCycleSubStageNameLabel: UILabel!
+    @IBOutlet weak var currentCycleStageTimerLabel: UILabel!
     
     @IBOutlet weak var sensor1TitleLabel: UILabel!
     @IBOutlet weak var sensor2TitleLabel: UILabel!
@@ -116,6 +117,7 @@ class SingleMachineViewController: UIViewController {
         versionLabel.text = ""
         
         currentStageTitleLabel.text = ""
+        currentCycleStageTimerLabel.text = ""
         
         currentCycleNameLabel.text = ""
         currentCycleIconImageView.isHidden = true
@@ -231,12 +233,13 @@ extension SingleMachineViewController: SideMenuDelegate {
             
             UserSettingsManager.shared.setUserLastMachineIPAddress(to: ipAddress)
             
-            DispatchQueue.main.sync {
-                self.setupLocalization()
-                self.resetOneTimeLabelValues()
-                self.resetOccurrentLabelValues()
-                MBProgressHUD.hide(for: self.view, animated: true)
+            self.setupLocalization()
+            self.resetOneTimeLabelValues()
+            self.resetOccurrentLabelValues()
+            if let machine = MachineMonitoring.shared.currentConnection?.machine {
+                self.updateSetupData(with: machine)
             }
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
@@ -280,7 +283,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
     
     // MARK: UI Update Methods
     
-    private func updateSetupData(with machine: Machine) {
+    fileprivate func updateSetupData(with machine: Machine) {
         modelNameLabel.text = machine.modelName
         serialNumberLabel.text = machine.serialNumber
         ipAddressLabel.text = machine.ipAddress
@@ -290,6 +293,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
     private func updateRealTimeData(with machine: Machine) {
         
         let currentCycleStage = machine.realTime.cycleStage?.getName
+        let currentCycleStageTimerIsOn = machine.realTime.cycleStageTimerIsOn
         let cycleError = machine.realTime.cycleError?.getName
         
         systemStatusLabel.text = machine.realTime.systemStatus?.getName
@@ -303,6 +307,15 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
         } else {
             currentStageTitleLabel.text = "Current Stage"
             currentCycleStageNameLabel.text = machine.realTime.cycleStage?.getName
+        }
+
+        if currentCycleStageTimerIsOn {
+            currentCycleStageTimerLabel.text = machine.realTime.cycleStageTimer
+            currentCycleStageTimerLabel.isHidden = false
+            cycleIndicator.stopAnimating()
+        } else {
+            currentCycleStageTimerLabel.text = ""
+            currentCycleStageTimerLabel.isHidden = true
         }
         
         if cycleError!.isEmpty  {
@@ -321,7 +334,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
             currentCycleIconImageView.isHidden = false
         }
         
-        if let systemStatus = machine.realTime.systemStatus, systemStatus != .none {
+        if let systemStatus = machine.realTime.systemStatus, systemStatus != .none, !currentCycleStageTimerIsOn {
             if !cycleIndicator.isAnimating {
                 cycleIndicator.startAnimating()
             }

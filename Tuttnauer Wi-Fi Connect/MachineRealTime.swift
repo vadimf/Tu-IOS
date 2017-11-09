@@ -15,6 +15,7 @@ class MachineRealTime: NSObject {
     var systemStatus: AutoClaveEnums.SystemCurrentStatus?
     var screenSaverOn: Int = 0
     var doorState: AutoClaveEnums.DoorState?
+    var atmosphericPressure: Double = 100.0
     
     var cycleID: AutoClaveEnums.CycleID?
     var cycleName: String?
@@ -23,7 +24,22 @@ class MachineRealTime: NSObject {
             updateSystemStatus() // Did this because there is no way to determine RealTimeStateSystemStatus (according to Avi)
         }
     }
-    
+    var cycleStageTimerIsOn: Bool = false
+    var cycleStageTimer: String? {
+        get {
+            if let startTime = cycleStageStartTime,
+                let endTime = cycleStageEndTime {
+                let now = Date()
+                let times = now.minutesAndSeconds(until: endTime)
+                return "\(times.minutes):\(times.seconds)"
+            } else {
+                return nil
+            }
+        }
+    }
+    var cycleStageStartTime: Date?
+    var cycleStageEndTime: Date?
+
     var cycleSubStage: AutoClaveEnums.CycleSubStage?
     var cycleError: AutoClaveEnums.CycleError?
     
@@ -39,7 +55,7 @@ class MachineRealTime: NSObject {
     var parameter2: BaseParameter?
     var parameter3: BaseParameter?
     
-    // MARK: Update Methods
+    // MARK: - Update Methods
     
     private func updateSystemStatus() {
         switch cycleStage! {

@@ -10,11 +10,13 @@ import Foundation
 
 extension Int {
     
-    func toUInt8BytesArray() -> [UInt8] {
+    func toUInt8BytesArray(reverse: Bool = true) -> [UInt8] {
         var decimal = self
         let data = Data(bytes: &decimal, count: MemoryLayout<Int>.size)
-        let reversed = Array(data.reversed())
-        return reversed
+        if reverse {
+            return Array(data.reversed())
+        }
+        return Array(data)
     }
     
 }

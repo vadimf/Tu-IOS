@@ -8,15 +8,14 @@ target 'Tuttnauer Wi-Fi Connect' do
   # Pods for Tuttnauer Wi-Fi Connect
 
   pod 'SideMenu'
-  pod 'MMLanScan'
   pod 'SwiftyUserDefaults'
   pod 'MBProgressHUD'
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'IQKeyboardManagerSwift'
   pod 'CocoaAsyncSocket'
-  pod 'NetUtils' 
   pod 'ReachabilitySwift'
   pod 'NVActivityIndicatorView'
+  pod 'Gifu'
 
 end

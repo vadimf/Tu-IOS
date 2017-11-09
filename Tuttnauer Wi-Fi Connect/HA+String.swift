@@ -25,4 +25,16 @@ extension String {
         return CGFloat(number)
     }
     
+    // MARK: - String to Date
+    
+    func stringToDate(format: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        guard let date = dateFormatter.date(from: self) else {
+            print("Cannot return current date. Invalid arguments")
+            return Date()
+        }
+        return date
+    }
+    
 }
