@@ -16,6 +16,5 @@ target 'Tuttnauer Wi-Fi Connect' do
   pod 'CocoaAsyncSocket'
   pod 'ReachabilitySwift'
   pod 'NVActivityIndicatorView'
-  pod 'Gifu'
 
 end

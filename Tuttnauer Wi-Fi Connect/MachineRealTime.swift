@@ -54,6 +54,12 @@ class MachineRealTime: NSObject {
     // MARK: - Update Methods
     
     private func updateSystemStatus() {
+        
+        if doorState == .door1Opened {
+            systemStatus = AutoClaveEnums.SystemCurrentStatus.notReady
+            return
+        }
+        
         switch cycleStage! {
         case .none:
             systemStatus = AutoClaveEnums.SystemCurrentStatus.none

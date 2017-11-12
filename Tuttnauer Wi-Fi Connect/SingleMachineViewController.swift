@@ -334,12 +334,14 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
             currentCycleIconImageView.isHidden = false
         }
         
-        if let systemStatus = machine.realTime.systemStatus, systemStatus != .none, !currentCycleStageTimerIsOn {
+        if let systemStatus = machine.realTime.systemStatus, systemStatus != .none && systemStatus != .notReady, !currentCycleStageTimerIsOn {
             if !cycleIndicator.isAnimating {
                 cycleIndicator.startAnimating()
             }
         } else {
-            cycleIndicator.stopAnimating()
+            if cycleIndicator.isAnimating {
+                cycleIndicator.stopAnimating()
+            }
         }
     }
     

@@ -17,6 +17,7 @@ class AutoClaveEnums {
         case cycleRunning
         case cycleDone
         case cycleFail
+        case notReady
         
         var getName: String {
             switch self {
@@ -32,6 +33,8 @@ class AutoClaveEnums {
                 return "Cycle Done"
             case .cycleFail:
                 return "Cycle Failed"
+            case .notReady:
+                return "Not Ready"
             }
         }
     }
