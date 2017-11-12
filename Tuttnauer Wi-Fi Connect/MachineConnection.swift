@@ -179,8 +179,9 @@ extension MachineConnection {
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
             
-            machine.realTime.atmosphericPressure = self.getMachineRealTimeAtmosphericPressure(startAddress: totalAddresses.start, data: data)
+            let systemStatus = self.getMachineRealTimeCurrentStatus(startAddress: totalAddresses.start, data: data)
             
+            machine.realTime.atmosphericPressure = self.getMachineRealTimeAtmosphericPressure(startAddress: totalAddresses.start, data: data)
             machine.realTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
             machine.realTime.cycleID = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
             machine.realTime.cycleStage = AutoClaveEnums.CycleStage(rawValue: self.getMachineRealTimeCycleStage(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleStage(rawValue: 0)
@@ -213,9 +214,11 @@ extension MachineConnection {
         return data[Int(address.start - startAddress)]
     }
     
-    private func getMachineRealTimeCurrentStatus(startAddress: Int32, data: [Int]) -> Int {
+    private func getMachineRealTimeCurrentStatus(startAddress: Int32, data: [Int]) -> UInt64 {
         let address = MachineConstants.RealTime.systemStatus
-        return data[Int(address.start - startAddress)] // TODO: it's 4 addresses, translate that to a String
+        let systemStatusData = Array(data[Int(address.start - startAddress)..<Int(address.end - startAddress + 1)])
+        let systemStatus = Utilities.decimalsToUInt64(decimals: systemStatusData)
+        return systemStatus
     }
     
     private func getMachineRealTimeDoorState(startAddress: Int32, data: [Int]) -> Int {
