@@ -39,6 +39,89 @@ class AutoClaveEnums {
         }
     }
     
+    enum BackgroundStatus: UInt64 {
+        case none = 0
+        case preHeating = 1
+        case hotWater = 2
+        /// Water are detected in the chamber
+        case waterInChamber = 4
+        /// Door is open
+        case doorOpen = 16
+        /// Waste water Reservoir full
+        case wasteWaterReservoirFull = 32
+        /// mineral free water Reservoir empty
+        case mineralFreeWaterReservoirEmpty = 64
+        /// Stand by cycle is schedualed  to be run
+        case standByCycle = 128
+        /// Jacket is cool
+        case jacketIsCool = 256
+        /// Clean water tank
+        case emptyReservoirVacuumPump = 512
+        /// Steam generatore pressure is too low
+        case steamGeneratorLowPressure = 1024
+        /// Drain is too hot
+        case drainHot = 2048
+        /// Io Extension Not Connected (in case IoExtension defined)
+        case adam6060NotConnected = 4096
+        /// VHP Cycle High Start Temperature
+        case vhpCycleHighStartTemperature = 8192
+        /// VHP Cycle VhpIn Not Read (value = 1)
+        case vhpInNotReady = 16384
+        /// Unable to heta bio filter
+        case bioFilterTimeOut = 32768
+        /// Thermo bio filter is too cold
+        case bioFilterIsCool = 65536
+        /// Printer port is not valid
+        case printerPortInvalid = 131072
+        /// Door is in opening progress
+        case doorOpening = 262144
+        /// Door is in closing progress
+        case doorClosing = 524288
+        /// time out while trying to cool darin
+        case coolDrainTimeOut = 1048576
+        /// time out while trying to heat jacket
+        case jacketTimeOut = 2097152
+        /// No supply is detected
+        case supplyError = 4194304
+        /// No water supply is detected
+        case supplyWaterError = 8388608
+        /// no water to vacuum pump
+        case waterToVacuumPumpError = 16777216
+        /// no water to generator
+        case waterToGeneratorError = 33554432
+        /// No supply distilled water is detected
+        case supplyDistilledWaterError = 67108864
+        /// No compressed air supply is detected
+        case compressedAirSupplyError = 134217728
+        /// mo water detected in steam generator
+        case steamGeneratorNoWaterError = 268435456
+        /// Chamber pressure is out of range
+        case chamberPressureNotInRange = 536870912
+        /// Chamber temperature is out of range
+        case chamberTemperatureNotInRange = 1073741824
+        /// Atmosphereic pressure is not set
+        case atmospherePressureNotSet = 2147483648
+        /// Invalid door state
+        case doorError = 4294967296
+        /// Emergency Stop buuton is pressed
+        case emergencyStop = 8589934592
+        /// Tset mode is active
+        case testModeIsActive = 17179869184
+        /// Analog input sensot is out of range
+        case analogInputError = 34359738368
+        /// Adam 6017 device Not Connected (in case Air detector or external reference defined)
+        case adam6017NotConnected = 68719476736
+        /// Fail to connect with I/O card
+        case inputOutputCardNotConnected = 137438953472
+        /// RTC is either disabled or not working
+        case timeError = 274877906944
+        //* Statuses that are displayed by message
+        /// I/O card protocol port is not valid
+        case protocolPortInValid = 549755813888
+        /// Razed only if value of parameter 'unlockDoorOnCycleEnd' is 1 and cycle ended successfuly
+        case cycleEnded = 1099511627776
+    }
+    
     enum DoorState: Int {
         case door1Opened = 0
         case door1Closed
@@ -478,11 +561,11 @@ class AutoClaveEnums {
         // If chamber temperature does not reach X�c as defined in parameter <see cref="ParameterNames.ExhaustTopTemperature"/>
         // after X minutes as defined in parameter <see cref="ParameterNames.HeatTimeError"/>
         case HeatBeforePressureTimeError = 7
-        // If chamber pressure does not reach X kPa as defined in cycle parameter 'Pulse [A,B,C,D] Low Pressure'
+        // If chamber pressure does not reach X kPa as defined in cycle parameter 'Pulse [ABCD] Low Pressure'
         // after X minutes as defined in cycle parameter 'Pressure Time Error'
         // <see cref="ParameterNames.PressureTimeError"/>
         case VacuumTimeError = 8
-        // If chamber pressure does not reach X kPa as defined in cycle parameter 'Pulse [A,B,C,D] High Pressure'
+        // If chamber pressure does not reach X kPa as defined in cycle parameter 'Pulse [ABCD] High Pressure'
         // after X minutes as defined in cycle parameter 'Pressure Time Error'
         case PressureTimeError = 9
         // If chamber temperature does not reach X�c as defined in parameter <see cref="ParameterNames.Temperature1Stay"/>

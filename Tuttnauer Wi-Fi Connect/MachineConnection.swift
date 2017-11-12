@@ -214,11 +214,11 @@ extension MachineConnection {
         return data[Int(address.start - startAddress)]
     }
     
-    private func getMachineRealTimeCurrentStatus(startAddress: Int32, data: [Int]) -> UInt64 {
+    private func getMachineRealTimeCurrentStatus(startAddress: Int32, data: [Int]) -> Int64 {
         let address = MachineConstants.RealTime.systemStatus
         let systemStatusData = Array(data[Int(address.start - startAddress)..<Int(address.end - startAddress + 1)])
         let systemStatus = Utilities.decimalsToUInt64(decimals: systemStatusData)
-        return systemStatus
+        return Int64(systemStatus)
     }
     
     private func getMachineRealTimeDoorState(startAddress: Int32, data: [Int]) -> Int {
