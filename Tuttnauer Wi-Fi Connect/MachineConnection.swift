@@ -259,8 +259,13 @@ extension MachineConnection {
         let startTimeData = Array(data[Int(startTimeAddress.start - startAddress)..<Int(startTimeAddress.end - startAddress + 1)])
         let endTimeData = Array(data[Int(endTimeAddress.start - startAddress)..<Int(endTimeAddress.end - startAddress + 1)])
 
-        let startTime = Utilities.decimalsTicksToDate(decimals: startTimeData)
-        let endTime = Utilities.decimalsTicksToDate(decimals: endTimeData)
+        var startTime = Utilities.decimalsTicksToDate(decimals: startTimeData)
+        var endTime = Utilities.decimalsTicksToDate(decimals: endTimeData)
+        
+        // Fixes issues where dates have some localization problems
+        let secondsFromGMT = TimeInterval(abs(TimeZone.current.secondsFromGMT()))
+        startTime.addTimeInterval(-secondsFromGMT)
+        endTime.addTimeInterval(-secondsFromGMT)
         
         return (startTime, endTime)
     }

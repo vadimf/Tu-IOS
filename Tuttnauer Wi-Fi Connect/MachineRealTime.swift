@@ -27,11 +27,8 @@ class MachineRealTime: NSObject {
     var cycleStageTimerIsOn: Bool = false
     var cycleStageTimer: String? {
         get {
-            if let startTime = cycleStageStartTime,
-                let endTime = cycleStageEndTime {
-                let now = Date()
-                let times = now.minutesAndSeconds(until: endTime)
-                return "\(times.minutes):\(times.seconds)"
+            if let end = cycleStageEndTime {
+                return updatedTimer(endDate: end)
             } else {
                 return nil
             }
@@ -39,7 +36,6 @@ class MachineRealTime: NSObject {
     }
     var cycleStageStartTime: Date?
     var cycleStageEndTime: Date?
-
     var cycleSubStage: AutoClaveEnums.CycleSubStage?
     var cycleError: AutoClaveEnums.CycleError?
     
@@ -66,6 +62,11 @@ class MachineRealTime: NSObject {
         default:
             systemStatus = AutoClaveEnums.SystemCurrentStatus.cycleRunning
         }
+    }
+    
+    private func updatedTimer(endDate: Date) -> String {
+        
+        return Date().minutesAndSeconds(until: endDate)
     }
     
 }
