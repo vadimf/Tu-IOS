@@ -26,6 +26,7 @@ struct TableViewCellsIdentifiers {
     static let settingsOptionTableViewCell = "Settings Option Cell"
     static let sideMenuCell = "Side Menu Cell"
     static let sideMenuIconCell = "Side Menu Icon Cell"
+    static let systemStatusErrorCell = "System Status Error Cell"
 }
 
 struct NotificationsIdentifiers {

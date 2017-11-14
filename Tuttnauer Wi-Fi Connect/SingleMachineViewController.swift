@@ -168,6 +168,11 @@ class SingleMachineViewController: UIViewController {
     @IBAction func menuButtonTapped(_ sender: UIBarButtonItem) {
     }
     
+    @IBAction func systemStatusButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: SegueIdentifiers.singleMachineToSystemStatusPopup, sender: self)
+    }
+    
+    
 }
 
 // MARK: - Notifications
@@ -206,6 +211,9 @@ extension SingleMachineViewController {
             guard let vc = segue.destination as? UISideMenuNavigationController else { return }
             guard let sideMenuVC = vc.viewControllers.first as? SideMenuViewController else { return }
             sideMenuVC.delegate = self
+        } else if segue.identifier == SegueIdentifiers.singleMachineToSystemStatusPopup {
+            guard let vc = segue.destination as? SystemStatusViewController else { return }
+            // TODO: Pass error strings array
         }
         
     }
