@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1601CCD01FA504E2004AC86F /* HA+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1601CCCF1FA504E2004AC86F /* HA+Int.swift */; };
 		160DD2361FA1E4060017D221 /* BaseSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160DD2351FA1E4060017D221 /* BaseSensor.swift */; };
+		1627989E1FBAB4E0001D1E19 /* SystemStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627989D1FBAB4E0001D1E19 /* SystemStatusViewController.swift */; };
 		162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */; };
 		162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */; };
 		163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		1601CCCF1FA504E2004AC86F /* HA+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+Int.swift"; sourceTree = "<group>"; };
 		160DD2351FA1E4060017D221 /* BaseSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSensor.swift; sourceTree = "<group>"; };
+		1627989D1FBAB4E0001D1E19 /* SystemStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatusViewController.swift; sourceTree = "<group>"; };
 		162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuIconTableViewCell.swift; sourceTree = "<group>"; };
 		163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineRealTime.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				168ACDEF1F922D86000277DD /* SingleMachineViewController.swift */,
+				1627989D1FBAB4E0001D1E19 /* SystemStatusViewController.swift */,
 			);
 			name = Machine;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 			files = (
 				162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */,
 				166BA9731FA6125C00157706 /* BaseParameter.swift in Sources */,
+				1627989E1FBAB4E0001D1E19 /* SystemStatusViewController.swift in Sources */,
 				16E041761FB324E600770E11 /* HA+Date.swift in Sources */,
 				16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */,
 				168ACDEA1F922996000277DD /* HA+UIView.swift in Sources */,

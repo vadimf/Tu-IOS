@@ -45,7 +45,7 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var doorStateTitleLabel: UILabel!
     @IBOutlet weak var cycleErrorTitleLabel: UILabel!
     
-    @IBOutlet weak var systemStatusLabel: UILabel!
+    @IBOutlet weak var systemStatusButton: UIButton!
     @IBOutlet weak var doorStateLabel: UILabel!
     @IBOutlet weak var cycleErrorLabel: UILabel!
     
@@ -126,7 +126,7 @@ class SingleMachineViewController: UIViewController {
         
         cycleErrorTitleLabel.text = ""
         
-        systemStatusLabel.text = "-"
+        systemStatusButton.setTitle("-", for: .normal)
         doorStateLabel.text = "-"
         cycleErrorLabel.text = "-"
     }
@@ -296,7 +296,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
         let currentCycleStageTimerIsOn = machine.realTime.cycleStageTimerIsOn
         let cycleError = machine.realTime.cycleError?.getName
         
-        systemStatusLabel.text = machine.realTime.systemStatus?.getName
+        systemStatusButton.setTitle(machine.realTime.systemStatus?.getName, for: .normal)
         currentCycleIconImageView.image = machine.realTime.cycleID?.getIcon
         
         //currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
@@ -404,28 +404,6 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
             parameter3TitleLabel.text = ""
             parameter3ValueLabel.text = ""
         }
-    }
-    
-}
-
-
-// MARK: - Machine Monitor Delegate
-
-extension SingleMachineViewController {
-    
-    // MARK: - Non-Delegate Methods
-    
-    private func reconnect() {
-        /*self.machineMonitor?.reconnect(completion: { (success, error) in
-            
-            guard error == nil, success else {
-                self.connectionLost()
-                return
-            }
-            
-            self.machineMonitor?.getMachineSetupData()
-            self.machineMonitor?.startMonitoring()
-        })*/
     }
     
 }
