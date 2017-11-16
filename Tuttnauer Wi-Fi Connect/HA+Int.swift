@@ -19,6 +19,15 @@ extension Int {
         return Array(data)
     }
     
+    func toInt16BinaryArray(reversed: Bool) -> [Int] {
+        let string = String(self, radix: 2).padBinary(toSize: 16)
+        var array = Array(string).map { Int(String($0)) ?? 0 }
+        if reversed {
+            array = Array(array.reversed())
+        }
+        return array
+    }
+        
 }
 
 extension Double {

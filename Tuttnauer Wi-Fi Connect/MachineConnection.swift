@@ -179,8 +179,7 @@ extension MachineConnection {
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
             
-            let systemStatus = self.getMachineRealTimeCurrentStatus(startAddress: totalAddresses.start, data: data)
-            
+            machine.realTime.backgroundStatus = self.getMachineRealTimeBackgroundStatus(startAddress: totalAddresses.start, data: data)
             machine.realTime.atmosphericPressure = self.getMachineRealTimeAtmosphericPressure(startAddress: totalAddresses.start, data: data)
             machine.realTime.doorState = AutoClaveEnums.DoorState(rawValue: self.getMachineRealTimeDoorState(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.DoorState(rawValue: 0)
             machine.realTime.cycleID = AutoClaveEnums.CycleID(rawValue: self.getMachineRealTimeCurrentCycleID(startAddress: totalAddresses.start, data: data)) ?? AutoClaveEnums.CycleID(rawValue: 0)
@@ -214,11 +213,27 @@ extension MachineConnection {
         return data[Int(address.start - startAddress)]
     }
     
-    private func getMachineRealTimeCurrentStatus(startAddress: Int32, data: [Int]) -> Int64 {
+    private func getMachineRealTimeBackgroundStatus(startAddress: Int32, data: [Int]) -> [String] {
         let address = MachineConstants.RealTime.systemStatus
         let systemStatusData = Array(data[Int(address.start - startAddress)..<Int(address.end - startAddress + 1)])
-        let systemStatus = Utilities.decimalsToUInt64(decimals: systemStatusData)
-        return Int64(systemStatus)
+        
+        let status1 = systemStatusData[3].toInt16BinaryArray(reversed: true)
+        let status2 = systemStatusData[2].toInt16BinaryArray(reversed: true)
+        let status3 = systemStatusData[1].toInt16BinaryArray(reversed: true)
+        let status4 = systemStatusData[0].toInt16BinaryArray(reversed: true)
+        
+        let statusData = status1 + status2 + status3 + status4
+        
+        var statuses = [String]()
+        
+        for (index, status) in statusData.enumerated() {
+            if status == 1,
+                let name = AutoClaveEnums.BackgroundStatus(rawValue: (index + 1))?.getName {
+                statuses.append(name)
+            }
+        }
+        
+        return statuses
     }
     
     private func getMachineRealTimeDoorState(startAddress: Int32, data: [Int]) -> Int {

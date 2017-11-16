@@ -10,11 +10,7 @@ import UIKit
 
 class SystemStatusViewController: UIViewController {
 
-    var errors = [String]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var errors = [String]()
     
     // MARK: - IBOutlets
     
@@ -26,18 +22,16 @@ class SystemStatusViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        errors = ["Analog input error", "Chamber pressure not in range"]
-        popupContainerView.layer.shadowColor = UIColor.black.cgColor
-        popupContainerView.layer.shadowOpacity = 0.2
-        popupContainerView.layer.shadowOffset = CGSize.zero
-        popupContainerView.layer.shadowRadius = 10
-        popupContainerView.layer.shadowPath = UIBezierPath(rect: popupContainerView.bounds).cgPath
-        popupContainerView.layer.shouldRasterize = true
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        popupContainerView.layer.shadowColor = UIColor.black.cgColor
+        popupContainerView.layer.shadowOpacity = 0.3
+        popupContainerView.layer.shadowOffset = CGSize.zero
+        popupContainerView.layer.shadowRadius = 10
+        popupContainerView.layer.shadowPath = UIBezierPath(rect: popupContainerView.bounds).cgPath
     }
 
     override func didReceiveMemoryWarning() {

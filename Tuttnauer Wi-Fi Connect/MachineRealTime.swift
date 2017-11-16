@@ -13,6 +13,7 @@ class MachineRealTime: NSObject {
     // MARK: - Real Time Data
     
     var systemStatus: AutoClaveEnums.SystemCurrentStatus?
+    var backgroundStatus = [String]()
     var screenSaverOn: Int = 0
     var doorState: AutoClaveEnums.DoorState?
     var atmosphericPressure: Double = 100.0

@@ -25,6 +25,11 @@ extension String {
         return CGFloat(number)
     }
     
+    func padBinary(toSize: Int) -> String {
+        let padding = String(repeating: Character("0"), count: (toSize - self.count))
+        return padding + self
+    }
+    
     // MARK: - String to Date
     
     func stringToDate(format: String) -> Date {

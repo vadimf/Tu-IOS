@@ -39,87 +39,182 @@ class AutoClaveEnums {
         }
     }
     
-    enum BackgroundStatus: UInt64 {
+    enum BackgroundStatus: Int {
         case none = 0
         case preHeating = 1
-        case hotWater = 2
+        case hotWater
         /// Water are detected in the chamber
-        case waterInChamber = 4
+        case waterInChamber
         /// Door is open
-        case doorOpen = 16
+        case doorOpen
         /// Waste water Reservoir full
-        case wasteWaterReservoirFull = 32
+        case wasteWaterReservoirFull
         /// mineral free water Reservoir empty
-        case mineralFreeWaterReservoirEmpty = 64
+        case mineralFreeWaterReservoirEmpty
         /// Stand by cycle is schedualed  to be run
-        case standByCycle = 128
+        case standByCycle
         /// Jacket is cool
-        case jacketIsCool = 256
+        case jacketIsCool
         /// Clean water tank
-        case emptyReservoirVacuumPump = 512
+        case emptyReservoirVacuumPump
         /// Steam generatore pressure is too low
-        case steamGeneratorLowPressure = 1024
+        case steamGeneratorLowPressure
         /// Drain is too hot
-        case drainHot = 2048
+        case drainHot
+        /// Low gasket pressure
+        case lowGasketPressure
         /// Io Extension Not Connected (in case IoExtension defined)
-        case adam6060NotConnected = 4096
+        case adam6060NotConnected
         /// VHP Cycle High Start Temperature
-        case vhpCycleHighStartTemperature = 8192
+        case vhpCycleHighStartTemperature
         /// VHP Cycle VhpIn Not Read (value = 1)
-        case vhpInNotReady = 16384
+        case vhpInNotReady
         /// Unable to heta bio filter
-        case bioFilterTimeOut = 32768
+        case bioFilterTimeOut
         /// Thermo bio filter is too cold
-        case bioFilterIsCool = 65536
+        case bioFilterIsCool
         /// Printer port is not valid
-        case printerPortInvalid = 131072
+        case printerPortInvalid
         /// Door is in opening progress
-        case doorOpening = 262144
+        case doorOpening
         /// Door is in closing progress
-        case doorClosing = 524288
+        case doorClosing
         /// time out while trying to cool darin
-        case coolDrainTimeOut = 1048576
+        case coolDrainTimeOut
         /// time out while trying to heat jacket
-        case jacketTimeOut = 2097152
+        case jacketTimeOut
         /// No supply is detected
-        case supplyError = 4194304
+        case supplyError
         /// No water supply is detected
-        case supplyWaterError = 8388608
+        case supplyWaterError
         /// no water to vacuum pump
-        case waterToVacuumPumpError = 16777216
+        case waterToVacuumPumpError
         /// no water to generator
-        case waterToGeneratorError = 33554432
+        case waterToGeneratorError
         /// No supply distilled water is detected
-        case supplyDistilledWaterError = 67108864
+        case supplyDistilledWaterError
         /// No compressed air supply is detected
-        case compressedAirSupplyError = 134217728
+        case compressedAirSupplyError
         /// mo water detected in steam generator
-        case steamGeneratorNoWaterError = 268435456
+        case steamGeneratorNoWaterError
         /// Chamber pressure is out of range
-        case chamberPressureNotInRange = 536870912
+        case chamberPressureNotInRange
         /// Chamber temperature is out of range
-        case chamberTemperatureNotInRange = 1073741824
+        case chamberTemperatureNotInRange
         /// Atmosphereic pressure is not set
-        case atmospherePressureNotSet = 2147483648
+        case atmospherePressureNotSet
         /// Invalid door state
-        case doorError = 4294967296
+        case doorError
         /// Emergency Stop buuton is pressed
-        case emergencyStop = 8589934592
+        case emergencyStop
         /// Tset mode is active
-        case testModeIsActive = 17179869184
+        case testModeIsActive
         /// Analog input sensot is out of range
-        case analogInputError = 34359738368
+        case analogInputError
         /// Adam 6017 device Not Connected (in case Air detector or external reference defined)
-        case adam6017NotConnected = 68719476736
+        case adam6017NotConnected
         /// Fail to connect with I/O card
-        case inputOutputCardNotConnected = 137438953472
+        case inputOutputCardNotConnected
         /// RTC is either disabled or not working
-        case timeError = 274877906944
+        case timeError
         //* Statuses that are displayed by message
         /// I/O card protocol port is not valid
-        case protocolPortInValid = 549755813888
+        case protocolPortInValid
         /// Razed only if value of parameter 'unlockDoorOnCycleEnd' is 1 and cycle ended successfuly
-        case cycleEnded = 1099511627776
+        case cycleEnded
+        
+        static var count: Int {
+            return (BackgroundStatus.cycleEnded.hashValue + 1)
+        }
+        
+        var getName: String {
+            switch self {
+            case .none:
+                return "System Ready"
+            case .preHeating:
+                return "Pre Heating"
+            case .hotWater:
+                return "Hot water in chamber"
+            case .waterInChamber:
+                return "Water in chamber"
+            case .doorOpen:
+                return "Door open"
+            case .wasteWaterReservoirFull:
+                return "Waste water reservoir"
+            case .mineralFreeWaterReservoirEmpty:
+                return "Mineral free weater reservoir empty"
+            case .standByCycle:
+                return "Stand by cycle"
+            case .jacketIsCool:
+                return "Jacket is cool"
+            case .emptyReservoirVacuumPump:
+                return "Empty reservoir vacuum pup"
+            case .steamGeneratorLowPressure:
+                return "Steam generator low pressure"
+            case .drainHot:
+                return "Drain hot"
+            case .lowGasketPressure:
+                return "Low gasket pressure"
+            case .adam6060NotConnected:
+                return "IO Extension device not connected"
+            case .vhpCycleHighStartTemperature:
+                return "High start temperature"
+            case .vhpInNotReady:
+                return "Vhp input not ready"
+            case .bioFilterTimeOut:
+                return "Bio filter timeout"
+            case .bioFilterIsCool:
+                return "Bio filter is cool"
+            case .printerPortInvalid:
+                return "Printer port is not valid"
+            case .doorOpening:
+                return "Wait... Door Opening"
+            case .doorClosing:
+                return "Wait... Door Closing"
+            case .coolDrainTimeOut:
+                return "Cool drain time out"
+            case .jacketTimeOut:
+                return "Jacket time out"
+            case .supplyError:
+                return "Supply error"
+            case .supplyWaterError:
+                return "Supply water error"
+            case .waterToVacuumPumpError:
+                return "No water in reservoir vacuum pump"
+            case .waterToGeneratorError:
+                return "No water in reservoir generator"
+            case .supplyDistilledWaterError:
+                return "Supply distilled water error"
+            case .compressedAirSupplyError:
+                return "Compressed air supply error"
+            case .steamGeneratorNoWaterError:
+                return "Steam generator no water"
+            case .chamberPressureNotInRange:
+                return "Chamber pressure not in range"
+            case .chamberTemperatureNotInRange:
+                return "Chamber temperature not in range"
+            case .atmospherePressureNotSet:
+                return "Atmospheric pressure not set"
+            case .doorError:
+                return "Door error"
+            case .emergencyStop:
+                return "Emergency Stop"
+            case .testModeIsActive:
+                return "Test Mode Is Active"
+            case .analogInputError:
+                return "Analog input error"
+            case .adam6017NotConnected:
+                return "Air detector is not connected"
+            case .inputOutputCardNotConnected:
+                return "I/O card is not connected"
+            case .timeError:
+                return "Time error"
+            case .protocolPortInValid:
+                return "Protocol port is not valid"
+            case .cycleEnded:
+                return "Cycle ended"
+            }
+        }
     }
     
     enum DoorState: Int {

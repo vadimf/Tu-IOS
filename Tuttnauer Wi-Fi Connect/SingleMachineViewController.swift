@@ -213,7 +213,8 @@ extension SingleMachineViewController {
             sideMenuVC.delegate = self
         } else if segue.identifier == SegueIdentifiers.singleMachineToSystemStatusPopup {
             guard let vc = segue.destination as? SystemStatusViewController else { return }
-            // TODO: Pass error strings array
+            guard let machine = self.monitor?.currentConnection?.machine else { return }
+            vc.errors = machine.realTime.backgroundStatus
         }
         
     }
