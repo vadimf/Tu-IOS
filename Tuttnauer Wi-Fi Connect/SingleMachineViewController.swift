@@ -14,6 +14,7 @@ import NVActivityIndicatorView
 class SingleMachineViewController: UIViewController {
     
     var monitor: MachineMonitoring?
+    var systemStatusPopup: SystemStatusViewController?
     var cycleIndicator: NVActivityIndicatorView!
     
     // MARK: - IBOutlets
@@ -208,13 +209,20 @@ extension SingleMachineViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == SegueIdentifiers.singleMachineToSideMenu {
-            guard let vc = segue.destination as? UISideMenuNavigationController else { return }
-            guard let sideMenuVC = vc.viewControllers.first as? SideMenuViewController else { return }
+            
+            guard let vc = segue.destination as? UISideMenuNavigationController,
+                let sideMenuVC = vc.viewControllers.first as? SideMenuViewController else { return }
+            
             sideMenuVC.delegate = self
+            
         } else if segue.identifier == SegueIdentifiers.singleMachineToSystemStatusPopup {
-            guard let vc = segue.destination as? SystemStatusViewController else { return }
-            guard let machine = self.monitor?.currentConnection?.machine else { return }
-            vc.errors = machine.realTime.backgroundStatus
+            
+            guard let vc = segue.destination as? SystemStatusViewController,
+                let machine = self.monitor?.currentConnection?.machine else { return }
+            
+            vc.statuses = machine.realTime.backgroundStatus
+            systemStatusPopup = vc
+            
         }
         
     }
@@ -301,6 +309,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
     
     private func updateRealTimeData(with machine: Machine) {
         
+        
         let currentCycleStage = machine.realTime.cycleStage?.getName
         let currentCycleStageTimerIsOn = machine.realTime.cycleStageTimerIsOn
         let cycleError = machine.realTime.cycleError?.getName
@@ -309,6 +318,13 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
         currentCycleIconImageView.image = machine.realTime.cycleID?.getIcon
         
         //currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
+        
+        if let systemStatusPopup = self.systemStatusPopup {
+            let currentStatus = machine.realTime.backgroundStatus
+            if !currentStatus.isEmpty && !currentStatus.containsSameElements(as: systemStatusPopup.statuses) {
+                systemStatusPopup.updateStatuses(with: currentStatus)
+            }
+        }
         
         if currentCycleStage!.isEmpty {
             currentStageTitleLabel.text = ""

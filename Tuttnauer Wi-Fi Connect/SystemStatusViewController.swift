@@ -10,7 +10,7 @@ import UIKit
 
 class SystemStatusViewController: UIViewController {
 
-    var errors = [String]()
+    var statuses = [String]()
     
     // MARK: - IBOutlets
     
@@ -38,6 +38,13 @@ class SystemStatusViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Update Methods
+    
+    func updateStatuses(with statuses:[String]) {
+        self.statuses = statuses
+        tableView.reloadData()
+    }
 
     // MARK: - IBActions
     
@@ -57,14 +64,14 @@ extension SystemStatusViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return errors.count
+        return statuses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellsIdentifiers.systemStatusErrorCell, for: indexPath)
         
-        cell.textLabel?.text = errors[indexPath.row]
+        cell.textLabel?.text = statuses[indexPath.row]
         
         return cell
     }
