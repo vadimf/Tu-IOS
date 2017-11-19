@@ -46,8 +46,10 @@ class MachineConnection: NSObject {
     func connect(completion: MachineConnectCompletionHandler?) {
         modbus.connect(success: {
             self.isConnected = true
-            self.machine = Machine()
-            self.machine?.ipAddress = self.ipAddress
+            if self.machine == nil {
+                self.machine = Machine()
+                self.machine?.ipAddress = self.ipAddress
+            }
             completion?(true, nil)
             self.delegate?.didConnect(to: self, success: true)
         }, failure: { error in
@@ -61,11 +63,15 @@ class MachineConnection: NSObject {
     func disconnect() {
         modbus.disconnect()
         isConnected = false
+        stopFetching()
         delegate?.didDisconnect(from: self)
     }
     
     fileprivate func checkConnection(error: NSError) {
         if error.code == 54 {
+            modbus.disconnect()
+            isConnected = false
+            stopFetching()
             delegate?.didLoseConnection(to: self)
         }
         print(error.localizedDescription)

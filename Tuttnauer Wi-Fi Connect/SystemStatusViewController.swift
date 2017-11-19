@@ -45,6 +45,11 @@ class SystemStatusViewController: UIViewController {
         self.statuses = statuses
         tableView.reloadData()
     }
+    
+    func clearStatuses() {
+        self.statuses = [String]()
+        tableView.reloadData()
+    }
 
     // MARK: - IBActions
     

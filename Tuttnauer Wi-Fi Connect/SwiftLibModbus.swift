@@ -24,7 +24,6 @@ class SwiftLibModbus: NSObject {
     init(ipAddress: NSString, port: Int32, device: Int32) {
         super.init()
         modbusQueue = DispatchQueue(label: "com.iModbus.modbusQueue", qos: .userInteractive)
-        // modbusQueue = DispatchQueue(label: "com.iModbus.modbusQueue", attributes: .concurrent)
         let _ = self.setupTCP(ipAddress: ipAddress, port: port, device: device)
     }
     

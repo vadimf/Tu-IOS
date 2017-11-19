@@ -309,10 +309,10 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
     
     private func updateRealTimeData(with machine: Machine) {
         
+        guard let currentCycleStage = machine.realTime.cycleStage?.getName,
+            let cycleError = machine.realTime.cycleError?.getName else { return }
         
-        let currentCycleStage = machine.realTime.cycleStage?.getName
         let currentCycleStageTimerIsOn = machine.realTime.cycleStageTimerIsOn
-        let cycleError = machine.realTime.cycleError?.getName
         
         systemStatusButton.setTitle(machine.realTime.systemStatus?.getName, for: .normal)
         currentCycleIconImageView.image = machine.realTime.cycleID?.getIcon
@@ -321,12 +321,12 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
         
         if let systemStatusPopup = self.systemStatusPopup {
             let currentStatus = machine.realTime.backgroundStatus
-            if !currentStatus.isEmpty && !currentStatus.containsSameElements(as: systemStatusPopup.statuses) {
+            if !currentStatus.containsSameElements(as: systemStatusPopup.statuses) {
                 systemStatusPopup.updateStatuses(with: currentStatus)
             }
         }
         
-        if currentCycleStage!.isEmpty {
+        if currentCycleStage.isEmpty {
             currentStageTitleLabel.text = ""
             currentCycleStageNameLabel.text = ""
         } else {
@@ -343,7 +343,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
             currentCycleStageTimerLabel.isHidden = true
         }
         
-        if cycleError!.isEmpty  {
+        if cycleError.isEmpty  {
             cycleErrorTitleLabel.text = ""
             cycleErrorLabel.text = ""
         } else {

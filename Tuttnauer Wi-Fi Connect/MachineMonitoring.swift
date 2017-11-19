@@ -58,6 +58,7 @@ class MachineMonitoring: NSObject {
             } else {
                 self.delegate?.didLoseConnection(to: connection)
             }
+            self.currentConnection?.isConnected = success
         }
     }
     
@@ -111,7 +112,9 @@ extension MachineMonitoring: MachineConnectionDelegate {
     
     func didConnect(to connection: MachineConnection, success: Bool) {
         if success {
-            self.connections.append(connection)
+            if !self.connections.contains(connection) {
+                self.connections.append(connection)
+            }
             connection.startFetching()
             print("Connected to:", connection.ipAddress)
             NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Connected to: \(connection.machine!.ipAddress)")
