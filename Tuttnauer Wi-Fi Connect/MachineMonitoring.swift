@@ -146,7 +146,7 @@ extension MachineMonitoring: MachineConnectionDelegate {
     func didUpdateRealTimeData(for connection: MachineConnection, machine: Machine) {
         guard connection == currentConnection else { return }
         
-        if let cycleError = machine.realTime.cycleError, cycleError != .None {
+        if let cycleError = machine.realTime.cycleError, cycleError != .none {
             if !cycleErrorNotified {
                 cycleErrorNotified = true
                 NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "\(machine.modelName) cycle error: \(cycleError.getName)")

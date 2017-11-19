@@ -38,7 +38,11 @@ class MachineRealTime: NSObject {
     var cycleStageStartTime: Date?
     var cycleStageEndTime: Date?
     var cycleSubStage: AutoClaveEnums.CycleSubStage?
-    var cycleError: AutoClaveEnums.CycleError?
+    var cycleError: AutoClaveEnums.CycleError? {
+        didSet {
+            updateSystemStatus()
+        }
+    }
     
     // MARK: - Sensors
     
@@ -55,6 +59,11 @@ class MachineRealTime: NSObject {
     // MARK: - Update Methods
     
     private func updateSystemStatus() {
+        
+        if cycleError != nil && cycleError != AutoClaveEnums.CycleError.none {
+            systemStatus = AutoClaveEnums.SystemCurrentStatus.cycleFail
+            return
+        }
         
         if doorState == .door1Opened {
             systemStatus = AutoClaveEnums.SystemCurrentStatus.notReady

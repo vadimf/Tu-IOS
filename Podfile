@@ -15,6 +15,6 @@ target 'Tuttnauer Wi-Fi Connect' do
   pod 'IQKeyboardManagerSwift'
   pod 'CocoaAsyncSocket'
   pod 'ReachabilitySwift'
-  pod 'NVActivityIndicatorView'
+  pod 'SwiftGifOrigin'
 
 end

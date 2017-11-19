@@ -639,7 +639,7 @@ class AutoClaveEnums {
     
     enum CycleError: Int {
         // No error
-        case None = 0
+        case none = 0
         // User has pushed the stop button and canceled the cycle
         case CanceledByUser = 1
         // Door has been manually opened during cycle
@@ -798,7 +798,7 @@ class AutoClaveEnums {
         
         var getName: String {
             switch self {
-            case .None:
+            case .none:
                 return ""
             case .CanceledByUser:
                 return "Cancelled by user"

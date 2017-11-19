@@ -10,6 +10,7 @@
 		1601CCD01FA504E2004AC86F /* HA+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1601CCCF1FA504E2004AC86F /* HA+Int.swift */; };
 		160DD2361FA1E4060017D221 /* BaseSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160DD2351FA1E4060017D221 /* BaseSensor.swift */; };
 		1627989E1FBAB4E0001D1E19 /* SystemStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1627989D1FBAB4E0001D1E19 /* SystemStatusViewController.swift */; };
+		1627B2FB1FC1AE2C0004E087 /* gif-load.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1627B2FA1FC1AE2C0004E087 /* gif-load.gif */; };
 		162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */; };
 		162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */; };
 		163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */; };
@@ -67,6 +68,7 @@
 		1601CCCF1FA504E2004AC86F /* HA+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HA+Int.swift"; sourceTree = "<group>"; };
 		160DD2351FA1E4060017D221 /* BaseSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSensor.swift; sourceTree = "<group>"; };
 		1627989D1FBAB4E0001D1E19 /* SystemStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatusViewController.swift; sourceTree = "<group>"; };
+		1627B2FA1FC1AE2C0004E087 /* gif-load.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "gif-load.gif"; sourceTree = "<group>"; };
 		162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuIconTableViewCell.swift; sourceTree = "<group>"; };
 		163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineRealTime.swift; sourceTree = "<group>"; };
@@ -146,6 +148,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1627B2F91FC1AE260004E087 /* Gifs */ = {
+			isa = PBXGroup;
+			children = (
+				1627B2FA1FC1AE2C0004E087 /* gif-load.gif */,
+			);
+			name = Gifs;
+			sourceTree = "<group>";
+		};
 		162FEE921FA01117005A1055 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +338,7 @@
 		16A462D51F5D63C8002C4ECF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1627B2F91FC1AE260004E087 /* Gifs */,
 				16A462E61F5D6A43002C4ECF /* Tuttnauer Wi-Fi Connect-Bridging-Header.h */,
 				16A462CC1F5D3FE0002C4ECF /* Info.plist */,
 				168ACE0A1F926371000277DD /* Localizable.strings */,
@@ -506,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A462CB1F5D3FE0002C4ECF /* LaunchScreen.storyboard in Resources */,
+				1627B2FB1FC1AE2C0004E087 /* gif-load.gif in Resources */,
 				16707DF11F61775500706B87 /* COPYING.LESSER in Resources */,
 				16707DEF1F61775500706B87 /* AUTHORS in Resources */,
 				16707DF61F61775500706B87 /* NEWS in Resources */,
@@ -559,9 +571,9 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -569,9 +581,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGifOrigin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

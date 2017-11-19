@@ -9,13 +9,13 @@
 import UIKit
 import SideMenu
 import MBProgressHUD
-import NVActivityIndicatorView
+import SwiftGifOrigin
 
 class SingleMachineViewController: UIViewController {
     
     var monitor: MachineMonitoring?
     var systemStatusPopup: SystemStatusViewController?
-    var cycleIndicator: NVActivityIndicatorView!
+    var cycleIndicator: UIImageView!
     
     // MARK: - IBOutlets
     
@@ -63,7 +63,12 @@ class SingleMachineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cycleIndicator = NVActivityIndicatorView(frame: currentCycleIndicatorView.frame, type: .ballSpinFadeLoader, color: UIColor.tuttnauerRed(), padding: 0)
+        let gifIndicator = UIImageView()
+        gifIndicator.contentMode = .scaleAspectFit
+        gifIndicator.loadGif(name: "gif-load")
+        gifIndicator.translatesAutoresizingMaskIntoConstraints = false
+        cycleIndicator = gifIndicator
+        cycleIndicator.isHidden = true
         
         registerNotifications()
         setupSideMenu()
@@ -95,9 +100,7 @@ class SingleMachineViewController: UIViewController {
     // MARK: - Setup Methods
     
     private func setupCycleIndicator() {
-        NVActivityIndicatorView.DEFAULT_BLOCKER_SIZE = CGSize(width: currentCycleIndicatorView.frame.size.height, height: currentCycleIndicatorView.frame.size.height)
         cycleIndicator.frame = currentCycleIndicatorView.frame
-        cycleIndicator.translatesAutoresizingMaskIntoConstraints = false
         currentCycleIndicatorView.addSubview(cycleIndicator)
         cycleIndicator.topAnchor.constraint(equalTo: currentCycleIndicatorView.topAnchor).isActive = true
         cycleIndicator.rightAnchor.constraint(equalTo: currentCycleIndicatorView.rightAnchor).isActive = true
@@ -360,13 +363,9 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
         }
         
         if let systemStatus = machine.realTime.systemStatus, systemStatus != .none && systemStatus != .notReady, !currentCycleStageTimerIsOn {
-            if !cycleIndicator.isAnimating {
-                cycleIndicator.startAnimating()
-            }
+            cycleIndicator.isHidden = false
         } else {
-            if cycleIndicator.isAnimating {
-                cycleIndicator.stopAnimating()
-            }
+            cycleIndicator.isHidden = true
         }
     }
     
