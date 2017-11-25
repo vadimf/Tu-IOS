@@ -24,6 +24,7 @@ class MainConnectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
+        ipAddressTextField.text = "10.0.0.44"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,21 +45,6 @@ class MainConnectViewController: UIViewController {
             return
         }
         connect(to: ipAddress)
-    }
-    
-}
-
-// MARK: - Navigation
-
-extension MainConnectViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == SegueIdentifiers.mainConnectToSingleMachine {
-            guard let _ = segue.destination as? SingleMachineViewController else { return }
-            
-        }
-        
     }
     
 }

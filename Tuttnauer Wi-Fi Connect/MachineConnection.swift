@@ -375,9 +375,21 @@ extension MachineConnection {
         let sensor2 = Array(data[Int(sensor2Address.start - startAddress)..<Int(sensor2Address.end - startAddress + 1)])
         let sensor3 = Array(data[Int(sensor3Address.start - startAddress)..<Int(sensor3Address.end - startAddress + 1)])
         
-        let sensor1Value = Utilities.decimalsToDouble(decimals: sensor1)
-        let sensor2Value = Utilities.decimalsToDouble(decimals: sensor2)
-        let sensor3Value = Utilities.decimalsToDouble(decimals: sensor3)
+        var sensor1Value = Utilities.decimalsToDouble(decimals: sensor1)
+        var sensor2Value = Utilities.decimalsToDouble(decimals: sensor2)
+        var sensor3Value = Utilities.decimalsToDouble(decimals: sensor3)
+        
+        if sensor1Value.isNaN {
+            sensor1Value = 0
+        }
+        
+        if sensor2Value.isNaN {
+            sensor2Value = 0
+        }
+        
+        if sensor3Value.isNaN {
+            sensor3Value = 0
+        }
         
         return (sensor1Value, sensor2Value, sensor3Value)
     }

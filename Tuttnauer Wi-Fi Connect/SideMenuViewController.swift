@@ -73,7 +73,9 @@ class SideMenuViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func disconnectButtonTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: NotificationsIdentifiers.machineDidDisconnectUserInitiated, object: nil)
+        navigationController?.dismiss(animated: true, completion: {
+            NotificationCenter.default.post(name: NotificationsIdentifiers.machineDidDisconnectUserInitiated, object: nil)
+        })
     }
 
 }

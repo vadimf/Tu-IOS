@@ -193,14 +193,26 @@ extension SingleMachineViewController {
         NotificationCenter.default.removeObserver(self, name: NotificationsIdentifiers.machineDidDisconnect, object: nil)
     }
     
-    @objc func handleMachineDidDisconnectUserInitiated(notification: Notification) {
+    func handleMachineDidDisconnectUserInitiated(notification: Notification) {
         // User disconnected from the machine on purpose
-        dismiss(animated: true, completion: nil)
+        guard let monitor = self.monitor,
+            let currentConnection = monitor.currentConnection else { return }
+        
+        currentConnection.disconnect()
+        
+        if monitor.connections.count > 1 {
+            // Switch to another connected machine (the first in the connections array)
+            guard let connection = monitor.connections.first else { return }
+            monitor.switchCurrentConnection(to: connection)
+        } else {
+            // Go back to the login screen
+            navigationController?.dismiss(animated: true, completion: nil)
+        }
     }
     
-    @objc func handleMachineDidDisconnect(notification: Notification) {
+    func handleMachineDidDisconnect(notification: Notification) {
         // Disconnected from the machine for unknown reasons
-        dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
 }

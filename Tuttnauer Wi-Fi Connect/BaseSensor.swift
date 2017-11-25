@@ -90,6 +90,9 @@ class BaseSensor: NSObject {
     
     func getFormattedUnit() -> String {
         let unitValue = getUnit().roundToPlaces(places: 1)
+        if unitValue == 0 {
+            return "-"
+        }
         switch self.units {
         case .celsius:
             return "\(unitValue) °C"

@@ -51,6 +51,10 @@ class MachineMonitoring: NSObject {
         }
     }
     
+    func switchCurrentConnection(to connection: MachineConnection) {
+        currentConnection = connection
+    }
+    
     func reconnect(to connection: MachineConnection) {
         connection.connect { (success, error) in
             if success {
