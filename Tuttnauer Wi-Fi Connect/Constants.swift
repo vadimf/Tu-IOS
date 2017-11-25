@@ -34,4 +34,5 @@ struct NotificationsIdentifiers {
     static let machineDidDisconnectUserInitiated = NSNotification.Name.init("machineDidDisconnectUserInitiated")
     static let machineDidDisconnect = NSNotification.Name.init("machineDidDisconnect")
     static let reachabilityChanged = Notification.Name.reachabilityChanged
+    static let didFindNewMachineOnTheNetworkNotification = NSNotification.Name.init("didFindNewMachineOnTheNetworkNotification")
 }

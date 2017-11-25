@@ -161,6 +161,7 @@ extension NetworkManager: GCDAsyncUdpSocketDelegate {
     func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
         guard let machineData = String(data: data, encoding: .utf8) else { return }
         parseMachineData(data: machineData)
+        NotificationCenter.default.post(name: NotificationsIdentifiers.didFindNewMachineOnTheNetworkNotification, object: nil)
     }
     
     func udpSocket(_ sock: GCDAsyncUdpSocket, didNotConnect error: Error?) {

@@ -50,14 +50,19 @@ class SideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        registerNotifications()
+        
         networkManager = NetworkManager.shared
         networkManager?.delegate = self
-        
-        if networkManager!.machines.isEmpty {
-            networkManager?.scanForMachinesOnNetwork()
-        }
+        networkManager?.scanForMachinesOnNetwork()
         
         updateDataSource()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        deRegisterNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,6 +76,20 @@ class SideMenuViewController: UIViewController {
         NotificationCenter.default.post(name: NotificationsIdentifiers.machineDidDisconnectUserInitiated, object: nil)
     }
 
+}
+
+// MARK: - Notifications
+
+extension SideMenuViewController {
+    
+    fileprivate func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDataSource), name: NotificationsIdentifiers.didFindNewMachineOnTheNetworkNotification, object: nil)
+    }
+    
+    fileprivate func deRegisterNotifications() {
+        NotificationCenter.default.removeObserver(self, name: NotificationsIdentifiers.didFindNewMachineOnTheNetworkNotification, object: nil)
+    }
+    
 }
 
 // MARK: - NetworkManager Delegate
@@ -101,7 +120,7 @@ extension SideMenuViewController {
         }
     }
     
-    fileprivate func updateDataSource() {
+    @objc fileprivate func updateDataSource() {
 
         if !dataSource.isEmpty {
             dataSource.removeAll()
@@ -179,9 +198,12 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
                 delegate?.didChooseDifferentMachine(ipAddress: item.value)
                 dismiss(animated: true, completion: nil)
             }
+            return
         }
         
-        UIApplication.shared.open(URL(string: item.value)!, options: [:], completionHandler: nil)
+        if item.enabled {
+            UIApplication.shared.open(URL(string: item.value)!, options: [:], completionHandler: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
