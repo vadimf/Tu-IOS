@@ -24,7 +24,7 @@ class MainConnectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
-        ipAddressTextField.text = "10.0.0.44"
+        let _ = NetworkManager.shared
     }
     
     override func viewDidAppear(_ animated: Bool) {

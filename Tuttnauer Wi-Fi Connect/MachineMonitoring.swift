@@ -56,14 +56,38 @@ class MachineMonitoring: NSObject {
     }
     
     func reconnect(to connection: MachineConnection) {
-        connection.connect { (success, error) in
-            if success {
-                self.delegate?.didConnect(to: connection, success: true)
-            } else {
-                self.delegate?.didLoseConnection(to: connection)
-            }
-            self.currentConnection?.isConnected = success
+        
+        // Check if WiFi is available first
+        guard NetworkManager.shared.reachability!.isReachableViaWiFi else {
+            delegate?.didLoseConnection(to: connection)
+            currentConnection?.isConnected = false
+            return
         }
+        
+        // Check if this machine is even connected to the network anymore
+        NetworkManager.shared.scanForMachinesOnNetwork()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: { // Delayed so scanForMachinesOnNetwork() can finish its work
+            let machines = NetworkManager.shared.machines
+            guard machines.count > 0 else {
+                self.delegate?.didLoseConnection(to: connection)
+                return
+            }
+            for machine in machines {
+                if machine.ipAddress == connection.ipAddress {
+                    // Try to connect again
+                    connection.connect { (success, error) in
+                        if success {
+                            self.delegate?.didConnect(to: connection, success: true)
+                        } else {
+                            self.delegate?.didLoseConnection(to: connection)
+                        }
+                        self.currentConnection?.isConnected = success
+                    }
+                } else {
+                    self.delegate?.didLoseConnection(to: connection)
+                }
+            }
+        })
     }
     
     func disconnect(from connection: MachineConnection) {

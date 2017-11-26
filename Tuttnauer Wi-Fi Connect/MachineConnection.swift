@@ -67,12 +67,19 @@ class MachineConnection: NSObject {
         delegate?.didDisconnect(from: self)
     }
     
+    func disconnectAfterLostConnection() {
+        modbus.disconnect()
+        isConnected = false
+        stopFetching()
+        delegate?.didLoseConnection(to: self)
+    }
+    
     fileprivate func checkConnection(error: NSError) {
+        let networkReachability = NetworkManager.shared.reachability!
         if error.code == 54 {
-            modbus.disconnect()
-            isConnected = false
-            stopFetching()
-            delegate?.didLoseConnection(to: self)
+            disconnectAfterLostConnection()
+        } else if error.code == 60, !networkReachability.isReachableViaWiFi {
+            disconnectAfterLostConnection()
         }
         print(error.localizedDescription)
     }
