@@ -352,15 +352,6 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
             }
 
         }
-
-        if currentCycleStageTimerIsOn {
-            currentCycleStageTimerLabel.text = machine.realTime.cycleStageTimer
-            currentCycleStageTimerLabel.isHidden = false
-            cycleIndicator.stopAnimating()
-        } else {
-            currentCycleStageTimerLabel.text = ""
-            currentCycleStageTimerLabel.isHidden = true
-        }
         
         if cycleError.isEmpty  {
             cycleErrorTitleLabel.text = ""
@@ -378,7 +369,19 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
             currentCycleIconImageView.isHidden = false
         }
         
-        if let systemStatus = machine.realTime.systemStatus, systemStatus != .none && systemStatus != .notReady, !currentCycleStageTimerIsOn {
+        // MARK: Timer & Cycle indicator animation
+        
+        if currentCycleStageTimerIsOn {
+            currentCycleStageTimerLabel.text = machine.realTime.cycleStageTimer
+            currentCycleStageTimerLabel.isHidden = false
+        } else {
+            currentCycleStageTimerLabel.text = ""
+            currentCycleStageTimerLabel.isHidden = true
+        }
+        
+        if let systemStatus = machine.realTime.systemStatus,
+            systemStatus != .none && systemStatus != .notReady && systemStatus != .cycleDone,
+            !currentCycleStageTimerIsOn {
             cycleIndicator.isHidden = false
         } else {
             cycleIndicator.isHidden = true
