@@ -332,8 +332,6 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
         systemStatusButton.setTitle(machine.realTime.systemStatus?.getName, for: .normal)
         currentCycleIconImageView.image = machine.realTime.cycleID?.getIcon
         
-        //currentCycleSubStageNameLabel.text = machineRealTime.cycleSubStage?.getName
-        
         if let systemStatusPopup = self.systemStatusPopup {
             let currentStatus = machine.realTime.backgroundStatus
             if !currentStatus.containsSameElements(as: systemStatusPopup.statuses) {
@@ -346,7 +344,13 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
             currentCycleStageNameLabel.text = ""
         } else {
             currentStageTitleLabel.text = "Current Stage"
-            currentCycleStageNameLabel.text = machine.realTime.cycleStage?.getName
+            if let currentCycleSubStage = machine.realTime.cycleSubStage?.getName,
+                !currentCycleSubStage.isEmpty {
+                currentCycleStageNameLabel.text = currentCycleSubStage
+            } else {
+                currentCycleStageNameLabel.text = machine.realTime.cycleStage?.getName
+            }
+
         }
 
         if currentCycleStageTimerIsOn {
