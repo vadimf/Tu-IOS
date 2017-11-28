@@ -45,19 +45,8 @@ class ScanForMachinesViewController: UIViewController {
             selectedCell.unHighlightCell()
         }
         
-        if initialDataReload {
-            let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-            progressHUD.label.text = "Searching..."
-            initialDataReload = false
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: {
-                MBProgressHUD.hide(for: self.view, animated: true)
-                if self.machines.isEmpty {
-                    self.didUpdateMachineList(list: [])
-                }
-            })
-        }
-        
-        networkManager?.scanForMachinesOnNetwork()
+        networkManager?.delegate = self
+        reloadButtonTapped(self)
     }
     
     override func didReceiveMemoryWarning() {
