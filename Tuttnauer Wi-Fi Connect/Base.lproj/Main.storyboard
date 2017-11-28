@@ -896,7 +896,7 @@
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cycle_default" translatesAutoresizingMaskIntoConstraints="NO" id="Il1-9j-mmb">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cycle_0" translatesAutoresizingMaskIntoConstraints="NO" id="Il1-9j-mmb">
                                                 <rect key="frame" x="0.0" y="34" width="38" height="45"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Liquid B Waste Cooling" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdF-3n-h44">
@@ -1594,7 +1594,7 @@
     </scenes>
     <resources>
         <image name="icon_close" width="25" height="25"/>
-        <image name="icon_cycle_default" width="38" height="45"/>
+        <image name="icon_cycle_0" width="38" height="45"/>
         <image name="icon_navigationbar_menu" width="25" height="17"/>
         <image name="icon_navigationbar_reload" width="23" height="25"/>
         <image name="icon_navigationbar_settings" width="25" height="25"/>

@@ -418,21 +418,42 @@ extension MachineConnection {
     
     fileprivate func modbusMachineCurrentCycleInfo() {
         
-        let totalAddresses = MachineConstants.CycleInfo.total
+        // Cycle Name
+        let cycleNameAddresses = MachineConstants.CycleInfo.total
         
-        modbus.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+        modbus.readRegistersFrom(startAddress: (cycleNameAddresses.start - 1), count: cycleNameAddresses.count, success: { (data) in
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
             
-            let cycleName = self.getMachineCycleName(startAddress: totalAddresses.start, data: data)
+            let cycleName = self.getMachineCycleName(startAddress: cycleNameAddresses.start, data: data)
             
             if machine.realTime.cycleName != cycleName {
                 machine.realTime.cycleName = cycleName
+                self.delegate?.didUpdateRealTimeData(for: self, machine: machine)
             }
             
-            self.delegate?.didUpdateRealTimeData(for: self, machine: machine)
+        }, failure: { (error) in
+            self.checkConnection(error: error)
+            self.modbusMachineCurrentCycleInfo()
+        })
+        
+        // Cycle Icon
+        
+        let cycleIconIDAddress = MachineConstants.CurrentCycleProperties.cycleIcon
+        
+        modbus.readRegistersFrom(startAddress: (cycleIconIDAddress.start - 1), count: cycleIconIDAddress.count, success: { (data) in
             
+            guard let data = data as? [Int],
+                let machine = self.machine else { return }
+            
+            let cycleIconID = data[0]
+            
+            if machine.realTime.cycleIconID != cycleIconID {
+                machine.realTime.cycleIconID = cycleIconID
+                self.delegate?.didUpdateRealTimeData(for: self, machine: machine)
+            }
+        
         }, failure: { (error) in
             self.checkConnection(error: error)
             self.modbusMachineCurrentCycleInfo()
@@ -445,6 +466,11 @@ extension MachineConnection {
         let cycleName = Array(data[Int(cycleNameAddress.start - startAddress)..<Int(cycleNameAddress.end - startAddress + 1)])
         let cycleNameValue = Utilities.decimalsToString(decimals: cycleName)
         return cycleNameValue
+    }
+    
+    private func getMachineCycleIconID(startAddress: Int32, data: [Int]) -> Int {
+        let cycleIconID = Utilities.decimalsToInt(decimals: data)
+        return cycleIconID
     }
     
     // MARK: Current Cycle Parameters

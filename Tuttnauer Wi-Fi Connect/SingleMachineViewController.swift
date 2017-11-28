@@ -330,7 +330,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
         let currentCycleStageTimerIsOn = machine.realTime.cycleStageTimerIsOn
         
         systemStatusButton.setTitle(machine.realTime.systemStatus?.getName, for: .normal)
-        currentCycleIconImageView.image = machine.realTime.cycleID?.getIcon
+        currentCycleIconImageView.image = machine.realTime.cycleIcon
         
         if let systemStatusPopup = self.systemStatusPopup {
             let currentStatus = machine.realTime.backgroundStatus

@@ -113,6 +113,21 @@ class Utilities {
         return Utilities.fromByteArray(byteArray, UInt64.self)
     }
     
+    class func decimalsToInt(decimals: [Int]) -> Int {
+        
+        guard decimals.count == 4 else { return 0 }
+        
+        var byteArray = [UInt8]()
+        
+        for decimal in decimals {
+            let array = decimal.toUInt8BytesArray(reverse: false)
+            byteArray.append(array[1])
+            byteArray.append(array[0])
+        }
+        
+        return Utilities.fromByteArray(byteArray, Int.self)
+    }
+    
     // MARK: - Networking
     
     class func getWiFiAddress() -> String? {

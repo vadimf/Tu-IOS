@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 class MachineRealTime: NSObject {
 
@@ -20,6 +21,12 @@ class MachineRealTime: NSObject {
     
     var cycleID: AutoClaveEnums.CycleID?
     var cycleName: String?
+    var cycleIconID: Int = 9 // Default, blank icon
+    var cycleIcon: UIImage! {
+        get {
+            return UIImage(named: "icon_cycle_\(self.cycleIconID)")
+        }
+    }
     var cycleStage: AutoClaveEnums.CycleStage? {
         didSet {
             updateSystemStatus() // Did this because there is no way to determine RealTimeStateSystemStatus (according to Avi)
