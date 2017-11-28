@@ -1049,6 +1049,11 @@ class AutoClaveEnums {
         case time
     }
     
+    enum AnalogUnitsTypes {
+        case temperature
+        case pressure
+    }
+    
     enum AnalogUnits: Int {
         case celsius = 0
         case fahrenheit
