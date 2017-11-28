@@ -171,6 +171,11 @@ extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.accessoryType = .checkmark
             }
             
+            let currentMachineIPAddress = MachineMonitoring.shared.currentConnection?.ipAddress
+            if item.value == currentMachineIPAddress {
+                cell.backgroundColor = UIColor.tuttnauerGrey()
+            }
+            
             return cell
         }
         

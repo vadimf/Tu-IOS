@@ -113,6 +113,7 @@ class MachineMonitoring: NSObject {
     // MARK: Start, Stop & Resume Monitoring
     
     func startMonitoring(connection: MachineConnection) {
+        guard connection.isConnected else { return }
         connection.startFetching()
     }
     
@@ -122,6 +123,7 @@ class MachineMonitoring: NSObject {
     
     func startMonitoringAll() {
         for connection in connections {
+            guard connection.isConnected else { continue }
             connection.startFetching()
         }
     }
