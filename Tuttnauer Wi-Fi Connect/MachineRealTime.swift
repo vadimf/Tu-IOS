@@ -32,11 +32,12 @@ class MachineRealTime: NSObject {
             updateSystemStatus() // Did this because there is no way to determine RealTimeStateSystemStatus (according to Avi)
         }
     }
+    var cycleStageTimerMachineGMT: TimeInterval?
     var cycleStageTimerIsOn: Bool = false
     var cycleStageTimer: String? {
         get {
-            if let end = cycleStageEndTime {
-                return updatedTimer(endDate: end)
+            if let start = cycleStageStartTime, let end = cycleStageEndTime {
+                return updatedTimer(startDate: start, endDate: end)
             } else {
                 return nil
             }
@@ -87,9 +88,13 @@ class MachineRealTime: NSObject {
         }
     }
     
-    private func updatedTimer(endDate: Date) -> String {
-        
-        return Date().minutesAndSeconds(until: endDate)
+    private func updatedTimer(startDate: Date, endDate: Date) -> String {
+        // Find out what is the difference between GMT to the machine time
+        //let secondsFromGMT = TimeInterval(TimeZone.current.secondsFromGMT())
+        guard let machineGMT = self.cycleStageTimerMachineGMT else { return "" }
+        var now = Date()
+        now.addTimeInterval(machineGMT)
+        return now.minutesAndSeconds(until: endDate)
     }
     
 }

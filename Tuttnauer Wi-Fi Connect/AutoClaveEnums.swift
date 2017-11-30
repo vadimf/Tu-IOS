@@ -780,7 +780,7 @@ class AutoClaveEnums {
             case .ExhaustHighPressure:
                 return "Exhaust High Pressure"
             case .DryHighPressure:
-                return "Dry High Pressure"
+                return "High Pressure (Dry)"
             case .EndingHighPressure:
                 return "Ending High Pressure"
             case .AirError:

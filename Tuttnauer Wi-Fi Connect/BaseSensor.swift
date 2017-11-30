@@ -104,7 +104,8 @@ class BaseSensor: NSObject {
         case .psia:
             return "\(unitValue) Psia"
         case .psig:
-            if (value <= atmosphericPressure) { // We cannot display 0 or negative numbers for Psig, so it needs to be in inHg values
+            if (value <= atmosphericPressure) {
+                // We cannot display 0 or negative numbers for Psig, so it needs to be in inHg values
                 return "\(unitValue) inHg"
             }
             return "\(unitValue) Psig"
@@ -126,12 +127,13 @@ class BaseSensor: NSObject {
         }
         
         /*
-         * If (open door + Psig is -10 or +10 the current atmosphere pressure), return 0.
+         * Requested by the customer:
+         * If open door + Psig is -10 or +10 than the current atmosphere pressure, return 0.
          *
          * Example:
          * -> Door Open
          * -> Atmosphere pressure is 100.0
-         * -> PSIg value is between 90.0 and 110.0
+         * -> Psig value is between 90.0 and 110.0
          * = Return 0
          */
         if let machine = MachineMonitoring.shared.currentConnection?.machine?.realTime {
@@ -146,7 +148,8 @@ class BaseSensor: NSObject {
         if (value >= atmosphericPressure) {
             return (value - atmosphericPressure) * kpaToPSIGFactor
         } else {
-            return abs((value - atmosphericPressure) * kpaToInhgFactor) // We cannot display 0 or negative numbers for Psig, so it needs to be in inHg values
+            // We cannot display 0 or negative numbers for Psig, so it needs to be in inHg values
+            return abs((value - atmosphericPressure) * kpaToInhgFactor)
         }
     }
     

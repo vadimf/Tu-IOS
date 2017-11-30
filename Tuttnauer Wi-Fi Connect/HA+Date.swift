@@ -27,17 +27,8 @@ extension Date {
         var minutes = "00"
         var seconds = "00"
         
-        if minutesComponent < 10 {
-            minutes = "0\(minutesComponent)"
-        } else {
-            minutes = "\(minutesComponent)"
-        }
-        
-        if secondsComponent < 10 {
-            seconds = "0\(minutesComponent)"
-        } else {
-            seconds = "\(secondsComponent)"
-        }
+        minutes = minutesComponent < 10 ? "0\(minutesComponent)" : "\(minutesComponent)"
+        seconds = secondsComponent < 10 ? "0\(secondsComponent)" : "\(secondsComponent)"
         
         return "\(minutes):\(seconds)"
     }

@@ -202,8 +202,10 @@ extension MachineConnection {
             machine.realTime.cycleStageTimerIsOn = self.getMachineStageTimeIsOn(startAddress: totalAddresses.start, data: data)
             
             if machine.realTime.cycleStageTimerIsOn {
-                if machine.realTime.cycleStageStartTime == nil && machine.realTime.cycleStageEndTime == nil {
+                // When the timer is coming up for the first time, it's values are not good
+                if machine.realTime.cycleStageStartTime == nil && machine.realTime.cycleStageEndTime == nil && machine.realTime.cycleStageTimerMachineGMT == nil {
                     let times = self.getMachineStageStartEndTime(startAddress: totalAddresses.start, data: data)
+                    machine.realTime.cycleStageTimerMachineGMT = times.machineGMT
                     machine.realTime.cycleStageStartTime = times.start
                     machine.realTime.cycleStageEndTime = times.end
                 }
@@ -282,7 +284,7 @@ extension MachineConnection {
         if isOn == 1 { return true } else { return false }
     }
     
-    private func getMachineStageStartEndTime(startAddress: Int32, data: [Int]) -> (start: Date?, end: Date?) {
+    private func getMachineStageStartEndTime(startAddress: Int32, data: [Int]) -> (start: Date?, end: Date?, machineGMT: TimeInterval?) {
         
         let startTimeAddress = MachineConstants.RealTime.stageStartTime
         let endTimeAddress = MachineConstants.RealTime.stageEndTime
@@ -290,15 +292,19 @@ extension MachineConnection {
         let startTimeData = Array(data[Int(startTimeAddress.start - startAddress)..<Int(startTimeAddress.end - startAddress + 1)])
         let endTimeData = Array(data[Int(endTimeAddress.start - startAddress)..<Int(endTimeAddress.end - startAddress + 1)])
 
-        var startTime = Utilities.decimalsTicksToDate(decimals: startTimeData)
-        var endTime = Utilities.decimalsTicksToDate(decimals: endTimeData)
+        let startTime = Utilities.decimalsTicksToDate(decimals: startTimeData)
+        let endTime = Utilities.decimalsTicksToDate(decimals: endTimeData)
         
-        // Fixes issues where dates have some localization problems
-        let secondsFromGMT = TimeInterval(abs(TimeZone.current.secondsFromGMT()))
-        startTime.addTimeInterval(-secondsFromGMT)
-        endTime.addTimeInterval(-secondsFromGMT)
+        guard startTime.timeIntervalSinceReferenceDate > 0, endTime.timeIntervalSinceReferenceDate > 0 else {
+            return (nil, nil, nil)
+        }
         
-        return (startTime, endTime)
+        // Finding the machine's GMT
+        let machineGMT = (startTime.timeIntervalSinceReferenceDate - Date().timeIntervalSinceReferenceDate)
+        let machineGMTHours = round(machineGMT / 60 / 60)
+        let machineGMTSeconds = TimeInterval(machineGMTHours * 60 * 60)
+        
+        return (startTime, endTime, machineGMTSeconds)
     }
     
     // MARK: - Fetch Real Time Sensors Data
