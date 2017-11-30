@@ -381,7 +381,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
         
         if let systemStatus = machine.realTime.systemStatus,
             systemStatus != .none && systemStatus != .notReady && systemStatus != .cycleDone,
-            !currentCycleStageTimerIsOn {
+            !currentCycleStageTimerIsOn, machine.realTime.cycleStage != .done {
             cycleIndicator.isHidden = false
         } else {
             cycleIndicator.isHidden = true
