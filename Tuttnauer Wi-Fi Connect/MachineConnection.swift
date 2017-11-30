@@ -210,6 +210,7 @@ extension MachineConnection {
                     machine.realTime.cycleStageEndTime = times.end
                 }
             } else {
+                machine.realTime.cycleStageTimerMachineGMT = nil
                 machine.realTime.cycleStageStartTime = nil
                 machine.realTime.cycleStageEndTime = nil
             }
