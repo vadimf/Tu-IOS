@@ -55,6 +55,9 @@ class NetworkManager: NSObject {
     // MARK: - Methods
     
     fileprivate func setupSockets() {
+        
+        guard udpListenerSocket == nil, udpBroadcasterSocket == nil else { return }
+        
         // Setup sockets
         udpListenerQueue = DispatchQueue.main
         udpListenerSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: udpListenerQueue)
@@ -139,12 +142,12 @@ class NetworkManager: NSObject {
 
 extension NetworkManager {
     
-    func connect() {
+    public func connect() {
         setupSockets()
         isConnceted = true
     }
     
-    func disconnect() {
+    public func disconnect() {
         udpBroadcasterSocket?.close()
         udpListenerSocket?.close()
         udpBroadcasterSocket = nil

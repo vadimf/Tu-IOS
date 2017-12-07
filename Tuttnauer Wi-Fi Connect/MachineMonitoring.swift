@@ -94,6 +94,7 @@ class MachineMonitoring: NSObject {
     func disconnect(from connection: MachineConnection) {
         connection.disconnect()
         removeConnection(to: connection)
+        print("* Connections in stack:", self.connections)
     }
     
     func removeConnection(to connection: MachineConnection) {
@@ -123,15 +124,16 @@ class MachineMonitoring: NSObject {
     }
     
     func startMonitoringAll() {
+        guard !connections.isEmpty else { return }
         for connection in connections {
-            guard connection.isConnected else { continue }
             connection.startFetching()
         }
     }
     
-    func stopMonitoringAll() {
+    func stopMonitoringAll(shouldDisconnect: Bool = false) {
+        guard !connections.isEmpty else { return }
         for connection in connections {
-            connection.stopFetching()
+            connection.stopFetching(shouldDisconnect: shouldDisconnect)
         }
     }
     
@@ -153,20 +155,24 @@ extension MachineMonitoring: MachineConnectionDelegate {
             print("Could not connect to:", connection.ipAddress)
             NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Connection failed: \(connection.machine!.ipAddress)")
         }
+        print("* Connections in stack:", self.connections)
     }
     
     func didDisconnect(from connection: MachineConnection) {
         print("Disconnected from:", connection.ipAddress)
         NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Disconnected from: \(connection.machine!.ipAddress)")
+        print("* Connections in stack:", self.connections)
     }
     
     func didLoseConnection(to connection: MachineConnection) {
         print("Lost connection to:", connection.ipAddress)
         if connection == currentConnection {
-           delegate?.didLoseConnection(to: connection)
+            delegate?.didLoseConnection(to: connection)
         } else {
             NotificationsManager.shared.scheduleLocalNotification(in: 1, title: "Tuttnauer", body: "Lost connection to: \(connection.machine!.ipAddress)")
+            disconnect(from: connection)
         }
+        print("* Connections in stack:", self.connections)
     }
     
     func didUpdateSetupData(for connection: MachineConnection, machine: Machine) {

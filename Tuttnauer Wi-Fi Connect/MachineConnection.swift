@@ -28,6 +28,7 @@ class MachineConnection: NSObject {
     var machine: Machine?
     var ipAddress: String!
     var isConnected: Bool = false
+    var isFetching: Bool = false
     
     var operationTimeOutTimes: Int = 8 // The operation timeout times allowed before disconnecting
     var operationTimedOutCounter: Int = 0
@@ -80,20 +81,19 @@ class MachineConnection: NSObject {
     fileprivate func checkConnection(error: NSError) {
         
         print(error.localizedDescription)
-        
-        let networkReachability = NetworkManager.shared.reachability!
-        
+
         if error.code == 54 {
             disconnectAfterLostConnection()
         } else if error.code == 60 {
             operationTimedOutCounter += 1
-            
+    
             if operationTimedOutCounter > operationTimeOutTimes { // If operation has timed out by the machine more than X times, let's not take a risk and disconnect
                 disconnectAfterLostConnection()
                 return
             }
             
-            if !networkReachability.isReachableViaWiFi {
+            if let networkReachability = NetworkManager.shared.reachability,
+                !networkReachability.isReachableViaWiFi {
                 disconnectAfterLostConnection()
                 return
             }
@@ -103,15 +103,31 @@ class MachineConnection: NSObject {
     // MARK: - Fetch Start & Stop
     
     func startFetching() {
-        fetchMachineSetupData()
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fetchMachineRealTimeData), userInfo: nil, repeats: true)
-        timer?.fire()
+        if isConnected {
+            fetchMachineSetupData()
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fetchMachineRealTimeData), userInfo: nil, repeats: true)
+            timer?.fire()
+            isFetching = true
+        } else {
+            connect { (success, error) in
+                if success {
+                    self.startFetching()
+                } else {
+                    self.stopFetching()
+                }
+            }
+        }
     }
     
-    func stopFetching() {
+    func stopFetching(shouldDisconnect: Bool = false) {
         guard timer != nil else { return }
         timer!.invalidate()
         timer = nil
+        isFetching = false
+        if shouldDisconnect {
+            modbus.disconnect()
+            isConnected = false
+        }
     }
 
 }

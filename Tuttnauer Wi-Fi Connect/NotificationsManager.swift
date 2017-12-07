@@ -87,7 +87,6 @@ class NotificationsManager: NSObject {
                 print("Could not create local notification:", error!.localizedDescription)
                 return
             }
-            print("Notification created")
         })
     }
     
