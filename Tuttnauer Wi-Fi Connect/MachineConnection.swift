@@ -104,12 +104,15 @@ class MachineConnection: NSObject {
     
     func startFetching() {
         if isConnected {
+            print("startFetching() -> IS CONNECTED")
             fetchMachineSetupData()
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fetchMachineRealTimeData), userInfo: nil, repeats: true)
             timer?.fire()
             isFetching = true
         } else {
+            print("startFetching() -> NOT CONNECTED")
             connect { (success, error) in
+                print("startFetching() -> DID CONNECT")
                 if success {
                     self.startFetching()
                 } else {
