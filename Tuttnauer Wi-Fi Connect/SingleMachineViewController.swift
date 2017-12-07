@@ -198,9 +198,9 @@ extension SingleMachineViewController {
         guard let monitor = self.monitor,
             let currentConnection = monitor.currentConnection else { return }
         
-        currentConnection.disconnect()
+        monitor.disconnect(from: currentConnection)
         
-        if monitor.connections.count > 1 {
+        if monitor.connections.count > 0 {
             // Switch to another connected machine (the first in the connections array)
             guard let connection = monitor.connections.first else { return }
             monitor.switchCurrentConnection(to: connection)

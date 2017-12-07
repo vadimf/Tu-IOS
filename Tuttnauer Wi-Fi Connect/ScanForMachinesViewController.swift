@@ -85,16 +85,6 @@ class ScanForMachinesViewController: UIViewController {
     
 }
 
-// MARK: - Navigation
-
-extension ScanForMachinesViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
-}
-
 // MARK: - TableView Data Source & Delegate
 
 extension ScanForMachinesViewController: UITableViewDataSource, UITableViewDelegate {

@@ -53,6 +53,7 @@ class MachineMonitoring: NSObject {
     
     func switchCurrentConnection(to connection: MachineConnection) {
         currentConnection = connection
+        currentConnection?.fetchMachineSetupData()
     }
     
     func reconnect(to connection: MachineConnection) {

@@ -56,8 +56,6 @@ class SideMenuViewController: UIViewController {
         networkManager = NetworkManager.shared
         networkManager?.delegate = self
         networkManager?.scanForMachinesOnNetwork()
-        
-        updateDataSource()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -123,13 +121,15 @@ extension SideMenuViewController {
     }
     
     @objc fileprivate func updateDataSource() {
-
-        if !dataSource.isEmpty {
-            dataSource.removeAll()
+        
+        guard let networkManager = self.networkManager else { return }
+        
+        if !machines.elementsEqual(networkManager.machines) {
+            machines = networkManager.machines
         }
         
-        if let networkManager = self.networkManager {
-            machines = networkManager.machines
+        if !dataSource.isEmpty {
+            dataSource.removeAll()
         }
         
         updateMachineList()

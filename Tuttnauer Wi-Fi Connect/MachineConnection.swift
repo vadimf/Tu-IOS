@@ -29,6 +29,9 @@ class MachineConnection: NSObject {
     var ipAddress: String!
     var isConnected: Bool = false
     
+    var operationTimeOutTimes: Int = 8 // The operation timeout times allowed before disconnecting
+    var operationTimedOutCounter: Int = 0
+    
     var timer: Timer?
     
     // MARK: Initialization
@@ -75,13 +78,26 @@ class MachineConnection: NSObject {
     }
     
     fileprivate func checkConnection(error: NSError) {
+        
+        print(error.localizedDescription)
+        
         let networkReachability = NetworkManager.shared.reachability!
+        
         if error.code == 54 {
             disconnectAfterLostConnection()
-        } else if error.code == 60, !networkReachability.isReachableViaWiFi {
-            disconnectAfterLostConnection()
+        } else if error.code == 60 {
+            operationTimedOutCounter += 1
+            
+            if operationTimedOutCounter > operationTimeOutTimes { // If operation has timed out by the machine more than X times, let's not take a risk and disconnect
+                disconnectAfterLostConnection()
+                return
+            }
+            
+            if !networkReachability.isReachableViaWiFi {
+                disconnectAfterLostConnection()
+                return
+            }
         }
-        print(error.localizedDescription)
     }
     
     // MARK: - Fetch Start & Stop
@@ -104,7 +120,7 @@ class MachineConnection: NSObject {
 
 extension MachineConnection {
     
-    fileprivate func fetchMachineSetupData() {
+    func fetchMachineSetupData() {
         modbusMachineSetupData()
     }
     
@@ -139,6 +155,8 @@ extension MachineConnection {
         // Get Version Number
         modbus.readRegistersFrom(startAddress: (versionMajorAddress.start - 1), count: versionTotalAddresses, success: { (data) in
             
+            self.operationTimedOutCounter = 0
+            
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
             
@@ -155,6 +173,8 @@ extension MachineConnection {
         
         // Get Model Name & Serial Number
         modbus.readRegistersFrom(startAddress: (modelNameAddress.start - 1), count: modelTotalAddresses, success: { (data) in
+            
+            self.operationTimedOutCounter = 0
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
@@ -188,6 +208,8 @@ extension MachineConnection {
         let totalAddresses = MachineConstants.RealTime.total
         
         modbus.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+            
+            self.operationTimedOutCounter = 0
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
@@ -316,6 +338,8 @@ extension MachineConnection {
         
         modbus.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
             
+            self.operationTimedOutCounter = 0
+            
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
             
@@ -430,6 +454,8 @@ extension MachineConnection {
         
         modbus.readRegistersFrom(startAddress: (cycleNameAddresses.start - 1), count: cycleNameAddresses.count, success: { (data) in
             
+            self.operationTimedOutCounter = 0
+            
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
             
@@ -450,6 +476,8 @@ extension MachineConnection {
         let cycleIconIDAddress = MachineConstants.CurrentCycleProperties.cycleIcon
         
         modbus.readRegistersFrom(startAddress: (cycleIconIDAddress.start - 1), count: cycleIconIDAddress.count, success: { (data) in
+            
+            self.operationTimedOutCounter = 0
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }
@@ -487,6 +515,8 @@ extension MachineConnection {
         let totalAddresses = MachineConstants.CycleParameters.total
         
         modbus.readRegistersFrom(startAddress: (totalAddresses.start - 1), count: totalAddresses.count, success: { (data) in
+            
+            self.operationTimedOutCounter = 0
             
             guard let data = data as? [Int],
                 let machine = self.machine else { return }

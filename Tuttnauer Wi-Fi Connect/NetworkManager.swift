@@ -169,7 +169,7 @@ extension NetworkManager: GCDAsyncUdpSocketDelegate {
     }
     
     func udpSocket(_ sock: GCDAsyncUdpSocket, didSendDataWithTag tag: Int) {
-        print("didSendDataWithTag")
+        print("didSendDataWithTag:", tag)
     }
     
     func udpSocketDidClose(_ sock: GCDAsyncUdpSocket, withError error: Error?) {
