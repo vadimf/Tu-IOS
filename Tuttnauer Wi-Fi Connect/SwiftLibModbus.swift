@@ -23,7 +23,8 @@ class SwiftLibModbus: NSObject {
     
     init(ipAddress: NSString, port: Int32, device: Int32) {
         super.init()
-        modbusQueue = DispatchQueue(label: "com.iModbus.modbusQueue", qos: .userInteractive)
+        //modbusQueue = DispatchQueue(label: "com.iModbus.modbusQueue", qos: .userInteractive)
+        modbusQueue = DispatchQueue(label: "com.iModbus.modbusQueue", qos: .userInteractive, autoreleaseFrequency: .workItem)
         let _ = self.setupTCP(ipAddress: ipAddress, port: port, device: device)
     }
     
@@ -215,11 +216,12 @@ class SwiftLibModbus: NSObject {
                 for i in 0..<Int(count) {
                     returnArray.add(Int(tab_reg[i]))
                 }
+                tab_reg.deinitialize(count: Int(count))
+                tab_reg.deallocate(capacity: Int(count))
                 DispatchQueue.main.async {
                     success(returnArray as [AnyObject])
                 }
-            }
-            else {
+            } else {
                 let error = self.buildNSError(errno: errno)
                 DispatchQueue.main.async {
                     failure(error)
