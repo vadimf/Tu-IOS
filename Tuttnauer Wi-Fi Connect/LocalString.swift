@@ -90,6 +90,8 @@ class LocalString: NSObject {
     
     static let settingsScreenCellChooseConnectionTitle = "settings_screen_cell_choose_connection_title".localized
     static let settingsScreenCellChooseConnectionOptionAuto = "settings_screen_cell_choose_connection_option_auto".localized
+    static let settingsScreenCellChooseConnectionOptionManual = "settings_screen_cell_choose_connection_option_manual".localized
+    static let settingsScreenCellChooseConnectionOptionLastMachine = "settings_screen_cell_choose_connection_option_last_machine".localized
     
     static let settingsScreenCellNotificationsTitle = "settings_screen_cell_notifications_title".localized
     static let settingsScreenCellNotificationsSubtitle = "settings_screen_cell_notifications_subtitle".localized
@@ -102,10 +104,25 @@ class LocalString: NSObject {
     
     static let settingsScreenCellVersionTitle = "settings_screen_cell_version_title".localized
     
-    
     // MARK: - Languages
     
     static let languageEnglish = "English".localized
     static let languageSpanish = "Spanish".localized
+    
+    // MARK: - Side Menu items
+    
+    static let sideMenuItemPrivacyNoticeTitle = "side_menu_item_privacy_notice_title".localized
+    static let sideMenuItemHelpTitle = "side_menu_item_help_title".localized
+    static let sideMenuItemAboutTitle = "side_menu_item_about_title".localized
+    
+    // MARK: - AutoClave Enums Values
+    
+    static let enumSystemCurrentStatusNone = "enum_system_current_status_none".localized
+    static let enumSystemCurrentStatusNoError = "enum_system_current_status_no_error".localized
+    static let enumSystemCurrentStatusStandbyError = "enum_system_current_status_standby_error".localized
+    static let enumSystemCurrentStatusRunning = "enum_system_current_status_cycle_running".localized
+    static let enumSystemCurrentStatusCycleDone = "enum_system_current_status_cycle_done" .localized
+    static let enumSystemCurrentStatusCycleFailed = "enum_system_current_status_cycle_failed".localized
+    static let enumSystemCurrentStatusNotReady = "enum_system_current_status_not_ready".localized
     
 }

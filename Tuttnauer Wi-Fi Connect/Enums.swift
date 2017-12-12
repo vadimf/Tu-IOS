@@ -99,11 +99,11 @@ class Enums: NSObject {
         var getName: String {
             switch self {
             case .autoConnectOnStart:
-                return "Auto connect on start"
+                return LocalString.settingsScreenCellChooseConnectionOptionAuto
             case .manualConnect:
-                return "Manual connect"
+                return LocalString.settingsScreenCellChooseConnectionOptionManual
             case .connectToLastMachine:
-                return "Connect to last machine"
+                return LocalString.settingsScreenCellChooseConnectionOptionLastMachine
             }
         }
     }
@@ -118,11 +118,11 @@ class Enums: NSObject {
         var getName: String {
             switch self {
             case .privacyNotice:
-                return "Privacy Notice"
+                return LocalString.sideMenuItemPrivacyNoticeTitle
             case .help:
-                return "Help"
+                return LocalString.sideMenuItemHelpTitle
             case .about:
-                return "About Tuttnauer"
+                return LocalString.sideMenuItemAboutTitle
             }
         }
         

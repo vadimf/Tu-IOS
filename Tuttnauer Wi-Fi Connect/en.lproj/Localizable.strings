@@ -85,7 +85,9 @@
 "settings_screen_cell_language_option_english" = "English";
 
 "settings_screen_cell_choose_connection_title" = "Choose Connection";
-"settings_screen_cell_choose_connection_option_auto" = "Auto Connect on Start";
+"settings_screen_cell_choose_connection_option_auto" = "Auto connect on start";
+"settings_screen_cell_choose_connection_option_manual" = "Manual connect";
+"settings_screen_cell_choose_connection_option_last_machine" = "Last machine";
 
 "settings_screen_cell_notifications_title" = "Receive Live Notifications";
 "settings_screen_cell_notifications_subtitle" = "Check to enable notifications from the machine";
@@ -103,7 +105,13 @@
 "language_english" = "English";
 "language_spanish" = "Spanish";
 
-// MARK: - Enums Values
+// MARK: - Side Menu items
+
+"side_menu_item_privacy_notice_title" = "Privacy Notice";
+"side_menu_item_help_title" = "Help";
+"side_menu_item_about_title" = "About Tuttnauer";
+
+// MARK: - AutoClave Enums Values
 
 "enum_system_current_status_none" = "Ready";
 "enum_system_current_status_no_error" = "No Error";
@@ -111,6 +119,7 @@
 "enum_system_current_status_cycle_running" = "Cycle Running";
 "enum_system_current_status_cycle_done" = "Cycle Done";
 "enum_system_current_status_cycle_failed" = "Cycle Failed";
+"enum_system_current_status_not_ready" = "Not Ready";
 
 "enum_door_state_door_open" = "Door Open";
 "enum_door_state_door_closed" = "Dooe Closed";

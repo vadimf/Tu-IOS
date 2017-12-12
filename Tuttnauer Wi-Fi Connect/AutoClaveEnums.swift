@@ -22,19 +22,19 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .none:
-                return "Ready"
+                return LocalString.enumSystemCurrentStatusNone
             case .noError:
-                return "No Error"
+                return LocalString.enumSystemCurrentStatusNoError
             case .standByError:
-                return "Standby Error"
+                return LocalString.enumSystemCurrentStatusStandbyError
             case .cycleRunning:
-                return "Cycle Running"
+                return LocalString.enumSystemCurrentStatusRunning
             case .cycleDone:
-                return "Cycle Done"
+                return LocalString.enumSystemCurrentStatusCycleDone
             case .cycleFail:
-                return "Cycle Failed"
+                return LocalString.enumSystemCurrentStatusCycleFailed
             case .notReady:
-                return "Not Ready"
+                return LocalString.enumSystemCurrentStatusNotReady
             }
         }
     }

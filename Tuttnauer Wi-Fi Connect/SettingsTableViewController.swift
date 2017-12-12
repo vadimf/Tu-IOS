@@ -74,12 +74,10 @@ class SettingsTableViewController: UITableViewController {
         pressureSignLabel.text = settings.pressureUnit?.getName
         languageLabel.text = settings.language?.getName
         connectionTypeLabel.text = settings.connectionType?.getName
-        
-        let appVersion: AnyObject? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as AnyObject
-        if let appVersion = appVersion as? String {
-            versionSubtitleLabel.text = appVersion
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+            let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            versionSubtitleLabel.text = "\(appVersion).\(appBuild)"
         }
-
         liveNotificationsSwitch.isOn = UserSettingsManager.shared.userSettings.receiveLiveNotifications!
     }
     
