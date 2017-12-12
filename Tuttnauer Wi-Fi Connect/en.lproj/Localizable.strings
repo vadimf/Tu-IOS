@@ -6,6 +6,10 @@
   Copyright © 2017 Tuttnauer Europe B.V. All rights reserved.
 */
 
+// MARK: - General
+
+"app_name" = "Tuttnauer Wi-Fi Connect";
+
 // MARK: - Alert Dialog Buttons
 
 "alert_dialog_button_close" = "Close";
@@ -22,18 +26,19 @@
 "alert_dialog_connection_failed_title" = "Connection Failed";
 "alert_dialog_connection_failed_message" = "Could not connect to %@";
 "alert_dialog_connection_lost_title" = "Connection Lost";
-"alert_dialog_connection_lost_message" = "The machine is not responding. What do you want to do?";
+"alert_dialog_connection_lost_message" = "The machine %@ is not responding. What do you want to do?";
 "alert_dialog_could_not_activate_notifications_title" = "Could not activate live notifications";
 "alert_dialog_could_not_activate_notifications_message" = "Please activate notifications for Tuttnauer Wi-Fi Connect on your iPhone's settings app";
 
 // MARK: - Progress HUD titles
 
 "progress_hud_connecting" = "Connecting...";
-"progress_hud_connecting_to" = "Connecting %@";
+"progress_hud_connecting_to" = "Connecting: %@";
 "progress_hud_searching" = "Searching...";
 
 // MARK: - Scan For Machines Screen
 
+"scan_machines_screen_title" = "Scan for Machines";
 "scan_machines_screen_found_multiple_machines_title" = "Multiple machines found";
 "scan_machines_screen_found_one_machine_title" = "One machine found";
 "scan_machines_screen_found_multiple_machines_choose_title" = "Please choose one to connect";
@@ -44,6 +49,22 @@
 "scan_machines_screen_tableview_cell_serial_title" = "Serial:";
 "scan_machines_screen_tableview_cell_ip_title" = "IP:";
 "scan_machines_screen_tableview_cell_bsversion_title" = "Version:";
+"scan_machines_screen_tableview_cell_connected_title" = "Connected:";
+
+// MARK: - Single Machine Screen
+
+"single_machine_screen_model_name_title" = "Model Name";
+"single_machine_screen_serial_number_title" = "Serial No:";
+"single_machine_screen_ip_address_title" = "IP:";
+"single_machine_screen_version_title" = "Version:";
+
+"single_machine_screen_current_stage_title" = "Current Stage";
+"single_machine_screen_current_cycle_name" = "Current Cycle Name";
+"single_machine_screen_parameters_title_label" = "Cycle Parameters";
+
+"single_machine_screen_system_status_title" = "System Status";
+"single_machine_screen_door_state" = "Door State";
+"single_machine_screen_cycle_error_title" = "Cycle Error";
 
 // MARK: - Settings Screen
 
@@ -54,8 +75,8 @@
 "settings_screen_group_title_about" = "About";
 
 "settings_screen_cell_temperature_title" = "Temperature";
-"settings_screen_cell_temperature_option_celcius" = "C";
-"settings_screen_cell_temperature_option_fahrenheit" = "F";
+"settings_screen_cell_temperature_option_celcius" = "Celcius";
+"settings_screen_cell_temperature_option_fahrenheit" = "Fahrenheit";
 
 "settings_screen_cell_pressure_title" = "Pressure";
 "settings_screen_cell_pressure_kpa" = "kPa";
@@ -76,7 +97,11 @@
 "settings_screen_cell_copyright_subtitle" = "® All Rights Reserved to Tuttnauer Ltd.";
 
 "settings_screen_cell_version_title" = "Version";
-"settings_screen_cell_version_subtitle" = "1.0";
+
+// MARK: - Languages
+
+"language_english" = "English";
+"language_spanish" = "Spanish";
 
 // MARK: - Enums Values
 

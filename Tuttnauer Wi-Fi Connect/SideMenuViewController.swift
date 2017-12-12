@@ -44,7 +44,9 @@ class SideMenuViewController: UIViewController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var appNameLabel: UILabel!
     @IBOutlet weak var itemsTableView: UITableView!
+    @IBOutlet weak var disconnectButton: UIButton!
     
     // MARK: - Lifecycle
     
@@ -56,6 +58,9 @@ class SideMenuViewController: UIViewController {
         networkManager = NetworkManager.shared
         networkManager?.delegate = self
         networkManager?.scanForMachinesOnNetwork()
+        
+        appNameLabel.text = LocalString.appName
+        disconnectButton.setTitle(LocalString.alertDialogButtonDisconnect, for: .normal)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

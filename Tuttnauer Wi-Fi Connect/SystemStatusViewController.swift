@@ -14,6 +14,8 @@ class SystemStatusViewController: UIViewController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var popupTitleLabel: UILabel!
+    
     @IBOutlet weak var popupContainerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -22,7 +24,7 @@ class SystemStatusViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupLocalization()
     }
     
     override func viewDidLayoutSubviews() {
@@ -37,6 +39,12 @@ class SystemStatusViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Setup Methods
+    
+    func setupLocalization() {
+        popupTitleLabel.text = LocalString.singleMachineScreenSystemStatusTitle
     }
     
     // MARK: - Update Methods

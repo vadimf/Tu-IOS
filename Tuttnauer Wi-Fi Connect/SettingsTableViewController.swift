@@ -74,7 +74,12 @@ class SettingsTableViewController: UITableViewController {
         pressureSignLabel.text = settings.pressureUnit?.getName
         languageLabel.text = settings.language?.getName
         connectionTypeLabel.text = settings.connectionType?.getName
-        versionSubtitleLabel.text = "1.0"
+        
+        let appVersion: AnyObject? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as AnyObject
+        if let appVersion = appVersion as? String {
+            versionSubtitleLabel.text = appVersion
+        }
+
         liveNotificationsSwitch.isOn = UserSettingsManager.shared.userSettings.receiveLiveNotifications!
     }
     
@@ -90,7 +95,7 @@ class SettingsTableViewController: UITableViewController {
             DispatchQueue.main.sync {
                 guard authorized else {
                     if sender.isOn {
-                        Alerts.alertMessage(for: self, title: "Could not activate live notifications", message: "Please activate notifications for Tuttnauer Wi-Fi Connect on your iPhone's settings app", closeHandler: {
+                        Alerts.alertMessage(for: self, title: LocalString.alertDialogCouldNotActivateNotificationsTitle, message: LocalString.alertDialogCouldNotActivateNotificationsMessage, closeHandler: {
                             sender.setOn(false, animated: true)
                         })
                     }

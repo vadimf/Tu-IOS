@@ -14,6 +14,14 @@
 		162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */; };
 		162FEE961FA01138005A1055 /* SideMenuIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */; };
 		163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */; };
+		164628631FDD9CED00D02E7A /* modbus-tcp.c in Sources */ = {isa = PBXBuildFile; fileRef = 164628541FDD9CED00D02E7A /* modbus-tcp.c */; };
+		164628641FDD9CED00D02E7A /* COPYING.LESSER in Resources */ = {isa = PBXBuildFile; fileRef = 164628551FDD9CED00D02E7A /* COPYING.LESSER */; };
+		164628651FDD9CED00D02E7A /* modbus.c in Sources */ = {isa = PBXBuildFile; fileRef = 164628571FDD9CED00D02E7A /* modbus.c */; };
+		164628661FDD9CED00D02E7A /* modbus-rtu.c in Sources */ = {isa = PBXBuildFile; fileRef = 164628581FDD9CED00D02E7A /* modbus-rtu.c */; };
+		164628671FDD9CED00D02E7A /* modbus-data.c in Sources */ = {isa = PBXBuildFile; fileRef = 1646285A1FDD9CED00D02E7A /* modbus-data.c */; };
+		164628681FDD9CED00D02E7A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1646285C1FDD9CED00D02E7A /* README.md */; };
+		164628691FDD9CED00D02E7A /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 1646285D1FDD9CED00D02E7A /* NEWS */; };
+		1646286A1FDD9CED00D02E7A /* AUTHORS in Resources */ = {isa = PBXBuildFile; fileRef = 1646285E1FDD9CED00D02E7A /* AUTHORS */; };
 		165BB9431FA0098D0077862D /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BB9421FA0098D0077862D /* SideMenuViewController.swift */; };
 		165BC92B1FB04FF90017EA9F /* MachineConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BC92A1FB04FF90017EA9F /* MachineConnection.swift */; };
 		165BC92D1FB05A450017EA9F /* MachineMonitoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165BC92C1FB05A450017EA9F /* MachineMonitoring.swift */; };
@@ -25,15 +33,6 @@
 		1663F4091F9CCBDC005C05FF /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1663F4081F9CCBDC005C05FF /* Utilities.swift */; };
 		166BA9731FA6125C00157706 /* BaseParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BA9721FA6125C00157706 /* BaseParameter.swift */; };
 		16707DDC1F6175AF00706B87 /* SwiftLibModbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16707DDB1F6175AF00706B87 /* SwiftLibModbus.swift */; };
-		16707DEF1F61775500706B87 /* AUTHORS in Resources */ = {isa = PBXBuildFile; fileRef = 16707DDE1F61775500706B87 /* AUTHORS */; };
-		16707DF01F61775500706B87 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 16707DE01F61775500706B87 /* COPYING */; };
-		16707DF11F61775500706B87 /* COPYING.LESSER in Resources */ = {isa = PBXBuildFile; fileRef = 16707DE11F61775500706B87 /* COPYING.LESSER */; };
-		16707DF21F61775500706B87 /* modbus-data.c in Sources */ = {isa = PBXBuildFile; fileRef = 16707DE21F61775500706B87 /* modbus-data.c */; };
-		16707DF31F61775500706B87 /* modbus-rtu.c in Sources */ = {isa = PBXBuildFile; fileRef = 16707DE51F61775500706B87 /* modbus-rtu.c */; };
-		16707DF41F61775500706B87 /* modbus-tcp.c in Sources */ = {isa = PBXBuildFile; fileRef = 16707DE81F61775500706B87 /* modbus-tcp.c */; };
-		16707DF51F61775500706B87 /* modbus.c in Sources */ = {isa = PBXBuildFile; fileRef = 16707DEB1F61775500706B87 /* modbus.c */; };
-		16707DF61F61775500706B87 /* NEWS in Resources */ = {isa = PBXBuildFile; fileRef = 16707DED1F61775500706B87 /* NEWS */; };
-		16707DF71F61775500706B87 /* README.rst in Resources */ = {isa = PBXBuildFile; fileRef = 16707DEE1F61775500706B87 /* README.rst */; };
 		167C93651F9BB489004930C0 /* AutoClaveEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167C93641F9BB489004930C0 /* AutoClaveEnums.swift */; };
 		168909F51F98C2FE006ECEE4 /* ScanForMachinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168909F41F98C2FE006ECEE4 /* ScanForMachinesViewController.swift */; };
 		168909F81F98C36F006ECEE4 /* MachineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168909F71F98C36F006ECEE4 /* MachineTableViewCell.swift */; };
@@ -72,6 +71,22 @@
 		162FEE931FA0112F005A1055 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		162FEE951FA01138005A1055 /* SideMenuIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuIconTableViewCell.swift; sourceTree = "<group>"; };
 		163267FC1F9F4DBE00B11693 /* MachineRealTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineRealTime.swift; sourceTree = "<group>"; };
+		164628531FDD9CEC00D02E7A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		164628541FDD9CED00D02E7A /* modbus-tcp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-tcp.c"; sourceTree = "<group>"; };
+		164628551FDD9CED00D02E7A /* COPYING.LESSER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LESSER; sourceTree = "<group>"; };
+		164628561FDD9CED00D02E7A /* modbus-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-private.h"; sourceTree = "<group>"; };
+		164628571FDD9CED00D02E7A /* modbus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = modbus.c; sourceTree = "<group>"; };
+		164628581FDD9CED00D02E7A /* modbus-rtu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-rtu.c"; sourceTree = "<group>"; };
+		164628591FDD9CED00D02E7A /* modbus-rtu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-rtu.h"; sourceTree = "<group>"; };
+		1646285A1FDD9CED00D02E7A /* modbus-data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-data.c"; sourceTree = "<group>"; };
+		1646285B1FDD9CED00D02E7A /* modbus-tcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-tcp.h"; sourceTree = "<group>"; };
+		1646285C1FDD9CED00D02E7A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1646285D1FDD9CED00D02E7A /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
+		1646285E1FDD9CED00D02E7A /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		1646285F1FDD9CED00D02E7A /* modbus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modbus.h; sourceTree = "<group>"; };
+		164628601FDD9CED00D02E7A /* modbus-version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-version.h"; sourceTree = "<group>"; };
+		164628611FDD9CED00D02E7A /* modbus-tcp-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-tcp-private.h"; sourceTree = "<group>"; };
+		164628621FDD9CED00D02E7A /* modbus-rtu-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-rtu-private.h"; sourceTree = "<group>"; };
 		165BB9421FA0098D0077862D /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		165BC92A1FB04FF90017EA9F /* MachineConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineConnection.swift; sourceTree = "<group>"; };
 		165BC92C1FB05A450017EA9F /* MachineMonitoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineMonitoring.swift; sourceTree = "<group>"; };
@@ -83,23 +98,6 @@
 		1663F4081F9CCBDC005C05FF /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		166BA9721FA6125C00157706 /* BaseParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseParameter.swift; sourceTree = "<group>"; };
 		16707DDB1F6175AF00706B87 /* SwiftLibModbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLibModbus.swift; sourceTree = "<group>"; };
-		16707DDE1F61775500706B87 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
-		16707DDF1F61775500706B87 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		16707DE01F61775500706B87 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
-		16707DE11F61775500706B87 /* COPYING.LESSER */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.LESSER; sourceTree = "<group>"; };
-		16707DE21F61775500706B87 /* modbus-data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-data.c"; sourceTree = "<group>"; };
-		16707DE31F61775500706B87 /* modbus-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-private.h"; sourceTree = "<group>"; };
-		16707DE41F61775500706B87 /* modbus-rtu-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-rtu-private.h"; sourceTree = "<group>"; };
-		16707DE51F61775500706B87 /* modbus-rtu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-rtu.c"; sourceTree = "<group>"; };
-		16707DE61F61775500706B87 /* modbus-rtu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-rtu.h"; sourceTree = "<group>"; };
-		16707DE71F61775500706B87 /* modbus-tcp-private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-tcp-private.h"; sourceTree = "<group>"; };
-		16707DE81F61775500706B87 /* modbus-tcp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "modbus-tcp.c"; sourceTree = "<group>"; };
-		16707DE91F61775500706B87 /* modbus-tcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-tcp.h"; sourceTree = "<group>"; };
-		16707DEA1F61775500706B87 /* modbus-version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "modbus-version.h"; sourceTree = "<group>"; };
-		16707DEB1F61775500706B87 /* modbus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = modbus.c; sourceTree = "<group>"; };
-		16707DEC1F61775500706B87 /* modbus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modbus.h; sourceTree = "<group>"; };
-		16707DED1F61775500706B87 /* NEWS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
-		16707DEE1F61775500706B87 /* README.rst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
 		167C93641F9BB489004930C0 /* AutoClaveEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoClaveEnums.swift; sourceTree = "<group>"; };
 		168909F41F98C2FE006ECEE4 /* ScanForMachinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanForMachinesViewController.swift; sourceTree = "<group>"; };
 		168909F71F98C36F006ECEE4 /* MachineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,23 +185,22 @@
 		16707DDD1F61774B00706B87 /* libmodbus */ = {
 			isa = PBXGroup;
 			children = (
-				16707DDE1F61775500706B87 /* AUTHORS */,
-				16707DDF1F61775500706B87 /* config.h */,
-				16707DE01F61775500706B87 /* COPYING */,
-				16707DE11F61775500706B87 /* COPYING.LESSER */,
-				16707DE21F61775500706B87 /* modbus-data.c */,
-				16707DE31F61775500706B87 /* modbus-private.h */,
-				16707DE41F61775500706B87 /* modbus-rtu-private.h */,
-				16707DE51F61775500706B87 /* modbus-rtu.c */,
-				16707DE61F61775500706B87 /* modbus-rtu.h */,
-				16707DE71F61775500706B87 /* modbus-tcp-private.h */,
-				16707DE81F61775500706B87 /* modbus-tcp.c */,
-				16707DE91F61775500706B87 /* modbus-tcp.h */,
-				16707DEA1F61775500706B87 /* modbus-version.h */,
-				16707DEB1F61775500706B87 /* modbus.c */,
-				16707DEC1F61775500706B87 /* modbus.h */,
-				16707DED1F61775500706B87 /* NEWS */,
-				16707DEE1F61775500706B87 /* README.rst */,
+				1646285E1FDD9CED00D02E7A /* AUTHORS */,
+				164628531FDD9CEC00D02E7A /* config.h */,
+				164628551FDD9CED00D02E7A /* COPYING.LESSER */,
+				1646285A1FDD9CED00D02E7A /* modbus-data.c */,
+				164628561FDD9CED00D02E7A /* modbus-private.h */,
+				164628621FDD9CED00D02E7A /* modbus-rtu-private.h */,
+				164628581FDD9CED00D02E7A /* modbus-rtu.c */,
+				164628591FDD9CED00D02E7A /* modbus-rtu.h */,
+				164628611FDD9CED00D02E7A /* modbus-tcp-private.h */,
+				164628541FDD9CED00D02E7A /* modbus-tcp.c */,
+				1646285B1FDD9CED00D02E7A /* modbus-tcp.h */,
+				164628601FDD9CED00D02E7A /* modbus-version.h */,
+				164628571FDD9CED00D02E7A /* modbus.c */,
+				1646285F1FDD9CED00D02E7A /* modbus.h */,
+				1646285D1FDD9CED00D02E7A /* NEWS */,
+				1646285C1FDD9CED00D02E7A /* README.md */,
 			);
 			name = libmodbus;
 			sourceTree = "<group>";
@@ -516,16 +513,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1646286A1FDD9CED00D02E7A /* AUTHORS in Resources */,
 				16A462CB1F5D3FE0002C4ECF /* LaunchScreen.storyboard in Resources */,
+				164628691FDD9CED00D02E7A /* NEWS in Resources */,
+				164628641FDD9CED00D02E7A /* COPYING.LESSER in Resources */,
 				1627B2FB1FC1AE2C0004E087 /* gif-load.gif in Resources */,
-				16707DF11F61775500706B87 /* COPYING.LESSER in Resources */,
-				16707DEF1F61775500706B87 /* AUTHORS in Resources */,
-				16707DF61F61775500706B87 /* NEWS in Resources */,
+				164628681FDD9CED00D02E7A /* README.md in Resources */,
 				168ACE081F926371000277DD /* Localizable.strings in Resources */,
 				16A462C81F5D3FE0002C4ECF /* Assets.xcassets in Resources */,
-				16707DF01F61775500706B87 /* COPYING in Resources */,
 				16A462C61F5D3FE0002C4ECF /* Main.storyboard in Resources */,
-				16707DF71F61775500706B87 /* README.rst in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,9 +617,9 @@
 				1627989E1FBAB4E0001D1E19 /* SystemStatusViewController.swift in Sources */,
 				16E041761FB324E600770E11 /* HA+Date.swift in Sources */,
 				16E0750A1F9FC976008474B5 /* DefaultsKeys.swift in Sources */,
+				164628661FDD9CED00D02E7A /* modbus-rtu.c in Sources */,
 				168ACDEA1F922996000277DD /* HA+UIView.swift in Sources */,
 				16D607C11F9E4FB9001F8E08 /* MachineConstants.swift in Sources */,
-				16707DF31F61775500706B87 /* modbus-rtu.c in Sources */,
 				168ACDE81F922974000277DD /* HA+UITextField.swift in Sources */,
 				168ACDEC1F922A3B000277DD /* MainConnectViewController.swift in Sources */,
 				163267FD1F9F4DBE00B11693 /* MachineRealTime.swift in Sources */,
@@ -632,22 +628,24 @@
 				1662FDE11F9E5F8A004A390C /* HA+Array.swift in Sources */,
 				168ACDFD1F925FEE000277DD /* Tuttnauer+UIColor.swift in Sources */,
 				16CE3F451FA763610000AB75 /* NotificationsManager.swift in Sources */,
-				16707DF51F61775500706B87 /* modbus.c in Sources */,
 				168909FA1F98C465006ECEE4 /* Machine.swift in Sources */,
 				168ACE001F9260AD000277DD /* MainNavigationController.swift in Sources */,
 				165BB9431FA0098D0077862D /* SideMenuViewController.swift in Sources */,
 				168909F51F98C2FE006ECEE4 /* ScanForMachinesViewController.swift in Sources */,
 				162FEE941FA0112F005A1055 /* SideMenuTableViewCell.swift in Sources */,
 				167C93651F9BB489004930C0 /* AutoClaveEnums.swift in Sources */,
+				164628631FDD9CED00D02E7A /* modbus-tcp.c in Sources */,
 				168ACE0D1F92656B000277DD /* HA+String.swift in Sources */,
 				1662FDE31F9E6D7F004A390C /* Alerts.swift in Sources */,
 				16E2DBC11FA7B3AA006E131D /* NetworkManager.swift in Sources */,
 				16A462C11F5D3FE0002C4ECF /* AppDelegate.swift in Sources */,
+				164628671FDD9CED00D02E7A /* modbus-data.c in Sources */,
 				1663F4091F9CCBDC005C05FF /* Utilities.swift in Sources */,
 				160DD2361FA1E4060017D221 /* BaseSensor.swift in Sources */,
 				1660E9891F9FCDB5008DC47E /* Enums.swift in Sources */,
 				1660E98C1F9FD133008DC47E /* UserSettingsManager.swift in Sources */,
 				165BC92D1FB05A450017EA9F /* MachineMonitoring.swift in Sources */,
+				164628651FDD9CED00D02E7A /* modbus.c in Sources */,
 				165BC92B1FB04FF90017EA9F /* MachineConnection.swift in Sources */,
 				168ACDF61F923625000277DD /* SettingsOptionsTableViewController.swift in Sources */,
 				168909F81F98C36F006ECEE4 /* MachineTableViewCell.swift in Sources */,
@@ -655,11 +653,9 @@
 				1601CCD01FA504E2004AC86F /* HA+Int.swift in Sources */,
 				168ACE051F9262B1000277DD /* LocalString.swift in Sources */,
 				168ACDF01F922D86000277DD /* SingleMachineViewController.swift in Sources */,
-				16707DF21F61775500706B87 /* modbus-data.c in Sources */,
 				168ACE031F9260C4000277DD /* MainNavigationBar.swift in Sources */,
 				168ACDF41F923179000277DD /* SettingsTableViewController.swift in Sources */,
 				168ACDF21F922EEF000277DD /* Constants.swift in Sources */,
-				16707DF41F61775500706B87 /* modbus-tcp.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

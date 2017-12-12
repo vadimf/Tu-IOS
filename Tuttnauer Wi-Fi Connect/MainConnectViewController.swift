@@ -53,7 +53,7 @@ class MainConnectViewController: UIViewController {
 
 extension MainConnectViewController {
     
-    func connect(to ipAddress: String, loaderMessage: String = "Connecting...") {
+    func connect(to ipAddress: String, loaderMessage: String = LocalString.progressHUDConnecting) {
         
         let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         progressHUD.label.text = loaderMessage
@@ -66,7 +66,7 @@ extension MainConnectViewController {
                 MBProgressHUD.hide(for: self.view, animated: false)
                 
                 guard error == nil else {
-                    Alerts.alertMessage(for: self, title: "Connection Failed", message: "Could not connect to \(ipAddress)", closeHandler: nil)
+                    Alerts.alertMessage(for: self, title: LocalString.alertDialogConnectionFailedTitle, message: String(format: LocalString.alertDialogConnectionLostTitle, ipAddress), closeHandler: nil)
                     return
                 }
                 
@@ -90,17 +90,17 @@ extension MainConnectViewController {
         case types.autoConnectOnStart.rawValue:
             NetworkManager.shared.scanForMachinesOnNetwork()
             let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-            progressHUD.label.text = "Searching..."
+            progressHUD.label.text = LocalString.progressHUDConnecting
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
                 MBProgressHUD.hide(for: self.view, animated: false)
                 if let machine = NetworkManager.shared.machines.first {
-                    self.connect(to: machine.ipAddress, loaderMessage: "Connecting: \(machine.ipAddress)")
+                    self.connect(to: machine.ipAddress, loaderMessage: String(format: LocalString.progressHUDConnectingTo, machine.ipAddress))
                 }
             })
             return
         case types.connectToLastMachine.rawValue:
             guard let lastMachineIP = UserSettingsManager.shared.userSettings.lastMachineIPAddress, !lastMachineIP.isEmpty else { return }
-            connect(to: lastMachineIP, loaderMessage: "Connecting: \(lastMachineIP)")
+            connect(to: lastMachineIP, loaderMessage: String(format: LocalString.progressHUDConnectingTo, lastMachineIP))
         case types.manualConnect.rawValue:
             return
         default:

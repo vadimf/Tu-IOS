@@ -9,6 +9,10 @@
 import Foundation
 
 class LocalString: NSObject {
+    
+    // MARK: - General
+    
+    static let appName = "app_name".localized
 
     // MARK: - Alert Dialog Buttons
     
@@ -17,9 +21,28 @@ class LocalString: NSObject {
     static let alertDialogButtonCancel = "alert_dialog_button_cancel".localized
     static let alertDialogButtonYes = "alert_dialog_button_yes".localized
     static let alertDialogButtonNo = "alert_dialog_button_no".localized
+    static let alertDialogButtonConnect = "alert_dialog_button_connect".localized
+    static let alertDialogButtonReconnect = "alert_dialog_button_reconnect".localized
+    static let alertDialogButtonDisconnect = "alert_dialog_button_disconnect".localized
+    
+    // MARK: - Alert Dialog Messages
+    
+    static let alertDialogConnectionFailedTitle = "alert_dialog_connection_failed_title".localized
+    static let alertDialogConnectionFailedMessage = "alert_dialog_connection_failed_message".localized
+    static let alertDialogConnectionLostTitle = "alert_dialog_connection_lost_title".localized
+    static let alertDialogConnectionLostMesssage = "alert_dialog_connection_lost_message".localized
+    static let alertDialogCouldNotActivateNotificationsTitle = "alert_dialog_could_not_activate_notifications_title".localized
+    static let alertDialogCouldNotActivateNotificationsMessage = "alert_dialog_could_not_activate_notifications_message".localized
+    
+    // MARK: - Progress HUD titles
+    
+    static let progressHUDConnecting = "progress_hud_connecting".localized
+    static let progressHUDConnectingTo = "progress_hud_connecting_to".localized
+    static let progressHUDSearching = "progress_hud_searching".localized
     
     // MARK: - Scan For Machines Screen
     
+    static let scanMachinesScreenTitle = "scan_machines_screen_title".localized
     static let scanMachinesScreenFoundMultipleMachinesTitle = "scan_machines_screen_found_multiple_machines_title".localized
     static let scanMachinesScreenFoundOneMachineTitle = "scan_machines_screen_found_one_machine_title".localized
     static let scanMachinesScreenFoundMultipleMachinesChooseTitle = "scan_machines_screen_found_multiple_machines_choose_title".localized
@@ -30,6 +53,22 @@ class LocalString: NSObject {
     static let scanMachinesScreenTableViewCellSerialTitle = "scan_machines_screen_tableview_cell_serial_title".localized
     static let scanMachinesScreenTableViewCellIPTitle = "scan_machines_screen_tableview_cell_ip_title".localized
     static let scanMachinesScreenTableViewCellBSVersionTitle = "scan_machines_screen_tableview_cell_bsversion_title".localized
+    static let scanMachinesScreenTableViewCellConnectedTitle = "scan_machines_screen_tableview_cell_connected_title".localized
+    
+    // MARK: - Single Machine Screen
+    
+    static let singleMachineScreenModelNameTitle = "single_machine_screen_model_name_title".localized
+    static let singleMachineScreenSerialNumberTitle = "single_machine_screen_serial_number_title".localized
+    static let singleMachineScreenIPAddressTitle = "single_machine_screen_ip_address_title".localized
+    static let singleMachineScreenVersionTitle = "single_machine_screen_version_title".localized
+    
+    static let singleMachineScreenCurrentStageTitle = "single_machine_screen_current_stage_title".localized
+    static let singleMachineScreenCurrentCycleNameTitle = "single_machine_screen_current_cycle_name".localized
+    static let singleMachineScreenParametersTitle = "single_machine_screen_parameters_title_label".localized
+    
+    static let singleMachineScreenSystemStatusTitle = "single_machine_screen_system_status_title".localized
+    static let singleMachineScreenDoorStateTitle = "single_machine_screen_door_state".localized
+    static let singleMachineScreenCycleErrorTitle = "single_machine_screen_cycle_error_title".localized
     
     // MARK: - Settings Screen
     
@@ -62,6 +101,11 @@ class LocalString: NSObject {
     static let settingsScreenCellCopyrightSubtitle = "settings_screen_cell_copyright_subtitle".localized
     
     static let settingsScreenCellVersionTitle = "settings_screen_cell_version_title".localized
-    static let settingsScreenCellVersionSubtitle = "settings_screen_cell_version_subtitle".localized
+    
+    
+    // MARK: - Languages
+    
+    static let languageEnglish = "English".localized
+    static let languageSpanish = "Spanish".localized
     
 }

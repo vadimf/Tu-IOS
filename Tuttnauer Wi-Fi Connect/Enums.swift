@@ -35,9 +35,9 @@ class Enums: NSObject {
         var getFullName: String {
             switch self {
             case .celsius:
-                return "Celsius °C"
+                return "\(LocalString.settingsScreenCellTemperatureOptionCelcius) °C"
             case .fahrenheit:
-                return "Fahrenheit °F"
+                return "\(LocalString.settingsScreenCellTemperatureOptionFahrenheit) °F"
             }
         }
     }
@@ -82,9 +82,9 @@ class Enums: NSObject {
         var getName: String {
             switch self {
             case .english:
-                return "English"
+                return LocalString.languageEnglish
             case .spanish:
-                return "Spanish"
+                return LocalString.languageSpanish
             }
         }
     }

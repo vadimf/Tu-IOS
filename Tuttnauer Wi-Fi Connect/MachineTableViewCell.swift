@@ -52,6 +52,7 @@ class MachineTableViewCell: UITableViewCell {
         serialNumberTitleLabel.text = LocalString.scanMachinesScreenTableViewCellSerialTitle
         ipTitleLabel.text = LocalString.scanMachinesScreenTableViewCellIPTitle
         bsVersionTitleLabel.text = LocalString.scanMachinesScreenTableViewCellBSVersionTitle
+        connectedTitleLabel.text = LocalString.scanMachinesScreenTableViewCellConnectedTitle
     }
     
     private func setupData() {
@@ -63,7 +64,7 @@ class MachineTableViewCell: UITableViewCell {
         
         let connection = MachineMonitoring.shared.isConnected(to: machine.ipAddress)
         if connection.connected {
-            connectedLabel.text = "Yes"
+            connectedLabel.text = LocalString.alertDialogButtonYes
             connectedLabel.isHighlighted = true
         }
     }
@@ -73,7 +74,7 @@ class MachineTableViewCell: UITableViewCell {
         serialNumberLabel.text = ""
         ipLabel.text = ""
         bsVersionLabel.text = ""
-        connectedLabel.text = "No"
+        connectedLabel.text = LocalString.alertDialogButtonNo
         connectedLabel.isHighlighted = false
     }
     

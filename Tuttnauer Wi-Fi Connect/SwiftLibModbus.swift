@@ -174,6 +174,8 @@ class SwiftLibModbus: NSObject {
                 for i in 0..<Int(count) {
                     returnArray.add(Int(tab_reg[i]))
                 }
+                tab_reg.deinitialize(count: Int(count))
+                tab_reg.deallocate(capacity: Int(count))
                 DispatchQueue.main.async {
                     success(returnArray as [AnyObject])
                 }
@@ -195,6 +197,8 @@ class SwiftLibModbus: NSObject {
                 for i in 0..<Int(count) {
                     returnArray.add(Int(tab_reg[i]))
                 }
+                tab_reg.deinitialize(count: Int(count))
+                tab_reg.deallocate(capacity: Int(count))
                 DispatchQueue.main.async {
                     success(returnArray as [AnyObject])
                 }
@@ -239,6 +243,8 @@ class SwiftLibModbus: NSObject {
                 for i in 0..<Int(count) {
                     returnArray.add(Int(tab_reg[i]))
                 }
+                tab_reg.deinitialize(count: Int(count))
+                tab_reg.deallocate(capacity: Int(count))
                 DispatchQueue.main.async {
                     success(returnArray as [AnyObject])
                 }
@@ -258,7 +264,6 @@ class SwiftLibModbus: NSObject {
             for i in 0..<numberArray.count {
                 valueArray[i] = UInt16(numberArray[i] as! Int)
             }
-            
             if modbus_write_registers(self.mb!, address, Int32(numberArray.count), valueArray) >= 0 {
                 DispatchQueue.main.async {
                     success()

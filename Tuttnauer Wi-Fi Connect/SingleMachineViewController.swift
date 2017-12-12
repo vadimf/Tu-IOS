@@ -19,6 +19,11 @@ class SingleMachineViewController: UIViewController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var modelNameTitleLabel: UILabel!
+    @IBOutlet weak var serialNumberTitleLabel: UILabel!
+    @IBOutlet weak var ipAddressTitleLabel: UILabel!
+    @IBOutlet weak var versionTitleLabel: UILabel!
+    
     @IBOutlet weak var modelNameLabel: UILabel!
     @IBOutlet weak var serialNumberLabel: UILabel!
     @IBOutlet weak var ipAddressLabel: UILabel!
@@ -49,6 +54,8 @@ class SingleMachineViewController: UIViewController {
     @IBOutlet weak var systemStatusButton: UIButton!
     @IBOutlet weak var doorStateLabel: UILabel!
     @IBOutlet weak var cycleErrorLabel: UILabel!
+    
+    @IBOutlet weak var parametersTitleLabel: UILabel!
     
     @IBOutlet weak var parameter1TitleLabel: UILabel!
     @IBOutlet weak var parameter2TitleLabel: UILabel!
@@ -110,7 +117,18 @@ class SingleMachineViewController: UIViewController {
     }
     
     fileprivate func setupLocalization() {
+        modelNameTitleLabel.text = LocalString.singleMachineScreenModelNameTitle
+        serialNumberTitleLabel.text = LocalString.singleMachineScreenSerialNumberTitle
+        ipAddressTitleLabel.text = LocalString.singleMachineScreenIPAddressTitle
+        versionTitleLabel.text = LocalString.singleMachineScreenVersionTitle
         
+        currentCycleNameTitleLabel.text = LocalString.singleMachineScreenCurrentCycleNameTitle
+        currentStageTitleLabel.text = LocalString.singleMachineScreenCurrentStageTitle
+        
+        parametersTitleLabel.text = LocalString.singleMachineScreenParametersTitle
+        
+        systemStatusTitleLabel.text = LocalString.singleMachineScreenSystemStatusTitle
+        doorStateTitleLabel.text = LocalString.singleMachineScreenDoorStateTitle
     }
     
     fileprivate func resetOneTimeLabelValues() {
@@ -253,7 +271,7 @@ extension SingleMachineViewController: SideMenuDelegate {
         guard let monitor = self.monitor else { return }
         
         let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        progressHUD.label.text = "Connecting: \(ipAddress)"
+        progressHUD.label.text = String(format: LocalString.progressHUDConnectingTo, ipAddress)
         
         monitor.createConnection(to: ipAddress) { (success, error) in
             
@@ -290,7 +308,7 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
     }
     
     func didLoseConnection(to connection: MachineConnection) {
-        Alerts.alertMessageWithActions(for: self, title: "Connection Lost", message: "The machine \(connection.machine!.modelName) is not responding. What do you want to do?", doneButtonTitle: "Reconnect", cancelButtonTitle: "Disconnect", doneHandler: {
+        Alerts.alertMessageWithActions(for: self, title: LocalString.alertDialogConnectionLostTitle, message: String(format: LocalString.alertDialogConnectionLostMesssage, connection.machine!.modelName), doneButtonTitle: LocalString.alertDialogButtonConnect, cancelButtonTitle: LocalString.alertDialogButtonDisconnect, doneHandler: {
             self.monitor?.reconnect(to: connection)
         }) {
             self.monitor?.disconnect(from: connection)
@@ -343,21 +361,21 @@ extension SingleMachineViewController: MachineMonitoringDelegate {
             currentStageTitleLabel.text = ""
             currentCycleStageNameLabel.text = ""
         } else {
-            currentStageTitleLabel.text = "Current Stage"
+            currentStageTitleLabel.text = LocalString.singleMachineScreenCurrentStageTitle
             if let currentCycleSubStage = machine.realTime.cycleSubStage?.getName,
                 !currentCycleSubStage.isEmpty {
                 currentCycleStageNameLabel.text = currentCycleSubStage
             } else {
                 currentCycleStageNameLabel.text = machine.realTime.cycleStage?.getName
             }
-
+            
         }
         
         if cycleError.isEmpty  {
             cycleErrorTitleLabel.text = ""
             cycleErrorLabel.text = ""
         } else {
-            cycleErrorTitleLabel.text = "Cycle Error"
+            cycleErrorTitleLabel.text = LocalString.singleMachineScreenCycleErrorTitle
             cycleErrorLabel.text = cycleError
         }
         

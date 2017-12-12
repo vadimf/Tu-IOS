@@ -57,6 +57,7 @@ class ScanForMachinesViewController: UIViewController {
     // MARK: - Setup Methods
     
     private func setupLocalization() {
+        title = LocalString.scanMachinesScreenTitle
         machinesFoundTitleLabel.text = ""
         chooseMachinesTitleLabel.text = ""
     }
@@ -73,7 +74,7 @@ class ScanForMachinesViewController: UIViewController {
     @IBAction func reloadButtonTapped(_ sender: Any) {
         resetResults()
         let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-        progressHUD.label.text = "Searching..."
+        progressHUD.label.text = LocalString.progressHUDSearching
         networkManager?.scanForMachinesOnNetwork()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: {
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -157,7 +158,7 @@ extension ScanForMachinesViewController: NetworkManagerDelegate {
 
 extension ScanForMachinesViewController {
     
-    fileprivate func connect(to ipAddress: String, loaderMessage: String = "Connecting...") {
+    fileprivate func connect(to ipAddress: String, loaderMessage: String = LocalString.progressHUDSearching) {
         
         let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         progressHUD.label.text = loaderMessage
@@ -171,7 +172,7 @@ extension ScanForMachinesViewController {
                 MBProgressHUD.hide(for: self.view, animated: false)
                 
                 guard error == nil else {
-                    Alerts.alertMessage(for: self, title: "Connection Failed", message: "Could not connect to \(ipAddress)", closeHandler: nil)
+                     Alerts.alertMessage(for: self, title: LocalString.alertDialogConnectionFailedTitle, message: String(format: LocalString.alertDialogConnectionLostTitle, ipAddress), closeHandler: nil)
                     return
                 }
                 

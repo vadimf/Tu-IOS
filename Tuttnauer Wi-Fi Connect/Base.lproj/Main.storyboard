@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="McG-Dc-7MP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="McG-Dc-7MP">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -282,6 +282,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="hHl-IF-Lqw"/>
                     <connections>
+                        <outlet property="appNameLabel" destination="wm9-1Y-ZHu" id="FKu-bX-RVv"/>
+                        <outlet property="disconnectButton" destination="ovj-es-3hG" id="l4H-bd-9sY"/>
                         <outlet property="itemsTableView" destination="eyu-lr-unn" id="EiE-Qd-238"/>
                     </connections>
                 </viewController>
@@ -1129,13 +1131,16 @@
                         <outlet property="doorStateLabel" destination="GRC-Y2-mbt" id="5Z0-5B-9sJ"/>
                         <outlet property="doorStateTitleLabel" destination="qf4-Bx-P1B" id="pCf-Cn-9AU"/>
                         <outlet property="ipAddressLabel" destination="B0U-vB-9Gg" id="JWW-fo-5Bi"/>
+                        <outlet property="ipAddressTitleLabel" destination="v5Y-iZ-phz" id="DSK-l3-a3n"/>
                         <outlet property="modelNameLabel" destination="Jt3-CF-0FV" id="DxG-DP-fBR"/>
+                        <outlet property="modelNameTitleLabel" destination="XkS-AF-NpV" id="gvO-KK-GcA"/>
                         <outlet property="parameter1TitleLabel" destination="7vF-46-sdh" id="Hf1-Si-yJl"/>
                         <outlet property="parameter1ValueLabel" destination="NoW-d2-JcD" id="fKd-h1-bgv"/>
                         <outlet property="parameter2TitleLabel" destination="NeB-3s-dZv" id="jKu-Ev-PA3"/>
                         <outlet property="parameter2ValueLabel" destination="67r-jg-Bio" id="tj2-6c-61P"/>
                         <outlet property="parameter3TitleLabel" destination="au0-5x-8PJ" id="j7d-Oz-AEc"/>
                         <outlet property="parameter3ValueLabel" destination="LCv-0e-WZu" id="qqC-TB-w0I"/>
+                        <outlet property="parametersTitleLabel" destination="mZN-dV-nnR" id="ChQ-FB-ixN"/>
                         <outlet property="sensor1TitleLabel" destination="y6Y-8g-9sh" id="vwB-dt-yJY"/>
                         <outlet property="sensor1ValueLabel" destination="TTQ-Hx-c6Q" id="zfa-H8-WYm"/>
                         <outlet property="sensor2TitleLabel" destination="mlV-HJ-y2N" id="W0o-GA-8j6"/>
@@ -1143,9 +1148,11 @@
                         <outlet property="sensor3TitleLabel" destination="6QI-SX-ggK" id="aeb-UO-qCJ"/>
                         <outlet property="sensor3ValueLabel" destination="Swp-IA-rdo" id="bTS-fT-fi7"/>
                         <outlet property="serialNumberLabel" destination="Uzq-z0-3z9" id="hRR-Hm-MeU"/>
+                        <outlet property="serialNumberTitleLabel" destination="nXu-pz-3PA" id="xpJ-j9-7kc"/>
                         <outlet property="systemStatusButton" destination="fxR-NN-c1P" id="NxW-nX-dsl"/>
                         <outlet property="systemStatusTitleLabel" destination="QgO-rG-2Rt" id="ZCd-Lf-LD8"/>
                         <outlet property="versionLabel" destination="8aV-Ap-Vby" id="d9h-HY-URo"/>
+                        <outlet property="versionTitleLabel" destination="c0g-IP-dfP" id="Tly-jH-6e4"/>
                         <segue destination="HY0-mi-NFI" kind="presentation" identifier="Single Machine to Settings Segue" id="Ql1-Rb-boG"/>
                         <segue destination="wI3-Y5-Anb" kind="presentation" identifier="Single Machine to System Status Popup Segue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="J4f-pi-fnB"/>
                     </connections>
@@ -1242,6 +1249,7 @@
                     </view>
                     <connections>
                         <outlet property="popupContainerView" destination="RrW-FI-65p" id="51D-dC-Idk"/>
+                        <outlet property="popupTitleLabel" destination="Km2-fc-P8Z" id="rlw-EF-Cra"/>
                         <outlet property="tableView" destination="6jl-Fv-uwb" id="8pS-7H-DfT"/>
                         <outlet property="titleLabel" destination="Km2-fc-P8Z" id="EDy-xA-E9u"/>
                     </connections>
