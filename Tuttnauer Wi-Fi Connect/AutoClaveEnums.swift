@@ -142,7 +142,7 @@ class AutoClaveEnums {
             case .wasteWaterReservoirFull:
                 return "Waste water reservoir"
             case .mineralFreeWaterReservoirEmpty:
-                return "Mineral free weater reservoir empty"
+                return "Mineral free water reservoir empty"
             case .standByCycle:
                 return "Stand by cycle"
             case .jacketIsCool:
@@ -228,17 +228,17 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .door1Opened:
-                return "Door Open"
+                return LocalString.enumDoorStateDoorOpen
             case .door1Closed:
-                return "Door Closed"
+                return LocalString.enumDoorStateDoorClosed
             case .door1ClosedDoor2Closed:
-                return "Door 1 Closed. Door 2 Closed"
+                return LocalString.enumDoorStateDoor1ClosedDoor2Closed
             case .door1OpenDoor2Open:
-                return "Door 1 Open. Door 2 Open"
+                return LocalString.enumDoorStateDoor1OpenDoor2Open
             case .door1ClosedDoor2Opened:
-                return "Door 1 Closed. Door 2 Opened"
+                return LocalString.enumDoorStateDoor1ClosedDoor2Open
             case .door1OpenDoor2Closed:
-                return "Door 1 Open. Door 2 Closed"
+                return LocalString.enumDoorStateDoorDoor1OpenDoor2Closed
             }
         }
     }
@@ -424,17 +424,17 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .none:
-                return "-"
+                return LocalString.enumDoorErrorNone
             case .errorVacuuming:
-                return "Error Vacuuming"
+                return LocalString.enumDoorErrorVacuuming
             case .errorOpening:
-                return "Error Opening"
+                return LocalString.enumDoorErrorOpening
             case .errorClosing:
-                return "Error Closing"
+                return LocalString.enumDoorErrorClosing
             case .errorLocking:
-                return "Error Locking"
+                return LocalString.enumDoorErrorLocking
             case .errorUnlocking:
-                return "Error Unlocking"
+                return LocalString.enumDoorErrorUnlocking
             }
         }
     }
@@ -456,29 +456,29 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .none:
-                return ""
+                return LocalString.enumCycleStageNone
             case .global:
-                return "Global"
+                return LocalString.enumCycleStageGlobal
             case .start:
-                return "Starting"
+                return LocalString.enumCycleStageStart
             case .removeAir:
-                return "Removing Air"
+                return LocalString.enumCycleStageRemoveAir
             case .stabilize:
-                return "Stabilizing"
+                return LocalString.enumCycleStageStabilize
             case .heat:
-                return "Heating"
+                return LocalString.enumCycleStageHeat
             case .sterilization:
-                return "Sterilization"
+                return LocalString.enumCycleStageSterilization
             case .cool:
-                return "Cooling"
+                return LocalString.enumCycleStageCool
             case .exhaust:
-                return "Exhaust"
+                return LocalString.enumCycleStageExhaust
             case .dry:
-                return "Drying"
+                return LocalString.enumCycleStageDry
             case .ending:
-                return "Ending"
+                return LocalString.enumCycleStageEnding
             case .done:
-                return "Done"
+                return LocalString.enumCycleStageDone
             }
         }
     }
@@ -943,55 +943,55 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .none:
-                return ""
+                return LocalString.enumAnalogInputNameNone
             case .door1:
-                return "Door 1"
+                return LocalString.enumAnalogInputNameDoor1
             case .door2:
-                return "Door 2"
+                return LocalString.enumAnalogInputNameDoor2
             case .chamberTemperature:
-                return "Temperature"
+                return LocalString.enumAnalogInputNameTemperature
             case .refChamberTemperature1:
-                return "Temp. 1"
+                return LocalString.enumAnalogInputNameTemp1
             case .bioHazardTemperature:
-                return "Bio Temp."
+                return LocalString.enumAnalogInputNameBioTemp
             case .chamberPressure:
-                return "Pressure"
+                return LocalString.enumAnalogInputNamePressure
             case .water:
-                return "Water"
+                return LocalString.enumAnalogInputNameWater
             case .jacketPressure:
-                return "Jacket Pressure"
+                return LocalString.enumAnalogInputNameJacketPressure
             case .jacketTemperature:
-                return "Jacket Temperature"
+                return LocalString.enumAnalogInputNameJacketTemperature
             case .generator:
-                return "Generator"
+                return LocalString.enumAnalogInputNameGenerator
             case .drainTemperature:
-                return "Drain Temperature"
+                return LocalString.enumAnalogInputNameDrainTemperature
             case .refChamberTemperature2:
-                return "Temp. 2"
+                return LocalString.enumAnalogInputNameTemp2
             case .generatorWater:
-                return "Generator Water"
+                return LocalString.enumAnalogInputNameGeneratorWater
             case .waterWaste:
-                return "Water Waste"
+                return LocalString.enumAnalogInputNameWaterWaste
             case .waterDistillled:
-                return "Distilled Water"
+                return LocalString.enumAnalogInputNameDistilledWater
             case .airDetectorPressure:
-                return "Air Pressure Detector"
+                return LocalString.enumAnalogInputNameAirPressureDetector
             case .bioJacket:
-                return "Bio Jacket"
+                return LocalString.enumAnalogInputNameBioJacket
             case .externalTemperature:
-                return "Ext. Temperature"
+                return LocalString.enumAnalogInputNameExtTemperature
             case .externalPressure:
-                return "Ext. Pressure"
+                return LocalString.enumAnalogInputNameExtPressure
             case .refChamberTemperature3:
-                return "Temp. 3"
+                return LocalString.enumAnalogInputNameTemp3
             case .refChamberTemperature4:
-                return "Temp. 4"
+                return LocalString.enumAnalogInputNameTemp4
             case .refChamberTemperature5:
-                return "Temp. 5"
+                return LocalString.enumAnalogInputNameTemp5
             case .filterPressure:
-                return "Filter Pressure"
+                return LocalString.enumAnalogInputNameFilterPressure
             case .filterTemperature:
-                return "Filter Temperature"
+                return LocalString.enumAnalogInputNameFilterTemperature
             }
         }
     }
@@ -1014,31 +1014,31 @@ class AutoClaveEnums {
         var getName: String {
             switch self {
             case .none:
-                return ""
+                return LocalString.enumMainParameterNameNone
             case .sterTemperature:
-                return "Ster. Temp."
+                return LocalString.enumMainParameterNameSterTemp
             case .sterTime:
-                return "Ster. Time"
+                return LocalString.enumMainParameterNameSterTime
             case .dryTime:
-                return "Dry Time"
+                return LocalString.enumMainParameterNameDryTime
             case .stable1Temperature:
-                return "Temperature"
+                return LocalString.enumMainParameterNameStable1Temperature
             case .stable1Time:
-                return "Time"
+                return LocalString.enumMainParameterNameStable1Time
             case .stable2Temperature:
-                return "Temperature"
+                return LocalString.enumMainParameterNameStable2Temperature
             case .stable2Time:
-                return "Time"
+                return LocalString.enumMainParameterNameStable2Time
             case .requestPressure:
-                return "Vac. Pres."
+                return LocalString.enumMainParameterNameVacPres
             case .vacuumTime1:
-                return "Vac. Time 1"
+                return LocalString.enumMainParameterNameVacTime1
             case .vacuumTime2:
-                return "Vac. Time 2"
+                return LocalString.enumMainParameterNameVacTime2
             case .filterTestTime:
-                return "Test Time"
+                return LocalString.enumMainParameterNameTestTime
             case .dryPulses:
-                return "Dry Pulses"
+                return LocalString.enumMainParameterNameDryPulses
             }
         }
     }

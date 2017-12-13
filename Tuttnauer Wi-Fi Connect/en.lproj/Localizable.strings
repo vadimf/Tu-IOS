@@ -113,6 +113,8 @@
 
 // MARK: - AutoClave Enums Values
 
+// Current Status
+
 "enum_system_current_status_none" = "Ready";
 "enum_system_current_status_no_error" = "No Error";
 "enum_system_current_status_standby_error" = "Standby Error";
@@ -121,6 +123,8 @@
 "enum_system_current_status_cycle_failed" = "Cycle Failed";
 "enum_system_current_status_not_ready" = "Not Ready";
 
+// Door State
+
 "enum_door_state_door_open" = "Door Open";
 "enum_door_state_door_closed" = "Dooe Closed";
 "enum_door_state_door1closed_door2closed" = "Door 1 Closed. Door 2 Closed";
@@ -128,12 +132,16 @@
 "enum_door_state_door1closed_door2open" = "Door 1 Closed. Door 2 Opened";
 "enum_door_state_door1open_door2closed" = "Door 1 Open. Door 2 Closed";
 
+// Door Error
+
 "enum_door_error_none" = "-";
 "enum_door_error_vacuuming" = "Error Vacuuming";
 "enum_door_error_opening" = "Error Opening";
 "enum_door_error_closing" = "Error Closing";
 "enum_door_error_locking" = "Error Locking";
 "enum_door_error_unlocking" = "Error Unlocking";
+
+// Cycle Stage
 
 "enum_cycle_stage_none" = "";
 "enum_cycle_stage_global" = "Global";
@@ -147,3 +155,269 @@
 "enum_cycle_stage_dry" = "Drying";
 "enum_cycle_stage_ending" = "Ending";
 "enum_cycle_stage_done" = "Done";
+
+// Background Status - Automated
+
+"enum_background_status_system_ready" = "System Ready";
+"enum_background_status_pre_heating" = "Pre Heating";
+"enum_background_status_hot_water_in_chamber" = "Hot water in chamber";
+"enum_background_status_water_in_chamber" = "Water in chamber";
+"enum_background_status_door_open" = "Door open";
+"enum_background_status_waste_water_reservoir" = "Waste water reservoir";
+"enum_background_status_mineral_free_water_reservoir_empty" = "Mineral free water reservoir empty";
+"enum_background_status_stand_by_cycle" = "Stand by cycle";
+"enum_background_status_jacket_is_cool" = "Jacket is cool";
+"enum_background_status_empty_reservoir_vacuum_pup" = "Empty reservoir vacuum pup";
+"enum_background_status_steam_generator_low_pressure" = "Steam generator low pressure";
+"enum_background_status_drain_hot" = "Drain hot";
+"enum_background_status_low_gasket_pressure" = "Low gasket pressure";
+"enum_background_status_io_extension_device_not_connected" = "IO Extension device not connected";
+"enum_background_status_high_start_temperature" = "High start temperature";
+"enum_background_status_vhp_input_not_ready" = "Vhp input not ready";
+"enum_background_status_bio_filter_timeout" = "Bio filter timeout";
+"enum_background_status_bio_filter_is_cool" = "Bio filter is cool";
+"enum_background_status_printer_port_is_not_valid" = "Printer port is not valid";
+"enum_background_status_wait..._door_opening" = "Wait... Door Opening";
+"enum_background_status_wait..._door_closing" = "Wait... Door Closing";
+"enum_background_status_cool_drain_time_out" = "Cool drain time out";
+"enum_background_status_jacket_time_out" = "Jacket time out";
+"enum_background_status_supply_error" = "Supply error";
+"enum_background_status_supply_water_error" = "Supply water error";
+"enum_background_status_no_water_in_reservoir_vacuum_pump" = "No water in reservoir vacuum pump";
+"enum_background_status_no_water_in_reservoir_generator" = "No water in reservoir generator";
+"enum_background_status_supply_distilled_water_error" = "Supply distilled water error";
+"enum_background_status_compressed_air_supply_error" = "Compressed air supply error";
+"enum_background_status_steam_generator_no_water" = "Steam generator no water";
+"enum_background_status_chamber_pressure_not_in_range" = "Chamber pressure not in range";
+"enum_background_status_chamber_temperature_not_in_range" = "Chamber temperature not in range";
+"enum_background_status_atmospheric_pressure_not_set" = "Atmospheric pressure not set";
+"enum_background_status_door_error" = "Door error";
+"enum_background_status_emergency_stop" = "Emergency Stop";
+"enum_background_status_test_mode_is_active" = "Test Mode Is Active";
+"enum_background_status_analog_input_error" = "Analog input error";
+"enum_background_status_air_detector_is_not_connected" = "Air detector is not connected";
+"enum_background_status_i/o_card_is_not_connected" = "I/O card is not connected";
+"enum_background_status_time_error" = "Time error";
+"enum_background_status_protocol_port_is_not_valid" = "Protocol port is not valid";
+"enum_background_status_cycle_ended" = "Cycle ended";
+
+// Cycle ID - Automated
+
+"enum_cycle_id_unwrapped_instruments" = "Unwrapped instruments";
+"enum_cycle_id_wrapped_instruments" = "Wrapped Instruments";
+"enum_cycle_id_pouches" = "Pouches";
+"enum_cycle_id_wrapped_pouches" = "Wrapped Pouches";
+"enum_cycle_id_unwrapped_delicate_inst." = "Unwrapped delicate inst.";
+"enum_cycle_id_wrapped_delicate_inst." = "Wrapped delicate inst.";
+"enum_cycle_id_liquids_a" = "Liquids A";
+"enum_cycle_id_liquids_b" = "Liquids B";
+"enum_cycle_id_big_packages" = "Big Packages";
+"enum_cycle_id_bio_hazard_a" = "Bio Hazard A";
+"enum_cycle_id_bio_hazard_b" = "Bio Hazard B";
+"enum_cycle_id_vacuum_test" = "Vacuum Test";
+"enum_cycle_id_bowie_and_dick" = "Bowie and Dick";
+"enum_cycle_id_pasteurization" = "Pasteurization";
+"enum_cycle_id_vhp" = "Vhp";
+"enum_cycle_id_warm_up" = "Warm Up";
+"enum_cycle_id_isothermal" = "Isothermal";
+"enum_cycle_id_glass" = "Glass";
+"enum_cycle_id_plastic" = "Plastic";
+"enum_cycle_id_liquid_a" = "Liquid A";
+"enum_cycle_id_liquid_b_waste" = "Liquid B Waste";
+"enum_cycle_id_liquid_a_cooling" = "Liquid A Cooling";
+"enum_cycle_id_liquid_b_waste_cooling" = "Liquid B Waste Cooling";
+"enum_cycle_id_waste" = "Waste";
+"enum_cycle_id_hollow_load" = "Hollow Load";
+"enum_cycle_id_biohazard_liquids" = "BioHazard Liquids";
+"enum_cycle_id_unwrapped_134" = "Unwrapped 134";
+"enum_cycle_id_wrapped_134" = "Wrapped 134";
+"enum_cycle_id_unwrapped_121" = "Unwrapped 121";
+"enum_cycle_id_wrapped_121" = "Wrapped 121";
+"enum_cycle_id_prion_134" = "Prion 134";
+"enum_cycle_id_extra_drying_time" = "Extra Drying Time";
+"enum_cycle_id_air_steam_mixture" = "Air Steam Mixture";
+"enum_cycle_id_glass_test" = "Glass Test";
+"enum_cycle_id_custom_1" = "Custom 1";
+"enum_cycle_id_custom_2" = "Custom 2";
+"enum_cycle_id_custom_3" = "Custom 3";
+"enum_cycle_id_custom_4" = "Custom 4";
+"enum_cycle_id_custom_5" = "Custom 5";
+"enum_cycle_id_custom_6" = "Custom 6";
+"enum_cycle_id_custom_7" = "Custom 7";
+"enum_cycle_id_custom_8" = "Custom 8";
+"enum_cycle_id_custom_9" = "Custom 9";
+"enum_cycle_id_custom_10" = "Custom 10";
+"enum_cycle_id_custom_11" = "Custom 11";
+"enum_cycle_id_custom_12" = "Custom 12";
+"enum_cycle_id_custom_13" = "Custom 13";
+"enum_cycle_id_custom_14" = "Custom 14";
+"enum_cycle_id_custom_15" = "Custom 15";
+"enum_cycle_id_custom_16" = "Custom 16";
+"enum_cycle_id_custom_17" = "Custom 17";
+"enum_cycle_id_custom_18" = "Custom 18";
+"enum_cycle_id_custom_19" = "Custom 19";
+"enum_cycle_id_custom_20" = "Custom 20";
+
+// Cycle Sub Stage - Automated
+
+"enum_cycle_sub_stage_none" = "";
+"enum_cycle_sub_stage_purge" = "Purge";
+"enum_cycle_sub_stage_insert_water" = "Insert Water";
+"enum_cycle_sub_stage_steam_flush" = "Steam Flush";
+"enum_cycle_sub_stage_create_pulse" = "Create Pulse";
+"enum_cycle_sub_stage_pulse_h" = "Pulse H";
+"enum_cycle_sub_stage_pulse_l" = "Pulse L";
+"enum_cycle_sub_stage_vacuum" = "vacuum";
+"enum_cycle_sub_stage_stay_a" = "Stay A";
+"enum_cycle_sub_stage_stay_b" = "Stay B";
+"enum_cycle_sub_stage_vhp_wait" = "Vhp Wait";
+"enum_cycle_sub_stage_vhp_running" = "Vhp Running";
+"enum_cycle_sub_stage_vhp_ending" = "Vhp Ending";
+"enum_cycle_sub_stage_stable_before_ster" = "Stable before Ster";
+"enum_cycle_sub_stage_stabel_after_ster" = "Stabel after Ster";
+"enum_cycle_sub_stage_wait_for_open_door" = "Wait for open door";
+"enum_cycle_sub_stage_pre-stable_before_ster" = "Pre-Stable before Ster";
+"enum_cycle_sub_stage_pre-stable_after_ster" = "Pre-Stable after Ster";
+"enum_cycle_sub_stage_pre-heat" = "Pre-Heat";
+"enum_cycle_sub_stage_filter_test_insert_water" = "Filter test insert water";
+"enum_cycle_sub_stage_filter_test_create_pressure" = "Filter test create pressure";
+"enum_cycle_sub_stage_filter_test_stable" = "Filter test stable";
+"enum_cycle_sub_stage_filter_test_testing" = "Filter test testing";
+"enum_cycle_sub_stage_filter_test_exhaust" = "Filter test exhaust";
+"enum_cycle_sub_stage_cool_a" = "Cool A";
+"enum_cycle_sub_stage_cool_b" = "Cool B";
+"enum_cycle_sub_stage_cool_c" = "Cool C";
+"enum_cycle_sub_stage_exhaust_a" = "Exhaust A";
+"enum_cycle_sub_stage_exhaust_b" = "Exhaust B";
+
+// Cycle Error - Automated
+
+"enum_cycle_error_none" = "";
+"enum_cycle_error_cancelled_by_user" = "Cancelled by user";
+"enum_cycle_error_door_is_open" = "Door Is Open";
+"enum_cycle_error_analog_input_error" = "Analog Input Error";
+"enum_cycle_error_io_card_not_connected" = "IO Card Not Connected";
+"enum_cycle_error_power_down" = "Power Down";
+"enum_cycle_error_insert_water_time_error" = "Insert Water Time Error";
+"enum_cycle_error_heat_before_pressure_time_error" = "Heat Before Pressure Time Error";
+"enum_cycle_error_vacuum_time_error" = "Vacuum Time Error";
+"enum_cycle_error_pressure_time_error" = "Pressure Time Error";
+"enum_cycle_error_keep_heat_time_error" = "Keep Heat Time Error";
+"enum_cycle_error_heat_to_sterilization_time_error" = "Heat To Sterilization Time Error";
+"enum_cycle_error_sterilization_low_pressure" = "Sterilization Low Pressure";
+"enum_cycle_error_sterilization_high_pressure" = "Sterilization High Pressure";
+"enum_cycle_error_sterilization_low_temp" = "Sterilization Low Temp";
+"enum_cycle_error_sterilization_high_temp" = "Sterilization High Temp";
+"enum_cycle_error_rtc_timer_error" = "Rtc Timer Error";
+"enum_cycle_error_cooling_low_pressure" = "Cooling Low Pressure";
+"enum_cycle_error_cooling_high_temp" = "Cooling High Temp";
+"enum_cycle_error_exhaust_high_pressure" = "Exhaust High Pressure";
+"enum_cycle_error_high_pressure_(dry)" = "High Pressure (Dry)";
+"enum_cycle_error_ending_high_pressure" = "Ending High Pressure";
+"enum_cycle_error_air_error" = "Air Error";
+"enum_cycle_error_ending_high_temperature" = "Ending High Temperature";
+"enum_cycle_error_error_open_door" = "Error Open Door";
+"enum_cycle_error_error_close_door" = "Error Close Door";
+"enum_cycle_error_vhp_timeout" = "Vhp Timeout";
+"enum_cycle_error_emergency_stop" = "Emergency Stop";
+"enum_cycle_error_thermo_bio_filter_timeout" = "Thermo Bio Filter Timeout";
+"enum_cycle_error_purge_timeout" = "Purge Timeout";
+"enum_cycle_error_air_detector" = "Air Detector";
+"enum_cycle_error_internal_error" = "Internal Error";
+"enum_cycle_error_leak" = "Leak";
+"enum_cycle_error_vhp_fail" = "Vhp Fail";
+"enum_cycle_error_pre_heat_timeout" = "Pre Heat Timeout";
+"enum_cycle_error_jacket_is_cool" = "Jacket Is Cool";
+"enum_cycle_error_water_high_temp" = "Water High Temp";
+"enum_cycle_error_low_water_pressure" = "Low Water Pressure";
+"enum_cycle_error_piping_error" = "Piping Error";
+"enum_cycle_error_fault_filter" = "Fault Filter";
+"enum_cycle_error_p_air_removal_vacuum_failure" = "P Air Removal Vacuum Failure";
+"enum_cycle_error_p_leak" = "P Leak";
+"enum_cycle_error_p_prepare_air_inlet_failure" = "P Prepare Air Inlet Failure";
+"enum_cycle_error_p_prepare_vacuum_failure" = "P Prepare Vacuum Failure";
+"enum_cycle_error_p_burner_not_ready" = "P Burner Not Ready";
+"enum_cycle_error_p_diffusion_1_low_pressure" = "P Diffusion 1 Low Pressure";
+"enum_cycle_error_p_diffusion_1_high_pressure" = "P Diffusion 1 High Pressure";
+"enum_cycle_error_p_diffusion_1_high_rate" = "P Diffusion 1 High Rate";
+"enum_cycle_error_p_diffusion_1_air_inlet_failure" = "P Diffusion 1 Air Inlet Failure";
+"enum_cycle_error_p_plazma_1_vacuum_failure" = "P Plazma 1 Vacuum Failure";
+"enum_cycle_error_p_diffusion_2_low_pressure" = "P Diffusion 2 Low Pressure";
+"enum_cycle_error_p_diffusion_2_high_pressure" = "P Diffusion 2 High Pressure";
+"enum_cycle_error_p_diffusion_2_high_rate" = "P Diffusion 2 High Rate";
+"enum_cycle_error_p_diffusion_2_air_inlet_failure" = "P Diffusion 2 Air Inlet Failure";
+"enum_cycle_error_p_plazma_2_vacuum_failure" = "P Plazma 2 Vacuum Failure";
+"enum_cycle_error_p_aeration_vacuum_failure" = "P Aeration Vacuum Failure";
+"enum_cycle_error_p_aeration_air_inlet_failure" = "P Aeration Air Inlet Failure";
+"enum_cycle_error_p_normal_pressure" = "P Normal Pressure";
+"enum_cycle_error_p_cancelled_by_user" = "P Cancelled By User";
+"enum_cycle_error_p_emergency_stop" = "P Emergency Stop";
+"enum_cycle_error_p_io_card_not_connected" = "P IO Card Not Connected";
+"enum_cycle_error_p_analog_input_error" = "P Analog Input Error";
+"enum_cycle_error_p_power_down" = "P Power Down";
+"enum_cycle_error_p_door_is_open" = "P Door Is Open";
+"enum_cycle_error_p_cancelled_by_admin" = "P Cancelled By Admin";
+"enum_cycle_error_p_internal_error" = "P Internal Error";
+"enum_cycle_error_0_vacuum_fail" = "0 Vacuum Fail";
+"enum_cycle_error_0_leak" = "0 Leak";
+"enum_cycle_error_0_steam_error" = "0 Steam Error";
+"enum_cycle_error_0_03_timeout" = "0 03 Timeout";
+"enum_cycle_error_0_03_low_concentration" = "0 03 Low Concentration";
+"enum_cycle_error_0_exhaust_vacuum_fail" = "0 Exhaust Vacuum Fail";
+"enum_cycle_error_0_exhaust_pressure_fail" = "0 Exhaust Pressure Fail";
+"enum_cycle_error_0_normal_pressure" = "0 Normal Pressure";
+"enum_cycle_error_0_03_high_concentration" = "0 03 High Concentration";
+"enum_cycle_error_0_03_leaks" = "0 03 Leaks";
+"enum_cycle_error_0_03_dis" = "0 03 Dis";
+"enum_cycle_error_0_no_02_supply" = "0 No 02 Supply";
+"enum_cycle_error_0_no_steam" = "0 No Steam";
+"enum_cycle_error_0_analog_input_error" = "0 Analog Input Error";
+"enum_cycle_error_0_door_is_open" = "0 Door Is Open";
+"enum_cycle_error_0_cancelled_by_user" = "0 Cancelled By User";
+"enum_cycle_error_0_io_card_not_connected" = "0 IO Card Not Connected";
+"enum_cycle_error_0_power_down" = "0 Power Down";
+"enum_cycle_error_0_internal_error" = "0 Internal Error";
+
+// Analog Input Short Names - Automated
+
+"enum_analog_input_name_none" = "";
+"enum_analog_input_name_door_1" = "Door 1";
+"enum_analog_input_name_door_2" = "Door 2";
+"enum_analog_input_name_temperature" = "Temperature";
+"enum_analog_input_name_temp._1" = "Temp. 1";
+"enum_analog_input_name_bio_temp." = "Bio Temp.";
+"enum_analog_input_name_pressure" = "Pressure";
+"enum_analog_input_name_water" = "Water";
+"enum_analog_input_name_jacket_pressure" = "Jacket Pressure";
+"enum_analog_input_name_jacket_temperature" = "Jacket Temperature";
+"enum_analog_input_name_generator" = "Generator";
+"enum_analog_input_name_drain_temperature" = "Drain Temperature";
+"enum_analog_input_name_temp._2" = "Temp. 2";
+"enum_analog_input_name_generator_water" = "Generator Water";
+"enum_analog_input_name_water_waste" = "Water Waste";
+"enum_analog_input_name_distilled_water" = "Distilled Water";
+"enum_analog_input_name_air_pressure_detector" = "Air Pressure Detector";
+"enum_analog_input_name_bio_jacket" = "Bio Jacket";
+"enum_analog_input_name_ext._temperature" = "Ext. Temperature";
+"enum_analog_input_name_ext._pressure" = "Ext. Pressure";
+"enum_analog_input_name_temp._3" = "Temp. 3";
+"enum_analog_input_name_temp._4" = "Temp. 4";
+"enum_analog_input_name_temp._5" = "Temp. 5";
+"enum_analog_input_name_filter_pressure" = "Filter Pressure";
+"enum_analog_input_name_filter_temperature" = "Filter Temperature";
+
+// Main Parameters Names - Automated
+
+"enum_main_parameter_name_none" = "";
+"enum_main_parameter_name_ster._temp." = "Ster. Temp.";
+"enum_main_parameter_name_ster._time" = "Ster. Time";
+"enum_main_parameter_name_dry_time" = "Dry Time";
+"enum_main_parameter_name_stable1_temperature" = "Temperature";
+"enum_main_parameter_name_stable1_time" = "Time";
+"enum_main_parameter_name_stable2_temperature" = "Temperature";
+"enum_main_parameter_name_stable2_time" = "Time";
+"enum_main_parameter_name_vac._pres." = "Vac. Pres.";
+"enum_main_parameter_name_vac._time_1" = "Vac. Time 1";
+"enum_main_parameter_name_vac._time_2" = "Vac. Time 2";
+"enum_main_parameter_name_test_time" = "Test Time";
+"enum_main_parameter_name_dry_pulses" = "Dry Pulses";
