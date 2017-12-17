@@ -384,7 +384,7 @@ class LocalString: NSObject {
 
     // Analog Input Short Names
     
-    static let enumAnalogInputNameNone = "enum_analog_input_name_".localized
+    static let enumAnalogInputNameNone = "enum_analog_input_name_none".localized
     static let enumAnalogInputNameDoor1 = "enum_analog_input_name_door_1".localized
     static let enumAnalogInputNameDoor2 = "enum_analog_input_name_door_2".localized
     static let enumAnalogInputNameTemperature = "enum_analog_input_name_temperature".localized

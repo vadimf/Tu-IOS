@@ -126,7 +126,7 @@
 // Door State
 
 "enum_door_state_door_open" = "Door Open";
-"enum_door_state_door_closed" = "Dooe Closed";
+"enum_door_state_door_closed" = "Door Closed";
 "enum_door_state_door1closed_door2closed" = "Door 1 Closed. Door 2 Closed";
 "enum_door_state_door1open_door2open" = "Door 1 Open. Door 2 Open";
 "enum_door_state_door1closed_door2open" = "Door 1 Closed. Door 2 Opened";
@@ -267,7 +267,7 @@
 "enum_cycle_sub_stage_create_pulse" = "Create Pulse";
 "enum_cycle_sub_stage_pulse_h" = "Pulse H";
 "enum_cycle_sub_stage_pulse_l" = "Pulse L";
-"enum_cycle_sub_stage_vacuum" = "vacuum";
+"enum_cycle_sub_stage_vacuum" = "Vacuum";
 "enum_cycle_sub_stage_stay_a" = "Stay A";
 "enum_cycle_sub_stage_stay_b" = "Stay B";
 "enum_cycle_sub_stage_vhp_wait" = "Vhp Wait";
